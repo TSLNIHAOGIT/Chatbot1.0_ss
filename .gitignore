@@ -5,6 +5,8 @@
 *.hdf5
 .ipynb_checkpoints
 *.pyc
+*.pickle
+
 # Compiled source #
 ###################
 *.com
