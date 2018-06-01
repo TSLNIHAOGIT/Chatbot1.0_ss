@@ -1,6 +1,6 @@
 *.npy
 *.log
-*.csv
+#*.csv
 *.json
 *.hdf5
 .ipynb_checkpoints
