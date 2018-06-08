@@ -5,7 +5,7 @@
 *.hdf5
 .ipynb_checkpoints
 *.pyc
-*.pickle
+#*.pickle
 
 # Compiled source #
 ###################
