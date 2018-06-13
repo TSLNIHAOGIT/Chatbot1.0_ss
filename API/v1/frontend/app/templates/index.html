@@ -221,7 +221,9 @@
 				content.scrollTop(content.get(0).scrollHeight);
 			});
 
-
+             $('#btn2').click(function(){
+          $.post('/newConversation');
+      });
 			const input = $('#text');
 			input.bind('keypress', function (event) {
 				if (event.keyCode == '13') {
@@ -235,6 +237,9 @@
 </head>
 <body>
 <div id="container">
+    <div style="border:1px;text-align:right">
+        <button id="btn2" type="button">new conversation</button>
+    </div>
   <div class="header">
     <span style="float: left;">Chat</span>
     <span style="float: right;" id="time"></span>
