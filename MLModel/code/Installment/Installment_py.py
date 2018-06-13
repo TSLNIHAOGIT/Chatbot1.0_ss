@@ -31,7 +31,7 @@ class Installment:
         max_pred = np.max(result, axis=0)
         max_arg = np.argmax(max_pred)
         threshold = 0.6
-        if np.max(max_pred<threshold):
+        if np.max(max_pred)<threshold:
             label = 2
         else:
             label = max_arg
