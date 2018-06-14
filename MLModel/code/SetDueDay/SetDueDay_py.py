@@ -30,10 +30,10 @@ class SetDueDay:
                             self.lightgbm.predict(matrix)))
         max_pred = np.max(result, axis=0)
         max_arg = np.argmax(max_pred)
-        threshold = 0.6
+        threshold = 0.5
         if np.max(max_pred)<threshold:
             label = 2
         else:
             label = max_arg
-        return (label, np.max(max_pred))
+        return (label, [max_arg,np.max(max_pred)])
      
