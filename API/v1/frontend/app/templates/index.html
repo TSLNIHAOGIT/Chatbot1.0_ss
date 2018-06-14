@@ -192,6 +192,7 @@
                     content.append(
                                `<li><div><img src="static/avatar2.jpeg" class="img-left"><div class="line text-left">${data}<div class="arrow-left"></div></div></li>`
                             );
+                     content.scrollTop(content.get(0).scrollHeight);
                     }});
 
 
@@ -204,6 +205,7 @@
                 content.append(
                            `<li><div><img src="static/avatar2.jpeg" class="img-left"><div class="line text-left">${data}<div class="arrow-left"></div></div></li>`
                         );
+                content.scrollTop(content.get(0).scrollHeight);
 
                 });
 
@@ -213,6 +215,8 @@
 		$(document).ready(function () {
 			setInterval('$(\'#time\').html(new Date().toLocaleString())', 1);
 			let content = $('#content');
+            
+            $('#content').scrollTop($('#content')[0].scrollHeight);
 
 
 			$('#btn').click(function () {
