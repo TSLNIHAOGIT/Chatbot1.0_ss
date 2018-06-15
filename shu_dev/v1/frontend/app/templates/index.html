@@ -172,10 +172,20 @@
   </style>
   <script type="text/javascript" src="static/jquery.min.js"></script>
   <script>
-
-
+      
+      
+       
+        var socket = new WebSocket('ws://localhost:6006');
+        socket.onopen = function(event){
+            consolle.log("onopen");
+        };
+        const noresponse = function(){
+            text = "are you here"
+            content.append(`<li><div><img src="static/avatar1.jpeg" class="img-right"><div class="line text-right">${text}<div class="arrow-right"></div></div></div></li>`);
+        };
 		const dealText = function (content, value) {
 			if (value) {
+                
 				content.append(
 						`<li><div><img src="static/avatar1.jpeg" class="img-right"><div class="line text-right">${value}<div class="arrow-right"></div></div></div></li>`);
 
@@ -213,8 +223,20 @@
 			}
 		};
 		$(document).ready(function () {
+            
+            
 			setInterval('$(\'#time\').html(new Date().toLocaleString())', 1);
 			let content = $('#content');
+            
+            if($('#content').has('li').length <= 0){
+                $.getJSON('https://ipapi.co/json/', function(data){
+                    <!--console.log(JSON.stringifsy(data,null,2));-->
+                    
+                    $.post('/test',{ipAddress:JSON.stringify(data,null,2)});
+                });
+            }
+            
+            
             
             $('#content').scrollTop($('#content')[0].scrollHeight);
 
@@ -226,8 +248,9 @@
 			});
 
              $('#btn2').click(function(){
+                 noresponse();
                  $.post('/newConversation');
-                 $("#content").empty();
+                 <!--$("#content").empty();-->
                  
                 
       });
@@ -245,7 +268,7 @@
 <body>
 <div id="container">
     <div style="border:1px;text-align:right">
-        <button id="btn2" type="button">new conversation</button>
+        <button id="btn2" type="button">new conversation2</button>
     </div>
   <div class="header">
     <span style="float: left;">Chat</span>
