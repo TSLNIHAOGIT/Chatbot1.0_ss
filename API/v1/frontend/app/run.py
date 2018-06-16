@@ -3,7 +3,7 @@
 from flask import Flask
 import os,sys 
 # sys.path.append('/home/kai/data/wei/Chatbot1.0/')
-sys.path.append('../../../../../Chatbot1.0/')
+sys.path.append('../')
 # sys.path.append('/home/kai/data/Chatbot1.0/API/v1/frontend/')
 app=Flask("demo")
 from flask import  render_template,request
