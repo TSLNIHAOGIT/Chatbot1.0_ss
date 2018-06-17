@@ -455,26 +455,23 @@ class TreeStage1(TreeBase):
         update fc_path, all_path, current_node_name
         return current node, response
         """
-        cur_node = self.nodes[self.current_node_name]
-        self.all_path.append({self.current_node_name:_label})
-        
-        if cur_node.model_name != 'OtherClassifier':
-            self.fc_path.append({self.current_node_name:_label})
-            try:
-                self.current_node_name = self.connection[self.current_node_name].get(_label)
-            except KeyError:
-                return None,None
-            if self.current_node_name is None:
-                return None,None
-            else:
-                cur_node = self.nodes[self.current_node_name]
-                print('label is {}'.format(_label))
-                return cur_node,cur_node.get_response(_label) 
-        # other classifier    
-        else:
+        node_before_update = self.nodes[self.current_node_name]
+        try:
             self.current_node_name = self.connection[self.current_node_name].get(_label)
-            pre_node = cur_node
+        except KeyError:
+                return None,None
+        if self.current_node_name is None:
+                return None,None
+        node_after_update = self.nodes[self.current_node_name]
+        print('label is {}'.format(_label))
+        if node_after_update.model_name != 'OtherClassifier':
+            return node_after_update,node_after_update.get_response(_label) 
+        # Other classifier
+        else:
+            # map other node to parent node
+            self.current_node_name = node_before_update.name
             cur_node = self.nodes[self.current_node_name]
+            pre_node = node_after_update
             return cur_node,pre_node.get_response(_label)
         
     def _triger_jump(self):
