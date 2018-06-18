@@ -171,18 +171,16 @@
 
   </style>
   <script type="text/javascript" src="static/jquery.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.min.js"></script>
+
   <script>
       
-      
        
-        var socket = new WebSocket('ws://localhost:6006');
+        var socket = new WebSocket('ws://0.0.0.0:6006');
         socket.onopen = function(event){
             consolle.log("onopen");
         };
-        const noresponse = function(){
-            text = "are you here"
-            content.append(`<li><div><img src="static/avatar1.jpeg" class="img-right"><div class="line text-right">${text}<div class="arrow-right"></div></div></div></li>`);
-        };
+        
 		const dealText = function (content, value) {
 			if (value) {
                 
@@ -206,7 +204,7 @@
                     }});
 
 
-                $.post('/predict', {query: value,},
+                $.post('/predict', {query: value,uid:$.cookie('chatbot_userid')},
 
                 function(data) {
                   <!--alert("Data: " + data + "\nStatus: " + status);//显示结果-->
@@ -228,16 +226,6 @@
 			setInterval('$(\'#time\').html(new Date().toLocaleString())', 1);
 			let content = $('#content');
             
-            if($('#content').has('li').length <= 0){
-                $.getJSON('https://ipapi.co/json/', function(data){
-                    <!--console.log(JSON.stringifsy(data,null,2));-->
-                    
-                    $.post('/test',{ipAddress:JSON.stringify(data,null,2)});
-                });
-            }
-            
-            
-            
             $('#content').scrollTop($('#content')[0].scrollHeight);
 
 
@@ -246,10 +234,23 @@
 				$('#text').val('');
 				content.scrollTop(content.get(0).scrollHeight);
 			});
+            
+            $.post('/test2', {cookie:$.cookie('chatbot_userid'),}, function(data){
+                if(data==''){
+                    
+                }
+                else{
+                    $.cookie('chatbot_userid',data,{expires:7});
+                    <!--alert(data);-->
+                }
+                
+            });
 
              $('#btn2').click(function(){
-                 noresponse();
-                 $.post('/newConversation');
+                 
+                 $.post('/newConversation',{uid:$.cookie('chatbot_userid')},function(data){
+                     <!--alert(data);-->
+                 });
                  <!--$("#content").empty();-->
                  
                 
@@ -263,12 +264,13 @@
 				}
 			});
 		});
+            
   </script>
 </head>
-<body>
+<body onbeforeunload="return checkLeave()">
 <div id="container">
     <div style="border:1px;text-align:right">
-        <button id="btn2" type="button">new conversation2</button>
+        <button id="btn2" type="button">new conversation</button>
     </div>
   <div class="header">
     <span style="float: left;">Chat</span>
