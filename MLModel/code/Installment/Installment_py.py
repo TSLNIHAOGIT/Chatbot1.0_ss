@@ -25,9 +25,14 @@ class Installment:
         sentence = jieba.cut(sentence, cut_all = False)
         sentence = ' '.join(sentence)
         matrix = self.tfidf.transform([sentence])
-        result = np.vstack((self.svc.predict_proba(matrix),
-                            self.logistic.predict_proba(matrix),
-                            self.lightgbm.predict(matrix)))
+        if len(matrix.data) > 0:
+            result = np.vstack((self.svc.predict_proba(matrix),
+                                 self.logistic.predict_proba(matrix),
+                                 self.lightgbm.predict(matrix)))
+        else:
+            result = np.vstack((self.svc.predict_proba(matrix),
+                                 self.logistic.predict_proba(matrix),
+                                 ))
         max_pred = np.max(result, axis=0)
         max_arg = np.argmax(max_pred)
         threshold = 0.5
