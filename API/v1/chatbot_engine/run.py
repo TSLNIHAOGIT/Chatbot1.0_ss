@@ -396,6 +396,7 @@ class TreeStage1(TreeBase):
         'cf_s1_n32_splitDebt_q':S1_N32(),
         'cf_s1_n33_setDue3Day':S1_N33(),
         'cf_s1_n35_splitDebt_a_misc':S1_N35(),
+        'cf_s1_n4_identity_a_misc':S1_N4(),
         'cf_s1_n40_setCutDebtDue_a_misc':S1_N40(),
         'cf_s1_n41_setSplitDebtDue_q':S1_N41(),
         'cf_s1_n44_setSplitDebtDue_a_misc':S1_N44(),
