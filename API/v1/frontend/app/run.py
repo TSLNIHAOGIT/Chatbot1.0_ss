@@ -78,10 +78,9 @@ def background_process():
             print(uid)
             if query:
 
-                    print('query',query)
+                    
                     # time.sleep(5)
                     result = get_data(query, uid)
-                    print('result',result)
                     mongo_db.save_query(query, str(result))
                     print('saving to mongo db successfully!')
                     return str(result)
@@ -139,10 +138,10 @@ class Cache:
                 self.sessionId = msg['message']['sessionId']
                 print(self.sessionId)
             else:
-                print(req.content)
+                
                 raise ValueError('cannot get new sessionId, cannot start chat')
         else:
-            print(req.content)
+            print(req.status_code)
             
     def new_conversation(self, uid):
         req = requests.get(url, timeout=10, params={'action':'create'})
@@ -153,10 +152,10 @@ class Cache:
                 self.uid_dict[uid] = sessionId
                 print(self.uid_dict[uid])
             else:
-                print(req.content)
+            
                 raise ValueError('cannot get new sessionId, cannot start chat')
         else:
-            print(req.content)
+            print(req.status_code)
         
 
 
