@@ -103,7 +103,7 @@ def background_process():
 
             else:
                 print(e)
-                return str('MM出故障啦')
+                return str('请点击 new conversation')
 
 
     else:
