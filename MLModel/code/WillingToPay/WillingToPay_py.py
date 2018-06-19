@@ -40,7 +40,6 @@ class WillingToPay:
         # Regular expression
         if regular_enable:
             times = self.ext_time(sentence)
-            print(times)
             if len(times) == 1:
                 time2now = times[0]['time_to_now']
                 if time2now <= time_acc:
