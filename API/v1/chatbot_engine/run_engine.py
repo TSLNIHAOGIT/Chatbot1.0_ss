@@ -177,7 +177,7 @@ class S1_N15(Node):
         self.entry_counter += 1 
         print('label received is {}'.format(_label))
         if _label == 1:
-            self.response_1 = '赖账你是赖不掉的，目前我们公司已经派专员处理了，现在要求您在3天以内还钱'
+            self.response_1 = '赖账你是赖不掉的，目前我们公司已经派专员处理了，你现在必须告诉我什么时候还！'
             return self.response_1
         elif _label == 5:
             self.response_2 = '你这含含糊糊到底是哪天还？'
