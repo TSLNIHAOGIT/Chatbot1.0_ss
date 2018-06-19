@@ -47,7 +47,7 @@ class time_entity_recognize(object):
         time_extract=re.findall(self.pattern_words, string_input)
         time_extract_2=re.findall('\d{1,2}月\d{1,2}[日号]',string_input)
         if time_extract:
-            print('In collected Vacabulary',time_extract)
+            print('In collected Vacabulary')
             for each in time_extract:
                 each_time={}
                 if each in self.week_to_sequence.keys():
@@ -82,7 +82,7 @@ class time_entity_recognize(object):
                     all_time_recognize.append(each_time)
         # 处理具体的某月某日
         if time_extract_2:
-            print('Found specific date',time_extract_2)
+            print('Found specific date')
             for each in time_extract_2:
                 each_time_2={}
                 num_month_day=re.findall('\d{1,2}',each)
