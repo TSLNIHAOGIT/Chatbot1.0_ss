@@ -177,8 +177,12 @@ class S1_N15(Node):
         self.entry_counter += 1 
         print('label received is {}'.format(_label))
         if _label == 1:
-            self.response_1 = '赖账你是赖不掉的，目前我们公司已经派专员处理了，现在要求您在3天以内还钱'
+            self.response_1 = '赖账你是赖不掉的，目前我们公司已经派专员处理了，你现在必须告诉我什么时候还！'
             return self.response_1
+        elif _label == 5:
+            self.response_2 = '你这含含糊糊到底是哪天还？'
+            self.entry_counter -= 1
+            return self.response_2
         return self.response
        
 
@@ -424,7 +428,9 @@ class TreeStage1(TreeBase):
                     'cf_s1_n15_verifyWill_q':{0:'cf_s1_n20_q4_setDue3Day',
                                           1:'cf_s1_n15_verifyWill_q',
                                           2:'cf_s1_n25_cutDebt_q',
-                                          3:'cf_s1_n19_verifyWill_a_misc'},
+                                          3:'cf_s1_n19_verifyWill_a_misc',
+                                          4: 'cf_s1_n103_paymentChannel_s', 
+                                          5:'cf_s1_n15_verifyWill_q'},
                     'cf_s1_n20_q4_setDue3Day':{0:'cf_s1_n103_paymentChannel_s',
                                            1:'cf_s1_n20_q4_setDue3Day',
                                            2:'cf_s1_n24_setDue_a_misc'},

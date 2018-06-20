@@ -98,11 +98,7 @@ class time_entity_recognize(object):
 
         return all_time_recognize
 
-if __name__=='__main__':
-   path='time_words'
-   ter=time_entity_recognize(path)
-   res=ter.main('我这周日还可以么，也就是这个星期六，我尽量在下周一就把还了,不不我还是后天还得了,我30号还,17号,下个月15号,你厉害7月15号就还，我哈恩好7月18日')
-   print('res', res)
+
 
 
 
