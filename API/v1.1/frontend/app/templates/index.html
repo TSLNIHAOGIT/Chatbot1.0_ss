@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>HTML5模拟微信聊天界面</title>
+  <style>
+    /**重置标签默认样式*/
+    * {
+      margin: 0;
+      padding: 0;
+      list-style: none;
+      font-family: '微软雅黑';
+      font-size: 16px;
+    }
+
+    #container {
+      width: 450px;
+      height: 780px;
+      background: #eee;
+      margin: 30px auto 0;
+      position: relative;
+      box-shadow: 20px 20px 55px #777;
+    }
+
+    .header {
+      background: #000;
+      height: 40px;
+      color: #fff;
+      line-height: 34px;
+      font-size: 20px;
+      padding: 0 10px;
+    }
+
+    .footer {
+      width: 430px;
+      height: 50px;
+      background: #666;
+      position: absolute;
+      bottom: 0;
+      padding: 10px;
+    }
+
+    .footer input {
+      width: 275px;
+      height: 45px;
+      outline: none;
+      font-size: 20px;
+      text-indent: 10px;
+      position: absolute;
+      border-radius: 6px;
+      right: 80px;
+    }
+
+    .footer span {
+      display: inline-block;
+      width: 62px;
+      height: 48px;
+      background: #ccc;
+      font-weight: 900;
+      line-height: 45px;
+      cursor: pointer;
+      text-align: center;
+      position: absolute;
+      right: 10px;
+      border-radius: 6px;
+    }
+
+    .footer span:hover {
+      color: #fff;
+      background: #999;
+    }
+
+    #user_face_icon {
+      display: inline-block;
+      background: red;
+      width: 60px;
+      height: 60px;
+      border-radius: 30px;
+      position: absolute;
+      bottom: 6px;
+      left: 14px;
+      cursor: pointer;
+      overflow: hidden;
+    }
+
+    .content {
+      font-size: 20px;
+      width: 435px;
+      height: 662px;
+      overflow: auto;
+      padding: 5px;
+    }
+
+    .content li {
+      margin-top: 10px;
+      padding-left: 10px;
+      width: 420px;
+      display: block;
+      clear: both;
+      overflow: hidden;
+    }
+
+    .content li div div.line {
+      border-radius: 5px;
+      margin-left: 10px;
+      max-width: 310px;
+      border: 1px solid #ccc;
+      box-shadow: 0 0 3px #ccc;
+      min-height: 22px;
+    }
+
+    .content li div img {
+      border-radius: 4px;
+      height: 40px;
+      width: 40px;
+    }
+
+    .content li div img.img-left {
+      float: left;
+    }
+
+    .content li div img.img-right {
+      float: right;
+    }
+
+    .text-right {
+      position: relative;
+      margin-right: 10px;
+      float: right;
+      background: #92E649;
+      margin-top: 0px;
+      padding: 8px 10px;
+    }
+
+    .text-left {
+      position: relative;
+      margin-right: 10px;
+      float: left;
+      background: #fff;
+      margin-top: 0px;
+      padding: 8px 10px;
+    }
+
+    .arrow-right {
+      position:absolute;
+      top:5px;
+      right:-16px;
+      width:0;
+      height:0;
+      font-size:0;
+      color: #92E649;
+      border-top:8px solid transparent !important;
+      border-left:8px solid !important;
+      border-right:8px solid transparent !important;
+      border-bottom:8px solid transparent !important;
+    }
+
+    .arrow-left {
+      position:absolute;
+      top:5px;
+      left:-16px;
+      width:0;
+      height:0;
+      font-size:0;
+      color: #fff;
+      border-top:8px solid transparent !important;
+      border-left:8px solid transparent !important;
+      border-right:8px solid !important;
+      border-bottom:8px solid transparent !important;
+    }
+
+  </style>
+  <script type="text/javascript" src="static/jquery.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.min.js"></script>
+
+  <script>
+      
+       
+        var socket = new WebSocket('ws://0.0.0.0:6006');
+        socket.onopen = function(event){
+            consolle.log("onopen");
+        };
+        
+		const dealText = function (content, value) {
+			if (value) {
+                
+				content.append(
+						`<li><div><img src="static/avatar1.jpeg" class="img-right"><div class="line text-right">${value}<div class="arrow-right"></div></div></div></li>`);
+
+
+				<!--上面的value是输入过来的值，传入post返回结果的result作为下面的value-->
+				// $.ajax()
+
+
+
+				 $.ajax({type: "post",url:"/dataFromAjax_post", data:{"mydata": value,"mine":"哈哈"},
+				 success:function(data){
+                        <!--alert(data);-->
+                         //请求远处
+                    content.append(
+                               `<li><div><img src="static/avatar2.jpeg" class="img-left"><div class="line text-left">${data}<div class="arrow-left"></div></div></li>`
+                            );
+                     content.scrollTop(content.get(0).scrollHeight);
+                    }});
+
+
+                $.post('/predict', {query: value,uid:$.cookie('chatbot_userid')},
+
+                function(data) {
+                  <!--alert("Data: " + data + "\nStatus: " + status);//显示结果-->
+
+                //请求远处
+                content.append(
+                           `<li><div><img src="static/avatar2.jpeg" class="img-left"><div class="line text-left">${data}<div class="arrow-left"></div></div></li>`
+                        );
+                content.scrollTop(content.get(0).scrollHeight);
+
+                });
+
+
+			}
+		};
+		$(document).ready(function () {
+            
+            
+			setInterval('$(\'#time\').html(new Date().toLocaleString())', 1);
+			let content = $('#content');
+            
+            $('#content').scrollTop($('#content')[0].scrollHeight);
+
+
+			$('#btn').click(function () {
+				dealText(content, $('#text').val());
+				$('#text').val('');
+				content.scrollTop(content.get(0).scrollHeight);
+			});
+            
+            $.post('/createCookie', {cookie:$.cookie('chatbot_userid'),}, function(data){
+                if(data==''){
+                    
+                }
+                else{
+                    $.cookie('chatbot_userid',data,{expires:7});
+                    <!--alert(data);-->
+                }
+                
+            });
+
+             $('#btn2').click(function(){
+                 
+                 $.post('/newConversation',{uid:$.cookie('chatbot_userid')},function(data){
+                     <!--alert(data);-->
+                 });
+                 $("#content").empty();
+                 
+                
+      });
+			const input = $('#text');
+			input.bind('keypress', function (event) {
+				if (event.keyCode == '13') {
+					dealText(content, input.val());
+					input.val('');
+					content.scrollTop(content.get(0).scrollHeight);
+				}
+			});
+		});
+            
+  </script>
+</head>
+<body onbeforeunload="return checkLeave()">
+<div id="container">
+    <div style="border:1px;text-align:right">
+        <button id="btn2" type="button">new conversation</button>
+    </div>
+  <div class="header">
+    <span style="float: left;">Chat</span>
+    <span style="float: right;" id="time"></span>
+  </div>
+  <ul class="content" id="content"></ul>
+  <div class="footer">
+    <div id="user_face_icon">
+      <img src="static/down.png" style="cursor: default; width: 60px; height: 60px;">
+    </div>
+    <input id="text" type="text" placeholder="请输入内容..." style="font-size: 16px;">
+    <span id="btn" style="font-size: 16px;">发送</span>
+  </div>
+</div>
+</body>
+</html>
