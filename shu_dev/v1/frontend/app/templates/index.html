@@ -231,7 +231,7 @@
 				content.scrollTop(content.get(0).scrollHeight);
 			});
             
-            $.post('/createCookie', {cookie:$.cookie('chatbot_userid'),}, function(data){
+            $.post('/test2', {cookie:$.cookie('chatbot_userid'),}, function(data){
                 if(data==''){
                     
                 }
@@ -253,7 +253,7 @@
       });
 			const input = $('#text');
 			input.bind('keypress', function (event) {
-				if (event.keyCode == '13') {
+				if (event.KeyCode == '13') {
 					dealText(content, input.val());
 					input.val('');
 					content.scrollTop(content.get(0).scrollHeight);
