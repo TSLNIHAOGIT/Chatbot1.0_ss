@@ -171,82 +171,50 @@
 
   </style>
   <script type="text/javascript" src="static/jquery.min.js"></script>
+    <script type="text/javascript" src="//cdn.bootcss.com/socket.io/1.5.1/socket.io.min.js"></script>
   <script>
 
 
-		const dealText = function (content, value) {
-			if (value) {
-				content.append(
-						`<li><div><img src="static/avatar1.jpeg" class="img-right"><div class="line text-right">${value}<div class="arrow-right"></div></div></div></li>`);
-
-
-				<!--上面的value是输入过来的值，传入post返回结果的result作为下面的value-->
-				// $.ajax()
-
-
-
-				 $.ajax({type: "post",url:"/dataFromAjax_post", data:{"mydata": value,"mine":"哈哈"},
-				 success:function(data){
-                        <!--alert(data);-->
-                         //请求远处
-                    content.append(
-                               `<li><div><img src="static/avatar2.jpeg" class="img-left"><div class="line text-left">${data}<div class="arrow-left"></div></div></li>`
-                            );
-                    }});
-
-
-                $.post('/predict', {query: value,},
-
-                function(data) {
-                  <!--alert("Data: " + data + "\nStatus: " + status);//显示结果-->
-
-                //请求远处
-                content.append(
-                           `<li><div><img src="static/avatar2.jpeg" class="img-left"><div class="line text-left">${data}<div class="arrow-left"></div></div></li>`
-                        );
-
-                });
-
-
-			}
-		};
+		
 		$(document).ready(function () {
-			setInterval('$(\'#time\').html(new Date().toLocaleString())', 1);
-			let content = $('#content');
-
-			$('#btn').click(function () {
-				dealText(content, $('#text').val());
-				$('#text').val('');
-				content.scrollTop(content.get(0).scrollHeight);
-			});
-
-
-			const input = $('#text');
-			input.bind('keypress', function (event) {
-				if (event.keyCode == '13') {
-					dealText(content, input.val());
-					input.val('');
-					content.scrollTop(content.get(0).scrollHeight);
-				}
-			});
+            namespace = '/test';
+            var socket = io.connect(location.protocol + '//' + document.domain + ':' + location.port + namespace);
+            
+            socket.on('my_response',function(msg){
+                console.log('123');
+                $('#content').append(
+                    `<li><div><img src="static/avatar2.jpeg" class="img-left"><div class="line text-left">${msg.data}<div class="arrow-left"></div></div></li>`
+                );
+            socket.on('unique_message',function(msg){
+                $('#content').append(
+                    `<li><div><img src="static/avatar2.jpeg" class="img-left"><div class="line text-left">${msg.data}<div class="arrow-left"></div></div></li>`
+                );
+            });
+                
+            });
+            
+            $('#btn').click(function(){
+                $('#content').append(
+                    `<li><div><img src="static/avatar1.jpeg" class="img-right"><div class="line text-right">${$('#text').val()}<div class="arrow-right"></div></div></div></li>`
+                );
+                socket.emit('client_send',{'data':$('#text').val()});
+            });
 		});
-    $('#btn2').click(function()){
-        //call backend function APT desk
-        $.ajax({type:"post",url:"/test"})
-        success:function(){
-          alert
-        }
-      }
+        
+      
+      
+    
   </script>
 </head>
 <body>
+    <div id = 'test'></div>
 <div id="container">
   <div style="border:1px;text-align:right">
     <button id="btn2" type="button">Click</button>
   </div>
   
   <div class="header">
-    <span style="float: left;">Chat</span>
+    <span style="float: left;">New Chat</span>
     <span style="float: right;" id="time"></span>
   </div>
   <ul class="content" id="content"></ul>
