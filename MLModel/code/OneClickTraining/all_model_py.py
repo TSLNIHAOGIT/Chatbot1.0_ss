@@ -36,7 +36,7 @@ class IDClassifier:
         
         result = np.vstack((self.svc.predict_proba(matrix),
                                  self.logistic.predict_proba(matrix),
-                                 self.nb.predict(matrix)))
+                                 self.nb.predict_proba(matrix)))
         
         av_pred = np.mean(result, axis = 0)
         max_pred = np.max(av_pred, axis = 0)
@@ -79,7 +79,7 @@ class IfKnowDebtor:
         
         result = np.vstack((self.svc.predict_proba(matrix),
                                  self.logistic.predict_proba(matrix),
-                                 self.nb.predict(matrix)))
+                                 self.nb.predict_proba(matrix)))
         
         av_pred = np.mean(result, axis = 0)
         max_pred = np.max(av_pred, axis = 0)
@@ -122,7 +122,7 @@ class ConfirmLoan:
         
         result = np.vstack((self.svc.predict_proba(matrix),
                                  self.logistic.predict_proba(matrix),
-                                 self.nb.predict(matrix)))
+                                 self.nb.predict_proba(matrix)))
         
         av_pred = np.mean(result, axis = 0)
         max_pred = np.max(av_pred, axis = 0)
@@ -202,12 +202,12 @@ class WillingToPay:
         
         result = np.vstack((self.svc.predict_proba(matrix),
                                  self.logistic.predict_proba(matrix),
-                                 self.nb.predict(matrix)))
+                                 self.nb.predict_proba(matrix)))
         
         av_pred = np.mean(result, axis = 0)
         max_pred = np.max(av_pred, axis = 0)
         max_arg = np.argmax(av_pred)
-        threshold = 0.5
+        threshold = 0.4
         if np.max(max_pred)<threshold:
             label = 3
         else:
@@ -244,7 +244,7 @@ class CutDebt:
         
         result = np.vstack((self.svc.predict_proba(matrix),
                                  self.logistic.predict_proba(matrix),
-                                 self.nb.predict(matrix)))
+                                 self.nb.predict_proba(matrix)))
         
         av_pred = np.mean(result, axis = 0)
         max_pred = np.max(av_pred, axis = 0)
@@ -285,7 +285,7 @@ class Installment:
         
         result = np.vstack((self.svc.predict_proba(matrix),
                                  self.logistic.predict_proba(matrix),
-                                 self.nb.predict(matrix)))
+                                 self.nb.predict_proba(matrix)))
         
         av_pred = np.mean(result, axis = 0)
         max_pred = np.max(av_pred, axis = 0)
