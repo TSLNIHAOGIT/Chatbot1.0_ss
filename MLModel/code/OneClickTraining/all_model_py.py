@@ -46,8 +46,9 @@ class IDClassifier:
             label = 2
         else:
             label = max_arg
-        return (label, result, av_pred)
-    
+            
+        dictionary = {'label': label, 'pred_prob': result, 'av_pred': av_pred}
+        return dictionary
     
     
     
@@ -89,7 +90,9 @@ class IfKnowDebtor:
             label = 2
         else:
             label = max_arg
-        return (label, result, av_pred) 
+        
+        dictionary = {'label': label, 'pred_prob': result, 'av_pred': av_pred}
+        return dictionary
     
     
     
@@ -132,7 +135,9 @@ class ConfirmLoan:
             label = 2
         else:
             label = max_arg
-        return (label, result, av_pred)
+        
+        dictionary = {'label': label, 'pred_prob': result, 'av_pred': av_pred}
+        return dictionary
     
     
     
@@ -212,7 +217,9 @@ class WillingToPay:
             label = 3
         else:
             label = max_arg
-        return (label, result, av_pred)
+        
+        dictionary = {'label': label, 'pred_prob': result, 'av_pred': av_pred}
+        return dictionary
     
     
     
@@ -254,7 +261,9 @@ class CutDebt:
             label = 2
         else:
             label = max_arg
-        return (label, result, av_pred)
+        
+        dictionary = {'label': label, 'pred_prob': result, 'av_pred': av_pred}
+        return dictionary
     
     
     
@@ -295,4 +304,6 @@ class Installment:
             label = 2
         else:
             label = max_arg
-        return (label, result, av_pred)
+        
+        dictionary = {'label': label, 'pred_prob': result, 'av_pred': av_pred}
+        return dictionary
