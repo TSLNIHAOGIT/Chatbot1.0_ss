@@ -178,7 +178,7 @@
 		
 		$(document).ready(function () {
             namespace = '/test';
-            var socket = io.connect(location.protocol + '//' + document.domain + ':' + location.port + namespace);
+            var socket = io.connect(location.protocol + '//' + document.domain + ':' + location.port + namespace,{reconnection:false});
             let content = $('#content');
             
             $('body').keydown(function(){
@@ -187,13 +187,31 @@
                 }
             });
             
+            
+            socket.on('disconnect',function(msg){
+                
+                content.scrollTop(content.get(0).scrollHeight);
+            });
             socket.on('my_response',function(msg){
-                $('#content').append(
+                
+                if(msg.data == 'disconnection, please try again'){
+                    socket.close();
+                }
+                else{
+                    $('#content').append(
                     `<li><div><img src="static/avatar2.jpeg" class="img-left"><div class="line text-left">${msg.data}<div class="arrow-left"></div></div></li>`
                 );
+                }
                 content.scrollTop(content.get(0).scrollHeight);
             });
             
+            socket.on('disconnect',function(){
+                console.log('123',socket.connected)
+                $('#content').append(
+                    `<li><div><img src="static/avatar2.jpeg" class="img-left"><div class="line text-left">disconnect,please reconnect<div class="arrow-left"></div></div></li>`
+                    );
+                    content.scrollTop(content.get(0).scrollHeight);
+            });
             socket.on('unique_message',function(msg){
                 $('#content').append(
                     `<li><div><img src="static/avatar2.jpeg" class="img-left"><div class="line text-left">${msg.data}<div class="arrow-left"></div></div></li>`
@@ -202,14 +220,30 @@
             });
             
             $('#btn').click(function(){
-                if($('#text').val()){
-                    $('#content').append(
-                    `<li><div><img src="static/avatar1.jpeg" class="img-right"><div class="line text-right">${$('#text').val()}<div class="arrow-right"></div></div></div></li>`
-                );
-                    content.scrollTop(content.get(0).scrollHeight);
-                    input.val('');
-                    socket.emit('client_send',{'data':$('#text').val()});
+                console.log(socket.connected)
+                if(socket.connected){
+                    if($('#text').val()){
+                        $('#content').append(
+                        `<li><div><img src="static/avatar1.jpeg" class="img-right"><div class="line text-right">${$('#text').val()}<div class="arrow-right"></div></div></div></li>`
+                        );
+                        content.scrollTop(content.get(0).scrollHeight);
+                        
+                        socket.emit('client_send',{'data':$('#text').val()});
+                        input.val('');
+                        
+                    }
                 }
+                else{
+                    $('#content').append(
+                        `<li><div><img src="static/avatar1.jpeg" class="img-right"><div class="line text-right">${$('#text').val()}<div class="arrow-right"></div></div></div></li>`
+                        );
+                    input.val('');
+                    $('#content').append(
+                    `<li><div><img src="static/avatar2.jpeg" class="img-left"><div class="line text-left">disconnect,please reconnect<div class="arrow-left"></div></div></li>`
+                    );
+                    content.scrollTop(content.get(0).scrollHeight);
+                }
+                
     
             });
             
