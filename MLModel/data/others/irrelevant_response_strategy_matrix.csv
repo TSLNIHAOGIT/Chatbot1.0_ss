@@ -1,5 +1,5 @@
 类别,Idclassfier,ifknowdebtor,ConfirmLoan,willingtopay,cutdebt,installment,对策
-讨价还价,1.0,1.0,0.0,1.0,0.0,0.0,cutdebt
+讨价还价,1.0,1.0,0.0,1.0,1.0,1.0,cutdebt
 讨价还价,1.0,1.0,1.0,1.0,0.0,0.0,施压
 说出目的,0.0,0.0,1.0,1.0,1.0,1.0,ConfirmLoan
 确认数额,1.0,1.0,0.0,1.0,1.0,1.0,willingtopay
