@@ -17,6 +17,7 @@ class IDClassifier_other:
         svc, logistic, nb, jieba_path,tfidf
         """
         self._load_model(**model)
+        self._load_attributes(**model)
         
     def _load_model(self,**model):
         self.svc = model.get('svc')
@@ -27,6 +28,9 @@ class IDClassifier_other:
         jieba_path = model.get('jieba_path')
         if jieba_path is not None:
             jieba.load_userdict(jieba_path)
+            
+    def _load_attributes(self, **model):
+        self.label_mapping = model.get('possible_label')
         
         
     def classify(self, sentence):
@@ -58,6 +62,7 @@ class IfKnowDebtor_other:
         svc, logistic, nb, jieba_path,tfidf
         """
         self._load_model(**model)
+        self._load_attributes(**model)
         
     def _load_model(self,**model):
         self.svc = model.get('svc')
@@ -68,6 +73,9 @@ class IfKnowDebtor_other:
         jieba_path = model.get('jieba_path')
         if jieba_path is not None:
             jieba.load_userdict(jieba_path)
+            
+    def _load_attributes(self, **model):
+        self.label_mapping = model.get('possible_label')
         
         
     def classify(self, sentence):
@@ -100,6 +108,8 @@ class ConfirmLoan_other:
         svc, logistic, nb, jieba_path,tfidf
         """
         self._load_model(**model)
+        self._load_attributes(**model)
+        
         
     def _load_model(self,**model):
         self.svc = model.get('svc')
@@ -110,6 +120,9 @@ class ConfirmLoan_other:
         jieba_path = model.get('jieba_path')
         if jieba_path is not None:
             jieba.load_userdict(jieba_path)
+    
+    def _load_attributes(self, **model):
+        self.label_mapping = model.get('possible_label')
         
         
     def classify(self, sentence):
@@ -142,6 +155,7 @@ class WillingToPay_other:
         svc, logistic, nb, jieba_path,tfidf
         """
         self._load_model(**model)
+        self._load_attributes(**model)
         self.ext_time = time_entity_recognize(tpattern_path + 'time_words').main
         
     def _load_model(self,**model):
@@ -153,7 +167,11 @@ class WillingToPay_other:
         jieba_path = model.get('jieba_path')
         if jieba_path is not None:
             jieba.load_userdict(jieba_path)
-        
+    
+    def _load_attributes(self, **model):
+        self.label_mapping = model.get('possible_label')
+    
+    
         
     def classify(self, sentence, regular_enable=True, time_acc=24, time_nacc=24*35):
         """
@@ -220,6 +238,7 @@ class CutDebt_other:
         svc, logistic, nb, jieba_path,tfidf
         """
         self._load_model(**model)
+        self._load_attributes(**model)
         
     def _load_model(self,**model):
         self.svc = model.get('svc')
@@ -230,7 +249,11 @@ class CutDebt_other:
         jieba_path = model.get('jieba_path')
         if jieba_path is not None:
             jieba.load_userdict(jieba_path)
-        
+    
+    
+    def _load_attributes(self, **model):
+        self.label_mapping = model.get('possible_label')
+    
         
     def classify(self, sentence):
         sentence = jieba.cut(sentence, cut_all = False)
@@ -260,6 +283,7 @@ class Installment_other:
         svc, logistic, nb, jieba_path,tfidf
         """
         self._load_model(**model)
+        self._load_attributes(**model)
         
     def _load_model(self,**model):
         self.svc = model.get('svc')
@@ -270,7 +294,11 @@ class Installment_other:
         jieba_path = model.get('jieba_path')
         if jieba_path is not None:
             jieba.load_userdict(jieba_path)
-        
+    
+    def _load_attributes(self, **model):
+        self.label_mapping = model.get('possible_label')
+    
+    
         
     def classify(self, sentence):
         sentence = jieba.cut(sentence, cut_all = False)
