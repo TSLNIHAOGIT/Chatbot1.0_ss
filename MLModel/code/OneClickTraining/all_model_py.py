@@ -1,11 +1,12 @@
 import jieba
 import numpy as np
 import sys,os
+sys.path.append('../Others/')
 tpattern_path = '../TimePattern/'
 #sys.path.append(tpattern_path)
 sys.path.append(os.path.join(os.path.dirname(__file__), tpattern_path))
 from  time_regx_recognize import time_entity_recognize
-
+from others_py import *
 
 
 
@@ -23,6 +24,8 @@ class IDClassifier:
         self.logistic = model.get('logistic')
         self.nb = model.get('nb')
         self.tfidf = model.get('tfidf')
+        self.other = model.get('other')
+        self.other.classify('')
         # load jieba
         jieba_path = model.get('jieba_path')
         if jieba_path is not None:
@@ -46,6 +49,9 @@ class IDClassifier:
             label = 2
         else:
             label = max_arg
+        if label == 2:
+            response = self.other.classify(sentence)
+            label = response['label']
             
         dictionary = {'label': label, 'pred_prob': result, 'av_pred': av_pred}
         return dictionary
@@ -67,6 +73,8 @@ class IfKnowDebtor:
         self.logistic = model.get('logistic')
         self.nb = model.get('nb')
         self.tfidf = model.get('tfidf')
+        self.other = model.get('other')
+        self.other.classify('')
         # load jieba
         jieba_path = model.get('jieba_path')
         if jieba_path is not None:
@@ -90,6 +98,9 @@ class IfKnowDebtor:
             label = 2
         else:
             label = max_arg
+        if label == 2:
+            response = self.other.classify(sentence)
+            label = response['label']
         
         dictionary = {'label': label, 'pred_prob': result, 'av_pred': av_pred}
         return dictionary
@@ -112,6 +123,8 @@ class ConfirmLoan:
         self.logistic = model.get('logistic')
         self.nb = model.get('nb')
         self.tfidf = model.get('tfidf')
+        self.other = model.get('other')
+        self.other.classify('')
         # load jieba
         jieba_path = model.get('jieba_path')
         if jieba_path is not None:
@@ -135,6 +148,9 @@ class ConfirmLoan:
             label = 2
         else:
             label = max_arg
+        if label == 2:
+            response = self.other.classify(sentence)
+            label = response['label']
         
         dictionary = {'label': label, 'pred_prob': result, 'av_pred': av_pred}
         return dictionary
@@ -158,6 +174,8 @@ class WillingToPay:
         self.logistic = model.get('logistic')
         self.nb = model.get('nb')
         self.tfidf = model.get('tfidf')
+        self.other = model.get('other')
+        self.other.classify('')
         # load jieba
         jieba_path = model.get('jieba_path')
         if jieba_path is not None:
@@ -217,6 +235,10 @@ class WillingToPay:
             label = 3
         else:
             label = max_arg
+            
+        if label == 3:
+            response = self.other.classify(sentence)
+            label = response['label']
         
         dictionary = {'label': label, 'pred_prob': result, 'av_pred': av_pred}
         return dictionary
@@ -238,6 +260,8 @@ class CutDebt:
         self.logistic = model.get('logistic')
         self.nb = model.get('nb')
         self.tfidf = model.get('tfidf')
+        self.other = model.get('other')
+        self.other.classify('')
         # load jieba
         jieba_path = model.get('jieba_path')
         if jieba_path is not None:
@@ -261,6 +285,9 @@ class CutDebt:
             label = 2
         else:
             label = max_arg
+        if label == 2:
+            response = self.other.classify(sentence)
+            label = response['label']
         
         dictionary = {'label': label, 'pred_prob': result, 'av_pred': av_pred}
         return dictionary
@@ -281,6 +308,8 @@ class Installment:
         self.logistic = model.get('logistic')
         self.nb = model.get('nb')
         self.tfidf = model.get('tfidf')
+        self.other = model.get('other')
+        self.other.classify('')
         # load jieba
         jieba_path = model.get('jieba_path')
         if jieba_path is not None:
@@ -304,6 +333,10 @@ class Installment:
             label = 2
         else:
             label = max_arg
+            
+        if label == 2:
+            response = self.other.classify(sentence)
+            label = response['label']
         
         dictionary = {'label': label, 'pred_prob': result, 'av_pred': av_pred}
         return dictionary
