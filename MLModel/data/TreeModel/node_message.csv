@@ -1,22 +1,22 @@
 node_name,label,message,sentiment
-s0,0,N,1
-cf_s1_n1_identity_q,1,N,1
-cf_s1_n1_identity_q,0,N,1
-cf_s1_n1_identity_q,2,N,1
-cf_s1_n2_confirmLoan_q,0,N,1
-cf_s1_n2_confirmLoan_q,1,N,1
-cf_s1_n2_confirmLoan_q,2,N,1
-cf_s1_n5_ifAcquainted_q,0,N,1
-cf_s1_n5_ifAcquainted_q,1,N,1
-cf_s1_n5_ifAcquainted_q,2,N,1
-cf_s1_n15_verifyWill_q,0,N,1
-cf_s1_n15_verifyWill_q,1,N,1
-cf_s1_n15_verifyWill_q,2,N,1
+s0,0,"你好，这里是江苏逸能催收公司，请问是罗巍先生吗？",1
+cf_s1_n1_identity_q,1,"不好意思，打扰了，请问您认识罗先生吗！",1
+cf_s1_n1_identity_q,0,"你好，这里是江苏逸能催收公司，请问是罗巍先生吗？",1
+cf_s1_n1_identity_q,2,"不好意思，您的回答我不太懂，请再说一次",1
+cf_s1_n2_confirmLoan_q,0,"您之前借贷了5万块钱，截至今天已经逾期47天，逾期总欠款5万2千块钱，其中利息1500，滞纳金500块。逸能公司已经对您进行了多次催促，但是您依旧没有按时偿还所欠款项。现在我们正式对您下达通知，要求您在明天下午3点之前还清所有欠款。",1
+cf_s1_n2_confirmLoan_q,1,"我们这边所有记录都显示，您找我们借款现在还未还！借了钱就需要还钱，请不要以这种理由来搪塞！",1
+cf_s1_n2_confirmLoan_q,2,"不好意思，您的回答我不太懂，请再说一次",1
+cf_s1_n5_ifAcquainted_q,0,"请您告诉罗巍先生，请他尽快联系逸能催收公司，感谢您的配合，再见！",1
+cf_s1_n5_ifAcquainted_q,1,"十分抱歉，打扰到您。感谢您的配合，再见！",1
+cf_s1_n5_ifAcquainted_q,2,"不好意思，您的回答我不太懂，请再说一次",1
+cf_s1_n15_verifyWill_q,0,"感谢您的配合。您可以使用APP或者银行转账的方式进行还款，还请将还款截图发至微信hwchat！",1
+cf_s1_n15_verifyWill_q,1,"赖账你是赖不掉的，目前我们公司已经派专员处理了，你现在必须告诉我什么时候还！",1
+cf_s1_n15_verifyWill_q,2,"额... 如果是这样的话您看我帮您把金额减免一定程度可以吗？ 如果今天还，我帮您把利息1500全部剪掉，您只用还本金1万2。这是我能做大的最大程度了！",1
 cf_s1_n15_verifyWill_q,3,N,1
 cf_s1_n15_verifyWill_q,4,N,1
 cf_s1_n15_verifyWill_q,5,N,1
-cf_s1_n25_cutDebt_q,0,N,1
-cf_s1_n25_cutDebt_q,1,N,1
+cf_s1_n25_cutDebt_q,0,"感谢您的配合。您可以使用APP或者银行转账的方式进行还款，还请将还款截图发至微信hwchat！",1
+cf_s1_n25_cutDebt_q,1,"额... 如果是这样的话您看我帮您把金额减免一定程度可以吗？ 如果今天还，我帮您把利息1500全部剪掉，您只用还本金1万2。这是我能做大的最大程度了！",1
 cf_s1_n25_cutDebt_q,2,N,1
 cf_s1_n25_cutDebt_q,3,N,1
 cf_s1_n25_cutDebt_q,4,N,1
