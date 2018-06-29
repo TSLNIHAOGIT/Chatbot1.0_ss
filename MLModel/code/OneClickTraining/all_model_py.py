@@ -1,10 +1,11 @@
 import jieba
 import numpy as np
 import sys,os
-sys.path.append('../Others/')
 tpattern_path = '../TimePattern/'
+others_pth = '../Others/'
 #sys.path.append(tpattern_path)
 sys.path.append(os.path.join(os.path.dirname(__file__), tpattern_path))
+sys.path.append(os.path.join(os.path.dirname(__file__), others_pth))
 from  time_regx_recognize import time_entity_recognize
 from others_py import *
 
