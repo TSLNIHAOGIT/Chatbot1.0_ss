@@ -14,7 +14,7 @@ class IDClassifier_other:
     def __init__(self, **model):
         """
         suggested parameters:
-        svc, logistic, nb, jieba_path,tfidf
+        svc, logistic, nb, jieba_path, tfidf
         """
         self._load_model(**model)
         self._load_attributes(**model)
@@ -47,6 +47,7 @@ class IDClassifier_other:
         max_arg = np.argmax(av_pred)
         
         label = max_arg
+        label = self.label_mapping[label]
             
         dictionary = {'label': label, 'pred_prob': result, 'av_pred': av_pred}
         return dictionary
@@ -92,6 +93,7 @@ class IfKnowDebtor_other:
         max_arg = np.argmax(av_pred)
         
         label = max_arg
+        label = self.label_mapping[label]
         
         dictionary = {'label': label, 'pred_prob': result, 'av_pred': av_pred}
         return dictionary
@@ -139,6 +141,7 @@ class ConfirmLoan_other:
         max_arg = np.argmax(av_pred)
         
         label = max_arg
+        label = self.label_mapping[label]
         
         dictionary = {'label': label, 'pred_prob': result, 'av_pred': av_pred}
         return dictionary
@@ -223,6 +226,7 @@ class WillingToPay_other:
         max_arg = np.argmax(av_pred)
        
         label = max_arg
+        label = self.label_mapping[label]
         
         dictionary = {'label': label, 'pred_prob': result, 'av_pred': av_pred}
         return dictionary
@@ -269,6 +273,7 @@ class CutDebt_other:
         max_arg = np.argmax(av_pred)
         
         label = max_arg
+        label = self.label_mapping[label]
         
         dictionary = {'label': label, 'pred_prob': result, 'av_pred': av_pred}
         return dictionary
@@ -314,6 +319,7 @@ class Installment_other:
         max_arg = np.argmax(av_pred)
         
         label = max_arg
+        label = self.label_mapping[label]
         
         dictionary = {'label': label, 'pred_prob': result, 'av_pred': av_pred}
         return dictionary
