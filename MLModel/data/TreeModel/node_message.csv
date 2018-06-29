@@ -28,35 +28,35 @@ cf_s1_n5_ifAcquainted_q,107,1,我这边是江苏逸能催收公司的催收员�
 cf_s1_n5_ifAcquainted_q,109,1,不是，您这边没必要跟我东拉西扯的啊。您到底认识他吗？
 cf_s1_n5_ifAcquainted_q,110,1,你这跟我说这些乱七八糟的没有用啊。你认识他吗？
 cf_s1_n15_verifyWill_q,0,1,感谢您的配合。您可以使用APP或者银行转账的方式进行还款，还请将还款截图发至微信hwchat！
-cf_s1_n15_verifyWill_q,1,1,赖账你是赖不掉的，目前我们公司已经派专员处理了，现在请你告诉我，明天下午3点之前你能不能还？
-cf_s1_n15_verifyWill_q,2,1,额... 如果是这样的话您看我帮您把金额减免一定程度可以吗？ 如果今天还，我帮您把利息1500全部剪掉，您只用还本金1万2。这是我能做大的最大程度了！
-cf_s1_n15_verifyWill_q,103,cf_s1_n15_verifyWill_q,N
-cf_s1_n15_verifyWill_q,104,cf_s1_n109_scheduleCall_s,N
-cf_s1_n15_verifyWill_q,105,cf_s1_n110_recordWechat_s,N
-cf_s1_n15_verifyWill_q,106,cf_s1_n15_verifyWill_q,N
-cf_s1_n15_verifyWill_q,107,cf_s1_n15_verifyWill_q,N
-cf_s1_n15_verifyWill_q,108,cf_s1_n15_verifyWill_q,N
-cf_s1_n15_verifyWill_q,109,cf_s1_n15_verifyWill_q,N
-cf_s1_n15_verifyWill_q,1001,cf_s1_n25_cutDebt_q,jump
+cf_s1_n15_verifyWill_q,1,1,赖账你是赖不掉的，目前我们公司已经派专员处理了，现在请你告诉我，明天下午3点之前你能不能还清？
+cf_s1_n15_verifyWill_q,2,1,我看看啊，这样的话，我帮您申请一下，把利息1500和滞纳金500全部剪掉，您只用还本金5万，但是你必须今天之内还清。这是我能做大的最大程度了，你看可以吗？
+cf_s1_n15_verifyWill_q,103,1,是这样的，您之前借贷了5万块钱，截至今天已经逾期47天，逾期总欠款5万2千块钱，其中利息1500，滞纳金500块。现在我们正式对您下达通知，要求您必须在明天下午3点之前还清所有欠款。
+cf_s1_n15_verifyWill_q,104,1,那好吧，我过一会儿给你打过去。
+cf_s1_n15_verifyWill_q,105,1,好的，那我们这边马上会有一个主管跟你联系。
+cf_s1_n15_verifyWill_q,106,1,N
+cf_s1_n15_verifyWill_q,107,1,N
+cf_s1_n15_verifyWill_q,108,1,N
+cf_s1_n15_verifyWill_q,109,1,N
+cf_s1_n15_verifyWill_q,1001,1,N
 cf_s1_n25_cutDebt_q,0,1,感谢您的配合。您可以使用APP或者银行转账的方式进行还款，还请将还款截图发至微信hwchat！
 cf_s1_n25_cutDebt_q,1,1,额... 如果是这样的话您看我帮您把金额减免一定程度可以吗？ 如果今天还，我帮您把利息1500全部剪掉，您只用还本金1万2。这是我能做大的最大程度了！
-cf_s1_n25_cutDebt_q,100,cf_s1_n25_cutDebt_q,N
-cf_s1_n25_cutDebt_q,102,cf_s1_n25_cutDebt_q,N
-cf_s1_n25_cutDebt_q,103,cf_s1_n25_cutDebt_q,N
-cf_s1_n25_cutDebt_q,104,cf_s1_n109_scheduleCall_s,N
-cf_s1_n25_cutDebt_q,106,cf_s1_n25_cutDebt_q,N
-cf_s1_n25_cutDebt_q,107,cf_s1_n25_cutDebt_q,N
-cf_s1_n25_cutDebt_q,108,cf_s1_n25_cutDebt_q,N
-cf_s1_n25_cutDebt_q,109,cf_s1_n25_cutDebt_q,N
-cf_s1_n25_cutDebt_q,1001,cf_s1_n32_splitDebt_q,jump
+cf_s1_n25_cutDebt_q,100,1,N
+cf_s1_n25_cutDebt_q,102,1,N
+cf_s1_n25_cutDebt_q,103,1,N
+cf_s1_n25_cutDebt_q,104,1,N
+cf_s1_n25_cutDebt_q,106,1,N
+cf_s1_n25_cutDebt_q,107,1,N
+cf_s1_n25_cutDebt_q,108,1,N
+cf_s1_n25_cutDebt_q,109,1,N
+cf_s1_n25_cutDebt_q,1001,1,jump
 cf_s1_n32_splitDebt_q,0,1,N
 cf_s1_n32_splitDebt_q,1,1,N
-cf_s1_n32_splitDebt_q,100,cf_s1_n32_splitDebt_q,N
-cf_s1_n32_splitDebt_q,102,cf_s1_n32_splitDebt_q,N
-cf_s1_n32_splitDebt_q,103,cf_s1_n32_splitDebt_q,N
-cf_s1_n32_splitDebt_q,104,cf_s1_n109_scheduleCall_s,N
-cf_s1_n32_splitDebt_q,106,cf_s1_n32_splitDebt_q,N
-cf_s1_n32_splitDebt_q,107,cf_s1_n32_splitDebt_q,N
-cf_s1_n32_splitDebt_q,108,cf_s1_n32_splitDebt_q,N
-cf_s1_n32_splitDebt_q,109,cf_s1_n32_splitDebt_q,N
-cf_s1_n32_splitDebt_q,1001,cf_s1_n105_noResult_s,jump
+cf_s1_n32_splitDebt_q,100,1,N
+cf_s1_n32_splitDebt_q,102,1,N
+cf_s1_n32_splitDebt_q,103,1,N
+cf_s1_n32_splitDebt_q,104,1,N
+cf_s1_n32_splitDebt_q,106,1,N
+cf_s1_n32_splitDebt_q,107,1,N
+cf_s1_n32_splitDebt_q,108,1,N
+cf_s1_n32_splitDebt_q,109,1,N
+cf_s1_n32_splitDebt_q,1001,1,jump
