@@ -1,3 +1,4 @@
+#encoding=utf-8
 import jieba
 import numpy as np
 import sys,os
@@ -34,6 +35,9 @@ class IDClassifier_other:
         
         
     def classify(self, sentence):
+        """
+        {'讨价还价':100, '说出目的':101, '确认数额':102, '请求重复':103, '请求等下打来':104, '其它通讯方式':105, '模糊确认':106, '回问身份':107, '还款方式':108, '故意岔开话题':109, '不愿配合':110}
+        """
         sentence = jieba.cut(sentence, cut_all = False)
         sentence = ' '.join(sentence)
         matrix = self.tfidf.transform([sentence])
@@ -80,6 +84,9 @@ class IfKnowDebtor_other:
         
         
     def classify(self, sentence):
+        """
+        {'讨价还价':100, '说出目的':101, '确认数额':102, '请求重复':103, '请求等下打来':104, '其它通讯方式':105, '模糊确认':106, '回问身份':107, '还款方式':108, '故意岔开话题':109, '不愿配合':110}
+        """
         sentence = jieba.cut(sentence, cut_all = False)
         sentence = ' '.join(sentence)
         matrix = self.tfidf.transform([sentence])
@@ -128,6 +135,9 @@ class ConfirmLoan_other:
         
         
     def classify(self, sentence):
+        """
+        {'讨价还价':100, '说出目的':101, '确认数额':102, '请求重复':103, '请求等下打来':104, '其它通讯方式':105, '模糊确认':106, '回问身份':107, '还款方式':108, '故意岔开话题':109, '不愿配合':110}
+        """
         sentence = jieba.cut(sentence, cut_all = False)
         sentence = ' '.join(sentence)
         matrix = self.tfidf.transform([sentence])
@@ -184,6 +194,9 @@ class WillingToPay_other:
         3 - other
         4 - Rex. can pay in very short time. notify payment channel.
         5 - Rex. 2 times appear. confirm again
+        
+        {'讨价还价':100, '说出目的':101, '确认数额':102, '请求重复':103, '请求等下打来':104, '其它通讯方式':105, '模糊确认':106, '回问身份':107, '还款方式':108, '故意岔开话题':109, '不愿配合':110}
+        
         """
         # Regular expression
         if regular_enable:
@@ -260,6 +273,9 @@ class CutDebt_other:
     
         
     def classify(self, sentence):
+        """
+        {'讨价还价':100, '说出目的':101, '确认数额':102, '请求重复':103, '请求等下打来':104, '其它通讯方式':105, '模糊确认':106, '回问身份':107, '还款方式':108, '故意岔开话题':109, '不愿配合':110}
+        """
         sentence = jieba.cut(sentence, cut_all = False)
         sentence = ' '.join(sentence)
         matrix = self.tfidf.transform([sentence])
@@ -306,6 +322,9 @@ class Installment_other:
     
         
     def classify(self, sentence):
+        """
+        {'讨价还价':100, '说出目的':101, '确认数额':102, '请求重复':103, '请求等下打来':104, '其它通讯方式':105, '模糊确认':106, '回问身份':107, '还款方式':108, '故意岔开话题':109, '不愿配合':110}
+        """
         sentence = jieba.cut(sentence, cut_all = False)
         sentence = ' '.join(sentence)
         matrix = self.tfidf.transform([sentence])
