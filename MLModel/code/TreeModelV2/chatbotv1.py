@@ -64,7 +64,7 @@ class Node:
         self.name = node_name
         self.entry_counter = 0
         self._load_message(msg_path)
-        print('{} is initialized'.format(self.name))
+        #print('{} is initialized'.format(self.name))
 
         
         
@@ -322,6 +322,21 @@ class TreeStage1(TreeBase):
         if current_node.model_name == 'StopClassifier':
             return 'end'
         _label,_ptp = current_node.process(sentence, model_dict)
+
+        response,next_node_name = self._updates(_label)
+        
+        if next_node_name is None:
+            return 'end'
+        else:
+            self.current_node_name = next_node_name
+        return response
+    
+    def ttest(self, sentence, model_dict,label):
+        current_node = self.nodes[self.current_node_name] 
+        if current_node.model_name == 'StopClassifier':
+            return 'end'
+        _label,_ptp = current_node.process(sentence, model_dict)
+        _label = label
 
         response,next_node_name = self._updates(_label)
         
