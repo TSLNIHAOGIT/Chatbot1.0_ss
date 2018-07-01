@@ -201,9 +201,9 @@ if __name__ == "__main__":
                   msg_path=msg_path,
                   model_dict=model_dict)
     
-    #################### Run Flask at 8889  ###############################################
-    print('http://10.0.24.31:8899/')
-    print('http://0.0.0.0:8889/')
+    #################### Run Flask at 6006  ###############################################
+    print('http://10.0.24.31:6006/')
+    print('http://0.0.0.0:6006/')
     scheduler = BackgroundScheduler()
     scheduler.start()
     scheduler.add_job(
@@ -215,4 +215,4 @@ if __name__ == "__main__":
     # Shut down the scheduler when exiting the app
     atexit.register(lambda: scheduler.shutdown())
 
-    socketio.run(app,'0.0.0.0',8889)
+    socketio.run(app,'0.0.0.0',6006)
