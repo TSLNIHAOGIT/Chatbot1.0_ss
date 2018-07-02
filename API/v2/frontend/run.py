@@ -87,15 +87,20 @@ class Cache:
     
     def purge_inactive(self):
         current = time.time()
+        remove_list = []
         for uid in self.active_session:
             if current - self.active_session[uid]['time_response'] > self.inactive_maxlength:
-                print('{} session is inactive, will be removed!'.format(uid))
-                self.remove_session(uid)
+                remove_list.append(uid)
             try:
                 if current - self.active_session[uid]['time_inform'] > self.inform_interval:
                     self.inform_inactive(uid)
             except KeyError:
                 pass
+            
+        # delete
+        for uid in remove_list:
+            print('{} session is inactive, will be removed!'.format(uid))
+                self.remove_session(uid)
                 
         
     def inform_inactive(self, uid):
