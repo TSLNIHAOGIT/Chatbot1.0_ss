@@ -119,6 +119,11 @@ class ConfirmLoan(BaseClassifier):
         self.re_time = TimePattern(pattern_path=tpattern_path+'mapping.csv')
         
     def classify(self, sentence,lower_bounder=36, upper_bounder=72):
+        """
+        if len(time_extract) == 0 --> run through ML
+        if len(time_extract) == 1(within short time) --> jump to n103
+        other --> jump to n15
+        """
         time_result = self._ext_time(sentence,lower_bounder, upper_bounder)
         time_label = time_result['label']
         time_extract = time_result['time_extract']
@@ -165,10 +170,11 @@ class WillingToPay(BaseClassifier):
         1 - not willing to pay (ML + Reg, too long)
         2 - hope to cut
         3 - other
-        4 - Rex. can pay in very short time. notify payment channel.
-        5 - Rex. 2 times appear. confirm again
         Re:
-        if time len(extract) >=2, and the min time is within the tolerance,
+        if time len(extract) >=2, and the min time is within the tolerance --> connect to self and confirm which day to pay
+        if time len(extract) ==1, and the min time is within the tolerance --> run through ML
+                                    and the min time is within the middle time --> not run ML, connect to self
+                                    and the min time is longer than the longest time --> no ML, connect to self, sentiment +1
         out put label 10
         """
         dictionary = {}
@@ -228,6 +234,14 @@ class CutDebt(BaseClassifier):
         self.re_time = TimePattern(pattern_path=tpattern_path+'mapping.csv')
         
     def classify(self, sentence,lower_bounder=36, upper_bounder=72):
+        """
+        Re:
+        if time len(extract) >=2, and the min time is within the tolerance --> connect to self and confirm which day to pay
+        if time len(extract) ==1, and the min time is within the tolerance --> run through ML
+                                    and the min time is within the middle time --> not run ML, connect to self
+                                    and the min time is longer than the longest time --> no ML, connect to self, sentiment +1
+        out put label 10
+        """
         dictionary = {}
         # Regular expression
         time_result = self._ext_time(sentence,lower_bounder, upper_bounder)
@@ -284,6 +298,14 @@ class Installment(BaseClassifier):
         
         
     def classify(self, sentence,lower_bounder=36, upper_bounder=72):
+        """
+        Re:
+        if time len(extract) >=2, and the min time is within the tolerance --> connect to self and confirm which day to pay
+        if time len(extract) ==1, and the min time is within the tolerance --> run through ML
+                                    and the min time is within the middle time --> not run ML, connect to self
+                                    and the min time is longer than the longest time --> no ML, connect to self, sentiment +1
+        out put label 10
+        """
         dictionary= {}
         # Regular expression
         time_result = self._ext_time(sentence,lower_bounder, upper_bounder)
