@@ -215,7 +215,6 @@ class WillingToPay(BaseClassifier):
             if label == 3:
                 response = self.other.classify(sentence)
                 label = response['label']
-            print('ML output is : {}'.format(label))
             # interact with regular expression
             if (time_label == 2) and (label != 1):
                 label = 10
