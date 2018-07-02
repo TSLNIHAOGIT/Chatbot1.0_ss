@@ -5,7 +5,6 @@ import sys,os
 tpattern_path = '../TimePattern/'
 #sys.path.append(tpattern_path)
 sys.path.append(os.path.join(os.path.dirname(__file__), tpattern_path))
-from  time_regx_recognize import time_entity_recognize
 
 
 
@@ -169,7 +168,7 @@ class WillingToPay_other:
         """
         self._load_model(**model)
         self._load_attributes(**model)
-        self.ext_time = time_entity_recognize(tpattern_path + 'time_words').main
+        
         
     def _load_model(self,**model):
         self.svc = model.get('svc')
@@ -186,7 +185,7 @@ class WillingToPay_other:
     
     
         
-    def classify(self, sentence, regular_enable=True, time_acc=24, time_nacc=24*35):
+    def classify(self, sentence):
         """
         0 - high willing to pay (ML + Reg, between short and long)
         1 - not willing to pay (ML + Reg, too long)
@@ -198,33 +197,7 @@ class WillingToPay_other:
         {'讨价还价':100, '说出目的':101, '确认数额':102, '请求重复':103, '请求等下打来':104, '其它通讯方式':105, '模糊确认':106, '回问身份':107, '还款方式':108, '故意岔开话题':109, '不愿配合':110}
         
         """
-        # Regular expression
-        if regular_enable:
-            times = self.ext_time(sentence)
-            if len(times) == 1:
-                time2now = times[0]['time_to_now']
-                if time2now <= time_acc:
-                    label = 4
-                    max_arg =4
-                    confidence = 1.0
-                elif time_acc < time2now <= time_nacc:
-                    label = 0
-                    max_arg = 0
-                    confidence = 1.0
-                else:
-                    label = 1
-                    max_arg = 1
-                    confidence = 1.0
-                return (label, [max_arg, confidence])
-            elif len(times) > 1:
-                label = 5
-                max_arg = 5
-                confidence = 1.0
-                return (label, [max_arg, confidence])
-                
-            
-        
-        
+       
         # ML model process
         sentence = jieba.cut(sentence, cut_all = False)
         sentence = ' '.join(sentence)
