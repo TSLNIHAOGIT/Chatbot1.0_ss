@@ -100,7 +100,7 @@ class Cache:
         # delete
         for uid in remove_list:
             print('{} session is inactive, will be removed!'.format(uid))
-                self.remove_session(uid)
+            self.remove_session(uid)
                 
         
     def inform_inactive(self, uid):
