@@ -13,6 +13,10 @@ class TimePattern:
         self._set_timeZone(tz)
         self._load_mapping(pattern_path)
         
+    def remove_time(self,sentence):
+        sentence = re.sub(self.re_ext,'',sentence)
+        return sentence
+        
     
     def process(self, sentence):
         current = dt.datetime.now()

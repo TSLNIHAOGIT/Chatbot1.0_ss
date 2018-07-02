@@ -127,6 +127,8 @@ class ConfirmLoan(BaseClassifier):
         time_result = self._ext_time(sentence,lower_bounder, upper_bounder)
         time_label = time_result['label']
         time_extract = time_result['time_extract']
+        # remove time pattern from setence
+        sentence = self.re_time.remove_time(sentence)
         sentence = jieba.cut(sentence, cut_all = False)
         sentence = ' '.join(sentence)
         matrix = self.tfidf.transform([sentence])
@@ -191,6 +193,8 @@ class WillingToPay(BaseClassifier):
             return {'label':10 , 'pred_prob': 1.0, 'av_pred': 1.0, 'time_extract':time_extract}
         else:           
             # ML model process
+            # remove time pattern from setence
+            sentence = self.re_time.remove_time(sentence)
             sentence = jieba.cut(sentence, cut_all = False)
             sentence = ' '.join(sentence)
             matrix = self.tfidf.transform([sentence])
@@ -211,7 +215,7 @@ class WillingToPay(BaseClassifier):
             if label == 3:
                 response = self.other.classify(sentence)
                 label = response['label']
-
+            print('ML output is : {}'.format(label))
             # interact with regular expression
             if (time_label == 2) and (label != 1):
                 label = 10
@@ -255,6 +259,8 @@ class CutDebt(BaseClassifier):
                     min_time = _time
             return {'label':10 , 'pred_prob': 1.0, 'av_pred': 1.0, 'time_extract':time_extract}
         else:
+            # remove time pattern from setence
+            sentence = self.re_time.remove_time(sentence)
             sentence = jieba.cut(sentence, cut_all = False)
             sentence = ' '.join(sentence)
             matrix = self.tfidf.transform([sentence])
@@ -319,6 +325,8 @@ class Installment(BaseClassifier):
                     min_time = _time
             return {'label':10 , 'pred_prob': 1.0, 'av_pred': 1.0, 'time_extract':time_extract}
         else:
+            # remove time pattern from setence
+            sentence = self.re_time.remove_time(sentence)
             sentence = jieba.cut(sentence, cut_all = False)
             sentence = ' '.join(sentence)
             matrix = self.tfidf.transform([sentence])
