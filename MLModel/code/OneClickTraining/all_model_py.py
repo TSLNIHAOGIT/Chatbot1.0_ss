@@ -182,8 +182,8 @@ class WillingToPay(BaseClassifier):
         time_result = self._ext_time(sentence,lower_bounder, upper_bounder)
         time_label = time_result['label']
         time_extract = time_result['time_extract']
-        min_time = time_extract[0]['gapH']
         if time_label == 2:
+            min_time = time_extract[0]['gapH']
             for each in time_extract[1:]:
                 _time = each['gapH']
                 if _time < min_time:
@@ -246,9 +246,9 @@ class CutDebt(BaseClassifier):
         # Regular expression
         time_result = self._ext_time(sentence,lower_bounder, upper_bounder)
         time_label = time_result['label']
-        time_extract = time_result['time_extract']
-        min_time = time_extract[0]['gapH']
+        time_extract = time_result['time_extract'] 
         if time_label == 2:
+            min_time = time_extract[0]['gapH']
             for each in time_extract[1:]:
                 _time = each['gapH']
                 if _time < min_time:
@@ -310,9 +310,9 @@ class Installment(BaseClassifier):
         # Regular expression
         time_result = self._ext_time(sentence,lower_bounder, upper_bounder)
         time_label = time_result['label']
-        time_extract = time_result['time_extract']
-        min_time = time_extract[0]['gapH']
+        time_extract = time_result['time_extract']        
         if time_label == 2:
+            min_time = time_extract[0]['gapH']
             for each in time_extract[1:]:
                 _time = each['gapH']
                 if _time < min_time:
