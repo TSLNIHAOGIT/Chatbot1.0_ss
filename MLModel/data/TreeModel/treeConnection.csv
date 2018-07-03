@@ -50,6 +50,7 @@ cf_s1_n25_cutDebt_q,106,cf_s1_n25_cutDebt_q,N
 cf_s1_n25_cutDebt_q,107,cf_s1_n25_cutDebt_q,N
 cf_s1_n25_cutDebt_q,108,cf_s1_n25_cutDebt_q,N
 cf_s1_n25_cutDebt_q,109,cf_s1_n25_cutDebt_q,N
+cf_s1_n25_cutDebt_q,10,cf_s1_n25_cutDebt_q,出现2个时间，并有一个在可接受范围。回原节点并确认时间。
 cf_s1_n25_cutDebt_q,1001,cf_s1_n32_splitDebt_q,jump
 cf_s1_n32_splitDebt_q,0,cf_s1_n106_paymentChannel_s,N
 cf_s1_n32_splitDebt_q,1,cf_s1_n32_splitDebt_q,N
@@ -61,4 +62,5 @@ cf_s1_n32_splitDebt_q,106,cf_s1_n32_splitDebt_q,N
 cf_s1_n32_splitDebt_q,107,cf_s1_n32_splitDebt_q,N
 cf_s1_n32_splitDebt_q,108,cf_s1_n32_splitDebt_q,N
 cf_s1_n32_splitDebt_q,109,cf_s1_n32_splitDebt_q,N
+cf_s1_n32_splitDebt_q,10,cf_s1_n32_splitDebt_q,出现2个时间，并有一个在可接受范围。回原节点并确认时间。
 cf_s1_n32_splitDebt_q,1001,cf_s1_n105_noResult_s,jump
