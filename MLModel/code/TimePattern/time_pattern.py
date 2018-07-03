@@ -14,7 +14,7 @@ class TimePattern:
         self._load_mapping(pattern_path)
         
     def remove_time(self,sentence):
-        sentence = re.sub(self.re_ext,'',sentence)
+        sentence = re.sub(self.re_ext,' ',sentence)
         return sentence
         
     
