@@ -101,11 +101,18 @@ class Node:
         """
         df = self.messages[(self.messages.label == label) & (self.messages.sentiment == sentiment)]
         # enable random extract
-        df = df.sample(frac=1)
+        try:
+            df = df.sample(frac=1)
+        except ValueError:
+            response = '这个节点是{}，输出label是{},情感色彩是{},并未设置话术！请检查'.format(self.name,label,sentiment)
+            print(response)
+            return response
         try:
             response = df.message.values[0]
         except IndexError:
-            response = '这个节点是{}，输出label是{},情感色彩是{},并未设置话术！请检查'.format(self.name,self.output_label,sentiment)
+            response = '这个节点是{}，输出label是{},情感色彩是{},并未设置话术！请检查'.format(self.name,label,sentiment)
+            print(response)
+            return response
         self.entry_counter += 1
         return response
 

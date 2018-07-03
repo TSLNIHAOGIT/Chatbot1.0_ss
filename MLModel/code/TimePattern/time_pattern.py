@@ -381,3 +381,16 @@ class TimePattern:
         month = ['下个月','再下个月','下下个月','1月','2月',
                  '3月','4月','5月','6月','7月','8月','9月','10月','11月','12月',
                  '一月','二月','三月','四月','五月','六月','七月','八月','九月','十月','十一月','十二月',]
+        
+    def test_case1(self):
+        """
+        test if there is any overlab between self-defined and the fixed expression
+        """
+        error_result = []
+        for each_pattern in self.serires.index.values:
+            fixymd = self.evl_ymd(each_pattern)
+            if len(fixymd) > 0:
+                pattern = fixymd[0]['pattern']
+                if pattern == each_pattern:
+                    error_result.append(each_pattern)
+        print(error_result)
