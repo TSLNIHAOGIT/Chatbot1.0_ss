@@ -321,7 +321,8 @@ class TimePattern:
         return eval_time
     
     def ymd_reg(self,x):
-        fix_ymd = r'(?:(?:今|明|后|大后)年)?(?:(?:\d{1,2}|下下下个|下下个|再下个|下个|十一|十二|一|二|三|四|五|六|七|八|九|十|后1个|后2个|后一个|后两个|后二个)月)?(?:(?:\d{1,2}|一|二|三|四|五|六|七|八|九|十|十一|十二|十三|十四|十五|十六|十七|十八|十九|二十|二十一|二十二|二十三|二十四|二十五|二十六|二十七|二十八|二十九|三十|三十一)[日号])?'
+        fix_ymd = r'(?:(?:今|明|后|大后)年)?(?:(?:\d{1,2}|下下下个|下下个|再下个|下个|十一|十二|一|二|三|四|五|六|七|八|九|十|后1个|后2个|后一个|后两个|后二个)月)(?:\d{1,2}|一|二|三|四|五|六|七|八|九|十|十一|十二|十三|十四||十六|十七|十八|十九|二十|二十一|二十二|二十三|二十四|二十五|二十六|二十七|二十八|二十九|三十|三十一)[日号]'
+#         fix_ymd = r'(?:(?:今|明|后|大后)年)?(?:(?:\d{1,2}|下下下个|下下个|再下个|下个|十一|十二|一|二|三|四|五|六|七|八|九|十|后1个|后2个|后一个|后两个|后二个)月)?(?:(?:\d{1,2}|一|二|三|四|五|六|七|八|九|十|十一|十二|十三|十四|十五|十六|十七|十八|十九|二十|二十一|二十二|二十三|二十四|二十五|二十六|二十七|二十八|二十九|三十|三十一)[日号])?'
         finds = list(set(re.findall(fix_ymd,x)) -set(['']))
         return finds
 
@@ -337,7 +338,7 @@ class TimePattern:
                     return gets
 
 
-        time_dic = {'今':'?','明':'+1','后':'+2','大后':'+3','下个':'+1','下下个':'+2','再下个':'+2','下下下个':'+3','后1个':'+1','后2个':'+1','后一个':'+1','后两个':'+1',
+        time_dic = {'今':'?','明':'+1','后':'+2','大后':'+3','下个':'+1','下下个':'+2','再下个':'+2','下下下个':'+3','后1个':'+1','后2个':'+2','后一个':'+1','后两个':'+2',
                     '一':'1','二':'2','三':'3','四':'4','五':'5','六':'6',
                    '七':'7','八':'8','九':'9','十':'10','十一':'11','十二':'12','十三':'13','十四':'14','十五':'15',
                    '十六':'16','十七':'17','十八':'18','十九':'19','二十':'20','二十一':'21','二十二':'22','二十三':'23',
@@ -376,11 +377,7 @@ class TimePattern:
             for each in finds:
                 evls.append({'pattern':each, 'expression':self.ymd_expression(each)})
         return evls
-    
-    def test1(self):
-        month = ['下个月','再下个月','下下个月','1月','2月',
-                 '3月','4月','5月','6月','7月','8月','9月','10月','11月','12月',
-                 '一月','二月','三月','四月','五月','六月','七月','八月','九月','十月','十一月','十二月',]
+   
         
     def test_case1(self):
         """
@@ -391,6 +388,23 @@ class TimePattern:
             fixymd = self.evl_ymd(each_pattern)
             if len(fixymd) > 0:
                 pattern = fixymd[0]['pattern']
-                if pattern == each_pattern:
-                    error_result.append(each_pattern)
+#                 if pattern == each_pattern:
+                error_result.append(each_pattern)
+        print('============ test case 1 is below ==============')
         print(error_result)
+        
+    def test_case2(self):
+        """
+        This test is used to test all self define mapping;
+        check is the evl string is correct
+        """
+        error_result = []
+        for key in self.dict_ext:
+            try:
+                evl = self.evl(self.dict_ext[key])
+            except Exception:
+                error_result.append(key)
+                print(key)
+        print('============ test case 2 is below ==============')
+        print(error_result )
+        
