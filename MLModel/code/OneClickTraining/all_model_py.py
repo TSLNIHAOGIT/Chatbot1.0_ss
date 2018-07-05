@@ -65,7 +65,7 @@ class IDClassifier(BaseClassifier):
         av_pred = np.mean(result, axis = 0)
         max_pred = np.max(av_pred, axis = 0)
         max_arg = np.argmax(av_pred)
-        threshold = 0.5
+        threshold = 0.38
         if np.max(max_pred)<threshold:
             label = 2
         else:
@@ -96,7 +96,7 @@ class IfKnowDebtor(BaseClassifier):
         av_pred = np.mean(result, axis = 0)
         max_pred = np.max(av_pred, axis = 0)
         max_arg = np.argmax(av_pred)
-        threshold = 0.5
+        threshold = 0.2
         if np.max(max_pred)<threshold:
             label = 2
         else:
@@ -140,7 +140,7 @@ class ConfirmLoan(BaseClassifier):
         av_pred = np.mean(result, axis = 0)
         max_pred = np.max(av_pred, axis = 0)
         max_arg = np.argmax(av_pred)
-        threshold = 0.5
+        threshold = 0.2
         if np.max(max_pred)<threshold:
             label = 2
         else:
@@ -206,7 +206,7 @@ class WillingToPay(BaseClassifier):
             av_pred = np.mean(result, axis = 0)
             max_pred = np.max(av_pred, axis = 0)
             max_arg = np.argmax(av_pred)
-            threshold = 0.4
+            threshold = 0.2
             if np.max(max_pred)<threshold:
                 label = 3
             else:
@@ -271,7 +271,7 @@ class CutDebt(BaseClassifier):
             av_pred = np.mean(result, axis = 0)
             max_pred = np.max(av_pred, axis = 0)
             max_arg = np.argmax(av_pred)
-            threshold = 0.5
+            threshold = 0.36
             if np.max(max_pred)<threshold:
                 label = 2
             else:
@@ -337,7 +337,7 @@ class Installment(BaseClassifier):
             av_pred = np.mean(result, axis = 0)
             max_pred = np.max(av_pred, axis = 0)
             max_arg = np.argmax(av_pred)
-            threshold = 0.5
+            threshold = 0.2
             if np.max(max_pred)<threshold:
                 label = 2
             else:
