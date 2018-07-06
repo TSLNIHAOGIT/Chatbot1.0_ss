@@ -64,6 +64,7 @@ class Node:
         self.name = node_name
         self.entry_counter = 0
         self._load_message(msg_path)
+        self.canJump = False
         #print('{} is initialized'.format(self.name))
 
         
@@ -74,6 +75,14 @@ class Node:
                 'class_name':self.__class__.__name__, 
                 'model': self.model_name}
     
+    def _triger_jump(self):
+        if self.canJump is True:
+            # jump trigger
+            if self.output_label == 1 and self.entry_counter >=2: 
+                self.output_label = 1001
+        else:
+            return None
+    
     
     
     def process(self, sentence, model_dict):
@@ -82,8 +91,7 @@ class Node:
         
         self.output_label = clf['label']
         # jump trigger
-        if self.output_label == 1 and self.entry_counter >=2: 
-            self.output_label = 1001
+        self._triger_jump()
         self.ptp_time = clf.get('ptp_time')
         return self.output_label, self.ptp_time
     
@@ -145,6 +153,7 @@ class S1_N2(Node):
         super().__init__('cf_s1_n2_confirmLoan_q', msg_path)
         self.describe = 'Verify Identify'
         self.model_name = 'ConfirmLoan'
+        self.canJump = True
                 
 
                 
@@ -162,6 +171,7 @@ class S1_N15(Node):
         super().__init__('cf_s1_n15_verifyWill_q', msg_path)
         self.describe = 'Verify willing to pay'
         self.model_name = 'WillingToPay'
+        self.canJump = True
                 
        
 
@@ -172,6 +182,7 @@ class S1_N25(Node):
         super().__init__('cf_s1_n25_cutDebt_q', msg_path)
         self.describe = 'ask if accept less amount'
         self.model_name = 'CutDebt'
+        self.canJump = True
         
         
         
@@ -183,6 +194,7 @@ class S1_N32(Node):
         super().__init__('cf_s1_n32_splitDebt_q', msg_path)
         self.describe = 'ask if accept installment'
         self.model_name = 'Installment'
+        self.canJump = True
         
         
         
