@@ -33,22 +33,23 @@ from apscheduler.triggers.interval import IntervalTrigger
 
 
 class Cache:
-    def __init__(self, graph_path,msg_path,model_dict,max_session=1000):
+    def __init__(self, graph_path,msg_path,model_dict,max_session=1000,debug=False):
         self.max_session = 1000
-        self.inform_interval = 20
-        self.inactive_maxlength = 75
+        self.inform_interval = 45
+        self.inactive_maxlength = 150
         #{'uid': {'stragety': Tree(), 'time_response': <time>, 'time_inform': <>}
         self.active_session = {}
         self.model_dict = model_dict
         self.graph_path = graph_path
         self.msg_path = msg_path
+        self.debug=debug
         
         
     def create_session(self, uid):
         if len(self.active_session) < self.max_session:
             self.active_session[uid] = {}
             self.active_session[uid].update({'stragety':TreeStage1(graph_path=self.graph_path,
-                                                                   msg_path=self.msg_path)})
+                                                                   msg_path=self.msg_path,debug=self.debug)})
             self.active_session[uid].update({'time_response':time.time()})
             self.active_session[uid].update({'time_inform':time.time()})
             self.active_session[uid].update({'chatting':[]})
@@ -204,7 +205,7 @@ if __name__ == "__main__":
     #################################################################
     cache = Cache(graph_path=graph_path,
                   msg_path=msg_path,
-                  model_dict=model_dict)
+                  model_dict=model_dict,debug=True)
     
     #################### Run Flask at 6006  ###############################################
     print('http://10.0.24.31:6006/')

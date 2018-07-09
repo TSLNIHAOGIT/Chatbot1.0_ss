@@ -285,10 +285,11 @@ class TreeBase:
         
     
 class TreeStage1(TreeBase):
-    def __init__(self, start_node='s0',graph_path='',msg_path=''):
+    def __init__(self, start_node='s0',graph_path='',msg_path='',debug=False):
         super().__init__(start_node=start_node)
         self._build_node(msg_path)
         self._build_graph(graph_path)
+        self.debug = debug
         
     def _build_node(self,msg_path):
         self.messages = pd.read_csv(msg_path,encoding='utf8')
@@ -331,13 +332,18 @@ class TreeStage1(TreeBase):
         
         # get current response
         response = cur_node.get_response(_label)
-        next_node_name = self.mapping.get(self.current_node_name)
+
         
         # get next node_name
         if self.mapping.get(self.current_node_name) is not None:
             next_node_name = self.mapping.get(self.current_node_name)[_label]['connection']
         else:
             next_node_name = None
+            
+        if self.debug:
+            response = response + '<-current node is: {}->'.format(self.current_node_name)
+            response = response + '<-output label is: {}->'.format(_label)
+            response = response + '<-next node is: {}->'.format(next_node_name)
         return response, next_node_name
         
         
