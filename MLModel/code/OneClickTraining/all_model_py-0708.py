@@ -271,7 +271,7 @@ class CutDebt(BaseClassifier):
             av_pred = np.mean(result, axis = 0)
             max_pred = np.max(av_pred, axis = 0)
             max_arg = np.argmax(av_pred)
-            threshold = 0.36
+            threshold = 0.35
             if np.max(max_pred)<threshold:
                 label = 2
             else:
