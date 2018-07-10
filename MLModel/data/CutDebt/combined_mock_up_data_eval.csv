@@ -1,5 +1,13 @@
 label,split_text,from
 0,可以,CutDebt
+0,已经还了，提示正在交易中,CutDebt
+0,要得,CutDebt
+0,好的，好的，好的,CutDebt
+0,行，你放一万个心,CutDebt
+0,行你放心,CutDebt
+0,行没问题,CutDebt
+0,行，行，行,CutDebt
+0,嗯嗯，好的,CutDebt
 1,我现在实在没那么多钱,CutDebt
 2,今天天气不错,CutDebt
 0,行,CutDebt
