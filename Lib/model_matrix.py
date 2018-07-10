@@ -18,10 +18,8 @@ def eval_mat(real_label, estimated_label):
     result[-1,-1] = correct / len(real_label)
     column_name = ['pred_'+str(each) for each in possible_label]
     column_name.append('recall')
-    print(column_name)
     row_name = ['actual_'+str(each) for each in possible_label]
     row_name.append('precision')
-    print(row_name)
     result = pd.DataFrame(result,columns=column_name,index=row_name)
     result = result.fillna(0)
     return result
