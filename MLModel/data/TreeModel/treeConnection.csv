@@ -15,7 +15,7 @@ cf_s1_n2_confirmLoan_q,103,cf_s1_n2_confirmLoan_q,N
 cf_s1_n2_confirmLoan_q,104,cf_s1_n109_scheduleCall_s,N
 cf_s1_n2_confirmLoan_q,106,cf_s1_n2_confirmLoan_q,N
 cf_s1_n2_confirmLoan_q,107,cf_s1_n2_confirmLoan_q,N
-cf_s1_n2_confirmLoan_q,108,cf_s1_n2_confirmLoan_q,N
+cf_s1_n2_confirmLoan_q,108,cf_s1_n15_verifyWill_q,N
 cf_s1_n2_confirmLoan_q,109,cf_s1_n2_confirmLoan_q,N
 cf_s1_n2_confirmLoan_q,10,cf_s1_n103_paymentChannel_s,CofirmLoan时短时间即可还款回复
 cf_s1_n2_confirmLoan_q,1001,cf_s1_n108_noResult_s,jump
