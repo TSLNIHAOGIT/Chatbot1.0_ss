@@ -1,6 +1,6 @@
 from,label,original_label,original_text,new_label
 讨价还价,2,100.0,违约金太多了,2
-ConfirmLoan,0,,你不清楚你们是高利贷么？还敢给我打电话,0,
+ConfirmLoan,0,,你不清楚你们是高利贷么？还敢给我打电话,0
 确认数额,2,102.0,怎么这么多,2
 ConfirmLoan,0,,我也是想还你们，可惜是心有余而力不足，现实太残酷，一分钱难倒英雄汉,0
 故意岔开话题,2,109.0,起床了,2
