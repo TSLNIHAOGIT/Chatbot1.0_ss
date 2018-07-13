@@ -9,7 +9,6 @@ cf_s1_n1_identity_q,107,cf_s1_n2_confirmLoan_q,N
 cf_s1_n1_identity_q,109,cf_s1_n1_identity_q,N
 cf_s1_n2_confirmLoan_q,0,cf_s1_n15_verifyWill_q,N
 cf_s1_n2_confirmLoan_q,1,cf_s1_n2_confirmLoan_q,N
-cf_s1_n2_confirmLoan_q,100,cf_s1_n25_cutDebt_q,N
 cf_s1_n2_confirmLoan_q,103,cf_s1_n2_confirmLoan_q,N
 cf_s1_n2_confirmLoan_q,104,cf_s1_n109_scheduleCall_s,N
 cf_s1_n2_confirmLoan_q,107,cf_s1_n2_confirmLoan_q,N
