@@ -1,5 +1,4 @@
 category,label,IDClassifier,IfKnowDebtor,ConfirmLoan,WillingToPay,CutDebt,Installment,strategy
-讨价还价,100,1.0,1.0,0.0,1.0,1.0,1.0,跳到cutdebt节点的施压话术，随机挑一条level1级别的
 讨价还价,100,1.0,1.0,1.0,1.0,0.0,0.0,对应节点施压更高level2及以上
 说出目的,101,0.0,0.0,1.0,1.0,1.0,1.0,跳到ConfirmLoan的问题，选一条新的话术
 确认数额,102,1.0,1.0,1.0,1.0,0.0,1.0,1.核资内容（你逾期XX、欠款多少、利息多少，滞纳金多少等等） 2.减免之后需要多少钱 
