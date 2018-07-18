@@ -2,8 +2,15 @@ import time
 import gc
 import sys,os
 
+ENV_PATH = '../../../ENV/'
+LOG_PATH = '../../../Lib/'
+
 sys.path.append(os.path.join(os.path.dirname(__file__), '../../../MLModel/code/OneClickTraining/'))
 sys.path.append(os.path.join(os.path.dirname(__file__), '../../../MLModel/code/TreeModelV2/'))
+sys.path.append(os.path.join(os.path.dirname(__file__), ENV_PATH))
+sys.path.append(os.path.join(os.path.dirname(__file__), LOG_PATH))
+from env import ENV
+from LOG import Logger
 from all_model_py import *
 import pickle
 from chatbotv1 import *
@@ -35,7 +42,7 @@ from apscheduler.triggers.interval import IntervalTrigger
 class Cache:
     def __init__(self, graph_path,msg_path,model_dict,max_session=1000,debug=False):
         self.max_session = 1000
-        self.inform_interval = 45
+        self.inform_interval = 60
         self.inactive_maxlength = 150
         #{'uid': {'stragety': Tree(), 'time_response': <time>, 'time_inform': <>}
         self.active_session = {}
@@ -43,6 +50,13 @@ class Cache:
         self.graph_path = graph_path
         self.msg_path = msg_path
         self.debug=debug
+        self.log = Logger(self.__class__.__name__,level=ENV.NODE_LOG_LEVEL.value).logger
+        self._print()
+        
+    def _print(self):
+        self.log.info('Max num of session is: {}'.format(self.max_session))
+        self.log.info('inform inacitve interval is {} seconds'.format(self.inform_interval))
+        self.log.info('inactive max length is {} seconds'.format(self.inactive_maxlength))
         
         
     def create_session(self, uid):
@@ -53,6 +67,8 @@ class Cache:
             self.active_session[uid].update({'time_response':time.time()})
             self.active_session[uid].update({'time_inform':time.time()})
             self.active_session[uid].update({'chatting':[]})
+            self.log.info('New session was created: {}'.format(uid))
+            self.log.info('Remaining session number is: {}'.format(self.max_session-len(self.active_session)))
             return True
         else:
             return False
@@ -69,51 +85,88 @@ class Cache:
             pass
         try:
             del self.active_session[uid]
-            print('session {} is removed'.format(uid))
+            self.log.info('{} session is inactive, it has been removed!'.format(uid))
         except KeyError:
                 pass
         gc.collect()
             
     def chat(self,uid,sentence):
         if self.active_session.get(uid) is not None:
+            self.log.info('receive message from user: {} ===================='.format(uid))
             response = self.active_session[uid]['stragety'].process(sentence, self.model_dict)
             self.active_session[uid]['time_response'] = time.time()
             self.active_session[uid]['time_inform'] = time.time()
             self.active_session[uid]['chatting'].append(response)
+            self.log.info('processing messages for user {} has been done!----------------'.format(uid))
         else:
             response = None
         return response
         
     
     
-    def purge_inactive(self):
+    def _bulk_deletes(self):
         current = time.time()
         remove_list = []
-        for uid in self.active_session:
-            if current - self.active_session[uid]['time_response'] > self.inactive_maxlength:
-                remove_list.append(uid)
-            try:
-                if current - self.active_session[uid]['time_inform'] > self.inform_interval:
-                    self.inform_inactive(uid)
-            except KeyError:
-                pass
+        try:
+            for uid in self.active_session:
+                try:
+                    if current - self.active_session[uid]['time_response'] > self.inactive_maxlength:
+                        remove_list.append(uid)
+                except KeyError:
+                    pass
+        except RuntimeError as e:
+            self.log.error(e)
+            return False
+        finally:
+            # delete
+            for uid in remove_list:              
+                self.remove_session(uid)
+        return True
+    
+    def _bulk_inform(self):
+        current = time.time()
+        inform_list = []
+        try:
+            for uid in self.active_session:
+                try:
+                    if current - self.active_session[uid]['time_inform'] > self.inform_interval:
+                        inform_list.append(uid)
+                     
+                except KeyError as e:
+                        self.log.error(e)
+                        pass
+            for each in inform_list:
+                self.inform_inactive(each)
             
-        # delete
-        for uid in remove_list:
-            print('{} session is inactive, will be removed!'.format(uid))
-            self.remove_session(uid)
+        except RuntimeError:
+            
+            return False
+        
+        return True
+    
+    
+    def purge_inactive(self):
+        current = time.time()
+        while True:
+            if self._bulk_deletes():
+                break
+
+        while True:
+            if self._bulk_inform():
+                break
+        
                 
         
     def inform_inactive(self, uid):
         self.active_session[uid]['time_inform'] = time.time()
-        last_sentence = self.active_session[uid]['chatting'][-1]
-#         response = '您有在听我说吗？ \n'+last_sentence
         response = '您有在听我说吗?请回答我刚才的问题！'
         socketio.emit('my_response',{'data':response},room = uid, namespace=name_space)
+        self.log.info('{} is inactive. Just inform that user'.format(uid))
         
         
         
 ############### Flask ###################
+logger = Logger('Websocket-Flask',level=ENV.NODE_LOG_LEVEL.value).logger
 async_mode = None
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'secret!'
@@ -164,29 +217,31 @@ def disconnect():
     cache.remove_session(uid)
     leave_room(uid)
     dc()
-    print('{} is disconnected'.format(uid))
+    logger.info('{} has been disconnected from API'.format(uid))
+    
     
 @socketio.on('connect',namespace=name_space)
 def connect():
-    print('connect')
-    print(request.sid)
+    
     uid = request.sid
     clients.append(uid)
-    print(len(clients))
+    logger.info('{} is trying to connect!'.format(uid))
     
     join_room(uid)
     if cache.create_session(uid):
+        logger.info('{} join connection successfully'.format(uid))
         response = cache.chat(uid, '')
         if response is not None:
             socketio.emit('my_response',{'data':response},room = uid,namespace=name_space) #the first sentence
             return None
         
     else:
+        logger.info('{} cannot join connection'.format(uid))
         socketio.emit('my_response',{'data':'server busy. please click new conv'},room = uid,namespace=name_space) 
         disconnect_frontend(uid)
         
 if __name__ == "__main__":
-
+    
     
     ############## Model Related ###################
     models_list = ['IDClassifier','CutDebt','IfKnowDebtor','WillingToPay','Installment','ConfirmLoan']

@@ -1,10 +1,19 @@
 import sys,os
+
+ENV_PATH = '../../../ENV/'
+LOG_PATH = '../../../Lib/'
+sys.path.append(os.path.join(os.path.dirname(__file__), ENV_PATH))
+sys.path.append(os.path.join(os.path.dirname(__file__), LOG_PATH))
 sys.path.append('../OneClickTraining/')
 sys.path.append('../Others/')
 from all_model_py import *
 from others_py import *
 import pickle
 import pandas as pd
+from env import ENV
+from LOG import Logger
+            
+            
             
             
 class ClassifierBase:
@@ -62,10 +71,10 @@ class StopClassifier(ClassifierBase):
 class Node:
     def __init__(self, node_name, msg_path=None):
         self.name = node_name
-        self.entry_counter = 0
         self._load_message(msg_path)
         self.canJump = False
-        #print('{} is initialized'.format(self.name))
+        self.sentiment = 1
+        self.log = Logger(self.__class__.__name__,level=ENV.NODE_LOG_LEVEL.value).logger
 
         
         
@@ -78,7 +87,7 @@ class Node:
     def _triger_jump(self):
         if self.canJump is True:
             # jump trigger
-            if self.output_label == 1 and self.entry_counter >=2: 
+            if self.output_label == 1 and self.sentiment >=2: 
                 self.output_label = 1001
         else:
             return None
@@ -103,25 +112,38 @@ class Node:
         self.messages.sentiment = self.messages.sentiment.astype('int')
         
         
-    def get_response(self, label, sentiment=1):
+    def get_response(self, label):
         """
         return response by label
         """
-        df = self.messages[(self.messages.label == label) & (self.messages.sentiment == sentiment)]
+        
+        df = self.messages[self.messages.label == label]
+        
+        max_sentiment = np.max(df.sentiment.values)
+        
+        if self.sentiment > max_sentiment:
+            sentiment = max_sentiment
+        else:
+            sentiment = self.sentiment
+            
+        df = df[df.sentiment == sentiment]
+        self.log.debug('Current sentiment is {}, node sentiment is: {}, max message sentiment is: {}'.format(sentiment,self.sentiment,max_sentiment))
+        self.log.debug('Available number of message is {}'.format(len(df)))
         # enable random extract
         try:
             df = df.sample(frac=1)
         except ValueError:
-            response = '这个节点是{}，输出label是{},情感色彩是{},并未设置话术！请检查'.format(self.name,label,sentiment)
-            print(response)
+            response = 'current node name is{}，ouput label is{},sentiment is{}, no message has been set'.format(self.name,label,sentiment)
+            self.log.error(response)
             return response
         try:
             response = df.message.values[0]
+            add_sentiment = df.add_sentiment.values[0]
         except IndexError:
-            response = '这个节点是{}，输出label是{},情感色彩是{},并未设置话术！请检查'.format(self.name,label,sentiment)
-            print(response)
+            response = 'current node name is{}，ouput label is{},sentiment is{}, no message has been set'.format(self.name,label,sentiment)
+            self.log.error(response)
             return response
-        self.entry_counter += 1
+        self.sentiment += add_sentiment
         return response
 
 
@@ -279,6 +301,7 @@ class S1_N110(NodeStop):
 class TreeBase:
     def __init__(self, start_node='s0', ):
         self.current_node_name = start_node
+        self.log = Logger(self.__class__.__name__,level=ENV.TREE_LOG_LEVEL.value).logger
         self.fc_path = []
         self.all_path = []
         
@@ -350,19 +373,28 @@ class TreeStage1(TreeBase):
         
     def process(self, sentence, model_dict):
         current_node = self.nodes[self.current_node_name] 
+        self.log.debug('Current node name is {}'.format(self.current_node_name))
         if current_node.model_name == 'StopClassifier':
+            self.log.debug('Reach Stop Node: {}'.format(self.current_node_name))
             return 'end'
         _label,_ptp = current_node.process(sentence, model_dict)
+        self.log.debug('Output label is {}'.format(_label))
 
         response,next_node_name = self._updates(_label)
         
+        
         if next_node_name is None:
+            self.log.debug('Next node name is None. Reach stop node')
             return 'end'
         else:
             self.current_node_name = next_node_name
+            self.log.debug('Next node name is {}.'.format(self.current_node_name))
         return response
     
     def ttest(self, sentence, model_dict,label):
+        """
+        random path test
+        """
         current_node = self.nodes[self.current_node_name] 
         if current_node.model_name == 'StopClassifier':
             return 'end'
