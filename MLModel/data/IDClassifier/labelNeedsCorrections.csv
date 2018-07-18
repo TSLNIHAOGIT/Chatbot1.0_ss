@@ -1,4 +1,4 @@
-from,label,original_label,original_text,,
+from,label,original_label,original_text,new_label,
 请求等下打来,2,104,我在上课,2,
 说出目的,2,101,干嘛？,2,
 IDClassifier,0,,你是谁,107,
