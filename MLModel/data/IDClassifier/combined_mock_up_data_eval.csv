@@ -1,4 +1,5 @@
 label,split_text,from
+0,什么事,IDClassifier
 0,啊,IDClassifier
 1,你有病吧我跟你说过很多次了我不是他,IDClassifier
 1,不是什么事,IDClassifier
