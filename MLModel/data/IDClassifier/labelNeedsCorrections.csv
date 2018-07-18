@@ -246,7 +246,6 @@ IDClassifier,0,,不要打过来了,0,1
 IDClassifier,0,,什么事说,101,
 IDClassifier,0,,你是哪个哦,107,
 IDClassifier,1,,上次不是跟你说过了，怎么又给我打电话,1,
-IDClassifier,0,,忙着呢，不要烦我,0
 请求重复,2,103,你找谁啊,2,
 IDClassifier,1,,现在没有时间,104,
 IDClassifier,1,,我是张亮,1,1
