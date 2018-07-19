@@ -1,0 +1,99 @@
+test_add (HRX.Test.example_unittest.ttest_mathfunc.TestMathFunc)
+Test method add(a, b) ... FAIL
+test_divide (HRX.Test.example_unittest.ttest_mathfunc.TestMathFunc)
+Test method divide(a, b) ... FAIL
+test_even (HRX.Test.example_unittest.ttest_mathfunc.TestMathFunc) ... test_minus (HRX.Test.example_unittest.ttest_mathfunc.TestMathFunc)
+Test method minus(a, b) ... ok
+test_multi (HRX.Test.example_unittest.ttest_mathfunc.TestMathFunc)
+Test method multi(a, b) ... ok
+test_subset (HRX.Test.example_unittest.ttest_mathfunc.TestMathFunc)
+sub_test ... 
+======================================================================
+FAIL: test_add (HRX.Test.example_unittest.ttest_mathfunc.TestMathFunc)
+Test method add(a, b)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/ozintel/Downloads/Tsl_python_progect/local_ml/Chatbot1.0/HRX/Test/example_unittest/ttest_mathfunc.py", line 40, in test_add
+    self.assertEqual([1, 4, 3, 4, 5, 6], [2, 2, 3, 4, 5, 7])
+AssertionError: Lists differ: [1, 4, 3, 4, 5, 6] != [2, 2, 3, 4, 5, 7]
+
+First differing element 0:
+1
+2
+
+- [1, 4, 3, 4, 5, 6]
++ [2, 2, 3, 4, 5, 7]
+
+======================================================================
+FAIL: test_divide (HRX.Test.example_unittest.ttest_mathfunc.TestMathFunc)
+Test method divide(a, b)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/ozintel/Downloads/Tsl_python_progect/local_ml/Chatbot1.0/HRX/Test/example_unittest/ttest_mathfunc.py", line 54, in test_divide
+    self.assertEqual(4, divide(6, 3))
+AssertionError: 4 != 2
+
+======================================================================
+FAIL: test_even (HRX.Test.example_unittest.ttest_mathfunc.TestMathFunc) (i=1)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/ozintel/Downloads/Tsl_python_progect/local_ml/Chatbot1.0/HRX/Test/example_unittest/ttest_mathfunc.py", line 35, in test_even
+    self.assertEqual(i % 2, 0)
+AssertionError: 1 != 0
+
+======================================================================
+FAIL: test_even (HRX.Test.example_unittest.ttest_mathfunc.TestMathFunc) (i=3)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/ozintel/Downloads/Tsl_python_progect/local_ml/Chatbot1.0/HRX/Test/example_unittest/ttest_mathfunc.py", line 35, in test_even
+    self.assertEqual(i % 2, 0)
+AssertionError: 1 != 0
+
+======================================================================
+FAIL: test_even (HRX.Test.example_unittest.ttest_mathfunc.TestMathFunc) (i=5)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/ozintel/Downloads/Tsl_python_progect/local_ml/Chatbot1.0/HRX/Test/example_unittest/ttest_mathfunc.py", line 35, in test_even
+    self.assertEqual(i % 2, 0)
+AssertionError: 1 != 0
+
+======================================================================
+FAIL: test_subset (HRX.Test.example_unittest.ttest_mathfunc.TestMathFunc) (data=0)
+sub_test
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/ozintel/Downloads/Tsl_python_progect/local_ml/Chatbot1.0/HRX/Test/example_unittest/ttest_mathfunc.py", line 27, in test_subset
+    self.assertEqual(i, 3)
+AssertionError: 0 != 3
+
+======================================================================
+FAIL: test_subset (HRX.Test.example_unittest.ttest_mathfunc.TestMathFunc) (data=1)
+sub_test
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/ozintel/Downloads/Tsl_python_progect/local_ml/Chatbot1.0/HRX/Test/example_unittest/ttest_mathfunc.py", line 27, in test_subset
+    self.assertEqual(i, 3)
+AssertionError: 1 != 3
+
+======================================================================
+FAIL: test_subset (HRX.Test.example_unittest.ttest_mathfunc.TestMathFunc) (data=2)
+sub_test
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/ozintel/Downloads/Tsl_python_progect/local_ml/Chatbot1.0/HRX/Test/example_unittest/ttest_mathfunc.py", line 27, in test_subset
+    self.assertEqual(i, 3)
+AssertionError: 2 != 3
+
+======================================================================
+FAIL: test_subset (HRX.Test.example_unittest.ttest_mathfunc.TestMathFunc) (data=4)
+sub_test
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/ozintel/Downloads/Tsl_python_progect/local_ml/Chatbot1.0/HRX/Test/example_unittest/ttest_mathfunc.py", line 27, in test_subset
+    self.assertEqual(i, 3)
+AssertionError: 4 != 3
+
+----------------------------------------------------------------------
+Ran 6 tests in 0.001s
+
+FAILED (failures=9)
