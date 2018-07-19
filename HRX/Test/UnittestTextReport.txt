@@ -1,0 +1,25 @@
+test_ConfirmLoan (HRX.Test.chatbot_ttest_model.chatBotModel) ... test_CutDebt (HRX.Test.chatbot_ttest_model.chatBotModel) ... ok
+test_IDClassifier (HRX.Test.chatbot_ttest_model.chatBotModel) ... ok
+test_IfKnowDebtor (HRX.Test.chatbot_ttest_model.chatBotModel) ... ok
+test_Installment (HRX.Test.chatbot_ttest_model.chatBotModel) ... test_WillingToPay (HRX.Test.chatbot_ttest_model.chatBotModel) ... ok
+
+======================================================================
+FAIL: test_ConfirmLoan (HRX.Test.chatbot_ttest_model.chatBotModel) (index=41)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/ozintel/Downloads/Tsl_python_progect/local_ml/Chatbot1.0/HRX/Test/chatbot_ttest_model.py", line 73, in test_ConfirmLoan
+    self.assertEqual(each[1], self.model_ConfirmLoan.classify(each[2])['label'],msg='input text:'+each[2])
+AssertionError: 0.0 != 1 : input text:利息是怎么算的为什么这么多？
+
+======================================================================
+FAIL: test_Installment (HRX.Test.chatbot_ttest_model.chatBotModel) (index=94)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/ozintel/Downloads/Tsl_python_progect/local_ml/Chatbot1.0/HRX/Test/chatbot_ttest_model.py", line 64, in test_Installment
+    self.assertEqual(each[1], self.model_Installment.classify(each[2])['label'])
+AssertionError: 1.0 != 0
+
+----------------------------------------------------------------------
+Ran 6 tests in 1.748s
+
+FAILED (failures=2)
