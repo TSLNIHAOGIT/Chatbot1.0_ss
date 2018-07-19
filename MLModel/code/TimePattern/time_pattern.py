@@ -3,13 +3,20 @@ import numpy as np
 import re
 import datetime as dt
 import pytz
+import sys,os
+ENV_PATH = '../../../ENV/'
+sys.path.append(os.path.join(os.path.dirname(__file__), ENV_PATH))
+from env import ENV
+
 
 
 class TimePattern:
-    def __init__(self,pattern_path='mapping.csv',tz='America/New_York'):
+    def __init__(self,pattern_path='mapping.csv',tz=None):
         """
         tz = pytz.timezone("Asia/Shanghai")
+        'America/New_York'
         """
+        
         self._set_timeZone(tz)
         self._load_mapping(pattern_path)
         
@@ -72,7 +79,10 @@ class TimePattern:
         self.re_ext = r'|'.join(self.serires.index.values)
         self.dict_ext = df_dict
         
-    def _set_timeZone(self,tz):
+    def _set_timeZone(self,tz=None):
+        if tz is None:
+            tz = ENV.TIMEZONE.value
+            print('Time Zone is set from ENV: {}'.format(tz))
         utc = pytz.utc
         self.tz = pytz.timezone(tz)
         now = dt.datetime.now()

@@ -10,8 +10,11 @@ from all_model_py import *
 from others_py import *
 import pickle
 import pandas as pd
-from env import ENV
+from env import ENV,PROFILE
 from LOG import Logger
+import datetime as dt
+import pytz
+import re
             
             
             
@@ -298,21 +301,174 @@ class S1_N110(NodeStop):
 ######################################### Tree #########################################################################
       
         
+
+    
+
+class PF:
+    def __init__(self,profile=None):
+        """
+        profile should be None or dictionary:
+        fields:
+        1. Name: lastName + firstName
+        2. principal: the money borrowed
+        3. contractStartDate
+        4. contractStartDate
+        5. apr:  yearly/monthly, no calculation will be involved
+        6. fee: late payment fee
+        7. lendingCompany: the money originally borrowed from
+        8. collectionCompany
+        9. customerID
+        10. ginder
+        11. collector: the agent who makes the call
+        12. totalAmount: the total amount owed by debotor
+        13. informDeadline: the deadline to collect money
+        14. splitDebtMaxTolerance: the max tolerance of split debt time
+        15. splitDebtFirstPay: the first payment after set up split debt
+        *16. deltaTime: the time diff between now and contract end Date. This will be calcualted
+        """
+        self.log = Logger(self.__class__.__name__,level=ENV.PROFILE_LOG_LEVEL.value).logger
+        if profile is None:
+            self._load_default()
+        else:
+            self._load_profile(profile)
+        
+    def _load_default(self):
+        self.log.debug('profile is None. The default demo profile will be loaded!')
+        self.name = PROFILE.lastName.value + PROFILE.firstName.value
+        self.principal = PROFILE.principal.value
+        self.contractStartDate = PROFILE.contractStartDate.value
+        self.contractEndDate = PROFILE.contractEndDate.value
+        self.apr = PROFILE.apr.value
+        self.interest = PROFILE.interest.value
+        self.fee = PROFILE.fee.value
+        self.lendingCompany = PROFILE.lendingCompany.value
+        self.collectionCompany = PROFILE.lendingCompany.value
+        self.customerID = PROFILE.customerID.value
+        self.ginder = PROFILE.ginder.value
+        self.collector = PROFILE.collector.value
+        self.totalAmount = PROFILE.totalAmount.value
+        self.informDeadline = PROFILE.informDeadline.value
+        self.splitDebtMaxTolerance = PROFILE.splitDebtMaxTolerance.value
+        self.splitDebtFirstPay = PROFILE.splitDebtFirstPay.value
+        self.deltaTime = (dt.datetime.now() - self.create_from_D(self.contractEndDate)).days
+        self._get_prefix()
+        self.log.info('Customer ID is {}, principal is {}, apr is {}'.format(self.customerID,
+                                                                             self.principal,
+                                                                             self.apr))
+        
+    def _load_profile(self, profile):
+        self.log.debug('Loading From Profile')
+        self.name = profile.get('name')
+        self.principal = profile.get('principal')
+        self.contractStartDate = profile.get('contractStartDate')
+        self.contractEndDate = profile.get('contractEndDate')
+        self.apr = profile.get('apr')
+        self.interest = profile.get('interest')
+        self.fee = profile.get('fee')
+        self.lendingCompany = profile.get('lendingCompany')
+        self.collectionCompany = profile.get('collectionCompany')
+        self.customerID = profile.get('customerID')
+        self.ginder = profile.get('ginder')
+        self.collector = PROFILE.collector.value
+        self.totalAmount = profile.get('totalAmount')
+        self.informDeadline = profile.get('informDeadline')
+        self.splitDebtMaxTolerance = profile.get('splitDebtMaxTolerance')
+        self.splitDebtFirstPay = profile.get('splitDebtFirstPay')
+        self.deltaTime = (dt.datetime.now() - self.create_from_D(self.contractEndDate)).days
+        self._get_prefix()
+        self.log.info('Customer ID is {}, principal is {}, apr is {}'.format(self.customerID,
+                                                                             self.principal,
+                                                                             self.apr))
+        
+    
+    def _get_prefix(self):
+        if self.ginder == '男':
+            self.profix = '先生'
+        elif self.ginder == '女':
+            self.profix = '女士'
+        else:
+            self.profix = '先生/女士'
+
+    def create_from_D(self, date):
+        year = int(re.findall('\d{4}年',date)[0][:-1])
+        month = int(re.findall('\d{1,2}月',date)[0][:-1])
+        day = int(re.findall('\d{1,2}日',date)[0][:-1])
+        return dt.datetime(year=year,month=month,day=day)
+        
+
+      
+        
 class TreeBase:
-    def __init__(self, start_node='s0', ):
+    def __init__(self, start_node='s0', profile=None):
         self.current_node_name = start_node
         self.log = Logger(self.__class__.__name__,level=ENV.TREE_LOG_LEVEL.value).logger
         self.fc_path = []
         self.all_path = []
+        self.profile = PF(profile)
+        
+    def _evaluate_sentence(self,sentence):
+        """
+        self.name = profile.get('name')
+        self.principal = profile.get('principal')
+        self.contractStartDate = profile.get('contractStartDate')
+        self.contractEndDate = profile.get('contractEndDate')
+        self.apr = profile.get('apr')
+        self.interest = profile.get('interest')
+        self.fee = profile.get('fee')
+        self.lendingCompany = profile.get('lendingCompany')
+        self.collectionCompany = profile.get('collectionCompany')
+        self.customerID = profile.get('customerID')
+        self.deltaTime = (dt.datetime.now() - self.create_from_D(self.contractEndDate)).days
+        self._get_prefix()
+        """
+        return sentence.format(name=self.profile.name, 
+                               principal=self.profile.principal,
+                               contractStartDate=self.profile.contractStartDate,
+                               contractEndDate=self.profile.contractEndDate,
+                               apr=self.profile.apr,
+                               interest=self.profile.interest,
+                               fee=self.profile.fee,
+                               lendingCompany=self.profile.lendingCompany,
+                               collectionCompany=self.profile.collectionCompany,
+                               deltaTime=self.profile.deltaTime,
+                               profix=self.profile.profix,
+                               collector = self.profile.collector,
+                               totalAmount = self.profile.totalAmount,
+                               informDeadline=self.profile.informDeadline,
+                               splitDebtMaxTolerance=self.profile.splitDebtMaxTolerance,
+                               splitDebtFirstPay=self.profile.splitDebtFirstPay)
+        
         
         
     
 class TreeStage1(TreeBase):
-    def __init__(self, start_node='s0',graph_path='',msg_path='',debug=False):
-        super().__init__(start_node=start_node)
+    def __init__(self, start_node='s0',graph_path='',msg_path='',debug=False, profile=None):
+        """
+        profile should be None or dictionary:
+        fields:
+        1. Name: lastName + firstName
+        2. principal: the money borrowed
+        3. contractStartDate
+        4. contractStartDate
+        5. apr:  yearly/monthly, no calculation will be involved
+        6. fee: late payment fee
+        7. lendingCompany: the money originally borrowed from
+        8. collectionCompany
+        9. customerID
+        10. ginder
+        11. collector: the agent who makes the call
+        12. totalAmount: the total amount owed by debotor
+        13. informDeadline
+        14. splitDebtMaxTolerance: the max tolerance of split debt time
+        15. splitDebtFirstPay: the first payment after set up split debt
+        *16. deltaTime: the time diff between now and contract end Date. This will be calcualted
+        """
+        super().__init__(start_node=start_node,profile=profile)
         self._build_node(msg_path)
         self._build_graph(graph_path)
         self.debug = debug
+        
+    
         
     def _build_node(self,msg_path):
         self.messages = pd.read_csv(msg_path,encoding='utf8')
@@ -381,6 +537,7 @@ class TreeStage1(TreeBase):
         self.log.debug('Output label is {}'.format(_label))
 
         response,next_node_name = self._updates(_label)
+        response = self._evaluate_sentence(response)
         
         
         if next_node_name is None:
@@ -408,3 +565,10 @@ class TreeStage1(TreeBase):
         else:
             self.current_node_name = next_node_name
         return response
+    def test_evaluateMessages(self):
+        messages = self.messages.message.values
+        for each in messages:
+            evl = self._evaluate_sentence(each)
+            print(evl)
+            if len(re.findall(r'{.*?}',evl)) > 0:
+                   raise ValueError(evl)

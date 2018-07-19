@@ -258,12 +258,15 @@ if __name__ == "__main__":
     
     ############## Model Related ###################
     models_list = ['IDClassifier','CutDebt','IfKnowDebtor','WillingToPay','Installment','ConfirmLoan']
+    need_set_TIMEZONE = ['CutDebt','WillingToPay','Installment','ConfirmLoan']
     savedModel_path = '../../../MLModel/savedModel/{}/{}.pickle'
 
     model_dict = {}
     for each_model in models_list:
         model_dict[each_model] = pickle.load(open(savedModel_path.format(each_model,each_model), 'rb'))
         model_dict[each_model].classify('再说一次')
+        if each_model in need_set_TIMEZONE:
+            model_dict[each_model].re_time._set_timeZone()
 
     model_dict['StopClassifier'] = StopClassifier()
     model_dict['InitClassifier'] = InitClassifier()    
