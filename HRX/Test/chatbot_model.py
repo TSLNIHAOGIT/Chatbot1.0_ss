@@ -76,4 +76,4 @@ def models():
 # print(model.classify("他是我哥哥")['label'])
 #
 # model = model_dict['ConfirmLoan']
-# print(model.classify("他是我哥哥")['label'])
+# print(model.classify("我也不知道逾期了啊，怎么这么快呢？")['label'])
