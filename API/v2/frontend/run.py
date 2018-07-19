@@ -57,6 +57,8 @@ class Cache:
         self.log.info('Max num of session is: {}'.format(self.max_session))
         self.log.info('inform inacitve interval is {} seconds'.format(self.inform_interval))
         self.log.info('inactive max length is {} seconds'.format(self.inactive_maxlength))
+        if self.debug:
+            self.log.info('DEBUG is enabled')
         
         
     def create_session(self, uid):
@@ -241,7 +243,18 @@ def connect():
         disconnect_frontend(uid)
         
 if __name__ == "__main__":
-    
+    argument = sys.argv
+    if len(argument) < 2:
+        DEBUG = False
+    else:
+        if argument[1].upper() == 'TRUE':
+            DEBUG = True
+        else:
+            DEBUG = False
+    try:
+        port = int(argument[2])
+    except:
+        port = 6006
     
     ############## Model Related ###################
     models_list = ['IDClassifier','CutDebt','IfKnowDebtor','WillingToPay','Installment','ConfirmLoan']
@@ -260,20 +273,20 @@ if __name__ == "__main__":
     #################################################################
     cache = Cache(graph_path=graph_path,
                   msg_path=msg_path,
-                  model_dict=model_dict,debug=True)
+                  model_dict=model_dict,debug=DEBUG)
     
     #################### Run Flask at 6006  ###############################################
-    print('http://10.0.24.31:6006/')
-    print('http://0.0.0.0:6006/')
+    print('http://10.0.24.31:{}/'.format(port))
+    print('http://0.0.0.0:{}/'.format(port))
     scheduler = BackgroundScheduler()
     scheduler.start()
     scheduler.add_job(
         func=cache.purge_inactive,
-        trigger=IntervalTrigger(seconds=10),
+        trigger=IntervalTrigger(seconds=3),
         id='purge_cache',
         name='purge_inactive',
         replace_existing=True)
     # Shut down the scheduler when exiting the app
     atexit.register(lambda: scheduler.shutdown())
 
-    socketio.run(app,'0.0.0.0',6006)
+    socketio.run(app,'0.0.0.0',port)
