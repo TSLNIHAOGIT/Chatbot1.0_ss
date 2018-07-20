@@ -359,21 +359,23 @@ class PF:
     def _load_profile(self, profile):
         self.log.debug('Loading From Profile')
         self.name = profile.get('name')
-        self.principal = profile.get('principal')
-        self.contractStartDate = profile.get('contractStartDate')
-        self.contractEndDate = profile.get('contractEndDate')
-        self.apr = profile.get('apr')
-        self.interest = profile.get('interest')
-        self.fee = profile.get('fee')
-        self.lendingCompany = profile.get('lendingCompany')
-        self.collectionCompany = profile.get('collectionCompany')
+        if self.name is None:
+            self.name = profile['lastName']+profile['firstName']
+        self.principal = profile['principal']
+        self.contractStartDate = profile['contractStartDate']
+        self.contractEndDate = profile['contractEndDate']
+        self.apr = profile['apr']
+        self.interest = profile['interest']
+        self.fee = profile['fee']
+        self.lendingCompany = profile['lendingCompany']
+        self.collectionCompany = profile['collectionCompany']
         self.customerID = profile.get('customerID')
-        self.ginder = profile.get('ginder')
+        self.ginder = profile['ginder']
         self.collector = PROFILE.collector.value
-        self.totalAmount = profile.get('totalAmount')
-        self.informDeadline = profile.get('informDeadline')
-        self.splitDebtMaxTolerance = profile.get('splitDebtMaxTolerance')
-        self.splitDebtFirstPay = profile.get('splitDebtFirstPay')
+        self.totalAmount = profile['totalAmount']
+        self.informDeadline = profile['informDeadline']
+        self.splitDebtMaxTolerance = profile['splitDebtMaxTolerance']
+        self.splitDebtFirstPay = profile['splitDebtFirstPay']
         self.deltaTime = (dt.datetime.now() - self.create_from_D(self.contractEndDate)).days
         self._get_prefix()
         self.log.info('Customer ID is {}, principal is {}, apr is {}'.format(self.customerID,

@@ -13,7 +13,9 @@ totalAmount
 informDeadline
 splitDebtMaxTolerance
 splitDebtFirstPay
-name
+name (or: firstName, lastName)
+
+note: if name is None. Then trying to load firstName and lastName
 
 
 

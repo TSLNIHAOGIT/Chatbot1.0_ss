@@ -61,11 +61,19 @@ class Cache:
             self.log.info('DEBUG is enabled')
         
         
-    def create_session(self, uid):
+    def create_session(self, uid, profile=None):
         if len(self.active_session) < self.max_session:
             self.active_session[uid] = {}
-            self.active_session[uid].update({'stragety':TreeStage1(graph_path=self.graph_path,
-                                                                   msg_path=self.msg_path,debug=self.debug)})
+            try:
+                self.active_session[uid].update({'stragety':TreeStage1(graph_path=self.graph_path,
+                                                                       msg_path=self.msg_path,
+                                                                       debug=self.debug,
+                                                                       profile=profile)})
+            except KeyError as e:
+                self.log.error('Key {} does not exist in profile'.format(e))
+                self.log.error('create session for user {} failed'.format(uid))
+                return False
+                
             self.active_session[uid].update({'time_response':time.time()})
             self.active_session[uid].update({'time_inform':time.time()})
             self.active_session[uid].update({'chatting':[]})
