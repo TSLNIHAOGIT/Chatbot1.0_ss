@@ -7,7 +7,7 @@ fee
 lendingCompany
 collectionCompany
 deltaTime
-profix
+prefix
 collector
 totalAmount
 informDeadline
@@ -23,7 +23,7 @@ note: if name is None. Then trying to load firstName and lastName
 ======================== demo
     firstName = '明'
     lastName = '李'
-    ginder = '男'
+    gender = '男'
     contractStartDate = '2018年1月16日'
     contractEndDate = '2018年5月16日'
     informDeadline = '明天下午3点'
