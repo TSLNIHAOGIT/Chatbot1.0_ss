@@ -97,6 +97,7 @@ class IDClassifier(BaseClassifier):
         max_pred = np.max(av_pred, axis = 0)
         max_arg = np.argmax(av_pred)
         threshold = 0.38
+        response = None
         if np.max(max_pred)<threshold:
             label = 2
             self.log.debug('max pred is less than threshold {}, set label to 2.'.format(threshold))
@@ -106,7 +107,7 @@ class IDClassifier(BaseClassifier):
             response = self.other.classify(sentence)
             label = response['label']
             
-        dictionary = {'label': label, 'pred_prob': result, 'av_pred': av_pred}
+        dictionary = {'label': label, 'pred_prob': result, 'av_pred': av_pred,'other_response':response}
         self.log.debug('Final Pred label is: {}'.format(dictionary['label']))
         self.log.debug('svc,logistic,nb result:\n {}'.format(dictionary['pred_prob']))
         self.log.debug('ave result:\n {}'.format(dictionary['av_pred']))
@@ -139,6 +140,7 @@ class IfKnowDebtor(BaseClassifier):
         max_pred = np.max(av_pred, axis = 0)
         max_arg = np.argmax(av_pred)
         threshold = 0.2
+        response = None
         if np.max(max_pred)<threshold:
             label = 2
             self.log.debug('max pred is less than threshold {}, set label to 2.'.format(threshold))
@@ -148,7 +150,7 @@ class IfKnowDebtor(BaseClassifier):
             response = self.other.classify(sentence)
             label = response['label']
         
-        dictionary = {'label': label, 'pred_prob': result, 'av_pred': av_pred}
+        dictionary = {'label': label, 'pred_prob': result, 'av_pred': av_pred,'other_response':response}
         self.log.debug('Final Pred label is: {}'.format(dictionary['label']))
         self.log.debug('svc,logistic,nb result:\n {}'.format(dictionary['pred_prob']))
         self.log.debug('ave result:\n {}'.format(dictionary['av_pred']))
@@ -189,6 +191,7 @@ class ConfirmLoan(BaseClassifier):
         max_pred = np.max(av_pred, axis = 0)
         max_arg = np.argmax(av_pred)
         threshold = 0.2
+        response = None
         if np.max(max_pred)<threshold:
             label = 2
             self.log.debug('max pred is less than threshold {}, set label to 2.'.format(threshold))
@@ -201,7 +204,11 @@ class ConfirmLoan(BaseClassifier):
         # interact with regular expression
         if (time_label == 10) and (label != 1):
             label = 10
-        dictionary = {'label': label, 'pred_prob': result, 'av_pred': av_pred, 'time_extract':time_extract}
+        dictionary = {'label': label, 
+                      'pred_prob': result, 
+                      'av_pred': av_pred, 
+                      'time_extract':time_extract,
+                      'other_response':response}
         self.log.debug('Final Pred label is: {}'.format(dictionary['label']))
         self.log.debug('svc,logistic,nb result:\n {}'.format(dictionary['pred_prob']))
         self.log.debug('ave result:\n {}'.format(dictionary['av_pred']))
@@ -238,6 +245,7 @@ class WillingToPay(BaseClassifier):
         time_result = self._ext_time(sentence,lower_bounder, upper_bounder)
         time_label = time_result['label']
         time_extract = time_result['time_extract']
+        response = None
         if time_label == 2:
             min_time = time_extract[0]['gapH']
             for each in time_extract[1:]:
@@ -282,7 +290,11 @@ class WillingToPay(BaseClassifier):
             elif time_label == 12:
                 label = 1
                 dictionary.update({'add_sentiment':1})
-            dictionary.update({'label': label, 'pred_prob': result, 'av_pred': av_pred, 'time_extract':time_extract})
+            dictionary.update({'label': label, 
+                               'pred_prob': result, 
+                               'av_pred': av_pred, 
+                               'time_extract':time_extract,
+                               'other_response':response})
             self.log.debug('Final Pred label is: {}'.format(dictionary['label']))
             self.log.debug('svc,logistic,nb result:\n {}'.format(dictionary['pred_prob']))
             self.log.debug('ave result:\n {}'.format(dictionary['av_pred']))
@@ -312,6 +324,7 @@ class CutDebt(BaseClassifier):
         time_result = self._ext_time(sentence,lower_bounder, upper_bounder)
         time_label = time_result['label']
         time_extract = time_result['time_extract'] 
+        response = None
         if time_label == 2:
             min_time = time_extract[0]['gapH']
             for each in time_extract[1:]:
@@ -356,7 +369,11 @@ class CutDebt(BaseClassifier):
             elif time_label == 12:
                 label = 1
                 dictionary.update({'add_sentiment':1})
-            dictionary.update({'label': label, 'pred_prob': result, 'av_pred': av_pred, 'time_extract':time_extract})
+            dictionary.update({'label': label, 
+                               'pred_prob': result, 
+                               'av_pred': av_pred, 
+                               'time_extract':time_extract,
+                               'other_response':response})
             self.log.debug('Final Pred label is: {}'.format(dictionary['label']))
             self.log.debug('svc,logistic,nb result:\n {}'.format(dictionary['pred_prob']))
             self.log.debug('ave result:\n {}'.format(dictionary['av_pred']))
@@ -385,7 +402,8 @@ class Installment(BaseClassifier):
         # Regular expression
         time_result = self._ext_time(sentence,lower_bounder, upper_bounder)
         time_label = time_result['label']
-        time_extract = time_result['time_extract']        
+        time_extract = time_result['time_extract']    
+        response = None
         if time_label == 2:
             min_time = time_extract[0]['gapH']
             for each in time_extract[1:]:
@@ -427,7 +445,11 @@ class Installment(BaseClassifier):
             elif time_label == 12:
                 label = 1
                 dictionary.update({'add_sentiment':1})
-            dictionary.update({'label': label, 'pred_prob': result, 'av_pred': av_pred, 'time_extract':time_extract})
+            dictionary.update({'label': label, 
+                               'pred_prob': result, 
+                               'av_pred': av_pred, 
+                               'time_extract':time_extract,
+                               'other_response':response})
             self.log.debug('Final Pred label is: {}'.format(dictionary['label']))
             self.log.debug('svc,logistic,nb result:\n {}'.format(dictionary['pred_prob']))
             self.log.debug('ave result:\n {}'.format(dictionary['av_pred']))

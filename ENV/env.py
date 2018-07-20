@@ -9,6 +9,7 @@ class ENV(Enum):
     PROFILE_LOG_LEVEL = 'DEBUG'
     NODE_LOG_LEVEL = 'INFO'
     CACHE_LOG_LEVEL = 'DEBUG'
+    DB_LOG_LEVEL = 'INFO'
 #     TIMEZONE = 'America/New_York'
     TIMEZONE = 'Asia/Shanghai'
     

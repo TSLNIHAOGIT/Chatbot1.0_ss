@@ -15,6 +15,7 @@ from LOG import Logger
 import datetime as dt
 import pytz
 import re
+import datetime as dt
             
             
             
@@ -104,8 +105,8 @@ class Node:
         self.output_label = clf['label']
         # jump trigger
         self._triger_jump()
-        self.ptp_time = clf.get('ptp_time')
-        return self.output_label, self.ptp_time
+        self.detail = clf
+        return self.output_label, self.detail
     
     
     def _load_message(self, msg_path):
@@ -299,8 +300,6 @@ class S1_N110(NodeStop):
 ######################################### Tree #########################################################################
 ######################################### Tree #########################################################################
 ######################################### Tree #########################################################################
-      
-        
 
     
 
@@ -407,6 +406,9 @@ class TreeBase:
         self.fc_path = []
         self.all_path = []
         self.profile = PF(profile)
+        self.conversationId = 1
+        self.cache = {'startTime':dt.datetime.utcnow(),'chat':[]}
+        self.agent_response = []
         
     def _evaluate_sentence(self,sentence):
         """
@@ -530,17 +532,23 @@ class TreeStage1(TreeBase):
         
         
     def process(self, sentence, model_dict):
-        current_node = self.nodes[self.current_node_name] 
+        current_node_name = self.current_node_name
+        current_node = self.nodes[current_node_name]
+        
         self.log.debug('Current node name is {}'.format(self.current_node_name))
         if current_node.model_name == 'StopClassifier':
             self.log.debug('Reach Stop Node: {}'.format(self.current_node_name))
             return 'end'
-        _label,_ptp = current_node.process(sentence, model_dict)
+        _label,_detail = current_node.process(sentence, model_dict)
         self.log.debug('Output label is {}'.format(_label))
 
         response,next_node_name = self._updates(_label)
         response = self._evaluate_sentence(response)
+        self.agent_response.append(response)
         
+        if current_node_name != 's0':
+            self._update_cache(sentence,current_node_name,next_node_name,_label,_detail)
+                
         
         if next_node_name is None:
             self.log.debug('Next node name is None. Reach stop node')
@@ -550,6 +558,40 @@ class TreeStage1(TreeBase):
             self.log.debug('Next node name is {}.'.format(self.current_node_name))
         return response
     
+    def _update_cache(self,sentence,current_node_name,next_node_name,label,detail):
+        cur_id = self.conversationId
+        try:
+            confidence = np.max(detail['av_pred'])
+        except:
+            self.log.error('confidence calulation error!!!!!!!')
+            confidence = 1
+        if 99<label<999:
+            other_response = detail.get('other_response')
+            if other_response is not None:
+                confidence_other = np.max(other_response['av_pred'])
+            else:
+                confidence_other = -1
+        else:
+            confidence_other = -1
+        if next_node_name is None:
+            status = 'complete'
+        elif self.nodes[next_node_name].model_name == 'StopClassifier':
+            status = 'complete'
+        else:
+            status = 'incomplete'
+        conversation = {'id':cur_id,
+                        'agent':self.agent_response[-1],
+                        'customer':sentence,
+                        'currentNode':current_node_name,
+                        'nextNode':next_node_name,
+                        'label':int(label),
+                        'confidence':float(confidence),
+                        'confidence_other':float(confidence_other),
+                        'responseTime':dt.datetime.utcnow()}
+        self.conversationId += 1
+        self.cache['chat'].append(conversation)
+        self.cache.update({'status':status})
+    
     def ttest(self, sentence, model_dict,label):
         """
         random path test
@@ -557,7 +599,7 @@ class TreeStage1(TreeBase):
         current_node = self.nodes[self.current_node_name] 
         if current_node.model_name == 'StopClassifier':
             return 'end'
-        _label,_ptp = current_node.process(sentence, model_dict)
+        _label,_detail = current_node.process(sentence, model_dict)
         _label = label
 
         response,next_node_name = self._updates(_label)

@@ -7,10 +7,9 @@ import os,sys
 class Logger:
     def __init__(self, logger_name, level='INFO', pt=False):
         """
-            self.log = Logger(self.__class__.__name__, log_file, pt=True).logger
-
-            def testlog(self, msg):
-            self.log.info(msg)
+            
+        Logger(self.__class__.__name__,level=ENV.NODE_LOG_LEVEL.value).logger
+            
         """
         self.logger = logging.getLogger(logger_name)
         self.level= level
