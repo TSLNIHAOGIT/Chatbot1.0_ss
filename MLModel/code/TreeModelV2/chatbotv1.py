@@ -344,7 +344,7 @@ class PF:
         self.lendingCompany = PROFILE.lendingCompany.value
         self.collectionCompany = PROFILE.lendingCompany.value
         self.customerID = PROFILE.customerID.value
-        self.ginder = PROFILE.ginder.value
+        self.gender = PROFILE.gender.value
         self.collector = PROFILE.collector.value
         self.totalAmount = PROFILE.totalAmount.value
         self.informDeadline = PROFILE.informDeadline.value
@@ -370,7 +370,7 @@ class PF:
         self.lendingCompany = profile['lendingCompany']
         self.collectionCompany = profile['collectionCompany']
         self.customerID = profile.get('customerID')
-        self.ginder = profile['ginder']
+        self.gender = profile['gender']
         self.collector = PROFILE.collector.value
         self.totalAmount = profile['totalAmount']
         self.informDeadline = profile['informDeadline']
@@ -384,12 +384,12 @@ class PF:
         
     
     def _get_prefix(self):
-        if self.ginder == '男':
-            self.profix = '先生'
-        elif self.ginder == '女':
-            self.profix = '女士'
+        if self.gender == '男':
+            self.prefix = '先生'
+        elif self.gender == '女':
+            self.prefix = '女士'
         else:
-            self.profix = '先生/女士'
+            self.prefix = '先生/女士'
 
     def create_from_D(self, date):
         year = int(re.findall('\d{4}年',date)[0][:-1])
@@ -433,7 +433,7 @@ class TreeBase:
                                lendingCompany=self.profile.lendingCompany,
                                collectionCompany=self.profile.collectionCompany,
                                deltaTime=self.profile.deltaTime,
-                               profix=self.profile.profix,
+                               prefix=self.profile.prefix,
                                collector = self.profile.collector,
                                totalAmount = self.profile.totalAmount,
                                informDeadline=self.profile.informDeadline,

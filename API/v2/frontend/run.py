@@ -44,7 +44,7 @@ class Cache:
         self.max_session = 1000
         self.inform_interval = 60
         self.inactive_maxlength = 150
-        #{'uid': {'stragety': Tree(), 'time_response': <time>, 'time_inform': <>}
+        #{'uid': {'strategy': Tree(), 'time_response': <time>, 'time_inform': <>}
         self.active_session = {}
         self.model_dict = model_dict
         self.graph_path = graph_path
@@ -65,7 +65,7 @@ class Cache:
         if len(self.active_session) < self.max_session:
             self.active_session[uid] = {}
             try:
-                self.active_session[uid].update({'stragety':TreeStage1(graph_path=self.graph_path,
+                self.active_session[uid].update({'strategy':TreeStage1(graph_path=self.graph_path,
                                                                        msg_path=self.msg_path,
                                                                        debug=self.debug,
                                                                        profile=profile)})
@@ -103,7 +103,7 @@ class Cache:
     def chat(self,uid,sentence):
         if self.active_session.get(uid) is not None:
             self.log.info('receive message from user: {} ===================='.format(uid))
-            response = self.active_session[uid]['stragety'].process(sentence, self.model_dict)
+            response = self.active_session[uid]['strategy'].process(sentence, self.model_dict)
             self.active_session[uid]['time_response'] = time.time()
             self.active_session[uid]['time_inform'] = time.time()
             self.active_session[uid]['chatting'].append(response)
