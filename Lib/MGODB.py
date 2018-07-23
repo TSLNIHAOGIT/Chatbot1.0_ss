@@ -9,7 +9,7 @@ import datetime as dt
 
 
 class DB:
-    def __init__(self,host=None,port=None,debug=False,id_increment=True,db=None,collection=None):
+    def __init__(self,host=None,port=None,debug=False,id_increment=True,db=None,collection=None,enable=True):
         """
         host: mongo db host, default to chatbotdb
         port: mongo db port, default to 27017
@@ -20,6 +20,7 @@ class DB:
         """
         self.log = Logger(self.__class__.__name__,level=ENV.DB_LOG_LEVEL.value).logger
         self.debug = debug
+        self.enable = enable
         self.id_increment=id_increment
         self._load_client(host,port)
         self._get_db(db)
@@ -40,7 +41,6 @@ class DB:
             db = db + '_debug'
         self.db = self.client[db]
         self.log.info('mongodb database is: {}'.format(db))
-        
             
     def _get_collection(self,collection=None):
         if collection is None:
@@ -63,11 +63,13 @@ class DB:
             self.log.info('DB {} was dropped!'.format(self.db.name))
             
     def insert(self,obj={}):
+        if not self.enable:
+            self.log.warning('database is not enabled!')
+            return None
         obj.update({'lastUpdateDate':dt.datetime.utcnow()})
         if self.id_increment:
             obj.update({'_id':self.collection.count_documents(filter={})+1})
         insert_id = self.collection.insert_one(obj).inserted_id
         self.log.info('{} was inserted into collection: {}'.format(insert_id,self.collection.name))
-        
     
         

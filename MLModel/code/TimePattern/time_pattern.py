@@ -11,14 +11,14 @@ from env import ENV
 
 
 class TimePattern:
-    def __init__(self,pattern_path='mapping.csv',tz=None):
+    def __init__(self,tz=None):
         """
         tz = pytz.timezone("Asia/Shanghai")
         'America/New_York'
         """
-        
+        self.pattern_csv = ENV.TIME_MAP_CSV.value
         self._set_timeZone(tz)
-        self._load_mapping(pattern_path)
+        self._load_mapping(self.pattern_csv)
         
     def remove_time(self,sentence):
         sentence = re.sub(self.re_ext,' ',sentence)
@@ -26,8 +26,7 @@ class TimePattern:
         
     
     def process(self, sentence):
-        current = dt.datetime.now()
-        current = self.tz.localize(current)
+        current = self._get_LocalNow()
         sentence = re.sub(r" ",'',sentence)
         fixymd = self.evl_ymd(sentence)
         selfdefine = re.findall(self.re_ext, sentence)
@@ -43,8 +42,7 @@ class TimePattern:
         return result
     
     def evl(self, expression):
-        current = dt.datetime.now()
-        current = self.tz.localize(current)
+        current = self._get_LocalNow()
         exp_week = re.findall(r'-.+W-.+w',expression)
         exp_ymd = re.findall(r'.+y-.+m.+d',expression)
 
@@ -64,8 +62,8 @@ class TimePattern:
             future = self.create_from_D(history)
         if future.tzinfo is None:
             future = self.tz.localize(future)
-        if not shift:
-            future = future - self.delta
+#         if not shift:
+#             future = future - self.delta
         return future
     
     def _load_mapping(self, pattern_path):
@@ -83,14 +81,14 @@ class TimePattern:
         if tz is None:
             tz = ENV.TIMEZONE.value
             print('Time Zone is set from ENV: {}'.format(tz))
-        utc = pytz.utc
+        tz = ENV.TIMEZONE.value
         self.tz = pytz.timezone(tz)
-        now = dt.datetime.now()
-        utc_now = utc.localize(now)
-        tz_now = self.tz.localize(now)
-        delta =  utc_now - tz_now
-        hours = round(delta.total_seconds() / 3600)
-        self.delta = dt.timedelta(hours=hours)
+        self.delta = self.tz.utcoffset(dt.datetime.utcnow())
+        
+        
+    def _get_LocalNow(self):
+        now = dt.datetime.utcnow()
+        return self.tz.localize(now) + self.delta
         
     def _pros_second(self, expression, current, history={'microsecond':0}):
         history = history.copy()
@@ -259,7 +257,7 @@ class TimePattern:
         
     def _pros_weekDay(self, expression, current, history):
         history = history.copy()
-        w = current.isocalendar()[2] 
+        w = current.isocalendar()[2] % 7
         reexp = r'W-.+w'
         extract = re.findall(reexp,expression)[0]
 
@@ -417,4 +415,3 @@ class TimePattern:
                 print(key)
         print('============ test case 2 is below ==============')
         print(error_result )
-        

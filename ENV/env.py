@@ -1,4 +1,5 @@
 from enum import Enum
+import sys,os
 
 
 class ENV(Enum):
@@ -10,6 +11,9 @@ class ENV(Enum):
     NODE_LOG_LEVEL = 'INFO'
     CACHE_LOG_LEVEL = 'DEBUG'
     DB_LOG_LEVEL = 'INFO'
+    TREE_CONNECTION_CSV = os.path.join(os.path.dirname(__file__), '../MLModel/data/TreeModel/treeConnection.csv')
+    NODE_MES_CSV = os.path.join(os.path.dirname(__file__), '../MLModel/data/TreeModel/node_message.csv')
+    TIME_MAP_CSV = os.path.join(os.path.dirname(__file__), '../MLModel/code/TimePattern/mapping.csv')
 #     TIMEZONE = 'America/New_York'
     TIMEZONE = 'Asia/Shanghai'
     
