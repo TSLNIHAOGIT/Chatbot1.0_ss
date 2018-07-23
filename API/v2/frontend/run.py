@@ -11,6 +11,7 @@ sys.path.append(os.path.join(os.path.dirname(__file__), ENV_PATH))
 sys.path.append(os.path.join(os.path.dirname(__file__), LOG_PATH))
 from env import ENV
 from LOG import Logger
+from MGODB import DB
 from all_model_py import *
 import pickle
 from chatbotv1 import *
@@ -40,18 +41,19 @@ from apscheduler.triggers.interval import IntervalTrigger
 
 
 class Cache:
-    def __init__(self, graph_path,msg_path,model_dict,max_session=1000,debug=False):
+    def __init__(self, model_dict,max_session=1000,debug=False,host=None,port=None,enableDB=False):
         self.max_session = 1000
         self.inform_interval = 60
         self.inactive_maxlength = 150
         #{'uid': {'strategy': Tree(), 'time_response': <time>, 'time_inform': <>}
         self.active_session = {}
         self.model_dict = model_dict
-        self.graph_path = graph_path
-        self.msg_path = msg_path
         self.debug=debug
+        self.enableDB = enableDB
         self.log = Logger(self.__class__.__name__,level=ENV.NODE_LOG_LEVEL.value).logger
+        self.db=DB(host,port,debug,True,enable=self.enableDB)
         self._print()
+        
         
     def _print(self):
         self.log.info('Max num of session is: {}'.format(self.max_session))
@@ -65,8 +67,7 @@ class Cache:
         if len(self.active_session) < self.max_session:
             self.active_session[uid] = {}
             try:
-                self.active_session[uid].update({'strategy':TreeStage1(graph_path=self.graph_path,
-                                                                       msg_path=self.msg_path,
+                self.active_session[uid].update({'strategy':TreeStage1(
                                                                        debug=self.debug,
                                                                        profile=profile)})
             except KeyError as e:
@@ -76,7 +77,6 @@ class Cache:
                 
             self.active_session[uid].update({'time_response':time.time()})
             self.active_session[uid].update({'time_inform':time.time()})
-            self.active_session[uid].update({'chatting':[]})
             self.log.info('New session was created: {}'.format(uid))
             self.log.info('Remaining session number is: {}'.format(self.max_session-len(self.active_session)))
             return True
@@ -89,10 +89,18 @@ class Cache:
             socketio.emit('my_response',{'data':response},room = uid, namespace=name_space)
         except:
             pass
+        
+        try:
+            history = self.active_session[uid]['strategy'].cache.copy()
+            self.db.insert(history)
+        except:
+            self.log.error('Fail to save cache for uid: ')
         try:
             disconnect_frontend(uid)
         except:
             pass
+       
+        
         try:
             del self.active_session[uid]
             self.log.info('{} session is inactive, it has been removed!'.format(uid))
@@ -106,10 +114,10 @@ class Cache:
             response = self.active_session[uid]['strategy'].process(sentence, self.model_dict)
             self.active_session[uid]['time_response'] = time.time()
             self.active_session[uid]['time_inform'] = time.time()
-            self.active_session[uid]['chatting'].append(response)
             self.log.info('processing messages for user {} has been done!----------------'.format(uid))
         else:
             response = None
+        
         return response
         
     
@@ -252,17 +260,36 @@ def connect():
         
 if __name__ == "__main__":
     argument = sys.argv
-    if len(argument) < 2:
+    DEBUG = os.environ.get('RUN_DEBUG')
+    port = os.environ.get('APP_PORT')
+    ENABLE_DB = os.environ.get('ENABLE_DB')
+    #################
+    if DEBUG is None:
         DEBUG = False
     else:
-        if argument[1].upper() == 'TRUE':
+        if DEBUG.upper() == 'TRUE':
             DEBUG = True
         else:
             DEBUG = False
-    try:
-        port = int(argument[2])
-    except:
+    #################
+    if port is None:
         port = 6006
+    else:
+        try:
+            port = int(port)
+        except:
+            port = 6006
+    #################
+    if ENABLE_DB is None:
+        ENABLE_DB = True
+    else:
+        if ENABLE_DB.upper() == 'False':
+            ENABLE_DB = False
+        else:
+            ENABLE_DB = True
+    print('DEBUG mode is: {}'.format(DEBUG))
+    print('port number is: {}'.format(port))
+    print('Enable DB is: {}'.format(ENABLE_DB))
     
     ############## Model Related ###################
     models_list = ['IDClassifier','CutDebt','IfKnowDebtor','WillingToPay','Installment','ConfirmLoan']
@@ -279,12 +306,8 @@ if __name__ == "__main__":
     model_dict['StopClassifier'] = StopClassifier()
     model_dict['InitClassifier'] = InitClassifier()    
 
-    graph_path='../../../MLModel/data/TreeModel/treeConnection.csv'
-    msg_path='../../../MLModel/data/TreeModel/node_message.csv'
     #################################################################
-    cache = Cache(graph_path=graph_path,
-                  msg_path=msg_path,
-                  model_dict=model_dict,debug=DEBUG)
+    cache = Cache(model_dict=model_dict,debug=DEBUG,enableDB=ENABLE_DB)
     
     #################### Run Flask at 6006  ###############################################
     print('http://10.0.24.31:{}/'.format(port))

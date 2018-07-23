@@ -2,8 +2,11 @@ import sys,os
 
 ENV_PATH = '../../../ENV/'
 LOG_PATH = '../../../Lib/'
+tpattern_path = '../TimePattern/'
+os_tp_path = os.path.join(os.path.dirname(__file__), tpattern_path)
 sys.path.append(os.path.join(os.path.dirname(__file__), ENV_PATH))
 sys.path.append(os.path.join(os.path.dirname(__file__), LOG_PATH))
+sys.path.append(os.path.join(os.path.dirname(__file__), tpattern_path))
 sys.path.append('../OneClickTraining/')
 sys.path.append('../Others/')
 from all_model_py import *
@@ -16,6 +19,8 @@ import datetime as dt
 import pytz
 import re
 import datetime as dt
+from TIME import LocalDateTime
+from  time_pattern import TimePattern
             
             
             
@@ -37,7 +42,7 @@ class InitClassifier(ClassifierBase):
     
             
             
-    def classify(self,sentence):
+    def classify(self,sentence,lower_bound=None,upper_bound=None):
         """
         0 - next
         """
@@ -56,7 +61,7 @@ class StopClassifier(ClassifierBase):
     
             
             
-    def classify(self,sentence):
+    def classify(self,sentence,lower_bound=None,upper_bound=None):
         """
         0 - next
         """
@@ -98,9 +103,9 @@ class Node:
     
     
     
-    def process(self, sentence, model_dict):
+    def process(self, sentence, model_dict,lower_bound=None,upper_bound=None):
         model = model_dict[self.model_name]
-        clf = model.classify(sentence)
+        clf = model.classify(sentence,lower_bound,upper_bound)
         
         self.output_label = clf['label']
         # jump trigger
@@ -326,10 +331,13 @@ class PF:
         *16. deltaTime: the time diff between now and contract end Date. This will be calcualted
         """
         self.log = Logger(self.__class__.__name__,level=ENV.PROFILE_LOG_LEVEL.value).logger
+        self.dt = LocalDateTime()
         if profile is None:
             self._load_default()
         else:
             self._load_profile(profile)
+        self.re_time = TimePattern()
+        self._loadUpLowBound()
         
     def _load_default(self):
         self.log.debug('profile is None. The default demo profile will be loaded!')
@@ -349,7 +357,7 @@ class PF:
         self.informDeadline = PROFILE.informDeadline.value
         self.splitDebtMaxTolerance = PROFILE.splitDebtMaxTolerance.value
         self.splitDebtFirstPay = PROFILE.splitDebtFirstPay.value
-        self.deltaTime = (dt.datetime.now() - self.create_from_D(self.contractEndDate)).days
+        self.deltaTime = (self.dt.getLocalNow() - self.create_from_D(self.contractEndDate)).days
         self._get_prefix()
         self.log.info('Customer ID is {}, principal is {}, apr is {}'.format(self.customerID,
                                                                              self.principal,
@@ -375,11 +383,41 @@ class PF:
         self.informDeadline = profile['informDeadline']
         self.splitDebtMaxTolerance = profile['splitDebtMaxTolerance']
         self.splitDebtFirstPay = profile['splitDebtFirstPay']
-        self.deltaTime = (dt.datetime.now() - self.create_from_D(self.contractEndDate)).days
+        self.deltaTime = (self.dt.getLocalNow() - self.create_from_D(self.contractEndDate)).days
         self._get_prefix()
         self.log.info('Customer ID is {}, principal is {}, apr is {}'.format(self.customerID,
                                                                              self.principal,
                                                                              self.apr))
+        
+    def _loadUpLowBound(self):
+        upper = self.re_time.process(self.splitDebtMaxTolerance)
+        lower = self.re_time.process(self.informDeadline)
+        try:
+            self.upper= upper[0]['gapH']
+            self.upperDateTime = upper[0]['time']
+            self.log.info('Load profile Upper bound successfully!')
+        except:
+            self.log.error('Loading Upper error! Set to default')
+            self._loadDefaultUpBound()
+        try:
+            self.lower= lower[0]['gapH']
+            self.lowerDateTime = lower[0]['time']
+            self.log.info('Load profile Lower bound successfully!')
+        except KeyError:
+            self.log.error('Loading lower error! Set to default')
+            self._loadDefaultLowBound()
+    
+    def _loadDefaultUpBound(self):
+        upper = self.re_time.process('1个月')
+        self.upper = upper[0]['gapH']
+        self.upperDateTime = upper[0]['time']
+        
+    def _loadDefaultLowBound(self):
+        lower = self.re_time.process('明天下午3点')
+        self.lower = lower[0]['gapH']
+        self.lowerDateTime = lower[0]['time']
+    
+        
         
     
     def _get_prefix(self):
@@ -394,7 +432,7 @@ class PF:
         year = int(re.findall('\d{4}年',date)[0][:-1])
         month = int(re.findall('\d{1,2}月',date)[0][:-1])
         day = int(re.findall('\d{1,2}日',date)[0][:-1])
-        return dt.datetime(year=year,month=month,day=day)
+        return self.dt.createLocalTime(year=year,month=month,day=day)
         
 
       
@@ -407,8 +445,14 @@ class TreeBase:
         self.all_path = []
         self.profile = PF(profile)
         self.conversationId = 1
-        self.cache = {'startTime':dt.datetime.utcnow(),'chat':[]}
+        self.dt = LocalDateTime()
+        self.cache = {'startTime':self.dt.getLocalNow(),
+                      'chat':[],
+                      'nearestToleranceDate':self.profile.lowerDateTime,
+                      'promiseToPayDate':None,
+                      'promiseToPayAmount':0.0}
         self.agent_response = []
+        
         
     def _evaluate_sentence(self,sentence):
         """
@@ -446,7 +490,7 @@ class TreeBase:
         
     
 class TreeStage1(TreeBase):
-    def __init__(self, start_node='s0',graph_path='',msg_path='',debug=False, profile=None):
+    def __init__(self, start_node='s0',debug=False, profile=None):
         """
         profile should be None or dictionary:
         fields:
@@ -468,8 +512,10 @@ class TreeStage1(TreeBase):
         *16. deltaTime: the time diff between now and contract end Date. This will be calcualted
         """
         super().__init__(start_node=start_node,profile=profile)
-        self._build_node(msg_path)
-        self._build_graph(graph_path)
+        self.msg_csv = ENV.NODE_MES_CSV.value
+        self.graph_csv = ENV.TREE_CONNECTION_CSV.value
+        self._build_node(self.msg_csv)
+        self._build_graph(self.graph_csv)
         self.debug = debug
         
     
@@ -539,7 +585,7 @@ class TreeStage1(TreeBase):
         if current_node.model_name == 'StopClassifier':
             self.log.debug('Reach Stop Node: {}'.format(self.current_node_name))
             return 'end'
-        _label,_detail = current_node.process(sentence, model_dict)
+        _label,_detail = current_node.process(sentence, model_dict,self.profile.lower,self.profile.upper)
         self.log.debug('Output label is {}'.format(_label))
 
         response,next_node_name = self._updates(_label)
@@ -580,17 +626,19 @@ class TreeStage1(TreeBase):
         else:
             status = 'incomplete'
         conversation = {'id':cur_id,
-                        'agent':self.agent_response[-1],
+                        'agent':self.agent_response[-2],
                         'customer':sentence,
                         'currentNode':current_node_name,
                         'nextNode':next_node_name,
                         'label':int(label),
                         'confidence':float(confidence),
                         'confidence_other':float(confidence_other),
-                        'responseTime':dt.datetime.utcnow()}
+                        'responseTime':self.dt.getLocalNow()}
         self.conversationId += 1
         self.cache['chat'].append(conversation)
         self.cache.update({'status':status})
+        self.cache.update({'endingNode':next_node_name})
+        self.cache.update({'customerLastSentence': sentence})
     
     def ttest(self, sentence, model_dict,label):
         """

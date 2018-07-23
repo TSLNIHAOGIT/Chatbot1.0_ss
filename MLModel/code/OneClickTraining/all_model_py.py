@@ -77,7 +77,7 @@ class BaseClassifier:
 class IDClassifier(BaseClassifier):
     
        
-    def classify(self, sentence):
+    def classify(self, sentence,lower_bounder=None,upper_bounder=None):
         """
         ML model wrapper. No time regular expression involved!
         input: sentence - type string
@@ -120,7 +120,7 @@ class IfKnowDebtor(BaseClassifier):
     
         
         
-    def classify(self, sentence):
+    def classify(self, sentence,lower_bounder=None,upper_bounder=None):
         """
         ML model wrapper. No time regular expression involved!
         input: sentence - type string
@@ -164,7 +164,7 @@ class ConfirmLoan(BaseClassifier):
     
     def __init__(self,**model):
         super().__init__(**model)
-        self.re_time = TimePattern(pattern_path=tpattern_path+'mapping.csv')
+        self.re_time = TimePattern()
         
     def classify(self, sentence,lower_bounder=36, upper_bounder=72):
         """
@@ -221,7 +221,7 @@ class ConfirmLoan(BaseClassifier):
 class WillingToPay(BaseClassifier):
     def __init__(self,**model):
         super().__init__(**model)
-        self.re_time = TimePattern(pattern_path=tpattern_path+'mapping.csv')
+        self.re_time = TimePattern()
     
         
         
@@ -306,7 +306,7 @@ class WillingToPay(BaseClassifier):
 class CutDebt(BaseClassifier):
     def __init__(self,**model):
         super().__init__(**model)
-        self.re_time = TimePattern(pattern_path=tpattern_path+'mapping.csv')
+        self.re_time = TimePattern()
         
     def classify(self, sentence,lower_bounder=36, upper_bounder=72):
         """
@@ -384,7 +384,7 @@ class CutDebt(BaseClassifier):
 class Installment(BaseClassifier):
     def __init__(self,**model):
         super().__init__(**model)
-        self.re_time = TimePattern(pattern_path=tpattern_path+'mapping.csv')
+        self.re_time = TimePattern()
         
         
     def classify(self, sentence,lower_bounder=36, upper_bounder=72):
