@@ -83,6 +83,7 @@ class Node:
         self._load_message(msg_path)
         self.canJump = False
         self.sentiment = 1
+        self.sentiment_audit = [self.sentiment]
         self.log = Logger(self.__class__.__name__,level=ENV.NODE_LOG_LEVEL.value).logger
 
         
@@ -96,7 +97,7 @@ class Node:
     def _triger_jump(self):
         if self.canJump is True:
             # jump trigger
-            if self.output_label == 1 and self.sentiment >=2: 
+            if self.output_label == 1 and self.sentiment >=3: 
                 self.output_label = 1001
         else:
             return None
@@ -153,6 +154,7 @@ class Node:
             self.log.error(response)
             return response
         self.sentiment += add_sentiment
+        self.sentiment_audit.append(self.sentiment)
         return response
 
 
@@ -633,7 +635,8 @@ class TreeStage1(TreeBase):
                         'label':int(label),
                         'confidence':float(confidence),
                         'confidence_other':float(confidence_other),
-                        'responseTime':self.dt.getLocalNow()}
+                        'responseTime':self.dt.getLocalNow(),
+                        'nodeSentiment':self.nodes[current_node_name].sentiment_audit[-2]}
         self.conversationId += 1
         self.cache['chat'].append(conversation)
         self.cache.update({'status':status})
