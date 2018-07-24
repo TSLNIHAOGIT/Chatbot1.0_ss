@@ -496,21 +496,34 @@ class TreeStage1(TreeBase):
         """
         profile should be None or dictionary:
         fields:
-        1. Name: lastName + firstName
-        2. principal: the money borrowed
-        3. contractStartDate
-        4. contractStartDate
-        5. apr:  yearly/monthly, no calculation will be involved
-        6. fee: late payment fee
+        1. name: lastName + firstName, eg "Li Ming"
+            if name is None, the constructor will try to load "lastName" and "firstName"
+        2. principal: the money borrowed,   eg:'10,000'
+        3. contractStartDate, the date when money was borrowed.  eg:"2018年5月2日", format"dddd年dd月dd日"
+        4. contractEndDate, the date before when total amount should be paid.
+                eg:"2018年5月2日", format"dddd年dd月dd日"
+        5. apr:  yearly/monthly, no calculation will be involved.  type: string. eg, '9%'
+        6. fee: late payment fee. string, eg "500"
         7. lendingCompany: the money originally borrowed from
+            type, string, eg "平安E贷"
         8. collectionCompany
+            type, string, eg "江苏逸能"
         9. customerID
-        10. ginder
+            string or int "100000"
+        10. gender
+            string, "男/女"
         11. collector: the agent who makes the call
+            string : "李明"
         12. totalAmount: the total amount owed by debotor
-        13. informDeadline
+            string: “50,000”
+        13. informDeadline: the deadline to collect money
+            相对时间
+            string: “明天下午2点”
         14. splitDebtMaxTolerance: the max tolerance of split debt time
-        15. splitDebtFirstPay: the first payment after set up split debt
+            相对时间:
+            string: 1个月以后
+        15. splitDebtFirstPay: the first payment amount after set up split debt
+            string: '10,000'
         *16. deltaTime: the time diff between now and contract end Date. This will be calcualted
         """
         super().__init__(start_node=start_node,profile=profile)
