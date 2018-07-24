@@ -20,7 +20,7 @@ cf_s1_n15_verifyWill_q,107,1,1,跟你说过了，我是江苏逸能的催收员�
 cf_s1_n15_verifyWill_q,108,1,0,还款的话您可以使用APP或者银行转账的方式进行处理，那你{informDeadline}之前可以还清吧？
 cf_s1_n15_verifyWill_q,109,1,1,你不要跟我东拉西扯的，现在就是问你，{informDeadline}之前你能不能还清？
 cf_s1_n15_verifyWill_q,1001,1,1,如果实在不行的话，这样吧，我帮您申请一下，把利息{interest}和滞纳金{fee}全部剪掉，您只用还本金人民币{principal}，但是你必须{informDeadline}之内还清。这是我能做大的最大程度了，你看可以吗？
-cf_s1_n1_identity_q,0,1,0,您好，我是{collectionCompany}的催收员{collector}。您之前于{contractStartDate}向{lendingCompany}借贷了人民币{principal}约定于{contractEndDate}还清。截至今天已经逾期{deltaTime}天，逾期总欠款人民币{totalAmount}元，其中利息{interest}，滞纳金{fee}块。现在{lendingCompany}委托我方协助追回欠款！请问这笔欠款为什么到现在都没有处理呢？
+cf_s1_n1_identity_q,0,1,0,您好，我是{collectionCompany}的催收员{collector}。您之前于{contractStartDate}向{lendingCompany}借贷了人民币{principal}约定于{contractEndDate}还清。截至今天已经逾期{deltaTime}天，逾期总欠款人民币{totalAmount}元，其中利息{interest}元，滞纳金{fee}块。现在{lendingCompany}委托我方协助追回欠款！请问这笔欠款为什么到现在都没有处理呢？
 cf_s1_n1_identity_q,1,1,0,不好意思，打扰了，请问您认识{name}{prefix}吗！
 cf_s1_n1_identity_q,101,1,0,是这样的，您之前借贷了人民币{principal}，约定于{contractEndDate}还清，截至今天已经逾期{deltaTime}天，逾期总欠款{totalAmount}元，其中利息{interest}，滞纳金{fee}块。请问为什么到现在都没有处理呢？
 cf_s1_n1_identity_q,103,1,0,我们这里是{collectionCompany}，请问您是{name}{prefix}吗？
