@@ -212,7 +212,7 @@ class PF:
         self.interest = PROFILE.interest.value
         self.fee = PROFILE.fee.value
         self.lendingCompany = PROFILE.lendingCompany.value
-        self.collectionCompany = PROFILE.lendingCompany.value
+        self.collectionCompany = PROFILE.collectionCompany.value
         self.customerID = PROFILE.customerID.value
         self.gender = PROFILE.gender.value
         self.collector = PROFILE.collector.value
