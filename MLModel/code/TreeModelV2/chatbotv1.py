@@ -73,17 +73,14 @@ class StopClassifier(ClassifierBase):
     
 
 
-
-
-
-
 class Node:
-    def __init__(self, node_name, msg_path=None):
+    def __init__(self, node_name, classifier=None, msg_path=None, canJump=False):
         self.name = node_name
         self._load_message(msg_path)
-        self.canJump = False
+        self.canJump = canJump
         self.sentiment = 1
         self.sentiment_audit = [self.sentiment]
+        self.model_name = classifier
         self.log = Logger(self.__class__.__name__,level=ENV.NODE_LOG_LEVEL.value).logger
 
         
@@ -158,178 +155,42 @@ class Node:
         return response
 
 
-        
-        
-
-        
-###################### Node 0  #########################
-
-    
-class S1_N0(Node):
-    def __init__(self, msg_path):
-        super().__init__('s0', msg_path)
-        self.describe = 'Init node'
-        self.model_name = 'InitClassifier'
-
-        
-###################### Node 1  #########################
-class S1_N1(Node):
-    def __init__(self, msg_path):
-        super().__init__('cf_s1_n1_identity_q', msg_path)
-        self.describe = 'Verify Identify'
-        self.model_name = 'IDClassifier'
-        
-        
-###################### Node 1  #########################
-class S1_N2(Node):
-    def __init__(self, msg_path):
-        super().__init__('cf_s1_n2_confirmLoan_q', msg_path)
-        self.describe = 'Verify Identify'
-        self.model_name = 'ConfirmLoan'
-        self.canJump = True
-                
-
-                
-#######################  Node 2  #############################        
-class S1_N5(Node):
-    def __init__(self, msg_path):
-        super().__init__('cf_s1_n5_ifAcquainted_q', msg_path)
-        self.describe = 'Ask if know debtor'
-        self.model_name = 'IfKnowDebtor'
-        
-        
-##########################  Node 3  ##########################        
-class S1_N15(Node):
-    def __init__(self, msg_path):
-        super().__init__('cf_s1_n15_verifyWill_q', msg_path)
-        self.describe = 'Verify willing to pay'
-        self.model_name = 'WillingToPay'
-        self.canJump = True
-                
-       
-
-        
-#########################  Node 7  ###########################        
-class S1_N25(Node):
-    def __init__(self, msg_path):
-        super().__init__('cf_s1_n25_cutDebt_q', msg_path)
-        self.describe = 'ask if accept less amount'
-        self.model_name = 'CutDebt'
-        self.canJump = True
-        
-        
-        
-                
-        
-#########################  Node 8  ###########################        
-class S1_N32(Node):
-    def __init__(self, msg_path):
-        super().__init__('cf_s1_n32_splitDebt_q', msg_path)
-        self.describe = 'ask if accept installment'
-        self.model_name = 'Installment'
-        self.canJump = True
-        
-        
-        
-############################## STOP NODE ########################
-class NodeStop(Node):
-    def __init__(self, node_name, msg_path):
-        super().__init__(node_name, msg_path)
-        self.model_name = 'StopClassifier'
-
-
-
-class S1_N101(NodeStop):
-    def __init__(self, msg_path):
-        super().__init__('cf_s1_n101_ifAcquainted_s', msg_path)
-        self.describe = 'inform phone recipient'
-
-        
-        
-class S1_N102(NodeStop):
-    def __init__(self, msg_path):
-        super().__init__('cf_s1_n102_ifAcquainted_s', msg_path)
-        self.describe = 'do not know debtor'
-    
- 
-        
-class S1_N103(NodeStop):
-    def __init__(self, msg_path):
-        super().__init__('cf_s1_n103_paymentChannel_s', msg_path)
-        self.describe = 'notify methods of paying'
-    
-
-        
-class S1_N104(NodeStop):
-    def __init__(self, msg_path):
-        super().__init__('cf_s1_n104_paymentChannel_s', msg_path)
-        self.describe = 'notify methods of paying'
-    
-        
-class S1_N105(NodeStop):
-    def __init__(self,msg_path):
-        super().__init__('cf_s1_n105_noResult_s',msg_path)
-        self.describe = 'no result'
-        
-    
-
-class S1_N106(NodeStop):
-    def __init__(self,msg_path):
-        super().__init__('cf_s1_n106_paymentChannel_s',msg_path)
-        self.describe = 'notify methods of paying'
-        
-        
-        
-class S1_N108(NodeStop):
-    def __init__(self,msg_path):
-        super().__init__('cf_s1_n108_noResult_s',msg_path)
-        self.describe = 'no result'
-        
-class S1_N109(NodeStop):
-    def __init__(self,msg_path):
-        super().__init__('cf_s1_n109_scheduleCall_s',msg_path)
-        self.describe = 'no result'
-        
-class S1_N110(NodeStop):
-    def __init__(self,msg_path):
-        super().__init__('cf_s1_n110_recordWechat_s',msg_path)
-        self.describe = 'no result'
-        
-    
-
-        
-    
-########################################################################################################################
-######################################### Tree #########################################################################
-######################################### Tree #########################################################################
-######################################### Tree #########################################################################
-######################################### Tree #########################################################################
-######################################### Tree #########################################################################
-######################################### Tree #########################################################################
 ######################################### Tree #########################################################################
 
-    
 
 class PF:
     def __init__(self,profile=None):
         """
         profile should be None or dictionary:
         fields:
-        1. Name: lastName + firstName
-        2. principal: the money borrowed
-        3. contractStartDate
-        4. contractStartDate
-        5. apr:  yearly/monthly, no calculation will be involved
-        6. fee: late payment fee
+        1. name: lastName + firstName, eg "Li Ming"
+            if name is None, the constructor will try to load "lastName" and "firstName"
+        2. principal: the money borrowed,   eg:'10,000'
+        3. contractStartDate, the date when money was borrowed.  eg:"2018年5月2日", format"dddd年dd月dd日"
+        4. contractEndDate, the date before when total amount should be paid.
+                eg:"2018年5月2日", format"dddd年dd月dd日"
+        5. apr:  yearly/monthly, no calculation will be involved.  type: string. eg, '9%'
+        6. fee: late payment fee. string, eg "500"
         7. lendingCompany: the money originally borrowed from
+            type, string, eg "平安E贷"
         8. collectionCompany
+            type, string, eg "江苏逸能"
         9. customerID
-        10. ginder
+            string or int "100000"
+        10. gender
+            string, "男/女"
         11. collector: the agent who makes the call
+            string : "李明"
         12. totalAmount: the total amount owed by debotor
+            string: “50,000”
         13. informDeadline: the deadline to collect money
+            相对时间
+            string: “明天下午2点”
         14. splitDebtMaxTolerance: the max tolerance of split debt time
-        15. splitDebtFirstPay: the first payment after set up split debt
+            相对时间:
+            string: 1个月以后
+        15. splitDebtFirstPay: the first payment amount after set up split debt
+            string: '10,000'
         *16. deltaTime: the time diff between now and contract end Date. This will be calcualted
         """
         self.log = Logger(self.__class__.__name__,level=ENV.PROFILE_LOG_LEVEL.value).logger
@@ -529,41 +390,41 @@ class TreeStage1(TreeBase):
         super().__init__(start_node=start_node,profile=profile)
         self.msg_csv = ENV.NODE_MES_CSV.value
         self.graph_csv = ENV.TREE_CONNECTION_CSV.value
-        self._build_node(self.msg_csv)
-        self._build_graph(self.graph_csv)
+        self._build_node()
         self.debug = debug
-        
-    
-        
-    def _build_node(self,msg_path):
-        self.messages = pd.read_csv(msg_path,encoding='utf8')
-        self.nodes = {
-        's0':S1_N0(msg_path),
-        'cf_s1_n1_identity_q':S1_N1(msg_path),
-        'cf_s1_n15_verifyWill_q':S1_N15(msg_path),
-        'cf_s1_n101_ifAcquainted_s':S1_N101(msg_path),
-        'cf_s1_n102_ifAcquainted_s':S1_N102(msg_path),
-        'cf_s1_n103_paymentChannel_s':S1_N103(msg_path),
-        'cf_s1_n104_paymentChannel_s':S1_N104(msg_path),
-        'cf_s1_n105_noResult_s':S1_N105(msg_path),
-        'cf_s1_n106_paymentChannel_s':S1_N106(msg_path),
-        'cf_s1_n108_noResult_s':S1_N108(msg_path),
-        'cf_s1_n109_scheduleCall_s':S1_N109(msg_path),
-        'cf_s1_n110_recordWechat_s':S1_N110(msg_path),
-        'cf_s1_n2_confirmLoan_q': S1_N2(msg_path),
-        'cf_s1_n25_cutDebt_q':S1_N25(msg_path),
-        'cf_s1_n32_splitDebt_q':S1_N32(msg_path),
-        'cf_s1_n5_ifAcquainted_q':S1_N5(msg_path),} 
-        
-    def _build_graph(self,graph_path):
-        self.df_mapping = pd.read_csv(graph_path)
+
+    def _build_node(self):
+        self.messages = pd.read_csv(self.msg_csv,encoding='utf8')
+        self.df_mapping = pd.read_csv(self.graph_csv)
         gp = self.df_mapping.groupby('node_name')
+        self.end_classifier = 'StopClassifier'
+        self.funcion_node_name = []
+        self.end_node_name = []
         self.mapping = {}
+        self.nodes = {}
         for each in gp:
+            # 1.get node name
+            node_name = each[0]
+            self.funcion_node_name.append(node_name)
+            # 2. get dataframe under group
             df_tmp = each[1]
+            # 2.1 get classifier name
+            classifier = each[1]['classifier'].values[0]
             df_tmp = df_tmp.set_index('label')
+            # 2.2 get can Jump
+            if df_tmp.index.max() >= 1000:
+                canJump = True
+            else:
+                canJump = False
+            # 3. initialize node
+            self.nodes[node_name] = Node(node_name,classifier,self.msg_csv,canJump)
+            # update mapping
             self.mapping.update({each[0]:df_tmp.T.to_dict()})
-        
+        self.end_node_name = list(set(self.df_mapping['connection']) - set(self.funcion_node_name))
+        ## initialize for end node
+        for each in self.end_node_name:
+            canJump = False
+            self.nodes[each] = Node(each,self.end_classifier,self.msg_csv,canJump)
         
 
         
@@ -649,7 +510,7 @@ class TreeStage1(TreeBase):
                         'confidence':float(confidence),
                         'confidence_other':float(confidence_other),
                         'responseTime':self.dt.getLocalNow(),
-                        'nodeSentiment':self.nodes[current_node_name].sentiment_audit[-2]}
+                        'nodeSentiment':int(self.nodes[current_node_name].sentiment_audit[-2])}
         self.conversationId += 1
         self.cache['chat'].append(conversation)
         self.cache.update({'status':status})
