@@ -1,4 +1,4 @@
-from,label,original_label,original_text,,
+from,label,original_label,original_text,new_label,
 IfKnowDebtor,0,,对呀,0,
 IfKnowDebtor,0,,有毛病。你们自己打电话给他，,1,
 IfKnowDebtor,1,,我是老人家，不认识,1,
