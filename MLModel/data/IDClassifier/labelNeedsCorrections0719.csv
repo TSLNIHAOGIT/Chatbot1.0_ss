@@ -1,4 +1,4 @@
-from,label,original_label,original_text,,
+from,label,original_label,original_text,new_label,
 说出目的,2,101,我不是，你有啥事情？我帮你找他,2,1
 请求等下打来,2,104,你好，我在忙,2,
 故意岔开话题,2,109,啊？,103,
