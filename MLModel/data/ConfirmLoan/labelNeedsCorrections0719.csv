@@ -1,4 +1,4 @@
-from,label,original_label,original_text,,
+from,label,original_label,original_text,new_label,
 ConfirmLoan,1,,胡说,1,
 故意岔开话题,2,109,生病了,2,
 ConfirmLoan,0,,我还欠钱吗？我以为我还了啊,0,
