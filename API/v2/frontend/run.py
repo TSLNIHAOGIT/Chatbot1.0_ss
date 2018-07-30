@@ -10,7 +10,7 @@ sys.path.append(os.path.join(os.path.dirname(__file__), '../../../MLModel/code/T
 sys.path.append(os.path.join(os.path.dirname(__file__), ENV_PATH))
 sys.path.append(os.path.join(os.path.dirname(__file__), LOG_PATH))
 from env import ENV
-from urllib
+import urllib
 from LOG import Logger
 from MGODB import DB
 from all_model_py import *
