@@ -10,6 +10,7 @@ sys.path.append(os.path.join(os.path.dirname(__file__), '../../../MLModel/code/T
 sys.path.append(os.path.join(os.path.dirname(__file__), ENV_PATH))
 sys.path.append(os.path.join(os.path.dirname(__file__), LOG_PATH))
 from env import ENV
+from urllib
 from LOG import Logger
 from MGODB import DB
 from all_model_py import *
@@ -217,8 +218,12 @@ def client_msg(msg):
         socketio.emit('my_response',{'data':response},room = uid, namespace=name_space)
 
 def decode(msg):
+    print('before decode: {}'.format(msg))
     msg = re.sub(r'%u', r'\u', msg)
+    msg = urllib.parse.unquote(msg)
     msg = msg.encode('latin-1').decode('unicode_escape')
+    
+    print('after decode: {}'.format(msg))
     return msg
 
 #sned message to a specific user
