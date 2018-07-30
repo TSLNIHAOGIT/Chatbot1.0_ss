@@ -218,12 +218,9 @@ def client_msg(msg):
         socketio.emit('my_response',{'data':response},room = uid, namespace=name_space)
 
 def decode(msg):
-    print('before decode: {}'.format(msg))
     msg = re.sub(r'%u', r'\u', msg)
     msg = urllib.parse.unquote(msg)
     msg = msg.encode('latin-1').decode('unicode_escape')
-    
-    print('after decode: {}'.format(msg))
     return msg
 
 #sned message to a specific user
