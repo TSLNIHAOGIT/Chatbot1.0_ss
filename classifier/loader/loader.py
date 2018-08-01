@@ -19,7 +19,14 @@ model_list = ['IDClassifier',
                   'Installment',
                   'ConfirmLoan']
 
+
+
+
+
+
 def load_all():
+    """
+    """
     logger = Logger(load_all.__name__).logger
     model_dict = {}
     for model in model_list:
@@ -30,4 +37,16 @@ def load_all():
             logger.info('{} time zone is set to {}'.format(model,ENV.TIMEZONE.value))
         except:
             logger.info('{} does not require time zone!'.format(model))
+    return model_dict
+
+
+
+
+
+def load_all_others():
+    logger = Logger(load_all.__name__).logger
+    model_dict = {}
+    for model in model_list:
+        model_dict[model] = pickle.load(open(saved_other_model_path.format(model,model),'rb'))
+        logger.info('{} has been load!'.format(model))
     return model_dict
