@@ -1,4 +1,6 @@
-文本,类别
+文本,类别,CutDebt,IDClassifier,IfKnowDebtor,Installment,ConfirmLoan,WillingToPay
+没明白,请求重复,0,0,0,0,1,0
+在办理离婚手续,请求等下打来,1,0,0,1,1,1
 我们skype上聊吧,其它通讯方式
 回去QQ上和你说,其它通讯方式
 你们公司在哪点，我过来,其它通讯方式

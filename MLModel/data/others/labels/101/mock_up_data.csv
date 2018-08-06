@@ -1,0 +1,4 @@
+text,category,label,IDClassifier,IfKnowDebtor,ConfirmLoan,WillingToPay,CutDebt,Installment
+什么认不认识？我就是啊！,肯定身份,101,1.0,0.0,1.0,1.0,1.0,1.0
+我是！,肯定身份,101,1.0,0.0,1.0,1.0,1.0,1.0
+我就是！,肯定身份,101,1.0,0.0,1.0,1.0,1.0,1.0

@@ -33,7 +33,7 @@ def load_all():
         model_dict[model] = pickle.load(open(saved_model_path.format(model,model),'rb'))
         logger.info('{} has been load!'.format(model))
         try:
-            model_dict['WillingToPay'].re_time._set_timeZone(ENV.TIMEZONE.value)
+            model_dict[model].re_time._set_timeZone(ENV.TIMEZONE.value)
             logger.info('{} time zone is set to {}'.format(model,ENV.TIMEZONE.value))
         except:
             logger.info('{} does not require time zone!'.format(model))

@@ -1,0 +1,5 @@
+text,category,label,IDClassifier,IfKnowDebtor,ConfirmLoan,WillingToPay,CutDebt,Installment
+马上，我让他接电话,请求等待,111,0.0,0.0,0.0,0.0,0.0,0.0
+稍等两分钟,请求等待,111,0.0,0.0,0.0,0.0,0.0,0.0
+等我一下,请求等待,111,0.0,0.0,0.0,0.0,0.0,0.0
+马上，让我思考一下,请求等待,111,1.0,1.0,0.0,0.0,0.0,0.0

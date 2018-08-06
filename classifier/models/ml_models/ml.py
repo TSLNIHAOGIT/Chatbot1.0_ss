@@ -96,13 +96,8 @@ class IDClassifier(BaseClassifier):
         av_pred = np.mean(result, axis = 0)
         max_pred = np.max(av_pred, axis = 0)
         max_arg = np.argmax(av_pred)
-        threshold = 0.38
         response = None
-        if np.max(max_pred)<threshold:
-            label = 2
-            self.log.debug('max pred is less than threshold {}, set label to 2.'.format(threshold))
-        else:
-            label = max_arg
+        label = max_arg
         if label == 2:
             response = self.other.classify(sentence)
             label = response['label']
@@ -139,13 +134,8 @@ class IfKnowDebtor(BaseClassifier):
         av_pred = np.mean(result, axis = 0)
         max_pred = np.max(av_pred, axis = 0)
         max_arg = np.argmax(av_pred)
-        threshold = 0.2
         response = None
-        if np.max(max_pred)<threshold:
-            label = 2
-            self.log.debug('max pred is less than threshold {}, set label to 2.'.format(threshold))
-        else:
-            label = max_arg
+        label = max_arg
         if label == 2:
             response = self.other.classify(sentence)
             label = response['label']
@@ -190,13 +180,8 @@ class ConfirmLoan(BaseClassifier):
         av_pred = np.mean(result, axis = 0)
         max_pred = np.max(av_pred, axis = 0)
         max_arg = np.argmax(av_pred)
-        threshold = 0.2
         response = None
-        if np.max(max_pred)<threshold:
-            label = 2
-            self.log.debug('max pred is less than threshold {}, set label to 2.'.format(threshold))
-        else:
-            label = max_arg
+        label = max_arg
         if label == 2:
             response = self.other.classify(sentence)
             label = response['label']
@@ -270,12 +255,8 @@ class WillingToPay(BaseClassifier):
             av_pred = np.mean(result, axis = 0)
             max_pred = np.max(av_pred, axis = 0)
             max_arg = np.argmax(av_pred)
-            threshold = 0.2
-            if np.max(max_pred)<threshold:
-                label = 3
-                self.log.debug('max pred is less than threshold {}, set label to 3.'.format(threshold))
-            else:
-                label = max_arg
+            label = max_arg
+            
 
             if label == 3:
                 response = self.other.classify(sentence)
@@ -348,12 +329,7 @@ class CutDebt(BaseClassifier):
             av_pred = np.mean(result, axis = 0)
             max_pred = np.max(av_pred, axis = 0)
             max_arg = np.argmax(av_pred)
-            threshold = 0.35
-            if np.max(max_pred)<threshold:
-                label = 2
-                self.log.debug('max pred is less than threshold {}, set label to 2.'.format(threshold))
-            else:
-                label = max_arg
+            label = max_arg
             if label == 2:
                 response = self.other.classify(sentence)
                 label = response['label']
@@ -427,12 +403,7 @@ class Installment(BaseClassifier):
             av_pred = np.mean(result, axis = 0)
             max_pred = np.max(av_pred, axis = 0)
             max_arg = np.argmax(av_pred)
-            threshold = 0.2
-            if np.max(max_pred)<threshold:
-                label = 2
-                self.log.debug('max pred is less than threshold {}, set label to 2.'.format(threshold))
-            else:
-                label = max_arg
+            label = max_arg
 
             if label == 2:
                 response = self.other.classify(sentence)

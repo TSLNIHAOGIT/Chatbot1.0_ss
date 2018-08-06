@@ -241,7 +241,7 @@ label,split_text,classifier,new_label
 0,啊对的,IDClassifier,0
 1,烦不烦啊，请你以后不要打这个电话了，在打我要屏蔽你了,IDClassifier,109
 1,不要再骚扰我了，不然我报警了,IDClassifier,109
-1,我不是，你打错了,IDClassifier,0
+1,我不是，你打错了,IDClassifier,1
 1,他在开赛车,IDClassifier,1
 1,不晓得他是谁,IDClassifier,1
 0,怎么老是打我电话,IDClassifier,109
@@ -443,9 +443,9 @@ label,split_text,classifier,new_label
 0,恩,IDClassifier,0
 1,不要给家打电话,IDClassifier,0
 0,对头，是我，你找我有什么事,IDClassifier,0
-0,就是我，有什么事么？,IDClassifier,1
+0,就是我，有什么事么？,IDClassifier,0
 1,几年都没听到他的消息了,IDClassifier,1
-1,这是我捡到的手机,IDClassifier,0
+1,这是我捡到的手机,IDClassifier,1
 0,我是，你哪里？,IDClassifier,0
 0,找我什么事情啊,IDClassifier,0
 0,啊？,IDClassifier,109
@@ -559,7 +559,7 @@ label,split_text,classifier,new_label
 1,认错人了,IDClassifier,1
 0,噢对对对对对,IDClassifier,0
 1,他在开飞机,IDClassifier,1
-1,他刚离开,IDClassifier,0
+1,他刚离开,IDClassifier,1
 1,没得这号人。,IDClassifier,1
 1,搞清楚在打我电话,IDClassifier,1
 1,俺不是,IDClassifier,1
@@ -837,7 +837,7 @@ label,split_text,classifier,new_label
 0,有事就说，没意思,IDClassifier,107
 0,对，是我阿,IDClassifier,0
 1,他在看电视,IDClassifier,104
-1,你错了,IDClassifier,0
+1,你错了,IDClassifier,1
 1,骗子，天天打我电话,IDClassifier,109
 0,噢对,IDClassifier,0
 1,我不是XX你找错人了,IDClassifier,1
@@ -1205,7 +1205,7 @@ label,split_text,classifier,new_label
 0,是你哪位,IDClassifier,0
 1,我是他妹妹,IDClassifier,1
 1,不,IDClassifier,1
-1,我不是打错了，挂,IDClassifier,0
+1,我不是打错了，挂,IDClassifier,1
 0,嗯……,IDClassifier,109
 1,他在吃饭,IDClassifier,104
 1,都说了多少次了,IDClassifier,109

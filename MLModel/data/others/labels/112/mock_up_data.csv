@@ -1,0 +1,3 @@
+text,category,label,IDClassifier,IfKnowDebtor,ConfirmLoan,WillingToPay,CutDebt,Installment
+我已经全部还了啊，怎么还有？,已经还清,112,1.0,1.0,0.0,0.0,1.0,1.0
+我这边app上显示已经全部还清了啊，余额为0,已经还清,112,1.0,1.0,0.0,0.0,1.0,1.0
