@@ -21,9 +21,33 @@ class TimePattern:
         self.pattern_csv = os.path.join(os.path.dirname(__file__), 'mapping.csv')
         self._set_timeZone(tz)
         self._load_mapping(self.pattern_csv)
+        self.time_dic = {'今':'?','明':'+1','后':'+2','大后':'+3','下个':'+1','下下个':'+2',
+                         '再下个':'+2','下下下个':'+3','后1个':'+1','后2个':'+2','后一个':'+1',
+                         '后两个':'+2',
+                         '一':'1','二':'2','三':'3','四':'4','五':'5',
+                         '六':'6','七':'7','八':'8','九':'9','十':'10',
+                         '十一':'11','十二':'12','十三':'13','十四':'14','十五':'15',
+                         '十六':'16','十七':'17','十八':'18','十九':'19','二十':'20',
+                         '二十一':'21','二十二':'22','二十三':'23','二十四':'24','二十五':'25',
+                         '二十六':'26','二十七':'27','二十八':'28','二十九':'29','三十':'30','三十一':'31',
+                         '四十':'40','五十':'50','六十':'60','七十':'70','八十':'80','九十':'90','一百':'100'}
+        self.fix_ymd = r'(?:(?:今|明|后|大后)年)?(?:(?:\d{1,2}|下下下个|下下个|再下个|下个|十一|十二|一|二|三|四|五|六|七|八|九|十|后1个|后2个|后一个|后两个|后二个)月)(?:\d{1,2}|一|二|三|四|五|六|七|八|九|十|十一|十二|十三|十四||十六|十七|十八|十九|二十|二十一|二十二|二十三|二十四|二十五|二十六|二十七|二十八|二十九|三十|三十一)[日号]'
+        reg_num = r'(?:(?:一|二|三|四|五|六|七|八|九|十|十一|十二|十三|十四|十五|二十|三十|四十|五十|六十|七十|八十|九十)|\d+)'
+        self.fix_period = r'(?:{}天)?(?:{}小时)?(?:{}分钟)?'.format(reg_num,reg_num,reg_num)
         
     def remove_time(self,sentence):
+        sentence = re.sub(r' ','',sentence)
         sentence = re.sub(self.re_ext,' ',sentence)
+        
+        finds_ymd = set(re.findall(self.fix_ymd,sentence)) - set([''])
+        finds_period = set(re.findall(self.fix_period,sentence)) - set([''])
+        if len(finds_ymd) > 0:
+            sentence = re.sub('|'.join(finds_ymd),' ',sentence)
+        if len(finds_period) > 0:
+            sentence = re.sub('|'.join(finds_period),' ',sentence)
+
+        if sentence == '':
+            return ' '
         return sentence
         
     
@@ -32,6 +56,7 @@ class TimePattern:
         sentence = re.sub(r" ",'',sentence)
         fixymd = self.evl_ymd(sentence)
         selfdefine = re.findall(self.re_ext, sentence)
+        period = self.evl_period(sentence)
         result = []
         for each in fixymd:
             future = self.evl(each['expression'])
@@ -41,6 +66,10 @@ class TimePattern:
             future = self.evl(self.dict_ext[each])
             gap = (future - current).total_seconds()
             result.append({'pattern':each, 'time':future, 'gapS':gap, 'gapH':gap/3600})
+        for each in period:
+            future = self.evl(each['expression'])
+            gap = (future - current).total_seconds()
+            result.append({'pattern':each['pattern'], 'time':future, 'gapS':gap, 'gapH':gap/3600})
         return result
     
     def evl(self, expression):
@@ -329,9 +358,8 @@ class TimePattern:
         return eval_time
     
     def ymd_reg(self,x):
-        fix_ymd = r'(?:(?:今|明|后|大后)年)?(?:(?:\d{1,2}|下下下个|下下个|再下个|下个|十一|十二|一|二|三|四|五|六|七|八|九|十|后1个|后2个|后一个|后两个|后二个)月)(?:\d{1,2}|一|二|三|四|五|六|七|八|九|十|十一|十二|十三|十四||十六|十七|十八|十九|二十|二十一|二十二|二十三|二十四|二十五|二十六|二十七|二十八|二十九|三十|三十一)[日号]'
-#         fix_ymd = r'(?:(?:今|明|后|大后)年)?(?:(?:\d{1,2}|下下下个|下下个|再下个|下个|十一|十二|一|二|三|四|五|六|七|八|九|十|后1个|后2个|后一个|后两个|后二个)月)?(?:(?:\d{1,2}|一|二|三|四|五|六|七|八|九|十|十一|十二|十三|十四|十五|十六|十七|十八|十九|二十|二十一|二十二|二十三|二十四|二十五|二十六|二十七|二十八|二十九|三十|三十一)[日号])?'
-        finds = list(set(re.findall(fix_ymd,x)) -set(['']))
+        
+        finds = list(set(re.findall(self.fix_ymd,x)) -set(['']))
         return finds
 
     def ymd_expression(self, result):
@@ -339,18 +367,13 @@ class TimePattern:
             if x.isdigit():
                 return x
             else:
-                gets = time_dic.get(x)
+                gets = self.time_dic.get(x)
                 if x is None:
                     return '?'
                 else:
                     return gets
 
 
-        time_dic = {'今':'?','明':'+1','后':'+2','大后':'+3','下个':'+1','下下个':'+2','再下个':'+2','下下下个':'+3','后1个':'+1','后2个':'+2','后一个':'+1','后两个':'+2',
-                    '一':'1','二':'2','三':'3','四':'4','五':'5','六':'6',
-                   '七':'7','八':'8','九':'9','十':'10','十一':'11','十二':'12','十三':'13','十四':'14','十五':'15',
-                   '十六':'16','十七':'17','十八':'18','十九':'19','二十':'20','二十一':'21','二十二':'22','二十三':'23',
-                   '二十四':'24','二十五':'25','二十六':'26','二十七':'27','二十八':'28','二十九':'29','三十':'30','三十一':'31'}
         year_index = result.find('年')
         month_index = result.find('月')
         if result.find('日') != -1:
@@ -386,6 +409,70 @@ class TimePattern:
                 evls.append({'pattern':each, 'expression':self.ymd_expression(each)})
         return evls
    
+
+    def period_reg(self,x):
+        
+        finds = list(set(re.findall(self.fix_period,x)) - set(['']))
+        return finds
+    
+    def period_expression(self,find):
+        day_index = find.find('天')
+        hour_index = find.find('小时')
+        minute_index = find.find('分钟')
+        if day_index != -1:
+            day = find[0:day_index]
+            if self.time_dic.get(day) is not None:
+                day = int(self.time_dic.get(day))
+            else:
+                try:
+                    day = int(day)
+                except Exception:
+                    day = 0
+        else:
+            day = 0
+
+        if hour_index != -1:
+            hour = find[day_index+1:hour_index]
+            if self.time_dic.get(hour) is not None:
+                hour = int(self.time_dic.get(hour))
+            else:
+                try:
+                    hour = int(hour)
+                except Exception:
+                    hour = 0
+        else:
+            hour = 0
+
+        if minute_index != -1:
+            minute = find[hour_index+2:minute_index]
+            if self.time_dic.get(minute) is not None:
+                minute = int(self.time_dic.get(minute))
+            else:
+                try:
+                    minute = int(minute)
+                except Exception:
+                    minute = 0
+        else:
+            minute = 0
+
+        delta_minute = 24*60*day + 60*hour +minute 
+        formatted = '?y-?m-?d-?H:+{}M:00S'.format(delta_minute)
+        return formatted
+    
+    def evl_period(self,text):
+        finds = self.period_reg(text)
+        evls = []
+        if len(finds) == 0:
+            return evls
+        else:
+            for each in finds:
+                evls.append({'pattern':each, 'expression':self.period_expression(each)})
+        return evls
+
+
+
+        
+        
         
     def test_case1(self):
         """

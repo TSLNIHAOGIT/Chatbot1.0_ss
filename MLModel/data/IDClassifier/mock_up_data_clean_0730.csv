@@ -81,7 +81,6 @@ label,split_text,classifier,new_label
 1,你还是找本人吧,IDClassifier,1
 0,啊，对！你是哪位？,IDClassifier,0
 1,不是啊,IDClassifier,1
-0,明天去处理,IDClassifier,0
 0,嗯，是的,IDClassifier,0
 1,吃错药了吧,IDClassifier,109
 0,对啊,IDClassifier,0
@@ -174,7 +173,7 @@ label,split_text,classifier,new_label
 0,是我啊。咋地啦,IDClassifier,0
 0,我是，等有钱再说,IDClassifier,0
 1,不是,IDClassifier,1
-1,我张三死,IDClassifier,1
+1,我是张三,IDClassifier,1
 1,别烦我,IDClassifier,109
 0,我在开车,IDClassifier,104
 0,我正在上班，下班后再联系可以吧嗯,IDClassifier,104
@@ -194,7 +193,6 @@ label,split_text,classifier,new_label
 0,是的怎么了,IDClassifier,0
 1,我应该认识他吗,IDClassifier,1
 1,看清楚再打嘛哈哈哈,IDClassifier,1
-0,good,IDClassifier,0
 1,都说不是了,IDClassifier,1
 1,他出去买东西了,IDClassifier,1
 1,不认识打错了,IDClassifier,1
@@ -415,14 +413,13 @@ label,split_text,classifier,new_label
 1,打错了！,IDClassifier,1
 0,是，你哪位？,IDClassifier,0
 0,我在公交车上,IDClassifier,109
-1,刚刚才换的电话,IDClassifier,0
+1,刚刚才换的电话,IDClassifier,1
 1,都说了多少次了，不认识,IDClassifier,1
 0,嗯你好,IDClassifier,0
 1,这个号码是我自己刚买的,IDClassifier,1
 1,你怎么这么固执我不是,IDClassifier,1
 0,好的，好的，你说,IDClassifier,0
 0,我在开车，什么事,IDClassifier,104
-0,没人联系我啊,IDClassifier,0
 0,对对对,IDClassifier,0
 1,打错了吧,IDClassifier,1
 1,我不知道你说的是谁,IDClassifier,1
@@ -441,7 +438,6 @@ label,split_text,classifier,new_label
 1,好久没联系了,IDClassifier,1
 0,你好我就是你是谁,IDClassifier,0
 0,恩,IDClassifier,0
-1,不要给家打电话,IDClassifier,0
 0,对头，是我，你找我有什么事,IDClassifier,0
 0,就是我，有什么事么？,IDClassifier,0
 1,几年都没听到他的消息了,IDClassifier,1
@@ -548,7 +544,6 @@ label,split_text,classifier,new_label
 0,是的，就是我，你是哪位？,IDClassifier,0
 1,打错了嗯,IDClassifier,1
 0,啊哈,IDClassifier,0
-1,说的,IDClassifier,0
 0,对的你是,IDClassifier,0
 0,找我有什么事,IDClassifier,0
 0,月底联系我,IDClassifier,104
@@ -625,7 +620,6 @@ label,split_text,classifier,new_label
 1,他没在,IDClassifier,1
 0,请说吧,IDClassifier,0
 1,我是他爷爷,IDClassifier,1
-0,我知道了，马上处理,IDClassifier,0
 1,不知道了,IDClassifier,1
 1,你是傻子么都说了我不是,IDClassifier,1
 1,本人出去了,IDClassifier,1
@@ -712,7 +706,6 @@ label,split_text,classifier,new_label
 1,不是，你找他干嘛？,IDClassifier,1
 0,对的我是,IDClassifier,0
 1,他在开会。,IDClassifier,104
-0,我知道了,IDClassifier,0
 1,他是我爹,IDClassifier,1
 1,你们自己找他，不管,IDClassifier,1
 0,好的，是我，你有什么事,IDClassifier,0
@@ -814,7 +807,7 @@ label,split_text,classifier,new_label
 1,少来烦我，有病啊,IDClassifier,109
 1,别人的手机,IDClassifier,1
 1,我不是本人哦,IDClassifier,1
-0,嗯我现在比较忙,IDClassifier,1
+0,嗯我现在比较忙,IDClassifier,104
 1,你是谁打错电话了,IDClassifier,1
 1,他不在我是他同事,IDClassifier,104
 1,抱歉你打错了拜拜,IDClassifier,1
@@ -854,7 +847,6 @@ label,split_text,classifier,new_label
 0,什么事,IDClassifier,107
 1,他出去耍了,IDClassifier,104
 1,提名挂,IDClassifier,109
-0,哦知道了,IDClassifier,0
 1,有什么事情，他不在，晓得他最近在干啥子哦，几天都没看到人了,IDClassifier,1
 0,啊是的是的,IDClassifier,0
 1,他换电话了,IDClassifier,1
@@ -882,7 +874,7 @@ label,split_text,classifier,new_label
 1,出去了,IDClassifier,104
 1,不是，他有事，忙完再说,IDClassifier,104
 0,对对,IDClassifier,0
-1,为什么打我家人电话,IDClassifier,0
+1,为什么打我家人电话,IDClassifier,1
 1,我是他的朋友,IDClassifier,1
 1,我吗？不是吧,IDClassifier,1
 1,是你爸,IDClassifier,1
@@ -1090,7 +1082,7 @@ label,split_text,classifier,new_label
 0,是我嗯,IDClassifier,0
 1,我不是呀,IDClassifier,1
 1,你自己联系他,IDClassifier,1
-1,不是什么事,IDClassifier,0
+1,不是什么事,IDClassifier,1
 0,找我什么事,IDClassifier,0
 0,找我啥事儿？,IDClassifier,0
 1,我不是，你找错人了,IDClassifier,1
@@ -1126,7 +1118,6 @@ label,split_text,classifier,new_label
 1,我不是他啊,IDClassifier,1
 1,没听过这个人,IDClassifier,1
 1,他很久没有回家了,IDClassifier,1
-0,忘记了马上处理,IDClassifier,0
 1,他电话号码给我了,IDClassifier,1
 1,不是，他手机坏了。在我店里维修,IDClassifier,104
 1,错了吧,IDClassifier,1

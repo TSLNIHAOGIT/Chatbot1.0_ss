@@ -1,0 +1,42 @@
+label,split_text,classifier,new_label,predict_label,original_index
+0,你 之前 怎么 不 打电话,IDClassifier,0,1,51
+1,是 你 爸,IDClassifier,1,0,54
+1,我 是 张 三,IDClassifier,1,0,68
+1,你 找 我 没用 啊,IDClassifier,1,0,77
+0,知道 你 是 来 催 钱 的 老子 没 钱,IDClassifier,0,1,110
+0,是 我   别 天天 打电话 烦不烦   再 打 报警 了 。 挂机,IDClassifier,0,1,112
+0,你 怎么 有 我 的 号码 ？,IDClassifier,0,1,174
+0,是 的   我 不是 还 了 吗,IDClassifier,0,1,186
+0,啊哈,IDClassifier,0,1,216
+0,OK,IDClassifier,0,1,294
+0,奥,IDClassifier,0,1,322
+0,没错,IDClassifier,0,1,343
+0,已经 有人 联系 过 我 了,IDClassifier,0,1,365
+1,我 是 李四,IDClassifier,1,0,374
+1,是 同学,IDClassifier,1,0,416
+0,这 是 我 手机号  ,IDClassifier,0,1,427
+0,说 吧,IDClassifier,0,1,474
+1,这 是 我 的 电话,IDClassifier,0,1,476
+1,是 你 妹,IDClassifier,1,0,491
+1,你 有 病 啊,IDClassifier,1,0,536
+1,是 你 妈,IDClassifier,1,0,552
+1,关 我 什么 事,IDClassifier,1,0,574
+0,对 但 我 不 认识 你 呀,IDClassifier,0,1,600
+0,啊 我 不 认识 你 你 要 干什么,IDClassifier,0,1,612
+1,是 个 屁,IDClassifier,1,0,626
+0,你们 起诉   不要 再 打电话 了,IDClassifier,0,1,638
+0,我 认识 你 吗,IDClassifier,0,1,639
+0,似的 似的,IDClassifier,0,1,663
+0,yes,IDClassifier,0,1,689
+1,我 姓张,IDClassifier,1,0,719
+1,你 是 找 某某 得 吧 ！,IDClassifier,1,0,724
+0,是 俺,IDClassifier,0,1,739
+1,不 对 啊,IDClassifier,1,0,755
+0,我 是 修 手机 的,IDClassifier,1,0,808
+1,我 是 张亮,IDClassifier,1,0,841
+0,我 等到 花儿 都 谢 了   才 等到 你们 的 电话 啊,IDClassifier,0,1,850
+0,好 的   好 的   你 说,IDClassifier,0,1,860
+1,此人 已死   有事 烧纸 ！,IDClassifier,1,0,867
+0,哎 哎,IDClassifier,0,1,889
+0,斗是,IDClassifier,0,1,899
+1,能 不能不要 打 我 电话 骚扰 我   他管 我 什么 事,IDClassifier,1,0,905
