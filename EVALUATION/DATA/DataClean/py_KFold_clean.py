@@ -148,7 +148,7 @@ class MLClassifier(BaseClassifier):
         return dictionary
     
     
-def train_main_model(df,model):
+def train_main_model(df,model,label_col):
     # get tfidf
 
     
@@ -168,18 +168,18 @@ def train_main_model(df,model):
     # linear svc
     l_svc = LinearSVC()
     lsvc = CalibratedClassifierCV(l_svc) 
-    print(df.label.value_counts())
-    lsvc.fit(phrase, df.label)
+    print(df[label_col].value_counts())
+    lsvc.fit(phrase, df[label_col])
     
     
     # logistic
     log_r = LogisticRegression()
-    log_r.fit(phrase, df.label)
+    log_r.fit(phrase, df[label_col])
     
     
     # Naive Bayes
     naive_b = MultinomialNB()
-    naive_b.fit(phrase, df.label)
+    naive_b.fit(phrase, df[label_col])
     print('finish training')
     
     main_model = model(svc=lsvc, logistic=log_r, nb=naive_b, tfidf=phrase_vectorizer,   jieba_path=os.path.join(os.path.dirname(__file__), '../../../MLModel/code/WordCut/userdict.txt'))
@@ -191,7 +191,7 @@ def train_main_model(df,model):
 
 if __name__ == '__main__':
 
-    model = 'IDClassifier'
+    model = 'ConfirmLoan'
     read_path = '../../../MLModel/data/{}/mock_up_data_clean_0730.csv'.format(model)
     
     label_col = 'new_label'
@@ -220,7 +220,7 @@ if __name__ == '__main__':
         count += 1
         train = df_main.iloc[t]
         evl = df_main.iloc[v]
-        clf,lsvc,log_r,naive_b,tfidf = train_main_model(train,MLClassifier)
+        clf,lsvc,log_r,naive_b,tfidf = train_main_model(train,MLClassifier,label_col)
         result = []
         for each in evl.split_text.values:
             result.append(clf.classify(each)['label'])
