@@ -439,7 +439,7 @@ label,split_text,classifier,new_label,comment,uncertain,name,criterion
 0,实在没有钱没意思,ConfirmLoan,0,,,zl,
 0,实在是没有，总不能让我去卖肾吧,ConfirmLoan,0,,,zl,
 0,世界杯常常爆冷，钱都去买足彩了,ConfirmLoan,0,,,zl,
-1,是我朋友借的吧，那天他拿我的身份证去用，搞出这么多事情。,ConfirmLoan,0,,,zl,
+1,是我朋友借的吧，那天他拿我的身份证去用，搞出这么多事情。,ConfirmLoan,1,,,zl,
 0,手头紧,ConfirmLoan,0,,,zl,
 0,手头紧的很,ConfirmLoan,0,,,zl,
 0,手头没钱,ConfirmLoan,0,,,zl,
