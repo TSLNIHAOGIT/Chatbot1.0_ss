@@ -68,8 +68,7 @@ class Cache:
         if len(self.active_session) < self.max_session:
             self.active_session[uid] = {}
             try:
-                self.active_session[uid].update({'strategy':TreeStage1(graph_path=self.graph_path,
-                                                                       msg_path=self.msg_path,
+                self.active_session[uid].update({'strategy':TreeStage1(
                                                                        debug=self.debug,
                                                                        profile=profile)})
             except KeyError as e:
