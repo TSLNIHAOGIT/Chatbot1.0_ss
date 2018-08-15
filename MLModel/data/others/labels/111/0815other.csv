@@ -1,0 +1,9 @@
+split_text,classifier,new_label
+他在睡觉你等会,IfKnowDebtor,111
+他在谈恋爱你等会,IfKnowDebtor,111
+我马上去叫他,IfKnowDebtor,111
+我朋友在,IfKnowDebtor,111
+等等,Installment,111
+等我几分钟就好,Installment,111
+几分钟就好,Installment,111
+等等我再回复你,WillingToPay,111
