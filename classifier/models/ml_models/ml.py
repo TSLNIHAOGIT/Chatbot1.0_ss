@@ -76,8 +76,12 @@ class BaseClassifier:
 
 class IDClassifier(BaseClassifier):
     
+    def __init__(self,**model):
+        super().__init__(**model)
+        self.label_meaning = 'ifDebtorAnswersing'
+        self.label_meaning_map = {0:'y',1:'n'}
        
-    def classify(self, sentence,lower_bounder=None,upper_bounder=None):
+    def classify(self, sentence,lower_bounder=None,upper_bounder=None,debug=False):
         """
         ML model wrapper. No time regular expression involved!
         input: sentence - type string
@@ -101,11 +105,15 @@ class IDClassifier(BaseClassifier):
         if label == 2:
             response = self.other.classify(sentence)
             label = response['label']
-            
-        dictionary = {'label': label, 'pred_prob': result, 'av_pred': av_pred,'other_response':response}
-        self.log.debug('Final Pred label is: {}'.format(dictionary['label']))
-        self.log.debug('svc,logistic,nb result:\n {}'.format(dictionary['pred_prob']))
-        self.log.debug('ave result:\n {}'.format(dictionary['av_pred']))
+        if debug:
+            dictionary = {'label': label, 'pred_prob': result, 'av_pred': av_pred,'other_response':response}
+        else:
+            if response is not None:
+                response = float(max(response['av_pred']))
+            av_pred_value = float(max(av_pred))
+            dictionary = {'label': label, 'av_pred': av_pred_value,'other_response':response}
+        self.log.debug('Final Pred label is: {}'.format(label))
+        dictionary.update({self.label_meaning:self.label_meaning_map.get(label,'null')})
         return dictionary
     
     
@@ -113,9 +121,13 @@ class IDClassifier(BaseClassifier):
 
 class IfKnowDebtor(BaseClassifier):
     
+    def __init__(self,**model):
+        super().__init__(**model)
+        self.label_meaning = 'ifKnowDebtor'
+        self.label_meaning_map = {0:'y',1:'n'}
         
         
-    def classify(self, sentence,lower_bounder=None,upper_bounder=None):
+    def classify(self, sentence,lower_bounder=None,upper_bounder=None,debug=False):
         """
         ML model wrapper. No time regular expression involved!
         input: sentence - type string
@@ -139,11 +151,16 @@ class IfKnowDebtor(BaseClassifier):
         if label == 2:
             response = self.other.classify(sentence)
             label = response['label']
+        if debug:
+            dictionary = {'label': label, 'pred_prob': result, 'av_pred': av_pred,'other_response':response}
+        else:
+            if response is not None:
+                response = float(max(response['av_pred']))
+            av_pred_value = float(max(av_pred))
+            dictionary = {'label': label, 'av_pred': av_pred_value,'other_response':response}
         
-        dictionary = {'label': label, 'pred_prob': result, 'av_pred': av_pred,'other_response':response}
-        self.log.debug('Final Pred label is: {}'.format(dictionary['label']))
-        self.log.debug('svc,logistic,nb result:\n {}'.format(dictionary['pred_prob']))
-        self.log.debug('ave result:\n {}'.format(dictionary['av_pred']))
+        self.log.debug('Final Pred label is: {}'.format(label))
+        dictionary.update({self.label_meaning:self.label_meaning_map.get(label,'null')})
         return dictionary
     
     
@@ -155,8 +172,10 @@ class ConfirmLoan(BaseClassifier):
     def __init__(self,**model):
         super().__init__(**model)
         self.re_time = TimePattern()
+        self.label_meaning = 'ifAdmitLoan'
+        self.label_meaning_map = {0:'y',1:'n'}
         
-    def classify(self, sentence,lower_bounder=36, upper_bounder=72):
+    def classify(self, sentence,lower_bounder=36, upper_bounder=72,debug=False):
         """
         if len(time_extract) == 0 --> run through ML
         if len(time_extract) == 1(within short time) --> jump to n103
@@ -189,14 +208,17 @@ class ConfirmLoan(BaseClassifier):
         # interact with regular expression
         if (time_label == 10) and (label != 1):
             label = 10
-        dictionary = {'label': label, 
-                      'pred_prob': result, 
-                      'av_pred': av_pred, 
-                      'time_extract':time_extract,
-                      'other_response':response}
-        self.log.debug('Final Pred label is: {}'.format(dictionary['label']))
-        self.log.debug('svc,logistic,nb result:\n {}'.format(dictionary['pred_prob']))
-        self.log.debug('ave result:\n {}'.format(dictionary['av_pred']))
+    
+        if debug:
+            dictionary = {'label': label, 'pred_prob': result, 'av_pred': av_pred,'other_response':response}
+        else:
+            if response is not None:
+                response = float(max(response['av_pred']))
+            av_pred_value = float(max(av_pred))
+            dictionary = {'label': label, 'av_pred': av_pred_value,'other_response':response}
+        dictionary.update({'timeExtract':time_extract})
+        self.log.debug('Final Pred label is: {}'.format(label))
+        dictionary.update({self.label_meaning:self.label_meaning_map.get(label,'null')})
         return dictionary
     
     
@@ -207,10 +229,12 @@ class WillingToPay(BaseClassifier):
     def __init__(self,**model):
         super().__init__(**model)
         self.re_time = TimePattern()
+        self.label_meaning = 'ifWillingToPay'
+        self.label_meaning_map = {0:'y',1:'n'}
     
         
         
-    def classify(self, sentence, lower_bounder=36, upper_bounder=72):
+    def classify(self, sentence, lower_bounder=36, upper_bounder=72,debug=False):
         """
         0 - high willing to pay (ML + Reg, between short and long)
         1 - not willing to pay (ML + Reg, too long)
@@ -271,14 +295,16 @@ class WillingToPay(BaseClassifier):
             elif time_label == 12:
                 label = 1
                 dictionary.update({'add_sentiment':1})
-            dictionary.update({'label': label, 
-                               'pred_prob': result, 
-                               'av_pred': av_pred, 
-                               'time_extract':time_extract,
-                               'other_response':response})
-            self.log.debug('Final Pred label is: {}'.format(dictionary['label']))
-            self.log.debug('svc,logistic,nb result:\n {}'.format(dictionary['pred_prob']))
-            self.log.debug('ave result:\n {}'.format(dictionary['av_pred']))
+            if debug:
+                dictionary = {'label': label, 'pred_prob': result, 'av_pred': av_pred,'other_response':response}
+            else:
+                if response is not None:
+                    response = float(max(response['av_pred']))
+                av_pred_value = float(max(av_pred))
+                dictionary = {'label': label, 'av_pred': av_pred_value,'other_response':response}
+            dictionary.update({'timeExtract':time_extract})
+            self.log.debug('Final Pred label is: {}'.format(label))
+            dictionary.update({self.label_meaning:self.label_meaning_map.get(label,'null')})
             return dictionary
     
     
@@ -288,8 +314,10 @@ class CutDebt(BaseClassifier):
     def __init__(self,**model):
         super().__init__(**model)
         self.re_time = TimePattern()
+        self.label_meaning = 'ifAcceptCutDebt'
+        self.label_meaning_map = {0:'y',1:'n'}
         
-    def classify(self, sentence,lower_bounder=36, upper_bounder=72):
+    def classify(self, sentence,lower_bounder=36, upper_bounder=72,debug=False):
         """
         Re:
         if time len(extract) >=2, and the min time is within the tolerance --> connect to self and confirm which day to pay,
@@ -345,14 +373,16 @@ class CutDebt(BaseClassifier):
             elif time_label == 12:
                 label = 1
                 dictionary.update({'add_sentiment':1})
-            dictionary.update({'label': label, 
-                               'pred_prob': result, 
-                               'av_pred': av_pred, 
-                               'time_extract':time_extract,
-                               'other_response':response})
-            self.log.debug('Final Pred label is: {}'.format(dictionary['label']))
-            self.log.debug('svc,logistic,nb result:\n {}'.format(dictionary['pred_prob']))
-            self.log.debug('ave result:\n {}'.format(dictionary['av_pred']))
+            if debug:
+                dictionary = {'label': label, 'pred_prob': result, 'av_pred': av_pred,'other_response':response}
+            else:
+                if response is not None:
+                    response = float(max(response['av_pred']))
+                av_pred_value = float(max(av_pred))
+                dictionary = {'label': label, 'av_pred': av_pred_value,'other_response':response}
+            dictionary.update({'timeExtract':time_extract})
+            self.log.debug('Final Pred label is: {}'.format(label))
+            dictionary.update({self.label_meaning:self.label_meaning_map.get(label,'null')})
             return dictionary
     
     
@@ -361,9 +391,11 @@ class Installment(BaseClassifier):
     def __init__(self,**model):
         super().__init__(**model)
         self.re_time = TimePattern()
+        self.label_meaning = 'ifAcceptInstallment'
+        self.label_meaning_map = {0:'y',1:'n'}
         
         
-    def classify(self, sentence,lower_bounder=36, upper_bounder=72):
+    def classify(self, sentence,lower_bounder=36, upper_bounder=72,debug=False):
         """
         Re:
         if time len(extract) >=2, and the min time is within the tolerance --> connect to self and confirm which day to pay,
@@ -416,14 +448,16 @@ class Installment(BaseClassifier):
             elif time_label == 12:
                 label = 1
                 dictionary.update({'add_sentiment':1})
-            dictionary.update({'label': label, 
-                               'pred_prob': result, 
-                               'av_pred': av_pred, 
-                               'time_extract':time_extract,
-                               'other_response':response})
-            self.log.debug('Final Pred label is: {}'.format(dictionary['label']))
-            self.log.debug('svc,logistic,nb result:\n {}'.format(dictionary['pred_prob']))
-            self.log.debug('ave result:\n {}'.format(dictionary['av_pred']))
+            if debug:
+                dictionary = {'label': label, 'pred_prob': result, 'av_pred': av_pred,'other_response':response}
+            else:
+                if response is not None:
+                    response = float(max(response['av_pred']))
+                av_pred_value = float(max(av_pred))
+                dictionary = {'label': label, 'av_pred': av_pred_value,'other_response':response}
+            dictionary.update({'timeExtract':time_extract})
+            self.log.debug('Final Pred label is: {}'.format(label))
+            dictionary.update({self.label_meaning:self.label_meaning_map.get(label,'null')})
             return dictionary
 
 
