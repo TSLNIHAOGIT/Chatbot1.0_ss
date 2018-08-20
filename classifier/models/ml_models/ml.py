@@ -40,7 +40,7 @@ class BaseClassifier:
         if jieba_path is not None:
             jieba.load_userdict(jieba_path)
             
-    def _ext_time(self,sentence, lower_bounder=36, upper_bounder=24*15):
+    def _ext_time(self,sentence, lower_bounder='明天下午5点', upper_bounder='1个月'):
         """
         time label 0: extract length is 0
         time label 2: extract length is 2
@@ -48,6 +48,8 @@ class BaseClassifier:
         time label 11: extract length is 1, delta time is within the middle time
         time label 12: extract length is 1, delta time is greater than the longest time
         """
+        lower_bounder_hour = self.re_time.process(lower_bounder)[0]['gapH']
+        upper_bounder_hour = self.re_time.process(upper_bounder)[0]['gapH']
         time_extract = self.re_time.process(sentence)
         time_label = 0
         if len(time_extract) == 0:
@@ -59,12 +61,12 @@ class BaseClassifier:
         else:
             delta = time_extract[0]['gapH']
             self.log.debug('Just one time was extracted! And the time delta is {} hours'.format(delta))
-            if delta < lower_bounder:
+            if delta < lower_bounder_hour:
                 time_label = 10
-                self.log.debug('The delta is less than lower bounder {} hours'.format(lower_bounder))
-            elif lower_bounder <= delta < upper_bounder:
+                self.log.debug('The delta is less than lower bounder {} hours'.format(lower_bounder_hour))
+            elif lower_bounder_hour <= delta < upper_bounder_hour:
                 time_label = 11
-                self.log.debug('The delta is greater than lower bounder {} hours but less than upper bounder {} hours'.format(lower_bounder,upper_bounder))
+                self.log.debug('The delta is greater than lower bounder {} hours but less than upper bounder {} hours'.format(lower_bounder_hour,upper_bounder_hour))
             else:
                 time_label = 12
                 self.log.debug('The delta is greater than upper bounder {} hours'.format(upper_bounder))
@@ -175,7 +177,10 @@ class ConfirmLoan(BaseClassifier):
         self.label_meaning = 'ifAdmitLoan'
         self.label_meaning_map = {0:'y',1:'n'}
         
-    def classify(self, sentence,lower_bounder=36, upper_bounder=72,debug=False):
+    def classify(self, 
+                 sentence,
+                 lower_bounder='明天下午5点', 
+                 upper_bounder='1个月',debug=False):
         """
         if len(time_extract) == 0 --> run through ML
         if len(time_extract) == 1(within short time) --> jump to n103
@@ -234,7 +239,10 @@ class WillingToPay(BaseClassifier):
     
         
         
-    def classify(self, sentence, lower_bounder=36, upper_bounder=72,debug=False):
+    def classify(self, 
+                 sentence,
+                 lower_bounder='明天下午5点', 
+                 upper_bounder='1个月',debug=False):
         """
         0 - high willing to pay (ML + Reg, between short and long)
         1 - not willing to pay (ML + Reg, too long)
@@ -317,7 +325,10 @@ class CutDebt(BaseClassifier):
         self.label_meaning = 'ifAcceptCutDebt'
         self.label_meaning_map = {0:'y',1:'n'}
         
-    def classify(self, sentence,lower_bounder=36, upper_bounder=72,debug=False):
+    def classify(self, 
+                 sentence,
+                 lower_bounder='明天下午5点', 
+                 upper_bounder='1个月',debug=False):
         """
         Re:
         if time len(extract) >=2, and the min time is within the tolerance --> connect to self and confirm which day to pay,
@@ -395,7 +406,10 @@ class Installment(BaseClassifier):
         self.label_meaning_map = {0:'y',1:'n'}
         
         
-    def classify(self, sentence,lower_bounder=36, upper_bounder=72,debug=False):
+    def classify(self, 
+                 sentence,
+                 lower_bounder='明天下午5点', 
+                 upper_bounder='1个月',debug=False):
         """
         Re:
         if time len(extract) >=2, and the min time is within the tolerance --> connect to self and confirm which day to pay,
