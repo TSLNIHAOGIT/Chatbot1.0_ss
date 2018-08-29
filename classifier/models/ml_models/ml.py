@@ -246,8 +246,7 @@ class WillingToPay(BaseClassifier):
         """
         0 - high willing to pay (ML + Reg, between short and long)
         1 - not willing to pay (ML + Reg, too long)
-        2 - hope to cut
-        3 - other
+        2 - other
         Re:
         if time len(extract) >=2, and the min time is within the tolerance --> connect to self and confirm which day to pay,
                                     output label is 10
@@ -290,7 +289,7 @@ class WillingToPay(BaseClassifier):
             label = max_arg
             
 
-            if label == 3:
+            if label == 2:
                 response = self.other.classify(sentence)
                 label = response['label']
             # interact with regular expression
