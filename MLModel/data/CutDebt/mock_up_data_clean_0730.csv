@@ -1,4 +1,4 @@
-label,split_text,classifier,new_label,comment,uncertain,Unnamed: 6,Unnamed: 7
+old_label,split_text,classifier,label,comment,uncertain,Unnamed: 6,Unnamed: 7
 0, 这样的话没问题,CutDebt,0,,,,
 0,10分钟内发截图给你,CutDebt,0,,,,
 0,12点之前处理进去就行,CutDebt,0,,,,

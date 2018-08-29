@@ -1,4 +1,4 @@
-label,split_text,classifier,new_label,comment,uncertain,name,criterion
+old_label,split_text,classifier,label,comment,uncertain,name,criterion
 0,OK,IDClassifier,0,,,,
 0,yes,IDClassifier,0,,,,
 0,"Yes,是的",IDClassifier,0,,,,

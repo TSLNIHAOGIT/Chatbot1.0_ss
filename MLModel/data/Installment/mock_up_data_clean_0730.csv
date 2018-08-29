@@ -1,4 +1,4 @@
-label,split_text,classifier,new_label,comment,uncertain,name,criterion
+old_label,split_text,classifier,label,comment,uncertain,name,criterion
 0.0,1000我可以先还,Installment,0,??,1.0,sr,
 0.0,10分钟内发截图给你,Installment,0,,,zl,
 0.0,15分钟到账,Installment,0,,,sr,

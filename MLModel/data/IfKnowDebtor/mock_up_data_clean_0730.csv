@@ -1,4 +1,4 @@
-label,split_text,classifier,new_label,comment,uncertain,name,criterion
+old_label,split_text,classifier,label,comment,uncertain,name,criterion
 0.0,XX吗，我认识,IfKnowDebtor,0,,,sr,
 0.0,啊,IfKnowDebtor,0,,,sr,
 0.0,俺是他爸,IfKnowDebtor,0,,,sr,
