@@ -1,4 +1,9 @@
-from HRX.Test.chatbot_model import models
+# from HRX.Test.chatbot_model import models
+import sys,os
+loader_path = '../../classifier/loader/'
+sys.path.append(loader_path)
+from loader import load_all
+# model_dict=load_all()
 import unittest
 import HTMLTestRunner     # 导入HTMLTestRunner模块
 import pandas as pd
@@ -9,7 +14,7 @@ class chatBotModel(unittest.TestCase):
     @classmethod
     def setUpClass(self):
         print("This setUpClass() method only called once.")
-        model = models()
+        model = load_all()
         self.model_IfKnowDebtor = model['IfKnowDebtor']
         self.model_CutDebt = model['CutDebt']
         self.model_IDClassifier = model['IDClassifier']
@@ -27,8 +32,8 @@ class chatBotModel(unittest.TestCase):
         df=self.df[self.df['node'] == 'IfKnowDebtor']
         data_ifkonwdebtor=zip(df['index'],df['label'],df['text'])
         for each in data_ifkonwdebtor:
-            with self.subTest(index=each[0]):  # 注意这里subTest的用法
-                self.assertEqual(each[1], self.model_IfKnowDebtor.classify(each[2])['label'])
+            with self.subTest(index=each[0],):  # 注意这里subTest的用法
+                self.assertEqual(each[1], self.model_IfKnowDebtor.classify(each[2])['label'],msg='debtor_answer:'+each[2])
 
     def test_CutDebt(self):
         # self.assertEqual(0,self.model_CutDebt.classify("可以没问题")['label'])
@@ -36,14 +41,14 @@ class chatBotModel(unittest.TestCase):
         data_CutDebt = zip(df['index'], df['label'], df['text'])
         for each in data_CutDebt:
             with self.subTest(index=each[0]):  # 注意这里subTest的用法
-                self.assertEqual(each[1], self.model_CutDebt.classify(each[2])['label'])
+                self.assertEqual(each[1], self.model_CutDebt.classify(each[2])['label'],msg='debtor_answer:'+each[2])
 
     def test_IDClassifier(self):
         df = self.df[self.df['node'] == 'IDClassifier']
         data_IDClassifier = zip(df['index'], df['label'], df['text'])
         for each in data_IDClassifier:
             with self.subTest(index=each[0]):  # 注意这里subTest的用法
-                self.assertEqual(each[1], self.model_IDClassifier.classify(each[2])['label'])
+                self.assertEqual(each[1], self.model_IDClassifier.classify(each[2])['label'],msg='debtor_answer:'+each[2])
         # self.assertEqual(1, self.model_IDClassifier.classify("他是我哥哥")['label'])
 
     def test_WillingToPay(self):
@@ -52,7 +57,7 @@ class chatBotModel(unittest.TestCase):
         data_WillingToPay = zip(df['index'], df['label'], df['text'])
         for each in data_WillingToPay:
             with self.subTest(index=each[0]):  # 注意这里subTest的用法
-                self.assertEqual(each[1], self.model_WillingToPay.classify(each[2])['label'])
+                self.assertEqual(each[1], self.model_WillingToPay.classify(each[2])['label'],msg='debtor_answer:'+each[2])
         # self.assertEqual(11, self.model_WillingToPay.classify("我真的还不起")['label'])
 
     def test_Installment(self):
@@ -61,7 +66,7 @@ class chatBotModel(unittest.TestCase):
         data_Installment = zip(df['index'], df['label'], df['text'])
         for each in data_Installment:
             with self.subTest(index=each[0]):  # 注意这里subTest的用法
-                self.assertEqual(each[1], self.model_Installment.classify(each[2])['label'])
+                self.assertEqual(each[1], self.model_Installment.classify(each[2])['label'],msg='debtor_answer:'+each[2])
 
     def test_ConfirmLoan(self):
         # self.assertEqual(0, self.model_ConfirmLoan.classify("我不想还了")['label'],msg='confirmloan_msg')#如果这条错了，下面的子测试就不执行了
@@ -70,7 +75,7 @@ class chatBotModel(unittest.TestCase):
         for each in data_ConfirmLoan:
             # print(each[0],each[1],self.model_ConfirmLoan.classify(each[2])['label'],each[2])
             with self.subTest(index=each[0]):  # 注意这里subTest的用法
-                self.assertEqual(each[1], self.model_ConfirmLoan.classify(each[2])['label'],msg='input text:'+each[2])
+                self.assertEqual(each[1], self.model_ConfirmLoan.classify(each[2])['label'],msg='debtor_answer:'+each[2])
 
 if __name__ == '__main__':
     unittest.main()

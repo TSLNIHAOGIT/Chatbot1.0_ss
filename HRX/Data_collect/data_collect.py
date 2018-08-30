@@ -1,5 +1,6 @@
 import pandas as pd
-df=pd.read_csv('data_2018_8_15.csv')[1:]
+# df=pd.read_csv('data_2018_8_15.csv')[1:]
+df=pd.read_excel('data_add_2018_8_23.xls')
 # print(df.head())
 # print(df.columns)
 # print(df['t011'])
@@ -35,12 +36,12 @@ data_06=pd.concat([df['t061'], df['t062'], df['t063'], df['t064'], df['t065'], d
 # print(df2.head())
 
 # print(pd.DataFrame(columns=list('DE')))
-data_01.to_excel('ConfirmLoan_0.xls',index=False)
-data_02.to_excel('ConfirmLoan_1.xls',index=False)
-data_03.to_excel('wait.xls',index=False)
-data_04.to_excel('Inconsistent.xls',index=False)
-data_05.to_excel('ptp_0.xls',index=False)
-data_06.to_excel('ptp_1.xls',index=False)
+data_01.to_excel('ConfirmLoan_0_2.xls',index=False)
+data_02.to_excel('ConfirmLoan_1_2.xls',index=False)
+data_03.to_excel('wait_2.xls',index=False)
+data_04.to_excel('Inconsistent_2.xls',index=False)
+data_05.to_excel('ptp_0_2.xls',index=False)
+data_06.to_excel('ptp_1_2.xls',index=False)
 
 
 

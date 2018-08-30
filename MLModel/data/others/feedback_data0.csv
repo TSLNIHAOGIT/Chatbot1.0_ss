@@ -1,0 +1,6 @@
+split_text,classifier,label
+嗯呢,IDClassifier,0
+讲话,IDClassifier,107
+有话快说,IDClassifier,107
+请讲,IDClassifier,107
+手头不太方便,ConfirmLoan,0

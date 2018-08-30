@@ -2,29 +2,44 @@ import sys,os
 sys.path.append('../../MLModel/code/OneClickTraining/')
 sys.path.append('../../MLModel/code/TreeModelV2/')
 
+# import sys,os
+# loader_path = '../../classifier/loader/'
+# sys.path.append(loader_path)
+# from loader import load_all
+# model_dict=load_all()
+
 from MLModel.code.OneClickTraining.all_model_py import  *
 from MLModel.code.TreeModelV2.chatbotv1 import *
 
-# class chatbot_engine(object):
-#     def __init__(self):
-models_list = ['IDClassifier', 'CutDebt', 'IfKnowDebtor', 'WillingToPay', 'Installment', 'ConfirmLoan']
-savedModel_path = '../../MLModel/savedModel/{}/{}.pickle'
-model_dict = {}
-for each_model in models_list:
-    model_dict[each_model] = pickle.load(open(savedModel_path.format(each_model, each_model), 'rb'))
+class chatbot_engine(object):
+    def __init__(self):
+        models_list = ['IDClassifier', 'CutDebt', 'IfKnowDebtor', 'WillingToPay', 'Installment', 'ConfirmLoan']
+        savedModel_path = '../../classifier/saved_Model/{}/main_flow/{}.pkl'
+        model_dict = {}
+        for each_model in models_list:
+            model_dict[each_model] = pickle.load(open(savedModel_path.format(each_model, each_model), 'rb'))
+
+
+
+
     # model_dict[each_model].classify('再说一次')
-model_dict['StopClassifier'] = StopClassifier()
-model_dict['InitClassifier'] = InitClassifier()
-def models():
-    models_list = ['IDClassifier', 'CutDebt', 'IfKnowDebtor', 'WillingToPay', 'Installment', 'ConfirmLoan']
-    savedModel_path = '../../MLModel/savedModel/{}/{}.pickle'
-    model_dict = {}
-    for each_model in models_list:
-        model_dict[each_model] = pickle.load(open(savedModel_path.format(each_model, each_model), 'rb'))
-        # model_dict[each_model].classify('再说一次')
-    model_dict['StopClassifier'] = StopClassifier()
-    model_dict['InitClassifier'] = InitClassifier()
-    return model_dict
+# model_dict['StopClassifier'] = StopClassifier()
+# model_dict['InitClassifier'] = InitClassifier()
+# def models():
+#     models_list = ['IDClassifier', 'CutDebt', 'IfKnowDebtor', 'WillingToPay', 'Installment', 'ConfirmLoan']
+#     savedModel_path = '../../MLModel/saved_Model/{}/main_flow/{}.pickle'
+#     model_dict = {}
+#     for each_model in models_list:
+#         model_dict[each_model] = pickle.load(open(savedModel_path.format(each_model, each_model), 'rb'))
+#         # model_dict[each_model].classify('再说一次')
+#     model_dict['StopClassifier'] = StopClassifier()
+#     model_dict['InitClassifier'] = InitClassifier()
+#     return model_dict
+
+
+
+
+
 graph_path = '../../MLModel/data/TreeModel/treeConnection.csv'
 msg_path = '../../MLModel/data/TreeModel/node_message.csv'
 
@@ -67,7 +82,7 @@ profile={'name':'王大喜','principal':'1,000','contractStartDate':"2018年1月
          'apr':'5%','fee':'200','lendingCompany':'平安E贷','collectionCompany':'江苏逸能','customerID':'123','gender':'男','collector':'小张','totalAmount':'1250','informDeadline':'明天下午三点',
          'splitDebtMaxTolerance':'一个月','splitDebtFirstPay':'800','deltaTime':' ','interest':'50'}
 
-t = TreeStage1(profile=profile)
+t = TreeStage1(profile=None)
 
 
 print(t.current_node_name)
@@ -100,8 +115,8 @@ while True:
     #     break
 
 
-model = model_dict['IfKnowDebtor']
-print(model.classify("不认识")['label'])
+# model = model_dict['IfKnowDebtor']
+# print(model.classify("不认识")['label'])
 
 # model = model_dict['CutDebt']
 # print(model.classify("他是我哥哥")['label'])

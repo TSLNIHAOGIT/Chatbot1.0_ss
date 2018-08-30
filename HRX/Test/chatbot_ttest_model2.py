@@ -1,4 +1,12 @@
-from HRX.Test.chatbot_model import models
+# from HRX.Test.chatbot_model import models
+import sys,os
+loader_path = '../../classifier/loader/'
+sys.path.append(loader_path)
+from loader import load_all
+# model_dict=load_all()
+
+
+
 import unittest
 import HTMLTestRunner     # 导入HTMLTestRunner模块
 import pandas as pd
@@ -10,7 +18,8 @@ class chatBotModel(unittest.TestCase):
     @classmethod
     def setUpClass(self):
         print("This setUpClass() method only called once.")
-        model = models()
+        # model = models()
+        model=load_all()
         self.model_IfKnowDebtor = model['IfKnowDebtor']
         self.model_CutDebt = model['CutDebt']
         self.model_IDClassifier = model['IDClassifier']
