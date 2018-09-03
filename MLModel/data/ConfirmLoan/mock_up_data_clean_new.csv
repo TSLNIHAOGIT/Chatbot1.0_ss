@@ -141,13 +141,13 @@ split_text,classifier,label
 你的利息不对,ConfirmLoan,0
 你知道现在学校有多黑吗？各种课补过去不过来，我哪有钱还？,ConfirmLoan,0
 你等我这个月来还吧,ConfirmLoan,0
-"你管我是不是, 方案给我发到微信嘛, 这个是我朋友用我的身份证办的，和我没有关系。",ConfirmLoan,0
+"你管我是不是, 方案给我发到微信嘛, 这个是我朋友用我的身份证办的，和我没有关系。",ConfirmLoan,1
 "你管我是不是。呢,我家人出事了，我都吃不起饭了，确实拿不出这个钱。",ConfirmLoan,0
 你管我还不还,ConfirmLoan,0
 "你管求得我的, 也,  你们利息太高了。",ConfirmLoan,0
 "你管求得我的。再说,我凭本事借的钱，为什么要还 。",ConfirmLoan,0
 "你管求得我的。嗯嗯，再说吧,我家人出事了，我都吃不起饭了，确实拿不出这个钱。",ConfirmLoan,0
-"你管求得我的。能不能换个长点儿的还款周期呢,这个是我朋友用我的身份证办的，和我没有关系。",ConfirmLoan,0
+"你管求得我的。能不能换个长点儿的还款周期呢,这个是我朋友用我的身份证办的，和我没有关系。",ConfirmLoan,1
 你要是还要这么高,ConfirmLoan,0
 你说的是2万多的日币吧，我只借了2000块，怎么变成那么多了,ConfirmLoan,0
 你说的是2万越南盾哇？,ConfirmLoan,0
@@ -249,7 +249,7 @@ split_text,classifier,label
 后年再说,ConfirmLoan,0
 "听不懂你说的什么, 要得，我知道, 我想起来了，是我借的。之前工程欠款，没钱还。",ConfirmLoan,0
 咋个就2万3了，应该是2万一的嘛,ConfirmLoan,0
-和我没关系，朋友借的,ConfirmLoan,0
+和我没关系，朋友借的,ConfirmLoan,1
 哇哈哈哈你是谁,ConfirmLoan,0
 哈哈哈不还,ConfirmLoan,0
 哎呀，你烦不烦，我现在不想还,ConfirmLoan,0
@@ -775,7 +775,7 @@ split_text,classifier,label
 昨天去银行取了钱准备还的，遇到了抢银行的，把我的钱也抢走了。,ConfirmLoan,0
 昨天我兄弟才走我这里借了几十万走，没得钱了啊，你们应该早点给我打电话的,ConfirmLoan,0
 昨天才交了2万元的住院费，我哪里还拿得出来钱嘛,ConfirmLoan,0
-"是不是和你有关系吗, 还有没有更低的方案, 不欠钱。",ConfirmLoan,0
+"是不是和你有关系吗, 还有没有更低的方案, 不欠钱。",ConfirmLoan,1
 "是不是那个在敲代码的？, 好嘛, 我丢工作了，我媳妇前段时间生小孩，我妈妈也住院了，实在没有钱。",ConfirmLoan,0
 "是不是那个在敲代码的？。方案给我发到微信嘛, 你们利息太高了。",ConfirmLoan,0
 是借的你的嘛,ConfirmLoan,0
@@ -1425,7 +1425,7 @@ split_text,classifier,label
 您打错了吧？找到这里了，有病,ConfirmLoan,1
 您打错了吧？没这个人呢,ConfirmLoan,1
 您打错了吧？这是信贷公司,ConfirmLoan,1
-想不起来了呢,ConfirmLoan,1
+想不起来了呢,ConfirmLoan,0
 想套我信息？,ConfirmLoan,1
 "懒得理你。等我出差回来再说,别瞎说，我什么时候欠你们钱了。",ConfirmLoan,1
 我一天到黑，大门不出，二门不迈，哪里可能出去借钱，你们是在开玩笑吧。,ConfirmLoan,1
@@ -1721,7 +1721,7 @@ split_text,classifier,label
 "跟你有啥关系。乎,不欠钱。",ConfirmLoan,1
 跟我没关系,ConfirmLoan,1
 还什么还，都不是我,ConfirmLoan,1
-还有这事？我都忘记了。,ConfirmLoan,1
+还有这事？我都忘记了。,ConfirmLoan,0
 这不可能，你是来搞笑的吧,ConfirmLoan,1
 这不是我借的,ConfirmLoan,1
 这不是我借的钱,ConfirmLoan,1
