@@ -217,7 +217,7 @@ no,IfKnowDebtor,1
 他在我边上,IfKnowDebtor,0
 他在手术,IfKnowDebtor,0
 他在手术,IfKnowDebtor,0
-他坐牢去了,IfKnowDebtor,1
+他坐牢去了,IfKnowDebtor,0
 他坐牢去了,IfKnowDebtor,0
 他多大,IfKnowDebtor,0
 他失踪了,IfKnowDebtor,0
@@ -521,7 +521,7 @@ no,IfKnowDebtor,1
 听名字不错,IfKnowDebtor,1
 听说他去世了,IfKnowDebtor,1
 听说他去世了,IfKnowDebtor,1
-听说他坐牢了,IfKnowDebtor,1
+听说他坐牢了,IfKnowDebtor,0
 听说他坐牢了,IfKnowDebtor,0
 听说过,IfKnowDebtor,0
 听说过这个人,IfKnowDebtor,0
