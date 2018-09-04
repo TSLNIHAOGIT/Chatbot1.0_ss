@@ -71,7 +71,10 @@ class BaseClassifier:
                 time_label = 12
                 self.log.debug('The delta is greater than upper bounder {} hours'.format(upper_bounder))
                 
-        return {'label':time_label,'time_extract':time_extract}
+        return {'label':time_label,
+                'time_extract':time_extract,
+                'lower_bounder_hour':lower_bounder_hour,
+                'upper_bounder_hour':upper_bounder_hour}
         
     
 
@@ -188,9 +191,7 @@ class ConfirmLoan(BaseClassifier):
         """
         if self.log is None:
             self.log = Logger(self.__class__.__name__,level=ENV.MODEL_LOG_LEVEL.value).logger
-        time_result = self._ext_time(sentence,lower_bounder, upper_bounder)
-        time_label = time_result['label']
-        time_extract = time_result['time_extract']
+
         # remove time pattern from setence
         sentence = self.re_time.remove_time(sentence)
         sentence = jieba.cut(sentence, cut_all = False)
@@ -209,10 +210,9 @@ class ConfirmLoan(BaseClassifier):
         if label == 2:
             response = self.other.classify(sentence)
             label = response['label']
-        
-        # interact with regular expression
-        if (time_label == 10) and (label != 1):
-            label = 10
+        time_extract = []
+     
+       
     
         if debug:
             dictionary = {'label': label, 'pred_prob': result, 'av_pred': av_pred,'other_response':response}
@@ -235,7 +235,7 @@ class WillingToPay(BaseClassifier):
         super().__init__(**model)
         self.re_time = TimePattern()
         self.label_meaning = 'ifWillingToPay'
-        self.label_meaning_map = {0:'y',1:'n'}
+        self.label_meaning_map = {0:'y',1:'n',10:'confirmAgain'}
     
         
         
@@ -261,17 +261,25 @@ class WillingToPay(BaseClassifier):
         time_result = self._ext_time(sentence,lower_bounder, upper_bounder)
         time_label = time_result['label']
         time_extract = time_result['time_extract']
+        lower_bounder_hour = time_result['lower_bounder_hour']
+        upper_bounder_hour = time_result['upper_bounder_hour']
         response = None
-        if time_label == 2:
+        if time_label == 2:   
             min_time = time_extract[0]['gapH']
             for each in time_extract[1:]:
                 _time = each['gapH']
                 if _time < min_time:
-                    min_time = _time
-            if min_time <= lower_bounder:
+                    min_time = _time      
+            if min_time <= lower_bounder_hour:
                 self.log.debug('There are more than 1 time extracted. And the min {} hours is shorter than lower bounder! The output label is set to 10!'.format(min_time))
-                return {'label':10 , 'pred_prob': 1.0, 'av_pred': 1.0, 'time_extract':time_extract}
-        else:           
+                label = 10
+            else:
+                label = 1
+                
+            dictionary = {'label': label, 'av_pred': 1.0,'other_response':0.0,'timeExtract':time_extract} 
+            dictionary.update({self.label_meaning:self.label_meaning_map.get(label,'null')})
+            return dictionary
+        else:    
             # ML model process
             # remove time pattern from setence
             sentence = self.re_time.remove_time(sentence)
@@ -343,16 +351,26 @@ class CutDebt(BaseClassifier):
         time_result = self._ext_time(sentence,lower_bounder, upper_bounder)
         time_label = time_result['label']
         time_extract = time_result['time_extract'] 
+        lower_bounder_hour = time_result['lower_bounder_hour']
+        upper_bounder_hour = time_result['upper_bounder_hour']
         response = None
-        if time_label == 2:
+        
+            
+        if time_label == 2:   
             min_time = time_extract[0]['gapH']
             for each in time_extract[1:]:
                 _time = each['gapH']
                 if _time < min_time:
-                    min_time = _time
-            if min_time <= lower_bounder:
+                    min_time = _time      
+            if min_time <= lower_bounder_hour:
                 self.log.debug('There are more than 1 time extracted. And the min {} hours is shorter than lower bounder! The output label is set to 10!'.format(min_time))
-                return {'label':10 , 'pred_prob': 1.0, 'av_pred': 1.0, 'time_extract':time_extract}
+                label = 10
+            else:
+                label = 1
+                
+            dictionary = {'label': label, 'av_pred': 1.0,'other_response':0.0,'timeExtract':time_extract} 
+            dictionary.update({self.label_meaning:self.label_meaning_map.get(label,'null')})
+            return dictionary
         else:
             # remove time pattern from setence
             sentence = self.re_time.remove_time(sentence)
@@ -423,17 +441,26 @@ class Installment(BaseClassifier):
         # Regular expression
         time_result = self._ext_time(sentence,lower_bounder, upper_bounder)
         time_label = time_result['label']
-        time_extract = time_result['time_extract']    
+        time_extract = time_result['time_extract']
+        lower_bounder_hour = time_result['lower_bounder_hour']
+        upper_bounder_hour = time_result['upper_bounder_hour']
         response = None
-        if time_label == 2:
+            
+        if time_label == 2:   
             min_time = time_extract[0]['gapH']
             for each in time_extract[1:]:
                 _time = each['gapH']
                 if _time < min_time:
-                    min_time = _time
-            if min_time <= lower_bounder:
+                    min_time = _time      
+            if min_time <= lower_bounder_hour:
                 self.log.debug('There are more than 1 time extracted. And the min {} hours is shorter than lower bounder! The output label is set to 10!'.format(min_time))
-                return {'label':10 , 'pred_prob': 1.0, 'av_pred': 1.0, 'time_extract':time_extract}
+                label = 10
+            else:
+                label = 1
+                
+            dictionary = {'label': label, 'av_pred': 1.0,'other_response':0.0,'timeExtract':time_extract} 
+            dictionary.update({self.label_meaning:self.label_meaning_map.get(label,'null')})
+            return dictionary
         else:
             # remove time pattern from setence
             sentence = self.re_time.remove_time(sentence)

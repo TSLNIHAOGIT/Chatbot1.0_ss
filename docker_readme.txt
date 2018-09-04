@@ -33,6 +33,9 @@ curl -O https://repo.continuum.io/archive/Anaconda3-5.2.0-Linux-x86_64.sh
 
 You may wish to edit your .bashrc to prepend the Anaconda3 install location to PATH:
 
+go to ~/.bashrc, add below to last line
 export PATH=/home/kai/anaconda3/bin:$PATH
+
+Then source ~/.bashrc
 
 Thank you for installing Anaconda3!

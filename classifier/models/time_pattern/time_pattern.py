@@ -11,6 +11,56 @@ sys.path.append('../../env/')
 from env import ENV
 
 
+class CHN2NUM:
+    def __init__(self):
+        self.CN_NUM = {
+    '〇' : 0, '一' : 1, '二' : 2, '三' : 3, '四' : 4, '五' : 5, '六' : 6, '七' : 7, '八' : 8, '九' : 9, '零' : 0,
+    '壹' : 1, '贰' : 2, '叁' : 3, '肆' : 4, '伍' : 5, '陆' : 6, '柒' : 7, '捌' : 8, '玖' : 9, '貮' : 2, '两' : 2
+}
+
+        for i in range(10):
+            self.CN_NUM[str(i)] = i
+        self.CN_UNIT = {
+                            '十' : 10,
+                            '拾' : 10,
+                            '百' : 100,
+                            '佰' : 100,
+                            '千' : 1000,
+                            '仟' : 1000,
+                            '万' : 10000,
+                            '萬' : 10000,
+                            '亿' : 100000000,
+                            '億' : 100000000,
+                            '兆' : 1000000000000,
+                        }
+
+    def transform(self,cn:str):
+        unit = 0   # current
+        ldig = []  # digest
+        for cndig in reversed(cn):
+            if cndig in self.CN_UNIT:
+                unit = self.CN_UNIT.get(cndig)
+                if unit == 10000 or unit == 100000000:
+                    ldig.append(unit)
+                    unit = 1
+            else:
+                dig = self.CN_NUM.get(cndig)
+                if unit:
+                    dig *= unit
+                    unit = 0
+                ldig.append(dig)
+        if unit == 10:
+            ldig.append(10)
+        val, tmp = 0, 0
+        for x in reversed(ldig):
+            if x == 10000 or x == 100000000:
+                val += tmp * x
+                tmp = 0
+            else:
+                tmp += x
+        val += tmp
+        return val
+
 class TimePattern:
     def __init__(self,tz=None):
         """
@@ -18,6 +68,7 @@ class TimePattern:
         tz = pytz.timezone(tz)
         'America/New_York'
         """
+        self.chn2num = CHN2NUM()
         self.pattern_csv = os.path.join(os.path.dirname(__file__), 'mapping.csv')
         self._set_timeZone(tz)
         self._load_mapping(self.pattern_csv)
@@ -32,8 +83,9 @@ class TimePattern:
                          '二十六':'26','二十七':'27','二十八':'28','二十九':'29','三十':'30','三十一':'31',
                          '四十':'40','五十':'50','六十':'60','七十':'70','八十':'80','九十':'90','一百':'100'}
         self.fix_ymd = r'(?:(?:今|明|后|大后)年)?(?:(?:\d{1,2}|下下下个|下下个|再下个|下个|十一|十二|一|二|三|四|五|六|七|八|九|十|后1个|后2个|后一个|后两个|后二个)月)(?:\d{1,2}|一|二|三|四|五|六|七|八|九|十|十一|十二|十三|十四||十六|十七|十八|十九|二十|二十一|二十二|二十三|二十四|二十五|二十六|二十七|二十八|二十九|三十|三十一)[日号]'
-        reg_num = r'(?:(?:一|二|三|四|五|六|七|八|九|十|十一|十二|十三|十四|十五|二十|三十|四十|五十|六十|七十|八十|九十)|\d+)'
-        self.fix_period = r'(?:{}天)?(?:{}小时)?(?:{}分钟)?'.format(reg_num,reg_num,reg_num)
+#         reg_num = r'(?:(?:一|二|三|四|五|六|七|八|九|十|十一|十二|十三|十四|十五|二十|三十|四十|五十|六十|七十|八十|九十)|\d+)'
+        reg_num = r'[一二三四五六七八九十零〇两百千万0-9]'
+        self.fix_period = r'(?:{}+天)?(?:{}+(?:个)?(?:小时|钟头)+)?(?:{}+分钟)?'.format(reg_num,reg_num,reg_num)
         
     def remove_time(self,sentence):
         sentence = re.sub(r' ','',sentence)
@@ -417,15 +469,17 @@ class TimePattern:
     
     def period_expression(self,find):
         day_index = find.find('天')
-        hour_index = find.find('小时')
+        hour_index = max(find.find('个小时'),find.find('个钟头'))
+        if hour_index == -1:
+            hour_index = find.find('小时')
         minute_index = find.find('分钟')
         if day_index != -1:
             day = find[0:day_index]
-            if self.time_dic.get(day) is not None:
-                day = int(self.time_dic.get(day))
+            if day.isdigit():
+                day = int(day)
             else:
                 try:
-                    day = int(day)
+                    day = int(self.chn2num.transform(day))
                 except Exception:
                     day = 0
         else:
@@ -433,11 +487,11 @@ class TimePattern:
 
         if hour_index != -1:
             hour = find[day_index+1:hour_index]
-            if self.time_dic.get(hour) is not None:
-                hour = int(self.time_dic.get(hour))
+            if hour.isdigit():
+                hour = int(hour)
             else:
                 try:
-                    hour = int(hour)
+                    hour = int(self.chn2num.transform(hour))
                 except Exception:
                     hour = 0
         else:
@@ -445,11 +499,11 @@ class TimePattern:
 
         if minute_index != -1:
             minute = find[hour_index+2:minute_index]
-            if self.time_dic.get(minute) is not None:
-                minute = int(self.time_dic.get(minute))
+            if minute.isdigit():
+                minute = int(minute)
             else:
                 try:
-                    minute = int(minute)
+                    minute = int(self.chn2num.transform(minute))
                 except Exception:
                     minute = 0
         else:
@@ -478,15 +532,22 @@ class TimePattern:
         """
         test if there is any overlab between self-defined and the fixed expression
         """
-        error_result = []
+        error_result_ymd = []
+        error_result_prd = []
         for each_pattern in self.serires.index.values:
             fixymd = self.evl_ymd(each_pattern)
+            fixperiod = self.evl_period(each_pattern)
             if len(fixymd) > 0:
                 pattern = fixymd[0]['pattern']
 #                 if pattern == each_pattern:
-                error_result.append(each_pattern)
+                error_result_ymd.append(each_pattern)
+            if len(fixperiod) > 0:
+                pattern = fixperiod[0]['pattern']
+                error_result_prd.append(each_pattern)
         print('============ test case 1 is below ==============')
-        print(error_result)
+        print(error_result_ymd)
+        print('----')
+        print(error_result_prd)
         
     def test_case2(self):
         """
