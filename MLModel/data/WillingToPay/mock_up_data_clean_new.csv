@@ -1,5 +1,10 @@
 split_text,classifier,label
-10分钟内发截图给你,WillingToPay,0
+行呢,WillingToPay,0
+行吧,WillingToPay,0
+行嘛,WillingToPay,0
+可以呢,WillingToPay,0
+可以吧,WillingToPay,0
+可以嘛,WillingToPay,0
 10号不能还,WillingToPay,1
 10号发工资处理,WillingToPay,0
 10号还,WillingToPay,0
