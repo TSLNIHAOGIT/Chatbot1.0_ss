@@ -8,6 +8,8 @@ sys.path.append(os.path.join(os.path.dirname(__file__), tpattern_path))
 from time_pattern import TimePattern
 env_path = '../../env/'
 sys.path.append(os.path.join(os.path.dirname(__file__), env_path))
+
+# from env.env import ENV
 from env import ENV
 log_path = '../../lib/'
 sys.path.append(os.path.join(os.path.dirname(__file__), log_path))

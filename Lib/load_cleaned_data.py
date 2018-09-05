@@ -45,7 +45,8 @@ def clean_label(label):
 def load_others(classifier,
                 label_list,
                 other_fe = ['text','label'],
-                other_path = '../../data/others/labels/{}/mock_up_data_new.csv'):
+                other_path = '../../data/others/labels/{}/mock_up_data_new.csv',
+                feedback_path='../../data/others/labels/{}/mock_up_data_feedback.csv'):
     """
     classifier: eg, CutDebt
     label_list: eg, [102, 103, 104, 106, 107, 108, 109, 110]
@@ -55,10 +56,16 @@ def load_others(classifier,
 
         df_load = pd.read_csv(other_path.format(label))
         df_availabel = df_load[df_load[classifier] == 0][other_fe].copy()
+        if feedback_path is not None:
+            df_load_fb = pd.read_csv(feedback_path.format(label))
+            df_availabel_fb = df_load_fb[df_load_fb[classifier] == 0][other_fe].copy()
+            df_availabel = pd.concat([df_availabel,df_availabel_fb],ignore_index=True)
         others = pd.concat([others,df_availabel],ignore_index=True)
     return others
                 
-def load_data():
+def load_data(load_fb=True):
+    if load_fb:
+        main_data_fb = 'mock_up_data_feedback.csv'
     path = os.path.join(os.path.dirname(__file__),'../MLModel/data/{}/')
     main_data_name = 'mock_up_data_clean_new.csv'
     strategy_mat_path = os.path.join(os.path.dirname(__file__),'../MLModel/data/others/strategy_mat_v1.csv')
@@ -68,6 +75,10 @@ def load_data():
         
         ori_data_main[each_model] = pd.read_csv(path.format(each_model) + main_data_name, encoding='utf8')
         ori_data_main[each_model] = ori_data_main[each_model][features]
+        if load_fb:
+            fb = pd.read_csv(path.format(each_model) + main_data_fb, encoding='utf8')
+            fb = fb[features]
+            ori_data_main[each_model] = pd.concat([ori_data_main[each_model],fb]).reset_index(drop=True)
     
     #combine CUtDebt and Installment label 0
     cut_0 = ori_data_main['CutDebt'][ori_data_main['CutDebt'].label == 0].copy()
@@ -81,7 +92,10 @@ def load_data():
     ori_data_other = {}
     for each_model in model_list:
         available_labels = list(strategy_mat[strategy_mat[each_model]==0]['label'].unique())
-        ori_data_other[each_model] = load_others(each_model,available_labels)
+        if load_fb:
+            ori_data_other[each_model] = load_others(each_model,available_labels)
+        else:
+            ori_data_other[each_model] = load_others(each_model,available_labels,feedback_path=None)
     
     # clean data
     clean_data_main = {}
@@ -108,5 +122,7 @@ def load_data():
 
         # shuffle data
         clean_data_main[each_model] = clean_data_main[each_model].sample(frac=1).reset_index(drop=True)
+        print(clean_data_main[each_model].label.value_counts())
         clean_data_other[each_model] = clean_data_other[each_model].sample(frac=1).reset_index(drop=True)
+        print(clean_data_other[each_model].label.value_counts())
     return clean_data_main,clean_data_other
