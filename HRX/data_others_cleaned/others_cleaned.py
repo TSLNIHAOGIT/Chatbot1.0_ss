@@ -73,6 +73,16 @@ def all_other_merge(path):
     all_others_df = pd.concat(all_others_list)
     all_others_df.to_excel(path+'/all_others.xls',index=None)
 
+def check(label):
+    # name2 = '{}_{}'.format(name, label)
+    # columns = ['text', 'category', 'label', 'IDClassifier', 'IfKnowDebtor', 'ConfirmLoan', 'WillingToPay', 'CutDebt',
+    #            'Installment', 'comment', 'uncertain', 'name', 'criterion']
+    read_path = '../../MLModel/data/others/labels/{}/mock_up_data_new.csv'.format(label)
+    df = pd.read_csv(read_path)
+    print('*******\n',df['label'].value_counts(),'*******\n',df['CutDebt'].value_counts(),'*******\n',df['IDClassifier'].value_counts(),'*******\n',df['IfKnowDebtor'].value_counts(),'*******\n',df['Installment'].value_counts(),'*******\n',
+    df['ConfirmLoan'].value_counts(),'*******\n',df['WillingToPay'].value_counts())#df['text'].value_counts()
+
+
 if __name__=="__main__":
     # label=102
     # name='确认数额'
@@ -87,6 +97,11 @@ if __name__=="__main__":
     # path='/Users/ozintel/Downloads/Tsl_work_file/Collect_project_file/chatbot/cmc/数据清洗2018_7_31/cleaned_data_2018_8_2/all_others/raw_data'
     # data_counts(path)
 
-    path='/Users/ozintel/Downloads/Tsl_work_file/Collect_project_file/chatbot/cmc/数据清洗2018_7_31/cleaned_data_2018_8_2/all_others/submit_data'
-    all_other_merge(path)
+    # path='/Users/ozintel/Downloads/Tsl_work_file/Collect_project_file/chatbot/cmc/数据清洗2018_7_31/cleaned_data_2018_8_2/all_others/submit_data'
+    # all_other_merge(path)
 
+    type=[(102,'确认数额'),(103,'请求重复'),(104,'请求等下打来'),(105,'其它通讯方式'),(106,'模糊确认'),(107,'回问身份'),(108,'还款方式'),(109,'故意岔开话题'),(110,'请求更新金额'),(111,'请求等待'),(112,'已经还清')]
+    for each in type:
+        label = each[0]
+        # name = each[1]
+        check(label)

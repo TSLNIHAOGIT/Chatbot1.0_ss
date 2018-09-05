@@ -1,0 +1,6 @@
+split_text,classifier,label
+认不倒哦,IDClassifier,1
+不晓得,IDClassifier,1
+不晓得你说的是哪一个,IDClassifier,1
+怎么啦，有事情吗,IDClassifier,0
+我在,IDClassifier,0

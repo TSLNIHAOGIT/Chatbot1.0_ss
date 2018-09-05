@@ -1,0 +1,4 @@
+split_text,classifier,label
+你说再多也是没有用的，要不你帮我还吧,WillingToPay,1
+我都说还了呢，你还问,WillingToPay,0
+不想还了，爱怎么滴怎么滴,WillingToPay,1

@@ -1,0 +1,4 @@
+text,category,label,CutDebt,IDClassifier,IfKnowDebtor,Installment,ConfirmLoan,WillingToPay
+已经还啦,已经还清,112,1,1,1,1,0,1
+已经还啦,已经还清,112,1,1,1,1,1,0
+不是还你们了吗,已经还清,112,1,1,1,1,1,0

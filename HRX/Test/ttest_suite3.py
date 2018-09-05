@@ -2,6 +2,8 @@ import unittest
 from HRX.Test.chatbot_ttest_model import  chatBotModel
 from HTMLTestRunner import HTMLTestRunner
 
+
+
 if __name__ == '__main__':
     suite = unittest.TestSuite()
     suite.addTests(unittest.TestLoader().loadTestsFromTestCase(chatBotModel))

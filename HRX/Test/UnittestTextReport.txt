@@ -1,6 +1,1187 @@
-test_ConfirmLoan (HRX.Test.chatbot_ttest_model.chatBotModel) ... test_CutDebt (HRX.Test.chatbot_ttest_model.chatBotModel) ... test_IDClassifier (HRX.Test.chatbot_ttest_model.chatBotModel) ... test_IfKnowDebtor (HRX.Test.chatbot_ttest_model.chatBotModel) ... test_Installment (HRX.Test.chatbot_ttest_model.chatBotModel) ... test_WillingToPay (HRX.Test.chatbot_ttest_model.chatBotModel) ... 
+test_ConfirmLoan (HRX.Test.chatbot_ttest_model.chatBotModel) ... test_CutDebt (HRX.Test.chatbot_ttest_model.chatBotModel) ... ok
+test_IDClassifier (HRX.Test.chatbot_ttest_model.chatBotModel) ... ok
+test_IfKnowDebtor (HRX.Test.chatbot_ttest_model.chatBotModel) ... ok
+test_Installment (HRX.Test.chatbot_ttest_model.chatBotModel) ... ok
+test_WillingToPay (HRX.Test.chatbot_ttest_model.chatBotModel) ... ok
+
 ======================================================================
-FAIL: test_ConfirmLoan (HRX.Test.chatbot_ttest_model.chatBotModel) (index=36)
+FAIL: test_ConfirmLoan (HRX.Test.chatbot_ttest_model.chatBotModel) (index=3)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/ozintel/Downloads/Tsl_python_progect/local_ml/Chatbot_project/Chatbot1.0/HRX/Test/chatbot_ttest_model.py", line 78, in test_ConfirmLoan
+    self.assertEqual(each[1], self.model_ConfirmLoan.classify(each[2])['label'],msg='debtor_answer:'+each[2])
+AssertionError: 0.0 != 10 : debtor_answer:2个月利息加滞纳金都有3千了吗？
+
+======================================================================
+FAIL: test_ConfirmLoan (HRX.Test.chatbot_ttest_model.chatBotModel) (index=4)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/ozintel/Downloads/Tsl_python_progect/local_ml/Chatbot_project/Chatbot1.0/HRX/Test/chatbot_ttest_model.py", line 78, in test_ConfirmLoan
+    self.assertEqual(each[1], self.model_ConfirmLoan.classify(each[2])['label'],msg='debtor_answer:'+each[2])
+AssertionError: 0.0 != 103 : debtor_answer: 你说什么啊？我不知道
+
+======================================================================
+FAIL: test_ConfirmLoan (HRX.Test.chatbot_ttest_model.chatBotModel) (index=7)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/ozintel/Downloads/Tsl_python_progect/local_ml/Chatbot_project/Chatbot1.0/HRX/Test/chatbot_ttest_model.py", line 78, in test_ConfirmLoan
+    self.assertEqual(each[1], self.model_ConfirmLoan.classify(each[2])['label'],msg='debtor_answer:'+each[2])
+AssertionError: 0.0 != 10 : debtor_answer:一直在天上飞，今天才下飞机
+
+======================================================================
+FAIL: test_ConfirmLoan (HRX.Test.chatbot_ttest_model.chatBotModel) (index=11)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/ozintel/Downloads/Tsl_python_progect/local_ml/Chatbot_project/Chatbot1.0/HRX/Test/chatbot_ttest_model.py", line 78, in test_ConfirmLoan
+    self.assertEqual(each[1], self.model_ConfirmLoan.classify(each[2])['label'],msg='debtor_answer:'+each[2])
+AssertionError: 0.0 != 10 : debtor_answer:上个月手机掉海里了，今天才补了卡，不晓得逾期了喃，没接到通知都嘛。
+
+======================================================================
+FAIL: test_ConfirmLoan (HRX.Test.chatbot_ttest_model.chatBotModel) (index=16)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/ozintel/Downloads/Tsl_python_progect/local_ml/Chatbot_project/Chatbot1.0/HRX/Test/chatbot_ttest_model.py", line 78, in test_ConfirmLoan
+    self.assertEqual(each[1], self.model_ConfirmLoan.classify(each[2])['label'],msg='debtor_answer:'+each[2])
+AssertionError: 0.0 != 109 : debtor_answer:不太清楚
+
+======================================================================
+FAIL: test_ConfirmLoan (HRX.Test.chatbot_ttest_model.chatBotModel) (index=31)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/ozintel/Downloads/Tsl_python_progect/local_ml/Chatbot_project/Chatbot1.0/HRX/Test/chatbot_ttest_model.py", line 78, in test_ConfirmLoan
+    self.assertEqual(each[1], self.model_ConfirmLoan.classify(each[2])['label'],msg='debtor_answer:'+each[2])
+AssertionError: 0.0 != 109 : debtor_answer:不用你们催
+
+======================================================================
+FAIL: test_ConfirmLoan (HRX.Test.chatbot_ttest_model.chatBotModel) (index=42)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/ozintel/Downloads/Tsl_python_progect/local_ml/Chatbot_project/Chatbot1.0/HRX/Test/chatbot_ttest_model.py", line 78, in test_ConfirmLoan
+    self.assertEqual(each[1], self.model_ConfirmLoan.classify(each[2])['label'],msg='debtor_answer:'+each[2])
+AssertionError: 0.0 != 109 : debtor_answer:之前联系不上你们啊
+
+======================================================================
+FAIL: test_ConfirmLoan (HRX.Test.chatbot_ttest_model.chatBotModel) (index=51)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/ozintel/Downloads/Tsl_python_progect/local_ml/Chatbot_project/Chatbot1.0/HRX/Test/chatbot_ttest_model.py", line 78, in test_ConfirmLoan
+    self.assertEqual(each[1], self.model_ConfirmLoan.classify(each[2])['label'],msg='debtor_answer:'+each[2])
+AssertionError: 0.0 != 109 : debtor_answer:了解
+
+======================================================================
+FAIL: test_ConfirmLoan (HRX.Test.chatbot_ttest_model.chatBotModel) (index=56)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/ozintel/Downloads/Tsl_python_progect/local_ml/Chatbot_project/Chatbot1.0/HRX/Test/chatbot_ttest_model.py", line 78, in test_ConfirmLoan
+    self.assertEqual(each[1], self.model_ConfirmLoan.classify(each[2])['label'],msg='debtor_answer:'+each[2])
+AssertionError: 0.0 != 10 : debtor_answer:今天几号了
+
+======================================================================
+FAIL: test_ConfirmLoan (HRX.Test.chatbot_ttest_model.chatBotModel) (index=57)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/ozintel/Downloads/Tsl_python_progect/local_ml/Chatbot_project/Chatbot1.0/HRX/Test/chatbot_ttest_model.py", line 78, in test_ConfirmLoan
+    self.assertEqual(each[1], self.model_ConfirmLoan.classify(each[2])['label'],msg='debtor_answer:'+each[2])
+AssertionError: 0.0 != 10 : debtor_answer:今天天气好晴朗，处处好风光。嗯嗯恩,本打算还的，结果钱包被人抢了。
+
+======================================================================
+FAIL: test_ConfirmLoan (HRX.Test.chatbot_ttest_model.chatBotModel) (index=58)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/ozintel/Downloads/Tsl_python_progect/local_ml/Chatbot_project/Chatbot1.0/HRX/Test/chatbot_ttest_model.py", line 78, in test_ConfirmLoan
+    self.assertEqual(each[1], self.model_ConfirmLoan.classify(each[2])['label'],msg='debtor_answer:'+each[2])
+AssertionError: 0.0 != 10 : debtor_answer:今天天气好晴朗，处处好风光。方案给我发到微信嘛
+
+======================================================================
+FAIL: test_ConfirmLoan (HRX.Test.chatbot_ttest_model.chatBotModel) (index=59)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/ozintel/Downloads/Tsl_python_progect/local_ml/Chatbot_project/Chatbot1.0/HRX/Test/chatbot_ttest_model.py", line 78, in test_ConfirmLoan
+    self.assertEqual(each[1], self.model_ConfirmLoan.classify(each[2])['label'],msg='debtor_answer:'+each[2])
+AssertionError: 0.0 != 10 : debtor_answer:今天天气好晴朗，处处好风光。等我出差回来再说
+
+======================================================================
+FAIL: test_ConfirmLoan (HRX.Test.chatbot_ttest_model.chatBotModel) (index=60)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/ozintel/Downloads/Tsl_python_progect/local_ml/Chatbot_project/Chatbot1.0/HRX/Test/chatbot_ttest_model.py", line 78, in test_ConfirmLoan
+    self.assertEqual(each[1], self.model_ConfirmLoan.classify(each[2])['label'],msg='debtor_answer:'+each[2])
+AssertionError: 0.0 != 10 : debtor_answer:今天天气很好。呀,我凭本事借的钱，为什么要还 。
+
+======================================================================
+FAIL: test_ConfirmLoan (HRX.Test.chatbot_ttest_model.chatBotModel) (index=61)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/ozintel/Downloads/Tsl_python_progect/local_ml/Chatbot_project/Chatbot1.0/HRX/Test/chatbot_ttest_model.py", line 78, in test_ConfirmLoan
+    self.assertEqual(each[1], self.model_ConfirmLoan.classify(each[2])['label'],msg='debtor_answer:'+each[2])
+AssertionError: 0.0 != 10 : debtor_answer:今天天气很好。行，知道了,我凭本事借的钱，为什么要还 。
+
+======================================================================
+FAIL: test_ConfirmLoan (HRX.Test.chatbot_ttest_model.chatBotModel) (index=62)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/ozintel/Downloads/Tsl_python_progect/local_ml/Chatbot_project/Chatbot1.0/HRX/Test/chatbot_ttest_model.py", line 78, in test_ConfirmLoan
+    self.assertEqual(each[1], self.model_ConfirmLoan.classify(each[2])['label'],msg='debtor_answer:'+each[2])
+AssertionError: 0.0 != 10 : debtor_answer:今天星期几
+
+======================================================================
+FAIL: test_ConfirmLoan (HRX.Test.chatbot_ttest_model.chatBotModel) (index=67)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/ozintel/Downloads/Tsl_python_progect/local_ml/Chatbot_project/Chatbot1.0/HRX/Test/chatbot_ttest_model.py", line 78, in test_ConfirmLoan
+    self.assertEqual(each[1], self.model_ConfirmLoan.classify(each[2])['label'],msg='debtor_answer:'+each[2])
+AssertionError: 0.0 != 104 : debtor_answer:从楼梯上摔下来了，在医院呢
+
+======================================================================
+FAIL: test_ConfirmLoan (HRX.Test.chatbot_ttest_model.chatBotModel) (index=71)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/ozintel/Downloads/Tsl_python_progect/local_ml/Chatbot_project/Chatbot1.0/HRX/Test/chatbot_ttest_model.py", line 78, in test_ConfirmLoan
+    self.assertEqual(each[1], self.model_ConfirmLoan.classify(each[2])['label'],msg='debtor_answer:'+each[2])
+AssertionError: 0.0 != 109 : debtor_answer:你不清楚你们是高利贷么？还敢给我打电话
+
+======================================================================
+FAIL: test_ConfirmLoan (HRX.Test.chatbot_ttest_model.chatBotModel) (index=72)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/ozintel/Downloads/Tsl_python_progect/local_ml/Chatbot_project/Chatbot1.0/HRX/Test/chatbot_ttest_model.py", line 78, in test_ConfirmLoan
+    self.assertEqual(each[1], self.model_ConfirmLoan.classify(each[2])['label'],msg='debtor_answer:'+each[2])
+AssertionError: 0.0 != 109 : debtor_answer:你个骗子
+
+======================================================================
+FAIL: test_ConfirmLoan (HRX.Test.chatbot_ttest_model.chatBotModel) (index=81)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/ozintel/Downloads/Tsl_python_progect/local_ml/Chatbot_project/Chatbot1.0/HRX/Test/chatbot_ttest_model.py", line 78, in test_ConfirmLoan
+    self.assertEqual(each[1], self.model_ConfirmLoan.classify(each[2])['label'],msg='debtor_answer:'+each[2])
+AssertionError: 0.0 != 109 : debtor_answer:你们别再打了，我有钱会你们的
+
+======================================================================
+FAIL: test_ConfirmLoan (HRX.Test.chatbot_ttest_model.chatBotModel) (index=89)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/ozintel/Downloads/Tsl_python_progect/local_ml/Chatbot_project/Chatbot1.0/HRX/Test/chatbot_ttest_model.py", line 78, in test_ConfirmLoan
+    self.assertEqual(each[1], self.model_ConfirmLoan.classify(each[2])['label'],msg='debtor_answer:'+each[2])
+AssertionError: 0.0 != 109 : debtor_answer:你们报警吧
+
+======================================================================
+FAIL: test_ConfirmLoan (HRX.Test.chatbot_ttest_model.chatBotModel) (index=109)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/ozintel/Downloads/Tsl_python_progect/local_ml/Chatbot_project/Chatbot1.0/HRX/Test/chatbot_ttest_model.py", line 78, in test_ConfirmLoan
+    self.assertEqual(each[1], self.model_ConfirmLoan.classify(each[2])['label'],msg='debtor_answer:'+each[2])
+AssertionError: 0.0 != 108 : debtor_answer:你们通过什么方式知道的
+
+======================================================================
+FAIL: test_ConfirmLoan (HRX.Test.chatbot_ttest_model.chatBotModel) (index=112)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/ozintel/Downloads/Tsl_python_progect/local_ml/Chatbot_project/Chatbot1.0/HRX/Test/chatbot_ttest_model.py", line 78, in test_ConfirmLoan
+    self.assertEqual(each[1], self.model_ConfirmLoan.classify(each[2])['label'],msg='debtor_answer:'+each[2])
+AssertionError: 0.0 != 107 : debtor_answer:你先说你是哪个
+
+======================================================================
+FAIL: test_ConfirmLoan (HRX.Test.chatbot_ttest_model.chatBotModel) (index=116)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/ozintel/Downloads/Tsl_python_progect/local_ml/Chatbot_project/Chatbot1.0/HRX/Test/chatbot_ttest_model.py", line 78, in test_ConfirmLoan
+    self.assertEqual(each[1], self.model_ConfirmLoan.classify(each[2])['label'],msg='debtor_answer:'+each[2])
+AssertionError: 0.0 != 109 : debtor_answer:你去报警啊
+
+======================================================================
+FAIL: test_ConfirmLoan (HRX.Test.chatbot_ttest_model.chatBotModel) (index=125)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/ozintel/Downloads/Tsl_python_progect/local_ml/Chatbot_project/Chatbot1.0/HRX/Test/chatbot_ttest_model.py", line 78, in test_ConfirmLoan
+    self.assertEqual(each[1], self.model_ConfirmLoan.classify(each[2])['label'],msg='debtor_answer:'+each[2])
+AssertionError: 0.0 != 108 : debtor_answer:你帮我处理
+
+======================================================================
+FAIL: test_ConfirmLoan (HRX.Test.chatbot_ttest_model.chatBotModel) (index=126)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/ozintel/Downloads/Tsl_python_progect/local_ml/Chatbot_project/Chatbot1.0/HRX/Test/chatbot_ttest_model.py", line 78, in test_ConfirmLoan
+    self.assertEqual(each[1], self.model_ConfirmLoan.classify(each[2])['label'],msg='debtor_answer:'+each[2])
+AssertionError: 0.0 != 109 : debtor_answer:你很闲是吧？
+
+======================================================================
+FAIL: test_ConfirmLoan (HRX.Test.chatbot_ttest_model.chatBotModel) (index=127)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/ozintel/Downloads/Tsl_python_progect/local_ml/Chatbot_project/Chatbot1.0/HRX/Test/chatbot_ttest_model.py", line 78, in test_ConfirmLoan
+    self.assertEqual(each[1], self.model_ConfirmLoan.classify(each[2])['label'],msg='debtor_answer:'+each[2])
+AssertionError: 0.0 != 103 : debtor_answer:你急啥啊
+
+======================================================================
+FAIL: test_ConfirmLoan (HRX.Test.chatbot_ttest_model.chatBotModel) (index=129)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/ozintel/Downloads/Tsl_python_progect/local_ml/Chatbot_project/Chatbot1.0/HRX/Test/chatbot_ttest_model.py", line 78, in test_ConfirmLoan
+    self.assertEqual(each[1], self.model_ConfirmLoan.classify(each[2])['label'],msg='debtor_answer:'+each[2])
+AssertionError: 0.0 != 109 : debtor_answer:你打死我啊
+
+======================================================================
+FAIL: test_ConfirmLoan (HRX.Test.chatbot_ttest_model.chatBotModel) (index=131)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/ozintel/Downloads/Tsl_python_progect/local_ml/Chatbot_project/Chatbot1.0/HRX/Test/chatbot_ttest_model.py", line 78, in test_ConfirmLoan
+    self.assertEqual(each[1], self.model_ConfirmLoan.classify(each[2])['label'],msg='debtor_answer:'+each[2])
+AssertionError: 0.0 != 109 : debtor_answer:你放高利贷的哇，我去揭发你
+
+======================================================================
+FAIL: test_ConfirmLoan (HRX.Test.chatbot_ttest_model.chatBotModel) (index=132)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/ozintel/Downloads/Tsl_python_progect/local_ml/Chatbot_project/Chatbot1.0/HRX/Test/chatbot_ttest_model.py", line 78, in test_ConfirmLoan
+    self.assertEqual(each[1], self.model_ConfirmLoan.classify(each[2])['label'],msg='debtor_answer:'+each[2])
+AssertionError: 0.0 != 109 : debtor_answer:你是哪位？为什么打电话给我？不知道我现在正在等一个重要的电话吗？你们可能让我损失几百万的生意，知道吗？这个损失你负责的了吗？
+
+======================================================================
+FAIL: test_ConfirmLoan (HRX.Test.chatbot_ttest_model.chatBotModel) (index=136)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/ozintel/Downloads/Tsl_python_progect/local_ml/Chatbot_project/Chatbot1.0/HRX/Test/chatbot_ttest_model.py", line 78, in test_ConfirmLoan
+    self.assertEqual(each[1], self.model_ConfirmLoan.classify(each[2])['label'],msg='debtor_answer:'+each[2])
+AssertionError: 0.0 != 109 : debtor_answer:你猜呢。嗯嗯，再说吧
+
+======================================================================
+FAIL: test_ConfirmLoan (HRX.Test.chatbot_ttest_model.chatBotModel) (index=142)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/ozintel/Downloads/Tsl_python_progect/local_ml/Chatbot_project/Chatbot1.0/HRX/Test/chatbot_ttest_model.py", line 78, in test_ConfirmLoan
+    self.assertEqual(each[1], self.model_ConfirmLoan.classify(each[2])['label'],msg='debtor_answer:'+each[2])
+AssertionError: 0.0 != 1 : debtor_answer:你管我是不是, 方案给我发到微信嘛, 这个是我朋友用我的身份证办的，和我没有关系。
+
+======================================================================
+FAIL: test_ConfirmLoan (HRX.Test.chatbot_ttest_model.chatBotModel) (index=148)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/ozintel/Downloads/Tsl_python_progect/local_ml/Chatbot_project/Chatbot1.0/HRX/Test/chatbot_ttest_model.py", line 78, in test_ConfirmLoan
+    self.assertEqual(each[1], self.model_ConfirmLoan.classify(each[2])['label'],msg='debtor_answer:'+each[2])
+AssertionError: 0.0 != 1 : debtor_answer:你管求得我的。能不能换个长点儿的还款周期呢,这个是我朋友用我的身份证办的，和我没有关系。
+
+======================================================================
+FAIL: test_ConfirmLoan (HRX.Test.chatbot_ttest_model.chatBotModel) (index=151)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/ozintel/Downloads/Tsl_python_progect/local_ml/Chatbot_project/Chatbot1.0/HRX/Test/chatbot_ttest_model.py", line 78, in test_ConfirmLoan
+    self.assertEqual(each[1], self.model_ConfirmLoan.classify(each[2])['label'],msg='debtor_answer:'+each[2])
+AssertionError: 0.0 != 109 : debtor_answer:你说的是2万越南盾哇？
+
+======================================================================
+FAIL: test_ConfirmLoan (HRX.Test.chatbot_ttest_model.chatBotModel) (index=155)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/ozintel/Downloads/Tsl_python_progect/local_ml/Chatbot_project/Chatbot1.0/HRX/Test/chatbot_ttest_model.py", line 78, in test_ConfirmLoan
+    self.assertEqual(each[1], self.model_ConfirmLoan.classify(each[2])['label'],msg='debtor_answer:'+each[2])
+AssertionError: 0.0 != 109 : debtor_answer:你问我，我问谁呢
+
+======================================================================
+FAIL: test_ConfirmLoan (HRX.Test.chatbot_ttest_model.chatBotModel) (index=178)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/ozintel/Downloads/Tsl_python_progect/local_ml/Chatbot_project/Chatbot1.0/HRX/Test/chatbot_ttest_model.py", line 78, in test_ConfirmLoan
+    self.assertEqual(each[1], self.model_ConfirmLoan.classify(each[2])['label'],msg='debtor_answer:'+each[2])
+AssertionError: 0.0 != 108 : debtor_answer:全套在咋们大A股中，怎么还？
+
+======================================================================
+FAIL: test_ConfirmLoan (HRX.Test.chatbot_ttest_model.chatBotModel) (index=218)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/ozintel/Downloads/Tsl_python_progect/local_ml/Chatbot_project/Chatbot1.0/HRX/Test/chatbot_ttest_model.py", line 78, in test_ConfirmLoan
+    self.assertEqual(each[1], self.model_ConfirmLoan.classify(each[2])['label'],msg='debtor_answer:'+each[2])
+AssertionError: 0.0 != 109 : debtor_answer:别再打来了
+
+======================================================================
+FAIL: test_ConfirmLoan (HRX.Test.chatbot_ttest_model.chatBotModel) (index=219)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/ozintel/Downloads/Tsl_python_progect/local_ml/Chatbot_project/Chatbot1.0/HRX/Test/chatbot_ttest_model.py", line 78, in test_ConfirmLoan
+    self.assertEqual(each[1], self.model_ConfirmLoan.classify(each[2])['label'],msg='debtor_answer:'+each[2])
+AssertionError: 0.0 != 109 : debtor_answer:别有事没事打电话
+
+======================================================================
+FAIL: test_ConfirmLoan (HRX.Test.chatbot_ttest_model.chatBotModel) (index=220)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/ozintel/Downloads/Tsl_python_progect/local_ml/Chatbot_project/Chatbot1.0/HRX/Test/chatbot_ttest_model.py", line 78, in test_ConfirmLoan
+    self.assertEqual(each[1], self.model_ConfirmLoan.classify(each[2])['label'],msg='debtor_answer:'+each[2])
+AssertionError: 0.0 != 109 : debtor_answer:别来烦我！！
+
+======================================================================
+FAIL: test_ConfirmLoan (HRX.Test.chatbot_ttest_model.chatBotModel) (index=221)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/ozintel/Downloads/Tsl_python_progect/local_ml/Chatbot_project/Chatbot1.0/HRX/Test/chatbot_ttest_model.py", line 78, in test_ConfirmLoan
+    self.assertEqual(each[1], self.model_ConfirmLoan.classify(each[2])['label'],msg='debtor_answer:'+each[2])
+AssertionError: 0.0 != 109 : debtor_answer:别老打电话了
+
+======================================================================
+FAIL: test_ConfirmLoan (HRX.Test.chatbot_ttest_model.chatBotModel) (index=222)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/ozintel/Downloads/Tsl_python_progect/local_ml/Chatbot_project/Chatbot1.0/HRX/Test/chatbot_ttest_model.py", line 78, in test_ConfirmLoan
+    self.assertEqual(each[1], self.model_ConfirmLoan.classify(each[2])['label'],msg='debtor_answer:'+each[2])
+AssertionError: 0.0 != 104 : debtor_answer:别问我
+
+======================================================================
+FAIL: test_ConfirmLoan (HRX.Test.chatbot_ttest_model.chatBotModel) (index=236)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/ozintel/Downloads/Tsl_python_progect/local_ml/Chatbot_project/Chatbot1.0/HRX/Test/chatbot_ttest_model.py", line 78, in test_ConfirmLoan
+    self.assertEqual(each[1], self.model_ConfirmLoan.classify(each[2])['label'],msg='debtor_answer:'+each[2])
+AssertionError: 0.0 != 103 : debtor_answer:单位效益不好
+
+======================================================================
+FAIL: test_ConfirmLoan (HRX.Test.chatbot_ttest_model.chatBotModel) (index=243)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/ozintel/Downloads/Tsl_python_progect/local_ml/Chatbot_project/Chatbot1.0/HRX/Test/chatbot_ttest_model.py", line 78, in test_ConfirmLoan
+    self.assertEqual(each[1], self.model_ConfirmLoan.classify(each[2])['label'],msg='debtor_answer:'+each[2])
+AssertionError: 0.0 != 10 : debtor_answer:可以延期不，我今天不还
+
+======================================================================
+FAIL: test_ConfirmLoan (HRX.Test.chatbot_ttest_model.chatBotModel) (index=246)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/ozintel/Downloads/Tsl_python_progect/local_ml/Chatbot_project/Chatbot1.0/HRX/Test/chatbot_ttest_model.py", line 78, in test_ConfirmLoan
+    self.assertEqual(each[1], self.model_ConfirmLoan.classify(each[2])['label'],msg='debtor_answer:'+each[2])
+AssertionError: 0.0 != 109 : debtor_answer:后天
+
+======================================================================
+FAIL: test_ConfirmLoan (HRX.Test.chatbot_ttest_model.chatBotModel) (index=247)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/ozintel/Downloads/Tsl_python_progect/local_ml/Chatbot_project/Chatbot1.0/HRX/Test/chatbot_ttest_model.py", line 78, in test_ConfirmLoan
+    self.assertEqual(each[1], self.model_ConfirmLoan.classify(each[2])['label'],msg='debtor_answer:'+each[2])
+AssertionError: 0.0 != 104 : debtor_answer:后年再说
+
+======================================================================
+FAIL: test_ConfirmLoan (HRX.Test.chatbot_ttest_model.chatBotModel) (index=250)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/ozintel/Downloads/Tsl_python_progect/local_ml/Chatbot_project/Chatbot1.0/HRX/Test/chatbot_ttest_model.py", line 78, in test_ConfirmLoan
+    self.assertEqual(each[1], self.model_ConfirmLoan.classify(each[2])['label'],msg='debtor_answer:'+each[2])
+AssertionError: 0.0 != 1 : debtor_answer:和我没关系，朋友借的
+
+======================================================================
+FAIL: test_ConfirmLoan (HRX.Test.chatbot_ttest_model.chatBotModel) (index=251)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/ozintel/Downloads/Tsl_python_progect/local_ml/Chatbot_project/Chatbot1.0/HRX/Test/chatbot_ttest_model.py", line 78, in test_ConfirmLoan
+    self.assertEqual(each[1], self.model_ConfirmLoan.classify(each[2])['label'],msg='debtor_answer:'+each[2])
+AssertionError: 0.0 != 107 : debtor_answer:哇哈哈哈你是谁
+
+======================================================================
+FAIL: test_ConfirmLoan (HRX.Test.chatbot_ttest_model.chatBotModel) (index=281)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/ozintel/Downloads/Tsl_python_progect/local_ml/Chatbot_project/Chatbot1.0/HRX/Test/chatbot_ttest_model.py", line 78, in test_ConfirmLoan
+    self.assertEqual(each[1], self.model_ConfirmLoan.classify(each[2])['label'],msg='debtor_answer:'+each[2])
+AssertionError: 0.0 != 103 : debtor_answer:啥子情况不晓得
+
+======================================================================
+FAIL: test_ConfirmLoan (HRX.Test.chatbot_ttest_model.chatBotModel) (index=282)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/ozintel/Downloads/Tsl_python_progect/local_ml/Chatbot_project/Chatbot1.0/HRX/Test/chatbot_ttest_model.py", line 78, in test_ConfirmLoan
+    self.assertEqual(each[1], self.model_ConfirmLoan.classify(each[2])['label'],msg='debtor_answer:'+each[2])
+AssertionError: 0.0 != 109 : debtor_answer:啥？有这事？看我这个记性。
+
+======================================================================
+FAIL: test_ConfirmLoan (HRX.Test.chatbot_ttest_model.chatBotModel) (index=283)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/ozintel/Downloads/Tsl_python_progect/local_ml/Chatbot_project/Chatbot1.0/HRX/Test/chatbot_ttest_model.py", line 78, in test_ConfirmLoan
+    self.assertEqual(each[1], self.model_ConfirmLoan.classify(each[2])['label'],msg='debtor_answer:'+each[2])
+AssertionError: 0.0 != 109 : debtor_answer:嗯呢
+
+======================================================================
+FAIL: test_ConfirmLoan (HRX.Test.chatbot_ttest_model.chatBotModel) (index=290)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/ozintel/Downloads/Tsl_python_progect/local_ml/Chatbot_project/Chatbot1.0/HRX/Test/chatbot_ttest_model.py", line 78, in test_ConfirmLoan
+    self.assertEqual(each[1], self.model_ConfirmLoan.classify(each[2])['label'],msg='debtor_answer:'+each[2])
+AssertionError: 0.0 != 109 : debtor_answer:在卖房子，一直没卖出去
+
+======================================================================
+FAIL: test_ConfirmLoan (HRX.Test.chatbot_ttest_model.chatBotModel) (index=313)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/ozintel/Downloads/Tsl_python_progect/local_ml/Chatbot_project/Chatbot1.0/HRX/Test/chatbot_ttest_model.py", line 78, in test_ConfirmLoan
+    self.assertEqual(each[1], self.model_ConfirmLoan.classify(each[2])['label'],msg='debtor_answer:'+each[2])
+AssertionError: 0.0 != 109 : debtor_answer:孩子不能不吃啊
+
+======================================================================
+FAIL: test_ConfirmLoan (HRX.Test.chatbot_ttest_model.chatBotModel) (index=358)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/ozintel/Downloads/Tsl_python_progect/local_ml/Chatbot_project/Chatbot1.0/HRX/Test/chatbot_ttest_model.py", line 78, in test_ConfirmLoan
+    self.assertEqual(each[1], self.model_ConfirmLoan.classify(each[2])['label'],msg='debtor_answer:'+each[2])
+AssertionError: 0.0 != 109 : debtor_answer:宽容宽容哈～
+
+======================================================================
+FAIL: test_ConfirmLoan (HRX.Test.chatbot_ttest_model.chatBotModel) (index=387)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/ozintel/Downloads/Tsl_python_progect/local_ml/Chatbot_project/Chatbot1.0/HRX/Test/chatbot_ttest_model.py", line 78, in test_ConfirmLoan
+    self.assertEqual(each[1], self.model_ConfirmLoan.classify(each[2])['label'],msg='debtor_answer:'+each[2])
+AssertionError: 0.0 != 109 : debtor_answer:微信有问题
+
+======================================================================
+FAIL: test_ConfirmLoan (HRX.Test.chatbot_ttest_model.chatBotModel) (index=402)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/ozintel/Downloads/Tsl_python_progect/local_ml/Chatbot_project/Chatbot1.0/HRX/Test/chatbot_ttest_model.py", line 78, in test_ConfirmLoan
+    self.assertEqual(each[1], self.model_ConfirmLoan.classify(each[2])['label'],msg='debtor_answer:'+each[2])
+AssertionError: 0.0 != 10 : debtor_answer:怎么都2个月了？
+
+======================================================================
+FAIL: test_ConfirmLoan (HRX.Test.chatbot_ttest_model.chatBotModel) (index=403)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/ozintel/Downloads/Tsl_python_progect/local_ml/Chatbot_project/Chatbot1.0/HRX/Test/chatbot_ttest_model.py", line 78, in test_ConfirmLoan
+    self.assertEqual(each[1], self.model_ConfirmLoan.classify(each[2])['label'],msg='debtor_answer:'+each[2])
+AssertionError: 0.0 != 109 : debtor_answer:想不起哦
+
+======================================================================
+FAIL: test_ConfirmLoan (HRX.Test.chatbot_ttest_model.chatBotModel) (index=423)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/ozintel/Downloads/Tsl_python_progect/local_ml/Chatbot_project/Chatbot1.0/HRX/Test/chatbot_ttest_model.py", line 78, in test_ConfirmLoan
+    self.assertEqual(each[1], self.model_ConfirmLoan.classify(each[2])['label'],msg='debtor_answer:'+each[2])
+AssertionError: 0.0 != 1 : debtor_answer:我不知道
+
+======================================================================
+FAIL: test_ConfirmLoan (HRX.Test.chatbot_ttest_model.chatBotModel) (index=426)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/ozintel/Downloads/Tsl_python_progect/local_ml/Chatbot_project/Chatbot1.0/HRX/Test/chatbot_ttest_model.py", line 78, in test_ConfirmLoan
+    self.assertEqual(each[1], self.model_ConfirmLoan.classify(each[2])['label'],msg='debtor_answer:'+each[2])
+AssertionError: 0.0 != 109 : debtor_answer:我不知道该说什么好
+
+======================================================================
+FAIL: test_ConfirmLoan (HRX.Test.chatbot_ttest_model.chatBotModel) (index=451)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/ozintel/Downloads/Tsl_python_progect/local_ml/Chatbot_project/Chatbot1.0/HRX/Test/chatbot_ttest_model.py", line 78, in test_ConfirmLoan
+    self.assertEqual(each[1], self.model_ConfirmLoan.classify(each[2])['label'],msg='debtor_answer:'+each[2])
+AssertionError: 0.0 != 10 : debtor_answer:我今天没借到钱
+
+======================================================================
+FAIL: test_ConfirmLoan (HRX.Test.chatbot_ttest_model.chatBotModel) (index=472)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/ozintel/Downloads/Tsl_python_progect/local_ml/Chatbot_project/Chatbot1.0/HRX/Test/chatbot_ttest_model.py", line 78, in test_ConfirmLoan
+    self.assertEqual(each[1], self.model_ConfirmLoan.classify(each[2])['label'],msg='debtor_answer:'+each[2])
+AssertionError: 0.0 != 10 : debtor_answer:我准备第3个月还啊
+
+======================================================================
+FAIL: test_ConfirmLoan (HRX.Test.chatbot_ttest_model.chatBotModel) (index=476)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/ozintel/Downloads/Tsl_python_progect/local_ml/Chatbot_project/Chatbot1.0/HRX/Test/chatbot_ttest_model.py", line 78, in test_ConfirmLoan
+    self.assertEqual(each[1], self.model_ConfirmLoan.classify(each[2])['label'],msg='debtor_answer:'+each[2])
+AssertionError: 0.0 != 10 : debtor_answer:我刚刚才找到工作，还没满一个月呢，没法工资啊
+
+======================================================================
+FAIL: test_ConfirmLoan (HRX.Test.chatbot_ttest_model.chatBotModel) (index=483)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/ozintel/Downloads/Tsl_python_progect/local_ml/Chatbot_project/Chatbot1.0/HRX/Test/chatbot_ttest_model.py", line 78, in test_ConfirmLoan
+    self.assertEqual(each[1], self.model_ConfirmLoan.classify(each[2])['label'],msg='debtor_answer:'+each[2])
+AssertionError: 0.0 != 1 : debtor_answer:我又没欠你钱
+
+======================================================================
+FAIL: test_ConfirmLoan (HRX.Test.chatbot_ttest_model.chatBotModel) (index=495)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/ozintel/Downloads/Tsl_python_progect/local_ml/Chatbot_project/Chatbot1.0/HRX/Test/chatbot_ttest_model.py", line 78, in test_ConfirmLoan
+    self.assertEqual(each[1], self.model_ConfirmLoan.classify(each[2])['label'],msg='debtor_answer:'+each[2])
+AssertionError: 0.0 != 104 : debtor_answer:我后面给你
+
+======================================================================
+FAIL: test_ConfirmLoan (HRX.Test.chatbot_ttest_model.chatBotModel) (index=504)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/ozintel/Downloads/Tsl_python_progect/local_ml/Chatbot_project/Chatbot1.0/HRX/Test/chatbot_ttest_model.py", line 78, in test_ConfirmLoan
+    self.assertEqual(each[1], self.model_ConfirmLoan.classify(each[2])['label'],msg='debtor_answer:'+each[2])
+AssertionError: 0.0 != 109 : debtor_answer:我多少还多少
+
+======================================================================
+FAIL: test_ConfirmLoan (HRX.Test.chatbot_ttest_model.chatBotModel) (index=549)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/ozintel/Downloads/Tsl_python_progect/local_ml/Chatbot_project/Chatbot1.0/HRX/Test/chatbot_ttest_model.py", line 78, in test_ConfirmLoan
+    self.assertEqual(each[1], self.model_ConfirmLoan.classify(each[2])['label'],msg='debtor_answer:'+each[2])
+AssertionError: 0.0 != 108 : debtor_answer:我尽量还，但是要给我时间啊，你说对吧
+
+======================================================================
+FAIL: test_ConfirmLoan (HRX.Test.chatbot_ttest_model.chatBotModel) (index=573)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/ozintel/Downloads/Tsl_python_progect/local_ml/Chatbot_project/Chatbot1.0/HRX/Test/chatbot_ttest_model.py", line 78, in test_ConfirmLoan
+    self.assertEqual(each[1], self.model_ConfirmLoan.classify(each[2])['label'],msg='debtor_answer:'+each[2])
+AssertionError: 0.0 != 107 : debtor_answer:我怕你是骗子哦
+
+======================================================================
+FAIL: test_ConfirmLoan (HRX.Test.chatbot_ttest_model.chatBotModel) (index=582)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/ozintel/Downloads/Tsl_python_progect/local_ml/Chatbot_project/Chatbot1.0/HRX/Test/chatbot_ttest_model.py", line 78, in test_ConfirmLoan
+    self.assertEqual(each[1], self.model_ConfirmLoan.classify(each[2])['label'],msg='debtor_answer:'+each[2])
+AssertionError: 0.0 != 109 : debtor_answer:我手机有问题
+
+======================================================================
+FAIL: test_ConfirmLoan (HRX.Test.chatbot_ttest_model.chatBotModel) (index=596)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/ozintel/Downloads/Tsl_python_progect/local_ml/Chatbot_project/Chatbot1.0/HRX/Test/chatbot_ttest_model.py", line 78, in test_ConfirmLoan
+    self.assertEqual(each[1], self.model_ConfirmLoan.classify(each[2])['label'],msg='debtor_answer:'+each[2])
+AssertionError: 0.0 != 109 : debtor_answer:我是不是可以当不知道
+
+======================================================================
+FAIL: test_ConfirmLoan (HRX.Test.chatbot_ttest_model.chatBotModel) (index=600)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/ozintel/Downloads/Tsl_python_progect/local_ml/Chatbot_project/Chatbot1.0/HRX/Test/chatbot_ttest_model.py", line 78, in test_ConfirmLoan
+    self.assertEqual(each[1], self.model_ConfirmLoan.classify(each[2])['label'],msg='debtor_answer:'+each[2])
+AssertionError: 0.0 != 109 : debtor_answer:我是月光族
+
+======================================================================
+FAIL: test_ConfirmLoan (HRX.Test.chatbot_ttest_model.chatBotModel) (index=607)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/ozintel/Downloads/Tsl_python_progect/local_ml/Chatbot_project/Chatbot1.0/HRX/Test/chatbot_ttest_model.py", line 78, in test_ConfirmLoan
+    self.assertEqual(each[1], self.model_ConfirmLoan.classify(each[2])['label'],msg='debtor_answer:'+each[2])
+AssertionError: 0.0 != 10 : debtor_answer:我朋友说今天钱还我
+
+======================================================================
+FAIL: test_ConfirmLoan (HRX.Test.chatbot_ttest_model.chatBotModel) (index=616)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/ozintel/Downloads/Tsl_python_progect/local_ml/Chatbot_project/Chatbot1.0/HRX/Test/chatbot_ttest_model.py", line 78, in test_ConfirmLoan
+    self.assertEqual(each[1], self.model_ConfirmLoan.classify(each[2])['label'],msg='debtor_answer:'+each[2])
+AssertionError: 0.0 != 104 : debtor_answer:我正在投资
+
+======================================================================
+FAIL: test_ConfirmLoan (HRX.Test.chatbot_ttest_model.chatBotModel) (index=617)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/ozintel/Downloads/Tsl_python_progect/local_ml/Chatbot_project/Chatbot1.0/HRX/Test/chatbot_ttest_model.py", line 78, in test_ConfirmLoan
+    self.assertEqual(each[1], self.model_ConfirmLoan.classify(each[2])['label'],msg='debtor_answer:'+each[2])
+AssertionError: 0.0 != 104 : debtor_answer:我正在筹钱，你催个毛线啊
+
+======================================================================
+FAIL: test_ConfirmLoan (HRX.Test.chatbot_ttest_model.chatBotModel) (index=619)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/ozintel/Downloads/Tsl_python_progect/local_ml/Chatbot_project/Chatbot1.0/HRX/Test/chatbot_ttest_model.py", line 78, in test_ConfirmLoan
+    self.assertEqual(each[1], self.model_ConfirmLoan.classify(each[2])['label'],msg='debtor_answer:'+each[2])
+AssertionError: 0.0 != 104 : debtor_answer:我母亲病了，等一段时间再说吧
+
+======================================================================
+FAIL: test_ConfirmLoan (HRX.Test.chatbot_ttest_model.chatBotModel) (index=642)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/ozintel/Downloads/Tsl_python_progect/local_ml/Chatbot_project/Chatbot1.0/HRX/Test/chatbot_ttest_model.py", line 78, in test_ConfirmLoan
+    self.assertEqual(each[1], self.model_ConfirmLoan.classify(each[2])['label'],msg='debtor_answer:'+each[2])
+AssertionError: 0.0 != 109 : debtor_answer:我狠你
+
+======================================================================
+FAIL: test_ConfirmLoan (HRX.Test.chatbot_ttest_model.chatBotModel) (index=644)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/ozintel/Downloads/Tsl_python_progect/local_ml/Chatbot_project/Chatbot1.0/HRX/Test/chatbot_ttest_model.py", line 78, in test_ConfirmLoan
+    self.assertEqual(each[1], self.model_ConfirmLoan.classify(each[2])['label'],msg='debtor_answer:'+each[2])
+AssertionError: 0.0 != 104 : debtor_answer:我现在借钱
+
+======================================================================
+FAIL: test_ConfirmLoan (HRX.Test.chatbot_ttest_model.chatBotModel) (index=649)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/ozintel/Downloads/Tsl_python_progect/local_ml/Chatbot_project/Chatbot1.0/HRX/Test/chatbot_ttest_model.py", line 78, in test_ConfirmLoan
+    self.assertEqual(each[1], self.model_ConfirmLoan.classify(each[2])['label'],msg='debtor_answer:'+each[2])
+AssertionError: 0.0 != 104 : debtor_answer:我现在忙得很。等我出差回来再说,不欠钱。
+
+======================================================================
+FAIL: test_ConfirmLoan (HRX.Test.chatbot_ttest_model.chatBotModel) (index=665)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/ozintel/Downloads/Tsl_python_progect/local_ml/Chatbot_project/Chatbot1.0/HRX/Test/chatbot_ttest_model.py", line 78, in test_ConfirmLoan
+    self.assertEqual(each[1], self.model_ConfirmLoan.classify(each[2])['label'],msg='debtor_answer:'+each[2])
+AssertionError: 0.0 != 1 : debtor_answer:我的身份证办的
+
+======================================================================
+FAIL: test_ConfirmLoan (HRX.Test.chatbot_ttest_model.chatBotModel) (index=680)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/ozintel/Downloads/Tsl_python_progect/local_ml/Chatbot_project/Chatbot1.0/HRX/Test/chatbot_ttest_model.py", line 78, in test_ConfirmLoan
+    self.assertEqual(each[1], self.model_ConfirmLoan.classify(each[2])['label'],msg='debtor_answer:'+each[2])
+AssertionError: 0.0 != 109 : debtor_answer:我知道了，再见
+
+======================================================================
+FAIL: test_ConfirmLoan (HRX.Test.chatbot_ttest_model.chatBotModel) (index=705)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/ozintel/Downloads/Tsl_python_progect/local_ml/Chatbot_project/Chatbot1.0/HRX/Test/chatbot_ttest_model.py", line 78, in test_ConfirmLoan
+    self.assertEqual(each[1], self.model_ConfirmLoan.classify(each[2])['label'],msg='debtor_answer:'+each[2])
+AssertionError: 0.0 != 109 : debtor_answer:我说真的，很讨厌这问题
+
+======================================================================
+FAIL: test_ConfirmLoan (HRX.Test.chatbot_ttest_model.chatBotModel) (index=737)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/ozintel/Downloads/Tsl_python_progect/local_ml/Chatbot_project/Chatbot1.0/HRX/Test/chatbot_ttest_model.py", line 78, in test_ConfirmLoan
+    self.assertEqual(each[1], self.model_ConfirmLoan.classify(each[2])['label'],msg='debtor_answer:'+each[2])
+AssertionError: 0.0 != 109 : debtor_answer:我难得管
+
+======================================================================
+FAIL: test_ConfirmLoan (HRX.Test.chatbot_ttest_model.chatBotModel) (index=739)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/ozintel/Downloads/Tsl_python_progect/local_ml/Chatbot_project/Chatbot1.0/HRX/Test/chatbot_ttest_model.py", line 78, in test_ConfirmLoan
+    self.assertEqual(each[1], self.model_ConfirmLoan.classify(each[2])['label'],msg='debtor_answer:'+each[2])
+AssertionError: 0.0 != 104 : debtor_answer:我马上下载看看
+
+======================================================================
+FAIL: test_ConfirmLoan (HRX.Test.chatbot_ttest_model.chatBotModel) (index=762)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/ozintel/Downloads/Tsl_python_progect/local_ml/Chatbot_project/Chatbot1.0/HRX/Test/chatbot_ttest_model.py", line 78, in test_ConfirmLoan
+    self.assertEqual(each[1], self.model_ConfirmLoan.classify(each[2])['label'],msg='debtor_answer:'+each[2])
+AssertionError: 0.0 != 109 : debtor_answer:挂了别再打了
+
+======================================================================
+FAIL: test_ConfirmLoan (HRX.Test.chatbot_ttest_model.chatBotModel) (index=769)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/ozintel/Downloads/Tsl_python_progect/local_ml/Chatbot_project/Chatbot1.0/HRX/Test/chatbot_ttest_model.py", line 78, in test_ConfirmLoan
+    self.assertEqual(each[1], self.model_ConfirmLoan.classify(each[2])['label'],msg='debtor_answer:'+each[2])
+AssertionError: 0.0 != 109 : debtor_answer:支付宝有问题
+
+======================================================================
+FAIL: test_ConfirmLoan (HRX.Test.chatbot_ttest_model.chatBotModel) (index=770)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/ozintel/Downloads/Tsl_python_progect/local_ml/Chatbot_project/Chatbot1.0/HRX/Test/chatbot_ttest_model.py", line 78, in test_ConfirmLoan
+    self.assertEqual(each[1], self.model_ConfirmLoan.classify(each[2])['label'],msg='debtor_answer:'+each[2])
+AssertionError: 0.0 != 10 : debtor_answer:明天朋友就换我钱了
+
+======================================================================
+FAIL: test_ConfirmLoan (HRX.Test.chatbot_ttest_model.chatBotModel) (index=771)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/ozintel/Downloads/Tsl_python_progect/local_ml/Chatbot_project/Chatbot1.0/HRX/Test/chatbot_ttest_model.py", line 78, in test_ConfirmLoan
+    self.assertEqual(each[1], self.model_ConfirmLoan.classify(each[2])['label'],msg='debtor_answer:'+each[2])
+AssertionError: 0.0 != 10 : debtor_answer:明年的今天再打电话来吧，我现在要去南极做义工，帮肥胖的企鹅减肥，未来的一年都不会用手机了。
+
+======================================================================
+FAIL: test_ConfirmLoan (HRX.Test.chatbot_ttest_model.chatBotModel) (index=776)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/ozintel/Downloads/Tsl_python_progect/local_ml/Chatbot_project/Chatbot1.0/HRX/Test/chatbot_ttest_model.py", line 78, in test_ConfirmLoan
+    self.assertEqual(each[1], self.model_ConfirmLoan.classify(each[2])['label'],msg='debtor_answer:'+each[2])
+AssertionError: 0.0 != 1 : debtor_answer:是不是和你有关系吗, 还有没有更低的方案, 不欠钱。
+
+======================================================================
+FAIL: test_ConfirmLoan (HRX.Test.chatbot_ttest_model.chatBotModel) (index=784)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/ozintel/Downloads/Tsl_python_progect/local_ml/Chatbot_project/Chatbot1.0/HRX/Test/chatbot_ttest_model.py", line 78, in test_ConfirmLoan
+    self.assertEqual(each[1], self.model_ConfirmLoan.classify(each[2])['label'],msg='debtor_answer:'+each[2])
+AssertionError: 0.0 != 108 : debtor_answer:是那个app的平台嘛
+
+======================================================================
+FAIL: test_ConfirmLoan (HRX.Test.chatbot_ttest_model.chatBotModel) (index=785)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/ozintel/Downloads/Tsl_python_progect/local_ml/Chatbot_project/Chatbot1.0/HRX/Test/chatbot_ttest_model.py", line 78, in test_ConfirmLoan
+    self.assertEqual(each[1], self.model_ConfirmLoan.classify(each[2])['label'],msg='debtor_answer:'+each[2])
+AssertionError: 0.0 != 104 : debtor_answer:最后警告一次不要打了, 等我出差回来再说。
+
+======================================================================
+FAIL: test_ConfirmLoan (HRX.Test.chatbot_ttest_model.chatBotModel) (index=810)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/ozintel/Downloads/Tsl_python_progect/local_ml/Chatbot_project/Chatbot1.0/HRX/Test/chatbot_ttest_model.py", line 78, in test_ConfirmLoan
+    self.assertEqual(each[1], self.model_ConfirmLoan.classify(each[2])['label'],msg='debtor_answer:'+each[2])
+AssertionError: 0.0 != 109 : debtor_answer:最近生意不好啊
+
+======================================================================
+FAIL: test_ConfirmLoan (HRX.Test.chatbot_ttest_model.chatBotModel) (index=829)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/ozintel/Downloads/Tsl_python_progect/local_ml/Chatbot_project/Chatbot1.0/HRX/Test/chatbot_ttest_model.py", line 78, in test_ConfirmLoan
+    self.assertEqual(each[1], self.model_ConfirmLoan.classify(each[2])['label'],msg='debtor_answer:'+each[2])
+AssertionError: 0.0 != 108 : debtor_answer:正在银行
+
+======================================================================
+FAIL: test_ConfirmLoan (HRX.Test.chatbot_ttest_model.chatBotModel) (index=849)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/ozintel/Downloads/Tsl_python_progect/local_ml/Chatbot_project/Chatbot1.0/HRX/Test/chatbot_ttest_model.py", line 78, in test_ConfirmLoan
+    self.assertEqual(each[1], self.model_ConfirmLoan.classify(each[2])['label'],msg='debtor_answer:'+each[2])
+AssertionError: 0.0 != 104 : debtor_answer:没时间
+
+======================================================================
+FAIL: test_ConfirmLoan (HRX.Test.chatbot_ttest_model.chatBotModel) (index=893)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/ozintel/Downloads/Tsl_python_progect/local_ml/Chatbot_project/Chatbot1.0/HRX/Test/chatbot_ttest_model.py", line 78, in test_ConfirmLoan
+    self.assertEqual(each[1], self.model_ConfirmLoan.classify(each[2])['label'],msg='debtor_answer:'+each[2])
+AssertionError: 0.0 != 103 : debtor_answer:清不到，不晓得
+
+======================================================================
+FAIL: test_ConfirmLoan (HRX.Test.chatbot_ttest_model.chatBotModel) (index=900)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/ozintel/Downloads/Tsl_python_progect/local_ml/Chatbot_project/Chatbot1.0/HRX/Test/chatbot_ttest_model.py", line 78, in test_ConfirmLoan
+    self.assertEqual(each[1], self.model_ConfirmLoan.classify(each[2])['label'],msg='debtor_answer:'+each[2])
+AssertionError: 0.0 != 108 : debtor_answer:烦死人，你们怎么总是阴魂不散
+
+======================================================================
+FAIL: test_ConfirmLoan (HRX.Test.chatbot_ttest_model.chatBotModel) (index=905)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/ozintel/Downloads/Tsl_python_progect/local_ml/Chatbot_project/Chatbot1.0/HRX/Test/chatbot_ttest_model.py", line 78, in test_ConfirmLoan
+    self.assertEqual(each[1], self.model_ConfirmLoan.classify(each[2])['label'],msg='debtor_answer:'+each[2])
+AssertionError: 0.0 != 104 : debtor_answer:现在在忙，没空打钱
+
+======================================================================
+FAIL: test_ConfirmLoan (HRX.Test.chatbot_ttest_model.chatBotModel) (index=915)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/ozintel/Downloads/Tsl_python_progect/local_ml/Chatbot_project/Chatbot1.0/HRX/Test/chatbot_ttest_model.py", line 78, in test_ConfirmLoan
+    self.assertEqual(each[1], self.model_ConfirmLoan.classify(each[2])['label'],msg='debtor_answer:'+each[2])
+AssertionError: 0.0 != 109 : debtor_answer:瓜娃娃
+
+======================================================================
+FAIL: test_ConfirmLoan (HRX.Test.chatbot_ttest_model.chatBotModel) (index=921)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/ozintel/Downloads/Tsl_python_progect/local_ml/Chatbot_project/Chatbot1.0/HRX/Test/chatbot_ttest_model.py", line 78, in test_ConfirmLoan
+    self.assertEqual(each[1], self.model_ConfirmLoan.classify(each[2])['label'],msg='debtor_answer:'+each[2])
+AssertionError: 0.0 != 109 : debtor_answer:看你把我咋样
+
+======================================================================
+FAIL: test_ConfirmLoan (HRX.Test.chatbot_ttest_model.chatBotModel) (index=926)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/ozintel/Downloads/Tsl_python_progect/local_ml/Chatbot_project/Chatbot1.0/HRX/Test/chatbot_ttest_model.py", line 78, in test_ConfirmLoan
+    self.assertEqual(each[1], self.model_ConfirmLoan.classify(each[2])['label'],msg='debtor_answer:'+each[2])
+AssertionError: 0.0 != 109 : debtor_answer:真的吗？
+
+======================================================================
+FAIL: test_ConfirmLoan (HRX.Test.chatbot_ttest_model.chatBotModel) (index=956)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/ozintel/Downloads/Tsl_python_progect/local_ml/Chatbot_project/Chatbot1.0/HRX/Test/chatbot_ttest_model.py", line 78, in test_ConfirmLoan
+    self.assertEqual(each[1], self.model_ConfirmLoan.classify(each[2])['label'],msg='debtor_answer:'+each[2])
+AssertionError: 0.0 != 104 : debtor_answer:等我下班就去还
+
+======================================================================
+FAIL: test_ConfirmLoan (HRX.Test.chatbot_ttest_model.chatBotModel) (index=961)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/ozintel/Downloads/Tsl_python_progect/local_ml/Chatbot_project/Chatbot1.0/HRX/Test/chatbot_ttest_model.py", line 78, in test_ConfirmLoan
+    self.assertEqual(each[1], self.model_ConfirmLoan.classify(each[2])['label'],msg='debtor_answer:'+each[2])
+AssertionError: 0.0 != 104 : debtor_answer:等有空还
+
+======================================================================
+FAIL: test_ConfirmLoan (HRX.Test.chatbot_ttest_model.chatBotModel) (index=967)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/ozintel/Downloads/Tsl_python_progect/local_ml/Chatbot_project/Chatbot1.0/HRX/Test/chatbot_ttest_model.py", line 78, in test_ConfirmLoan
+    self.assertEqual(each[1], self.model_ConfirmLoan.classify(each[2])['label'],msg='debtor_answer:'+each[2])
+AssertionError: 0.0 != 109 : debtor_answer:给老子滚，别再打来了
+
+======================================================================
+FAIL: test_ConfirmLoan (HRX.Test.chatbot_ttest_model.chatBotModel) (index=968)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/ozintel/Downloads/Tsl_python_progect/local_ml/Chatbot_project/Chatbot1.0/HRX/Test/chatbot_ttest_model.py", line 78, in test_ConfirmLoan
+    self.assertEqual(each[1], self.model_ConfirmLoan.classify(each[2])['label'],msg='debtor_answer:'+each[2])
+AssertionError: 0.0 != 109 : debtor_answer:缺钱花你去问银行要，找我干嘛
+
+======================================================================
+FAIL: test_ConfirmLoan (HRX.Test.chatbot_ttest_model.chatBotModel) (index=992)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/ozintel/Downloads/Tsl_python_progect/local_ml/Chatbot_project/Chatbot1.0/HRX/Test/chatbot_ttest_model.py", line 78, in test_ConfirmLoan
+    self.assertEqual(each[1], self.model_ConfirmLoan.classify(each[2])['label'],msg='debtor_answer:'+each[2])
+AssertionError: 0.0 != 103 : debtor_answer:能详细说说嘛
+
+======================================================================
+FAIL: test_ConfirmLoan (HRX.Test.chatbot_ttest_model.chatBotModel) (index=994)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/ozintel/Downloads/Tsl_python_progect/local_ml/Chatbot_project/Chatbot1.0/HRX/Test/chatbot_ttest_model.py", line 78, in test_ConfirmLoan
+    self.assertEqual(each[1], self.model_ConfirmLoan.classify(each[2])['label'],msg='debtor_answer:'+each[2])
+AssertionError: 0.0 != 109 : debtor_answer:自己在工地，工资一年结一次
+
+======================================================================
+FAIL: test_ConfirmLoan (HRX.Test.chatbot_ttest_model.chatBotModel) (index=1018)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/ozintel/Downloads/Tsl_python_progect/local_ml/Chatbot_project/Chatbot1.0/HRX/Test/chatbot_ttest_model.py", line 78, in test_ConfirmLoan
+    self.assertEqual(each[1], self.model_ConfirmLoan.classify(each[2])['label'],msg='debtor_answer:'+each[2])
+AssertionError: 0.0 != 109 : debtor_answer:请报上你的大名，让警察跟你说。
+
+======================================================================
+FAIL: test_ConfirmLoan (HRX.Test.chatbot_ttest_model.chatBotModel) (index=1025)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/ozintel/Downloads/Tsl_python_progect/local_ml/Chatbot_project/Chatbot1.0/HRX/Test/chatbot_ttest_model.py", line 78, in test_ConfirmLoan
+    self.assertEqual(each[1], self.model_ConfirmLoan.classify(each[2])['label'],msg='debtor_answer:'+each[2])
+AssertionError: 0.0 != 109 : debtor_answer:赌钱输了，你能不能再借我点
+
+======================================================================
+FAIL: test_ConfirmLoan (HRX.Test.chatbot_ttest_model.chatBotModel) (index=1044)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/ozintel/Downloads/Tsl_python_progect/local_ml/Chatbot_project/Chatbot1.0/HRX/Test/chatbot_ttest_model.py", line 78, in test_ConfirmLoan
+    self.assertEqual(each[1], self.model_ConfirmLoan.classify(each[2])['label'],msg='debtor_answer:'+each[2])
+AssertionError: 0.0 != 109 : debtor_answer:还个屁
+
+======================================================================
+FAIL: test_ConfirmLoan (HRX.Test.chatbot_ttest_model.chatBotModel) (index=1059)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/ozintel/Downloads/Tsl_python_progect/local_ml/Chatbot_project/Chatbot1.0/HRX/Test/chatbot_ttest_model.py", line 78, in test_ConfirmLoan
+    self.assertEqual(each[1], self.model_ConfirmLoan.classify(each[2])['label'],msg='debtor_answer:'+each[2])
+AssertionError: 0.0 != 10 : debtor_answer:这个事情确实怪我秘书疏忽了，明天等她上班我就第一个让她给你们打钱过去。
+
+======================================================================
+FAIL: test_ConfirmLoan (HRX.Test.chatbot_ttest_model.chatBotModel) (index=1073)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/ozintel/Downloads/Tsl_python_progect/local_ml/Chatbot_project/Chatbot1.0/HRX/Test/chatbot_ttest_model.py", line 78, in test_ConfirmLoan
+    self.assertEqual(each[1], self.model_ConfirmLoan.classify(each[2])['label'],msg='debtor_answer:'+each[2])
+AssertionError: 0.0 != 103 : debtor_answer:这啥
+
+======================================================================
+FAIL: test_ConfirmLoan (HRX.Test.chatbot_ttest_model.chatBotModel) (index=1076)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/ozintel/Downloads/Tsl_python_progect/local_ml/Chatbot_project/Chatbot1.0/HRX/Test/chatbot_ttest_model.py", line 78, in test_ConfirmLoan
+    self.assertEqual(each[1], self.model_ConfirmLoan.classify(each[2])['label'],msg='debtor_answer:'+each[2])
+AssertionError: 0.0 != 109 : debtor_answer:这样啊我想想
+
+======================================================================
+FAIL: test_ConfirmLoan (HRX.Test.chatbot_ttest_model.chatBotModel) (index=1150)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/ozintel/Downloads/Tsl_python_progect/local_ml/Chatbot_project/Chatbot1.0/HRX/Test/chatbot_ttest_model.py", line 78, in test_ConfirmLoan
+    self.assertEqual(each[1], self.model_ConfirmLoan.classify(each[2])['label'],msg='debtor_answer:'+each[2])
+AssertionError: 0.0 != 103 : debtor_answer:需要承担什么责任么
+
+======================================================================
+FAIL: test_ConfirmLoan (HRX.Test.chatbot_ttest_model.chatBotModel) (index=1169)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/ozintel/Downloads/Tsl_python_progect/local_ml/Chatbot_project/Chatbot1.0/HRX/Test/chatbot_ttest_model.py", line 78, in test_ConfirmLoan
+    self.assertEqual(each[1], self.model_ConfirmLoan.classify(each[2])['label'],msg='debtor_answer:'+each[2])
+AssertionError: 1.0 != 109 : debtor_answer:不对啊
+
+======================================================================
+FAIL: test_ConfirmLoan (HRX.Test.chatbot_ttest_model.chatBotModel) (index=1172)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/ozintel/Downloads/Tsl_python_progect/local_ml/Chatbot_project/Chatbot1.0/HRX/Test/chatbot_ttest_model.py", line 78, in test_ConfirmLoan
+    self.assertEqual(each[1], self.model_ConfirmLoan.classify(each[2])['label'],msg='debtor_answer:'+each[2])
+AssertionError: 1.0 != 103 : debtor_answer:不懂你说什么
+
+======================================================================
+FAIL: test_ConfirmLoan (HRX.Test.chatbot_ttest_model.chatBotModel) (index=1182)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/ozintel/Downloads/Tsl_python_progect/local_ml/Chatbot_project/Chatbot1.0/HRX/Test/chatbot_ttest_model.py", line 78, in test_ConfirmLoan
+    self.assertEqual(each[1], self.model_ConfirmLoan.classify(each[2])['label'],msg='debtor_answer:'+each[2])
+AssertionError: 1.0 != 109 : debtor_answer:不晓得
+
+======================================================================
+FAIL: test_ConfirmLoan (HRX.Test.chatbot_ttest_model.chatBotModel) (index=1186)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/ozintel/Downloads/Tsl_python_progect/local_ml/Chatbot_project/Chatbot1.0/HRX/Test/chatbot_ttest_model.py", line 78, in test_ConfirmLoan
+    self.assertEqual(each[1], self.model_ConfirmLoan.classify(each[2])['label'],msg='debtor_answer:'+each[2])
+AssertionError: 1.0 != 108 : debtor_answer:不欠就是不欠，怎么还没完了
+
+======================================================================
+FAIL: test_ConfirmLoan (HRX.Test.chatbot_ttest_model.chatBotModel) (index=1187)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/ozintel/Downloads/Tsl_python_progect/local_ml/Chatbot_project/Chatbot1.0/HRX/Test/chatbot_ttest_model.py", line 78, in test_ConfirmLoan
+    self.assertEqual(each[1], self.model_ConfirmLoan.classify(each[2])['label'],msg='debtor_answer:'+each[2])
+AssertionError: 1.0 != 103 : debtor_answer:不清楚，没借过。
+
+======================================================================
+FAIL: test_ConfirmLoan (HRX.Test.chatbot_ttest_model.chatBotModel) (index=1188)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/ozintel/Downloads/Tsl_python_progect/local_ml/Chatbot_project/Chatbot1.0/HRX/Test/chatbot_ttest_model.py", line 78, in test_ConfirmLoan
+    self.assertEqual(each[1], self.model_ConfirmLoan.classify(each[2])['label'],msg='debtor_answer:'+each[2])
+AssertionError: 1.0 != 109 : debtor_answer:不知
+
+======================================================================
+FAIL: test_ConfirmLoan (HRX.Test.chatbot_ttest_model.chatBotModel) (index=1190)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/ozintel/Downloads/Tsl_python_progect/local_ml/Chatbot_project/Chatbot1.0/HRX/Test/chatbot_ttest_model.py", line 78, in test_ConfirmLoan
+    self.assertEqual(each[1], self.model_ConfirmLoan.classify(each[2])['label'],msg='debtor_answer:'+each[2])
+AssertionError: 1.0 != 103 : debtor_answer:不知道你在说啥，我没借过
+
+======================================================================
+FAIL: test_ConfirmLoan (HRX.Test.chatbot_ttest_model.chatBotModel) (index=1191)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/ozintel/Downloads/Tsl_python_progect/local_ml/Chatbot_project/Chatbot1.0/HRX/Test/chatbot_ttest_model.py", line 78, in test_ConfirmLoan
+    self.assertEqual(each[1], self.model_ConfirmLoan.classify(each[2])['label'],msg='debtor_answer:'+each[2])
+AssertionError: 1.0 != 109 : debtor_answer:不知道呢
+
+======================================================================
+FAIL: test_ConfirmLoan (HRX.Test.chatbot_ttest_model.chatBotModel) (index=1194)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/ozintel/Downloads/Tsl_python_progect/local_ml/Chatbot_project/Chatbot1.0/HRX/Test/chatbot_ttest_model.py", line 78, in test_ConfirmLoan
+    self.assertEqual(each[1], self.model_ConfirmLoan.classify(each[2])['label'],msg='debtor_answer:'+each[2])
+AssertionError: 1.0 != 109 : debtor_answer:不要和我开这种玩笑了，我晓得你是二狗子喊来斗起我耍的。
+
+======================================================================
+FAIL: test_ConfirmLoan (HRX.Test.chatbot_ttest_model.chatBotModel) (index=1202)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/ozintel/Downloads/Tsl_python_progect/local_ml/Chatbot_project/Chatbot1.0/HRX/Test/chatbot_ttest_model.py", line 78, in test_ConfirmLoan
+    self.assertEqual(each[1], self.model_ConfirmLoan.classify(each[2])['label'],msg='debtor_answer:'+each[2])
+AssertionError: 1.0 != 103 : debtor_answer:什么公司？没说过
+
+======================================================================
+FAIL: test_ConfirmLoan (HRX.Test.chatbot_ttest_model.chatBotModel) (index=1214)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/ozintel/Downloads/Tsl_python_progect/local_ml/Chatbot_project/Chatbot1.0/HRX/Test/chatbot_ttest_model.py", line 78, in test_ConfirmLoan
+    self.assertEqual(each[1], self.model_ConfirmLoan.classify(each[2])['label'],msg='debtor_answer:'+each[2])
+AssertionError: 1.0 != 10 : debtor_answer:今天天气很好。好嘛,不欠钱。
+
+======================================================================
+FAIL: test_ConfirmLoan (HRX.Test.chatbot_ttest_model.chatBotModel) (index=1218)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/ozintel/Downloads/Tsl_python_progect/local_ml/Chatbot_project/Chatbot1.0/HRX/Test/chatbot_ttest_model.py", line 78, in test_ConfirmLoan
+    self.assertEqual(each[1], self.model_ConfirmLoan.classify(each[2])['label'],msg='debtor_answer:'+each[2])
+AssertionError: 1.0 != 108 : debtor_answer:余七没还钱，你们打电话给我做什么？你们应该打给余七啊，要不要我给你们他的电话？
+
+======================================================================
+FAIL: test_ConfirmLoan (HRX.Test.chatbot_ttest_model.chatBotModel) (index=1237)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/ozintel/Downloads/Tsl_python_progect/local_ml/Chatbot_project/Chatbot1.0/HRX/Test/chatbot_ttest_model.py", line 78, in test_ConfirmLoan
+    self.assertEqual(each[1], self.model_ConfirmLoan.classify(each[2])['label'],msg='debtor_answer:'+each[2])
+AssertionError: 1.0 != 109 : debtor_answer:你们系统有问题
+
+======================================================================
+FAIL: test_ConfirmLoan (HRX.Test.chatbot_ttest_model.chatBotModel) (index=1240)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/ozintel/Downloads/Tsl_python_progect/local_ml/Chatbot_project/Chatbot1.0/HRX/Test/chatbot_ttest_model.py", line 78, in test_ConfirmLoan
+    self.assertEqual(each[1], self.model_ConfirmLoan.classify(each[2])['label'],msg='debtor_answer:'+each[2])
+AssertionError: 1.0 != 109 : debtor_answer:你傻逼
+
+======================================================================
+FAIL: test_ConfirmLoan (HRX.Test.chatbot_ttest_model.chatBotModel) (index=1241)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/ozintel/Downloads/Tsl_python_progect/local_ml/Chatbot_project/Chatbot1.0/HRX/Test/chatbot_ttest_model.py", line 78, in test_ConfirmLoan
+    self.assertEqual(each[1], self.model_ConfirmLoan.classify(each[2])['label'],msg='debtor_answer:'+each[2])
+AssertionError: 1.0 != 107 : debtor_answer:你先说你是哪个。要得，我知道,不欠钱。
+
+======================================================================
+FAIL: test_ConfirmLoan (HRX.Test.chatbot_ttest_model.chatBotModel) (index=1246)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/ozintel/Downloads/Tsl_python_progect/local_ml/Chatbot_project/Chatbot1.0/HRX/Test/chatbot_ttest_model.py", line 78, in test_ConfirmLoan
+    self.assertEqual(each[1], self.model_ConfirmLoan.classify(each[2])['label'],msg='debtor_answer:'+each[2])
+AssertionError: 1.0 != 107 : debtor_answer:你又是谁。好好，我听到起在,不欠钱。
+
+======================================================================
+FAIL: test_ConfirmLoan (HRX.Test.chatbot_ttest_model.chatBotModel) (index=1251)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/ozintel/Downloads/Tsl_python_progect/local_ml/Chatbot_project/Chatbot1.0/HRX/Test/chatbot_ttest_model.py", line 78, in test_ConfirmLoan
+    self.assertEqual(each[1], self.model_ConfirmLoan.classify(each[2])['label'],msg='debtor_answer:'+each[2])
+AssertionError: 1.0 != 109 : debtor_answer:你弄错了
+
+======================================================================
+FAIL: test_ConfirmLoan (HRX.Test.chatbot_ttest_model.chatBotModel) (index=1254)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/ozintel/Downloads/Tsl_python_progect/local_ml/Chatbot_project/Chatbot1.0/HRX/Test/chatbot_ttest_model.py", line 78, in test_ConfirmLoan
+    self.assertEqual(each[1], self.model_ConfirmLoan.classify(each[2])['label'],msg='debtor_answer:'+each[2])
+AssertionError: 1.0 != 109 : debtor_answer:你怕是在忽悠我哟
+
+======================================================================
+FAIL: test_ConfirmLoan (HRX.Test.chatbot_ttest_model.chatBotModel) (index=1288)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/ozintel/Downloads/Tsl_python_progect/local_ml/Chatbot_project/Chatbot1.0/HRX/Test/chatbot_ttest_model.py", line 78, in test_ConfirmLoan
+    self.assertEqual(each[1], self.model_ConfirmLoan.classify(each[2])['label'],msg='debtor_answer:'+each[2])
+AssertionError: 1.0 != 109 : debtor_answer:你把证据给我看
+
+======================================================================
+FAIL: test_ConfirmLoan (HRX.Test.chatbot_ttest_model.chatBotModel) (index=1299)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/ozintel/Downloads/Tsl_python_progect/local_ml/Chatbot_project/Chatbot1.0/HRX/Test/chatbot_ttest_model.py", line 78, in test_ConfirmLoan
+    self.assertEqual(each[1], self.model_ConfirmLoan.classify(each[2])['label'],msg='debtor_answer:'+each[2])
+AssertionError: 1.0 != 109 : debtor_answer:你放屁
+
+======================================================================
+FAIL: test_ConfirmLoan (HRX.Test.chatbot_ttest_model.chatBotModel) (index=1306)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/ozintel/Downloads/Tsl_python_progect/local_ml/Chatbot_project/Chatbot1.0/HRX/Test/chatbot_ttest_model.py", line 78, in test_ConfirmLoan
+    self.assertEqual(each[1], self.model_ConfirmLoan.classify(each[2])['label'],msg='debtor_answer:'+each[2])
+AssertionError: 1.0 != 109 : debtor_answer:你是不是有病呀。啊，啥,不欠钱。
+
+======================================================================
+FAIL: test_ConfirmLoan (HRX.Test.chatbot_ttest_model.chatBotModel) (index=1308)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/ozintel/Downloads/Tsl_python_progect/local_ml/Chatbot_project/Chatbot1.0/HRX/Test/chatbot_ttest_model.py", line 78, in test_ConfirmLoan
+    self.assertEqual(each[1], self.model_ConfirmLoan.classify(each[2])['label'],msg='debtor_answer:'+each[2])
+AssertionError: 1.0 != 109 : debtor_answer:你是不是脑壳遭门夹了，乱说
+
+======================================================================
+FAIL: test_ConfirmLoan (HRX.Test.chatbot_ttest_model.chatBotModel) (index=1315)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/ozintel/Downloads/Tsl_python_progect/local_ml/Chatbot_project/Chatbot1.0/HRX/Test/chatbot_ttest_model.py", line 78, in test_ConfirmLoan
+    self.assertEqual(each[1], self.model_ConfirmLoan.classify(each[2])['label'],msg='debtor_answer:'+each[2])
+AssertionError: 1.0 != 109 : debtor_answer:你有证据吗？
+
+======================================================================
+FAIL: test_ConfirmLoan (HRX.Test.chatbot_ttest_model.chatBotModel) (index=1322)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/ozintel/Downloads/Tsl_python_progect/local_ml/Chatbot_project/Chatbot1.0/HRX/Test/chatbot_ttest_model.py", line 78, in test_ConfirmLoan
+    self.assertEqual(each[1], self.model_ConfirmLoan.classify(each[2])['label'],msg='debtor_answer:'+each[2])
+AssertionError: 1.0 != 107 : debtor_answer:你知不知道我是谁，我是马云的司机，家产上千万会跟你贷款这点钱么？
+
+======================================================================
+FAIL: test_ConfirmLoan (HRX.Test.chatbot_ttest_model.chatBotModel) (index=1330)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/ozintel/Downloads/Tsl_python_progect/local_ml/Chatbot_project/Chatbot1.0/HRX/Test/chatbot_ttest_model.py", line 78, in test_ConfirmLoan
+    self.assertEqual(each[1], self.model_ConfirmLoan.classify(each[2])['label'],msg='debtor_answer:'+each[2])
+AssertionError: 1.0 != 103 : debtor_answer:你说哪个欠钱了？有种再说100次。
+
+======================================================================
+FAIL: test_ConfirmLoan (HRX.Test.chatbot_ttest_model.chatBotModel) (index=1342)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/ozintel/Downloads/Tsl_python_progect/local_ml/Chatbot_project/Chatbot1.0/HRX/Test/chatbot_ttest_model.py", line 78, in test_ConfirmLoan
+    self.assertEqual(each[1], self.model_ConfirmLoan.classify(each[2])['label'],msg='debtor_answer:'+each[2])
+AssertionError: 1.0 != 109 : debtor_answer:你逗我玩呢？
+
+======================================================================
+FAIL: test_ConfirmLoan (HRX.Test.chatbot_ttest_model.chatBotModel) (index=1343)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/ozintel/Downloads/Tsl_python_progect/local_ml/Chatbot_project/Chatbot1.0/HRX/Test/chatbot_ttest_model.py", line 78, in test_ConfirmLoan
+    self.assertEqual(each[1], self.model_ConfirmLoan.classify(each[2])['label'],msg='debtor_answer:'+each[2])
+AssertionError: 1.0 != 109 : debtor_answer:你问问隔壁的老王，估计是他搞的飞机。
+
+======================================================================
+FAIL: test_ConfirmLoan (HRX.Test.chatbot_ttest_model.chatBotModel) (index=1350)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/ozintel/Downloads/Tsl_python_progect/local_ml/Chatbot_project/Chatbot1.0/HRX/Test/chatbot_ttest_model.py", line 78, in test_ConfirmLoan
+    self.assertEqual(each[1], self.model_ConfirmLoan.classify(each[2])['label'],msg='debtor_answer:'+each[2])
+AssertionError: 1.0 != 109 : debtor_answer:其他人的
+
+======================================================================
+FAIL: test_ConfirmLoan (HRX.Test.chatbot_ttest_model.chatBotModel) (index=1353)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/ozintel/Downloads/Tsl_python_progect/local_ml/Chatbot_project/Chatbot1.0/HRX/Test/chatbot_ttest_model.py", line 78, in test_ConfirmLoan
+    self.assertEqual(each[1], self.model_ConfirmLoan.classify(each[2])['label'],msg='debtor_answer:'+each[2])
+AssertionError: 1.0 != 109 : debtor_answer:再打就报警了
+
+======================================================================
+FAIL: test_ConfirmLoan (HRX.Test.chatbot_ttest_model.chatBotModel) (index=1355)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/ozintel/Downloads/Tsl_python_progect/local_ml/Chatbot_project/Chatbot1.0/HRX/Test/chatbot_ttest_model.py", line 78, in test_ConfirmLoan
+    self.assertEqual(each[1], self.model_ConfirmLoan.classify(each[2])['label'],msg='debtor_answer:'+each[2])
+AssertionError: 1.0 != 109 : debtor_answer:再骚扰我，我就报警了
+
+======================================================================
+FAIL: test_ConfirmLoan (HRX.Test.chatbot_ttest_model.chatBotModel) (index=1360)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/ozintel/Downloads/Tsl_python_progect/local_ml/Chatbot_project/Chatbot1.0/HRX/Test/chatbot_ttest_model.py", line 78, in test_ConfirmLoan
+    self.assertEqual(each[1], self.model_ConfirmLoan.classify(each[2])['label'],msg='debtor_answer:'+each[2])
+AssertionError: 1.0 != 109 : debtor_answer:别再打来了，不关我事
+
+======================================================================
+FAIL: test_ConfirmLoan (HRX.Test.chatbot_ttest_model.chatBotModel) (index=1370)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/ozintel/Downloads/Tsl_python_progect/local_ml/Chatbot_project/Chatbot1.0/HRX/Test/chatbot_ttest_model.py", line 78, in test_ConfirmLoan
+    self.assertEqual(each[1], self.model_ConfirmLoan.classify(each[2])['label'],msg='debtor_answer:'+each[2])
+AssertionError: 1.0 != 109 : debtor_answer:可不可以滚远点，听到你们这些鬼话就鬼火冒
+
+======================================================================
+FAIL: test_ConfirmLoan (HRX.Test.chatbot_ttest_model.chatBotModel) (index=1373)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/ozintel/Downloads/Tsl_python_progect/local_ml/Chatbot_project/Chatbot1.0/HRX/Test/chatbot_ttest_model.py", line 78, in test_ConfirmLoan
+    self.assertEqual(each[1], self.model_ConfirmLoan.classify(each[2])['label'],msg='debtor_answer:'+each[2])
+AssertionError: 1.0 != 109 : debtor_answer:呵呵，我欠你个鬼。
+
+======================================================================
+FAIL: test_ConfirmLoan (HRX.Test.chatbot_ttest_model.chatBotModel) (index=1395)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/ozintel/Downloads/Tsl_python_progect/local_ml/Chatbot_project/Chatbot1.0/HRX/Test/chatbot_ttest_model.py", line 78, in test_ConfirmLoan
+    self.assertEqual(each[1], self.model_ConfirmLoan.classify(each[2])['label'],msg='debtor_answer:'+each[2])
+AssertionError: 1.0 != 103 : debtor_answer:啥子哦，你有没搞错
+
+======================================================================
+FAIL: test_ConfirmLoan (HRX.Test.chatbot_ttest_model.chatBotModel) (index=1396)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/ozintel/Downloads/Tsl_python_progect/local_ml/Chatbot_project/Chatbot1.0/HRX/Test/chatbot_ttest_model.py", line 78, in test_ConfirmLoan
+    self.assertEqual(each[1], self.model_ConfirmLoan.classify(each[2])['label'],msg='debtor_answer:'+each[2])
+AssertionError: 1.0 != 103 : debtor_answer:啥子哦？你有没有搞错
+
+======================================================================
+FAIL: test_ConfirmLoan (HRX.Test.chatbot_ttest_model.chatBotModel) (index=1397)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/ozintel/Downloads/Tsl_python_progect/local_ml/Chatbot_project/Chatbot1.0/HRX/Test/chatbot_ttest_model.py", line 78, in test_ConfirmLoan
+    self.assertEqual(each[1], self.model_ConfirmLoan.classify(each[2])['label'],msg='debtor_answer:'+each[2])
+AssertionError: 1.0 != 109 : debtor_answer:啥子都没得
+
+======================================================================
+FAIL: test_ConfirmLoan (HRX.Test.chatbot_ttest_model.chatBotModel) (index=1401)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/ozintel/Downloads/Tsl_python_progect/local_ml/Chatbot_project/Chatbot1.0/HRX/Test/chatbot_ttest_model.py", line 78, in test_ConfirmLoan
+    self.assertEqual(each[1], self.model_ConfirmLoan.classify(each[2])['label'],msg='debtor_answer:'+each[2])
+AssertionError: 1.0 != 103 : debtor_answer:啥子？骗子走开
+
+======================================================================
+FAIL: test_ConfirmLoan (HRX.Test.chatbot_ttest_model.chatBotModel) (index=1404)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/ozintel/Downloads/Tsl_python_progect/local_ml/Chatbot_project/Chatbot1.0/HRX/Test/chatbot_ttest_model.py", line 78, in test_ConfirmLoan
+    self.assertEqual(each[1], self.model_ConfirmLoan.classify(each[2])['label'],msg='debtor_answer:'+each[2])
+AssertionError: 1.0 != 103 : debtor_answer:啥？骗子死开
+
+======================================================================
+FAIL: test_ConfirmLoan (HRX.Test.chatbot_ttest_model.chatBotModel) (index=1406)
 ----------------------------------------------------------------------
 Traceback (most recent call last):
   File "/Users/ozintel/Downloads/Tsl_python_progect/local_ml/Chatbot_project/Chatbot1.0/HRX/Test/chatbot_ttest_model.py", line 78, in test_ConfirmLoan
@@ -8,110 +1189,310 @@ Traceback (most recent call last):
 AssertionError: 1.0 != 103 : debtor_answer:在说一遍我没向你们借款，我的时间很宝贵的，你耽搁的起吗？
 
 ======================================================================
-FAIL: test_ConfirmLoan (HRX.Test.chatbot_ttest_model.chatBotModel) (index=41)
+FAIL: test_ConfirmLoan (HRX.Test.chatbot_ttest_model.chatBotModel) (index=1412)
 ----------------------------------------------------------------------
 Traceback (most recent call last):
   File "/Users/ozintel/Downloads/Tsl_python_progect/local_ml/Chatbot_project/Chatbot1.0/HRX/Test/chatbot_ttest_model.py", line 78, in test_ConfirmLoan
     self.assertEqual(each[1], self.model_ConfirmLoan.classify(each[2])['label'],msg='debtor_answer:'+each[2])
-AssertionError: 0.0 != 109 : debtor_answer:利息是怎么算的为什么这么多？
+AssertionError: 1.0 != 109 : debtor_answer:妈的，老子不欠你钱，在打砍死你
 
 ======================================================================
-FAIL: test_CutDebt (HRX.Test.chatbot_ttest_model.chatBotModel) (index=52)
+FAIL: test_ConfirmLoan (HRX.Test.chatbot_ttest_model.chatBotModel) (index=1420)
 ----------------------------------------------------------------------
 Traceback (most recent call last):
-  File "/Users/ozintel/Downloads/Tsl_python_progect/local_ml/Chatbot_project/Chatbot1.0/HRX/Test/chatbot_ttest_model.py", line 44, in test_CutDebt
-    self.assertEqual(each[1], self.model_CutDebt.classify(each[2])['label'],msg='debtor_answer:'+each[2])
-AssertionError: 1.0 != 106 : debtor_answer:我尽量
+  File "/Users/ozintel/Downloads/Tsl_python_progect/local_ml/Chatbot_project/Chatbot1.0/HRX/Test/chatbot_ttest_model.py", line 78, in test_ConfirmLoan
+    self.assertEqual(each[1], self.model_ConfirmLoan.classify(each[2])['label'],msg='debtor_answer:'+each[2])
+AssertionError: 1.0 != 109 : debtor_answer:怎么老打我电话
 
 ======================================================================
-FAIL: test_IDClassifier (HRX.Test.chatbot_ttest_model.chatBotModel) (index=55)
+FAIL: test_ConfirmLoan (HRX.Test.chatbot_ttest_model.chatBotModel) (index=1426)
 ----------------------------------------------------------------------
 Traceback (most recent call last):
-  File "/Users/ozintel/Downloads/Tsl_python_progect/local_ml/Chatbot_project/Chatbot1.0/HRX/Test/chatbot_ttest_model.py", line 51, in test_IDClassifier
-    self.assertEqual(each[1], self.model_IDClassifier.classify(each[2])['label'],msg='debtor_answer:'+each[2])
-AssertionError: 0.0 != 109 : debtor_answer:我没有贷
+  File "/Users/ozintel/Downloads/Tsl_python_progect/local_ml/Chatbot_project/Chatbot1.0/HRX/Test/chatbot_ttest_model.py", line 78, in test_ConfirmLoan
+    self.assertEqual(each[1], self.model_ConfirmLoan.classify(each[2])['label'],msg='debtor_answer:'+each[2])
+AssertionError: 1.0 != 0 : debtor_answer:想不起来了呢
 
 ======================================================================
-FAIL: test_IDClassifier (HRX.Test.chatbot_ttest_model.chatBotModel) (index=56)
+FAIL: test_ConfirmLoan (HRX.Test.chatbot_ttest_model.chatBotModel) (index=1427)
 ----------------------------------------------------------------------
 Traceback (most recent call last):
-  File "/Users/ozintel/Downloads/Tsl_python_progect/local_ml/Chatbot_project/Chatbot1.0/HRX/Test/chatbot_ttest_model.py", line 51, in test_IDClassifier
-    self.assertEqual(each[1], self.model_IDClassifier.classify(each[2])['label'],msg='debtor_answer:'+each[2])
-AssertionError: 0.0 != 109 : debtor_answer:你好小哥我暂时手头有点紧
+  File "/Users/ozintel/Downloads/Tsl_python_progect/local_ml/Chatbot_project/Chatbot1.0/HRX/Test/chatbot_ttest_model.py", line 78, in test_ConfirmLoan
+    self.assertEqual(each[1], self.model_ConfirmLoan.classify(each[2])['label'],msg='debtor_answer:'+each[2])
+AssertionError: 1.0 != 104 : debtor_answer:想套我信息？
 
 ======================================================================
-FAIL: test_IDClassifier (HRX.Test.chatbot_ttest_model.chatBotModel) (index=57)
+FAIL: test_ConfirmLoan (HRX.Test.chatbot_ttest_model.chatBotModel) (index=1455)
 ----------------------------------------------------------------------
 Traceback (most recent call last):
-  File "/Users/ozintel/Downloads/Tsl_python_progect/local_ml/Chatbot_project/Chatbot1.0/HRX/Test/chatbot_ttest_model.py", line 51, in test_IDClassifier
-    self.assertEqual(each[1], self.model_IDClassifier.classify(each[2])['label'],msg='debtor_answer:'+each[2])
-AssertionError: 0.0 != 104 : debtor_answer:我在开会
+  File "/Users/ozintel/Downloads/Tsl_python_progect/local_ml/Chatbot_project/Chatbot1.0/HRX/Test/chatbot_ttest_model.py", line 78, in test_ConfirmLoan
+    self.assertEqual(each[1], self.model_ConfirmLoan.classify(each[2])['label'],msg='debtor_answer:'+each[2])
+AssertionError: 1.0 != 109 : debtor_answer:我不清楚我要跟他本人核实
 
 ======================================================================
-FAIL: test_IDClassifier (HRX.Test.chatbot_ttest_model.chatBotModel) (index=58)
+FAIL: test_ConfirmLoan (HRX.Test.chatbot_ttest_model.chatBotModel) (index=1458)
 ----------------------------------------------------------------------
 Traceback (most recent call last):
-  File "/Users/ozintel/Downloads/Tsl_python_progect/local_ml/Chatbot_project/Chatbot1.0/HRX/Test/chatbot_ttest_model.py", line 51, in test_IDClassifier
-    self.assertEqual(each[1], self.model_IDClassifier.classify(each[2])['label'],msg='debtor_answer:'+each[2])
-AssertionError: 0.0 != 109 : debtor_answer:之内肯定还
+  File "/Users/ozintel/Downloads/Tsl_python_progect/local_ml/Chatbot_project/Chatbot1.0/HRX/Test/chatbot_ttest_model.py", line 78, in test_ConfirmLoan
+    self.assertEqual(each[1], self.model_ConfirmLoan.classify(each[2])['label'],msg='debtor_answer:'+each[2])
+AssertionError: 1.0 != 103 : debtor_answer:我不知道你再说什么
 
 ======================================================================
-FAIL: test_IDClassifier (HRX.Test.chatbot_ttest_model.chatBotModel) (index=96)
+FAIL: test_ConfirmLoan (HRX.Test.chatbot_ttest_model.chatBotModel) (index=1459)
 ----------------------------------------------------------------------
 Traceback (most recent call last):
-  File "/Users/ozintel/Downloads/Tsl_python_progect/local_ml/Chatbot_project/Chatbot1.0/HRX/Test/chatbot_ttest_model.py", line 51, in test_IDClassifier
-    self.assertEqual(each[1], self.model_IDClassifier.classify(each[2])['label'],msg='debtor_answer:'+each[2])
-AssertionError: 0.0 != 109 : debtor_answer:嗯呢
+  File "/Users/ozintel/Downloads/Tsl_python_progect/local_ml/Chatbot_project/Chatbot1.0/HRX/Test/chatbot_ttest_model.py", line 78, in test_ConfirmLoan
+    self.assertEqual(each[1], self.model_ConfirmLoan.classify(each[2])['label'],msg='debtor_answer:'+each[2])
+AssertionError: 1.0 != 109 : debtor_answer:我不知道你在想什么
 
 ======================================================================
-FAIL: test_IDClassifier (HRX.Test.chatbot_ttest_model.chatBotModel) (index=97)
+FAIL: test_ConfirmLoan (HRX.Test.chatbot_ttest_model.chatBotModel) (index=1460)
 ----------------------------------------------------------------------
 Traceback (most recent call last):
-  File "/Users/ozintel/Downloads/Tsl_python_progect/local_ml/Chatbot_project/Chatbot1.0/HRX/Test/chatbot_ttest_model.py", line 51, in test_IDClassifier
-    self.assertEqual(each[1], self.model_IDClassifier.classify(each[2])['label'],msg='debtor_answer:'+each[2])
-AssertionError: 1.0 != 109 : debtor_answer:不知道
+  File "/Users/ozintel/Downloads/Tsl_python_progect/local_ml/Chatbot_project/Chatbot1.0/HRX/Test/chatbot_ttest_model.py", line 78, in test_ConfirmLoan
+    self.assertEqual(each[1], self.model_ConfirmLoan.classify(each[2])['label'],msg='debtor_answer:'+each[2])
+AssertionError: 1.0 != 103 : debtor_answer:我不知道你在说什么
 
 ======================================================================
-FAIL: test_IfKnowDebtor (HRX.Test.chatbot_ttest_model.chatBotModel) (index=1)
+FAIL: test_ConfirmLoan (HRX.Test.chatbot_ttest_model.chatBotModel) (index=1519)
 ----------------------------------------------------------------------
 Traceback (most recent call last):
-  File "/Users/ozintel/Downloads/Tsl_python_progect/local_ml/Chatbot_project/Chatbot1.0/HRX/Test/chatbot_ttest_model.py", line 36, in test_IfKnowDebtor
-    self.assertEqual(each[1], self.model_IfKnowDebtor.classify(each[2])['label'],msg='debtor_answer:'+each[2])
-AssertionError: 0.0 != 101 : debtor_answer:认识啊，你找他有啥子事情吗？
+  File "/Users/ozintel/Downloads/Tsl_python_progect/local_ml/Chatbot_project/Chatbot1.0/HRX/Test/chatbot_ttest_model.py", line 78, in test_ConfirmLoan
+    self.assertEqual(each[1], self.model_ConfirmLoan.classify(each[2])['label'],msg='debtor_answer:'+each[2])
+AssertionError: 1.0 != 109 : debtor_answer:我建议你们打电话给下一个欠款人，不要在我这里浪费时间了
 
 ======================================================================
-FAIL: test_IfKnowDebtor (HRX.Test.chatbot_ttest_model.chatBotModel) (index=20)
+FAIL: test_ConfirmLoan (HRX.Test.chatbot_ttest_model.chatBotModel) (index=1529)
 ----------------------------------------------------------------------
 Traceback (most recent call last):
-  File "/Users/ozintel/Downloads/Tsl_python_progect/local_ml/Chatbot_project/Chatbot1.0/HRX/Test/chatbot_ttest_model.py", line 36, in test_IfKnowDebtor
-    self.assertEqual(each[1], self.model_IfKnowDebtor.classify(each[2])['label'],msg='debtor_answer:'+each[2])
-AssertionError: 109.0 != 1 : debtor_answer:你这是已经是骚扰了，你在骚扰我我要报警了
+  File "/Users/ozintel/Downloads/Tsl_python_progect/local_ml/Chatbot_project/Chatbot1.0/HRX/Test/chatbot_ttest_model.py", line 78, in test_ConfirmLoan
+    self.assertEqual(each[1], self.model_ConfirmLoan.classify(each[2])['label'],msg='debtor_answer:'+each[2])
+AssertionError: 1.0 != 109 : debtor_answer:我是土豪，没贷过款
 
 ======================================================================
-FAIL: test_Installment (HRX.Test.chatbot_ttest_model.chatBotModel) (index=72)
+FAIL: test_ConfirmLoan (HRX.Test.chatbot_ttest_model.chatBotModel) (index=1530)
 ----------------------------------------------------------------------
 Traceback (most recent call last):
-  File "/Users/ozintel/Downloads/Tsl_python_progect/local_ml/Chatbot_project/Chatbot1.0/HRX/Test/chatbot_ttest_model.py", line 69, in test_Installment
-    self.assertEqual(each[1], self.model_Installment.classify(each[2])['label'],msg='debtor_answer:'+each[2])
-AssertionError: 0.0 != 106 : debtor_answer:剩下我筹到就联系你
+  File "/Users/ozintel/Downloads/Tsl_python_progect/local_ml/Chatbot_project/Chatbot1.0/HRX/Test/chatbot_ttest_model.py", line 78, in test_ConfirmLoan
+    self.assertEqual(each[1], self.model_ConfirmLoan.classify(each[2])['label'],msg='debtor_answer:'+each[2])
+AssertionError: 1.0 != 109 : debtor_answer:我最近不缺钱，带啥子款？
 
 ======================================================================
-FAIL: test_Installment (HRX.Test.chatbot_ttest_model.chatBotModel) (index=78)
+FAIL: test_ConfirmLoan (HRX.Test.chatbot_ttest_model.chatBotModel) (index=1533)
 ----------------------------------------------------------------------
 Traceback (most recent call last):
-  File "/Users/ozintel/Downloads/Tsl_python_progect/local_ml/Chatbot_project/Chatbot1.0/HRX/Test/chatbot_ttest_model.py", line 69, in test_Installment
-    self.assertEqual(each[1], self.model_Installment.classify(each[2])['label'],msg='debtor_answer:'+each[2])
-AssertionError: 1.0 != 103 : debtor_answer:不用你说
+  File "/Users/ozintel/Downloads/Tsl_python_progect/local_ml/Chatbot_project/Chatbot1.0/HRX/Test/chatbot_ttest_model.py", line 78, in test_ConfirmLoan
+    self.assertEqual(each[1], self.model_ConfirmLoan.classify(each[2])['label'],msg='debtor_answer:'+each[2])
+AssertionError: 1.0 != 108 : debtor_answer:我有钱，怎么会贷款
 
 ======================================================================
-FAIL: test_WillingToPay (HRX.Test.chatbot_ttest_model.chatBotModel) (index=90)
+FAIL: test_ConfirmLoan (HRX.Test.chatbot_ttest_model.chatBotModel) (index=1583)
 ----------------------------------------------------------------------
 Traceback (most recent call last):
-  File "/Users/ozintel/Downloads/Tsl_python_progect/local_ml/Chatbot_project/Chatbot1.0/HRX/Test/chatbot_ttest_model.py", line 60, in test_WillingToPay
-    self.assertEqual(each[1], self.model_WillingToPay.classify(each[2])['label'],msg='debtor_answer:'+each[2])
-AssertionError: 0.0 != 108 : debtor_answer:可以你到时候直接查账单
+  File "/Users/ozintel/Downloads/Tsl_python_progect/local_ml/Chatbot_project/Chatbot1.0/HRX/Test/chatbot_ttest_model.py", line 78, in test_ConfirmLoan
+    self.assertEqual(each[1], self.model_ConfirmLoan.classify(each[2])['label'],msg='debtor_answer:'+each[2])
+AssertionError: 1.0 != 109 : debtor_answer:我没用身份证办理
+
+======================================================================
+FAIL: test_ConfirmLoan (HRX.Test.chatbot_ttest_model.chatBotModel) (index=1608)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/ozintel/Downloads/Tsl_python_progect/local_ml/Chatbot_project/Chatbot1.0/HRX/Test/chatbot_ttest_model.py", line 78, in test_ConfirmLoan
+    self.assertEqual(each[1], self.model_ConfirmLoan.classify(each[2])['label'],msg='debtor_answer:'+each[2])
+AssertionError: 1.0 != 103 : debtor_answer:我认不到你，莫跟我说乃些
+
+======================================================================
+FAIL: test_ConfirmLoan (HRX.Test.chatbot_ttest_model.chatBotModel) (index=1631)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/ozintel/Downloads/Tsl_python_progect/local_ml/Chatbot_project/Chatbot1.0/HRX/Test/chatbot_ttest_model.py", line 78, in test_ConfirmLoan
+    self.assertEqual(each[1], self.model_ConfirmLoan.classify(each[2])['label'],msg='debtor_answer:'+each[2])
+AssertionError: 1.0 != 109 : debtor_answer:打错电话了哇
+
+======================================================================
+FAIL: test_ConfirmLoan (HRX.Test.chatbot_ttest_model.chatBotModel) (index=1634)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/ozintel/Downloads/Tsl_python_progect/local_ml/Chatbot_project/Chatbot1.0/HRX/Test/chatbot_ttest_model.py", line 78, in test_ConfirmLoan
+    self.assertEqual(each[1], self.model_ConfirmLoan.classify(each[2])['label'],msg='debtor_answer:'+each[2])
+AssertionError: 1.0 != 109 : debtor_answer:找错饿了
+
+======================================================================
+FAIL: test_ConfirmLoan (HRX.Test.chatbot_ttest_model.chatBotModel) (index=1652)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/ozintel/Downloads/Tsl_python_progect/local_ml/Chatbot_project/Chatbot1.0/HRX/Test/chatbot_ttest_model.py", line 78, in test_ConfirmLoan
+    self.assertEqual(each[1], self.model_ConfirmLoan.classify(each[2])['label'],msg='debtor_answer:'+each[2])
+AssertionError: 1.0 != 109 : debtor_answer:根本就是无理取闹
+
+======================================================================
+FAIL: test_ConfirmLoan (HRX.Test.chatbot_ttest_model.chatBotModel) (index=1666)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/ozintel/Downloads/Tsl_python_progect/local_ml/Chatbot_project/Chatbot1.0/HRX/Test/chatbot_ttest_model.py", line 78, in test_ConfirmLoan
+    self.assertEqual(each[1], self.model_ConfirmLoan.classify(each[2])['label'],msg='debtor_answer:'+each[2])
+AssertionError: 1.0 != 103 : debtor_answer:没得哦，晓不得你说啥子，没干过。
+
+======================================================================
+FAIL: test_ConfirmLoan (HRX.Test.chatbot_ttest_model.chatBotModel) (index=1667)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/ozintel/Downloads/Tsl_python_progect/local_ml/Chatbot_project/Chatbot1.0/HRX/Test/chatbot_ttest_model.py", line 78, in test_ConfirmLoan
+    self.assertEqual(each[1], self.model_ConfirmLoan.classify(each[2])['label'],msg='debtor_answer:'+each[2])
+AssertionError: 1.0 != 109 : debtor_answer:没得这事！
+
+======================================================================
+FAIL: test_ConfirmLoan (HRX.Test.chatbot_ttest_model.chatBotModel) (index=1678)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/ozintel/Downloads/Tsl_python_progect/local_ml/Chatbot_project/Chatbot1.0/HRX/Test/chatbot_ttest_model.py", line 78, in test_ConfirmLoan
+    self.assertEqual(each[1], self.model_ConfirmLoan.classify(each[2])['label'],msg='debtor_answer:'+each[2])
+AssertionError: 1.0 != 109 : debtor_answer:没这回事
+
+======================================================================
+FAIL: test_ConfirmLoan (HRX.Test.chatbot_ttest_model.chatBotModel) (index=1682)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/ozintel/Downloads/Tsl_python_progect/local_ml/Chatbot_project/Chatbot1.0/HRX/Test/chatbot_ttest_model.py", line 78, in test_ConfirmLoan
+    self.assertEqual(each[1], self.model_ConfirmLoan.classify(each[2])['label'],msg='debtor_answer:'+each[2])
+AssertionError: 1.0 != 109 : debtor_answer:滚远点，别骚扰我
+
+======================================================================
+FAIL: test_ConfirmLoan (HRX.Test.chatbot_ttest_model.chatBotModel) (index=1686)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/ozintel/Downloads/Tsl_python_progect/local_ml/Chatbot_project/Chatbot1.0/HRX/Test/chatbot_ttest_model.py", line 78, in test_ConfirmLoan
+    self.assertEqual(each[1], self.model_ConfirmLoan.classify(each[2])['label'],msg='debtor_answer:'+each[2])
+AssertionError: 1.0 != 109 : debtor_answer:滚，胎神
+
+======================================================================
+FAIL: test_ConfirmLoan (HRX.Test.chatbot_ttest_model.chatBotModel) (index=1689)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/ozintel/Downloads/Tsl_python_progect/local_ml/Chatbot_project/Chatbot1.0/HRX/Test/chatbot_ttest_model.py", line 78, in test_ConfirmLoan
+    self.assertEqual(each[1], self.model_ConfirmLoan.classify(each[2])['label'],msg='debtor_answer:'+each[2])
+AssertionError: 1.0 != 109 : debtor_answer:爬爬爬，关我锤子事
+
+======================================================================
+FAIL: test_ConfirmLoan (HRX.Test.chatbot_ttest_model.chatBotModel) (index=1690)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/ozintel/Downloads/Tsl_python_progect/local_ml/Chatbot_project/Chatbot1.0/HRX/Test/chatbot_ttest_model.py", line 78, in test_ConfirmLoan
+    self.assertEqual(each[1], self.model_ConfirmLoan.classify(each[2])['label'],msg='debtor_answer:'+each[2])
+AssertionError: 1.0 != 109 : debtor_answer:爬远点，别骚扰我
+
+======================================================================
+FAIL: test_ConfirmLoan (HRX.Test.chatbot_ttest_model.chatBotModel) (index=1691)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/ozintel/Downloads/Tsl_python_progect/local_ml/Chatbot_project/Chatbot1.0/HRX/Test/chatbot_ttest_model.py", line 78, in test_ConfirmLoan
+    self.assertEqual(each[1], self.model_ConfirmLoan.classify(each[2])['label'],msg='debtor_answer:'+each[2])
+AssertionError: 1.0 != 109 : debtor_answer:爬远点，豁我嗦
+
+======================================================================
+FAIL: test_ConfirmLoan (HRX.Test.chatbot_ttest_model.chatBotModel) (index=1692)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/ozintel/Downloads/Tsl_python_progect/local_ml/Chatbot_project/Chatbot1.0/HRX/Test/chatbot_ttest_model.py", line 78, in test_ConfirmLoan
+    self.assertEqual(each[1], self.model_ConfirmLoan.classify(each[2])['label'],msg='debtor_answer:'+each[2])
+AssertionError: 1.0 != 109 : debtor_answer:现在骗子这么多，你以为我会相信你吗？
+
+======================================================================
+FAIL: test_ConfirmLoan (HRX.Test.chatbot_ttest_model.chatBotModel) (index=1693)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/ozintel/Downloads/Tsl_python_progect/local_ml/Chatbot_project/Chatbot1.0/HRX/Test/chatbot_ttest_model.py", line 78, in test_ConfirmLoan
+    self.assertEqual(each[1], self.model_ConfirmLoan.classify(each[2])['label'],msg='debtor_answer:'+each[2])
+AssertionError: 1.0 != 10 : debtor_answer:真晦气，今天第几个诈骗电话了。
+
+======================================================================
+FAIL: test_ConfirmLoan (HRX.Test.chatbot_ttest_model.chatBotModel) (index=1697)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/ozintel/Downloads/Tsl_python_progect/local_ml/Chatbot_project/Chatbot1.0/HRX/Test/chatbot_ttest_model.py", line 78, in test_ConfirmLoan
+    self.assertEqual(each[1], self.model_ConfirmLoan.classify(each[2])['label'],msg='debtor_answer:'+each[2])
+AssertionError: 1.0 != 109 : debtor_answer:瞎扯淡
+
+======================================================================
+FAIL: test_ConfirmLoan (HRX.Test.chatbot_ttest_model.chatBotModel) (index=1699)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/ozintel/Downloads/Tsl_python_progect/local_ml/Chatbot_project/Chatbot1.0/HRX/Test/chatbot_ttest_model.py", line 78, in test_ConfirmLoan
+    self.assertEqual(each[1], self.model_ConfirmLoan.classify(each[2])['label'],msg='debtor_answer:'+each[2])
+AssertionError: 1.0 != 109 : debtor_answer:神叨叨的
+
+======================================================================
+FAIL: test_ConfirmLoan (HRX.Test.chatbot_ttest_model.chatBotModel) (index=1702)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/ozintel/Downloads/Tsl_python_progect/local_ml/Chatbot_project/Chatbot1.0/HRX/Test/chatbot_ttest_model.py", line 78, in test_ConfirmLoan
+    self.assertEqual(each[1], self.model_ConfirmLoan.classify(each[2])['label'],msg='debtor_answer:'+each[2])
+AssertionError: 1.0 != 109 : debtor_answer:简直胡说八道
+
+======================================================================
+FAIL: test_ConfirmLoan (HRX.Test.chatbot_ttest_model.chatBotModel) (index=1708)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/ozintel/Downloads/Tsl_python_progect/local_ml/Chatbot_project/Chatbot1.0/HRX/Test/chatbot_ttest_model.py", line 78, in test_ConfirmLoan
+    self.assertEqual(each[1], self.model_ConfirmLoan.classify(each[2])['label'],msg='debtor_answer:'+each[2])
+AssertionError: 1.0 != 109 : debtor_answer:胡扯
+
+======================================================================
+FAIL: test_ConfirmLoan (HRX.Test.chatbot_ttest_model.chatBotModel) (index=1709)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/ozintel/Downloads/Tsl_python_progect/local_ml/Chatbot_project/Chatbot1.0/HRX/Test/chatbot_ttest_model.py", line 78, in test_ConfirmLoan
+    self.assertEqual(each[1], self.model_ConfirmLoan.classify(each[2])['label'],msg='debtor_answer:'+each[2])
+AssertionError: 1.0 != 109 : debtor_answer:胡说
+
+======================================================================
+FAIL: test_ConfirmLoan (HRX.Test.chatbot_ttest_model.chatBotModel) (index=1713)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/ozintel/Downloads/Tsl_python_progect/local_ml/Chatbot_project/Chatbot1.0/HRX/Test/chatbot_ttest_model.py", line 78, in test_ConfirmLoan
+    self.assertEqual(each[1], self.model_ConfirmLoan.classify(each[2])['label'],msg='debtor_answer:'+each[2])
+AssertionError: 1.0 != 109 : debtor_answer:说了不欠怎么总打电话
+
+======================================================================
+FAIL: test_ConfirmLoan (HRX.Test.chatbot_ttest_model.chatBotModel) (index=1721)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/ozintel/Downloads/Tsl_python_progect/local_ml/Chatbot_project/Chatbot1.0/HRX/Test/chatbot_ttest_model.py", line 78, in test_ConfirmLoan
+    self.assertEqual(each[1], self.model_ConfirmLoan.classify(each[2])['label'],msg='debtor_answer:'+each[2])
+AssertionError: 1.0 != 0 : debtor_answer:还什么还，都不是我
+
+======================================================================
+FAIL: test_ConfirmLoan (HRX.Test.chatbot_ttest_model.chatBotModel) (index=1722)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/ozintel/Downloads/Tsl_python_progect/local_ml/Chatbot_project/Chatbot1.0/HRX/Test/chatbot_ttest_model.py", line 78, in test_ConfirmLoan
+    self.assertEqual(each[1], self.model_ConfirmLoan.classify(each[2])['label'],msg='debtor_answer:'+each[2])
+AssertionError: 1.0 != 0 : debtor_answer:还有这事？我都忘记了。
+
+======================================================================
+FAIL: test_ConfirmLoan (HRX.Test.chatbot_ttest_model.chatBotModel) (index=1723)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/ozintel/Downloads/Tsl_python_progect/local_ml/Chatbot_project/Chatbot1.0/HRX/Test/chatbot_ttest_model.py", line 78, in test_ConfirmLoan
+    self.assertEqual(each[1], self.model_ConfirmLoan.classify(each[2])['label'],msg='debtor_answer:'+each[2])
+AssertionError: 1.0 != 109 : debtor_answer:这不可能，你是来搞笑的吧
+
+======================================================================
+FAIL: test_ConfirmLoan (HRX.Test.chatbot_ttest_model.chatBotModel) (index=1740)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/ozintel/Downloads/Tsl_python_progect/local_ml/Chatbot_project/Chatbot1.0/HRX/Test/chatbot_ttest_model.py", line 78, in test_ConfirmLoan
+    self.assertEqual(each[1], self.model_ConfirmLoan.classify(each[2])['label'],msg='debtor_answer:'+each[2])
+AssertionError: 1.0 != 109 : debtor_answer:这人不认识，请你核实信息后再打
+
+======================================================================
+FAIL: test_ConfirmLoan (HRX.Test.chatbot_ttest_model.chatBotModel) (index=1758)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/ozintel/Downloads/Tsl_python_progect/local_ml/Chatbot_project/Chatbot1.0/HRX/Test/chatbot_ttest_model.py", line 78, in test_ConfirmLoan
+    self.assertEqual(each[1], self.model_ConfirmLoan.classify(each[2])['label'],msg='debtor_answer:'+each[2])
+AssertionError: 1.0 != 103 : debtor_answer:风太大，没听清。乎,不欠钱。
 
 ----------------------------------------------------------------------
-Ran 6 tests in 2.021s
+Ran 6 tests in 6.100s
 
-FAILED (failures=14)
+FAILED (failures=186)

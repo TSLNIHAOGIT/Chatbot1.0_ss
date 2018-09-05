@@ -82,7 +82,7 @@ profile={'name':'王大喜','principal':'1,000','contractStartDate':"2018年1月
          'apr':'5%','fee':'200','lendingCompany':'平安E贷','collectionCompany':'江苏逸能','customerID':'123','gender':'男','collector':'小张','totalAmount':'1250','informDeadline':'明天下午三点',
          'splitDebtMaxTolerance':'一个月','splitDebtFirstPay':'800','deltaTime':' ','interest':'50'}
 
-t = TreeStage1(profile=None)
+t = TreeStage1(profile=profile)
 
 
 print(t.current_node_name)
