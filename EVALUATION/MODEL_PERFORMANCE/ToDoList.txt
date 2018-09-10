@@ -1,0 +1,11 @@
+1. n-fold cross validation
+interface
+
+2. f1 score
+'micro':
+Calculate metrics globally by counting the total true positives, false negatives and false positives.
+
+'macro':
+Calculate metrics for each label, and find their unweighted mean. This does not take label imbalance into account.
+
+'weighted':

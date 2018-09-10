@@ -13,7 +13,10 @@ import gc
 # from googleapiclient.discovery import build
 import sys,os
 model_list = ['CutDebt','IDClassifier','IfKnowDebtor','Installment','WillingToPay','ConfirmLoan',]
-sys.path.append(os.path.join(os.path.dirname(__file__),'../classifier/models/time_pattern/'))
+# sys.path.append(os.path.join(os.path.dirname(__file__),'../classifier/models/time_pattern/'))
+# from time_pattern import TimePattern
+
+sys.path.append(os.path.join(os.path.dirname(__file__),'../classifier/models/time_extractor/'))
 from time_pattern import TimePattern
 
 jieba.load_userdict(os.path.join(os.path.dirname(__file__), "../MLModel/code/WordCut/userdict.txt"))

@@ -3,7 +3,8 @@
 import jieba
 import numpy as np
 import sys,os
-tpattern_path = '../time_pattern/'
+# tpattern_path = '../time_pattern/'
+tpattern_path = '../time_extractor/'
 sys.path.append(os.path.join(os.path.dirname(__file__), tpattern_path))
 from time_pattern import TimePattern
 env_path = '../../env/'
