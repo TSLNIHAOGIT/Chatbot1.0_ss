@@ -28,6 +28,7 @@ class BaseClassifier:
         """
         self._load_model(**model)
         self.log = None
+        self.re_time = TimePattern(logAppendName=self.__class__.__name__)
         
     def warm_up(self):
         self.other.classify('')
@@ -78,6 +79,29 @@ class BaseClassifier:
                 'time_extract':time_extract,
                 'lower_bounder_hour':lower_bounder_hour,
                 'upper_bounder_hour':upper_bounder_hour}
+    
+    def preds_ml(self,sentence,removeTime=True):
+        if self.log is None:
+            self.log = Logger(self.__class__.__name__,level=ENV.MODEL_LOG_LEVEL.value).logger
+        if removeTime:
+            sentence = self.re_time.remove_time(sentence)
+        sentence = jieba.cut(sentence, cut_all = False)
+        sentence = ' '.join(sentence)
+        matrix = self.tfidf.transform([sentence])
+        self.log.debug('In transfered tfidf, the number of words in vocalbulary is: {}'.format(len(matrix.data)))
+        result = np.vstack((self.svc.predict_proba(matrix),
+                                 self.logistic.predict_proba(matrix),
+                                 self.nb.predict_proba(matrix)))
+        
+        av_pred = np.mean(result, axis = 0)
+        max_pred = np.max(av_pred, axis = 0)
+        max_arg = np.argmax(av_pred)
+        response = None
+        label = max_arg
+        if label == 2:
+            response = self.other.classify(sentence)
+            label = response['label']
+        return label,result,av_pred,response
         
     
 
@@ -95,31 +119,17 @@ class IDClassifier(BaseClassifier):
         input: sentence - type string
         return label
         """
-        if self.log is None:
-            self.log = Logger(self.__class__.__name__,level=ENV.MODEL_LOG_LEVEL.value).logger
-        sentence = jieba.cut(sentence, cut_all = False)
-        sentence = ' '.join(sentence)
-        matrix = self.tfidf.transform([sentence])
-        self.log.debug('In transfered tfidf, the number of words in vocalbulary is: {}'.format(len(matrix.data)))
-        result = np.vstack((self.svc.predict_proba(matrix),
-                                 self.logistic.predict_proba(matrix),
-                                 self.nb.predict_proba(matrix)))
-        
-        av_pred = np.mean(result, axis = 0)
-        max_pred = np.max(av_pred, axis = 0)
-        max_arg = np.argmax(av_pred)
-        response = None
-        label = max_arg
-        if label == 2:
-            response = self.other.classify(sentence)
-            label = response['label']
+        ml_label,result,av_pred,response = self.preds_ml(sentence)
+        label = ml_label
         if debug:
-            dictionary = {'label': label, 'pred_prob': result, 'av_pred': av_pred,'other_response':response}
+            dictionary = {'label': ml_label, 'pred_prob': result,
+                          'av_pred': av_pred,'other_response':response,'ml_label':ml_label}
         else:
             if response is not None:
                 response = float(max(response['av_pred']))
             av_pred_value = float(max(av_pred))
-            dictionary = {'label': label, 'av_pred': av_pred_value,'other_response':response}
+            dictionary = {'label': label, 'av_pred': av_pred_value,
+                          'other_response':response,'ml_label':ml_label}
         self.log.debug('Final Pred label is: {}'.format(label))
         dictionary.update({self.label_meaning:self.label_meaning_map.get(label,'null')})
         return dictionary
@@ -141,31 +151,17 @@ class IfKnowDebtor(BaseClassifier):
         input: sentence - type string
         return label
         """
-        if self.log is None:
-            self.log = Logger(self.__class__.__name__,level=ENV.MODEL_LOG_LEVEL.value).logger
-        sentence = jieba.cut(sentence, cut_all = False)
-        sentence = ' '.join(sentence)
-        matrix = self.tfidf.transform([sentence])
-        self.log.debug('In transfered tfidf, the number of words in vocalbulary is: {}'.format(len(matrix.data)))
-        result = np.vstack((self.svc.predict_proba(matrix),
-                                 self.logistic.predict_proba(matrix),
-                                 self.nb.predict_proba(matrix)))
-        
-        av_pred = np.mean(result, axis = 0)
-        max_pred = np.max(av_pred, axis = 0)
-        max_arg = np.argmax(av_pred)
-        response = None
-        label = max_arg
-        if label == 2:
-            response = self.other.classify(sentence)
-            label = response['label']
+        ml_label,result,av_pred,response = self.preds_ml(sentence)
+        label = ml_label
         if debug:
-            dictionary = {'label': label, 'pred_prob': result, 'av_pred': av_pred,'other_response':response}
+            dictionary = {'label': label, 'pred_prob': result,
+                          'av_pred': av_pred,'other_response':response,'ml_label':ml_label}
         else:
             if response is not None:
                 response = float(max(response['av_pred']))
             av_pred_value = float(max(av_pred))
-            dictionary = {'label': label, 'av_pred': av_pred_value,'other_response':response}
+            dictionary = {'label': label, 'av_pred': av_pred_value,
+                          'other_response':response,'ml_label':ml_label}
         
         self.log.debug('Final Pred label is: {}'.format(label))
         dictionary.update({self.label_meaning:self.label_meaning_map.get(label,'null')})
@@ -179,7 +175,6 @@ class ConfirmLoan(BaseClassifier):
     
     def __init__(self,**model):
         super().__init__(**model)
-        self.re_time = TimePattern()
         self.label_meaning = 'ifAdmitLoan'
         self.label_meaning_map = {0:'y',1:'n'}
         
@@ -192,38 +187,18 @@ class ConfirmLoan(BaseClassifier):
         if len(time_extract) == 1(within short time) --> jump to n103
             other --> jump to n15
         """
-        if self.log is None:
-            self.log = Logger(self.__class__.__name__,level=ENV.MODEL_LOG_LEVEL.value).logger
-
-        # remove time pattern from setence
-        sentence = self.re_time.remove_time(sentence)
-        sentence = jieba.cut(sentence, cut_all = False)
-        sentence = ' '.join(sentence)
-        matrix = self.tfidf.transform([sentence])
-        self.log.debug('In transfered tfidf, the number of words in vocalbulary is: {}'.format(len(matrix.data)))
-        result = np.vstack((self.svc.predict_proba(matrix),
-                                 self.logistic.predict_proba(matrix),
-                                 self.nb.predict_proba(matrix)))
-        
-        av_pred = np.mean(result, axis = 0)
-        max_pred = np.max(av_pred, axis = 0)
-        max_arg = np.argmax(av_pred)
-        response = None
-        label = max_arg
-        if label == 2:
-            response = self.other.classify(sentence)
-            label = response['label']
-        time_extract = []
+        ml_label,result,av_pred,response = self.preds_ml(sentence)
+        label = ml_label
      
-       
-    
         if debug:
-            dictionary = {'label': label, 'pred_prob': result, 'av_pred': av_pred,'other_response':response}
+            dictionary = {'label': label, 'pred_prob': result, 
+                          'av_pred': av_pred,'other_response':response,'ml_label':ml_label}
         else:
             if response is not None:
                 response = float(max(response['av_pred']))
             av_pred_value = float(max(av_pred))
-            dictionary = {'label': label, 'av_pred': av_pred_value,'other_response':response}
+            dictionary = {'label': label, 'av_pred': av_pred_value,
+                          'other_response':response,'ml_label':ml_label}
         dictionary.update({'timeExtract':time_extract})
         self.log.debug('Final Pred label is: {}'.format(label))
         dictionary.update({self.label_meaning:self.label_meaning_map.get(label,'null')})
@@ -236,7 +211,6 @@ class ConfirmLoan(BaseClassifier):
 class WillingToPay(BaseClassifier):
     def __init__(self,**model):
         super().__init__(**model)
-        self.re_time = TimePattern()
         self.label_meaning = 'ifWillingToPay'
         self.label_meaning_map = {0:'y',1:'n',10:'confirmAgain'}
     
@@ -267,6 +241,11 @@ class WillingToPay(BaseClassifier):
         lower_bounder_hour = time_result['lower_bounder_hour']
         upper_bounder_hour = time_result['upper_bounder_hour']
         response = None
+        
+        ml_label,result,av_pred,response = self.preds_ml(sentence)
+        label = ml_label
+        
+        
         if time_label == 2:   
             min_time = time_extract[0]['gapH']
             for each in time_extract[1:]:
@@ -279,30 +258,12 @@ class WillingToPay(BaseClassifier):
             else:
                 label = 1
                 
-            dictionary = {'label': label, 'av_pred': 1.0,'other_response':0.0,'timeExtract':time_extract} 
+            dictionary.update({'label': label, 'av_pred': 1.0,
+                          'other_response':0.0,'timeExtract':time_extract,'ml_label':ml_label})
             dictionary.update({self.label_meaning:self.label_meaning_map.get(label,'null')})
             return dictionary
         else:    
-            # ML model process
-            # remove time pattern from setence
-            sentence = self.re_time.remove_time(sentence)
-            sentence = jieba.cut(sentence, cut_all = False)
-            sentence = ' '.join(sentence)
-            matrix = self.tfidf.transform([sentence])
-            self.log.debug('In transfered tfidf, the number of words in vocalbulary is: {}'.format(len(matrix.data)))
-            result = np.vstack((self.svc.predict_proba(matrix),
-                                     self.logistic.predict_proba(matrix),
-                                     self.nb.predict_proba(matrix)))
-
-            av_pred = np.mean(result, axis = 0)
-            max_pred = np.max(av_pred, axis = 0)
-            max_arg = np.argmax(av_pred)
-            label = max_arg
             
-
-            if label == 2:
-                response = self.other.classify(sentence)
-                label = response['label']
             # interact with regular expression
             if (time_label == 2) and (label != 1):
                 label = 10
@@ -314,12 +275,14 @@ class WillingToPay(BaseClassifier):
                 label = 1
                 dictionary.update({'add_sentiment':1})
             if debug:
-                dictionary = {'label': label, 'pred_prob': result, 'av_pred': av_pred,'other_response':response}
+                dictionary.update({'label': label, 'pred_prob': result, 
+                              'av_pred': av_pred,'other_response':response,'ml_label':ml_label})
             else:
                 if response is not None:
                     response = float(max(response['av_pred']))
                 av_pred_value = float(max(av_pred))
-                dictionary = {'label': label, 'av_pred': av_pred_value,'other_response':response}
+                dictionary.update({'label': label, 'av_pred': av_pred_value,
+                              'other_response':response,'ml_label':ml_label})
             dictionary.update({'timeExtract':time_extract})
             self.log.debug('Final Pred label is: {}'.format(label))
             dictionary.update({self.label_meaning:self.label_meaning_map.get(label,'null')})
@@ -331,7 +294,6 @@ class WillingToPay(BaseClassifier):
 class CutDebt(BaseClassifier):
     def __init__(self,**model):
         super().__init__(**model)
-        self.re_time = TimePattern()
         self.label_meaning = 'ifAcceptCutDebt'
         self.label_meaning_map = {0:'y',1:'n'}
         
@@ -358,6 +320,8 @@ class CutDebt(BaseClassifier):
         upper_bounder_hour = time_result['upper_bounder_hour']
         response = None
         
+        ml_label,result,av_pred,response = self.preds_ml(sentence)
+        label = ml_label
             
         if time_label == 2:   
             min_time = time_extract[0]['gapH']
@@ -371,29 +335,12 @@ class CutDebt(BaseClassifier):
             else:
                 label = 1
                 
-            dictionary = {'label': label, 'av_pred': 1.0,'other_response':0.0,'timeExtract':time_extract} 
+            dictionary = {'label': label, 'av_pred': 1.0,
+                          'other_response':0.0,'timeExtract':time_extract,'ml_label':ml_label} 
             dictionary.update({self.label_meaning:self.label_meaning_map.get(label,'null')})
             return dictionary
         else:
-            # remove time pattern from setence
-            sentence = self.re_time.remove_time(sentence)
-            sentence = jieba.cut(sentence, cut_all = False)
-            sentence = ' '.join(sentence)
-            matrix = self.tfidf.transform([sentence])
-            self.log.debug('In transfered tfidf, the number of words in vocalbulary is: {}'.format(len(matrix.data)))
-            result = np.vstack((self.svc.predict_proba(matrix),
-                                     self.logistic.predict_proba(matrix),
-                                     self.nb.predict_proba(matrix)))
 
-            av_pred = np.mean(result, axis = 0)
-            max_pred = np.max(av_pred, axis = 0)
-            max_arg = np.argmax(av_pred)
-            label = max_arg
-            if label == 2:
-                response = self.other.classify(sentence)
-                label = response['label']
-
-            dictionary = {'label': label, 'pred_prob': result, 'av_pred': av_pred}
             # interact with regular expression
             if (time_label == 2) and (label != 1):
                 label = 10
@@ -402,15 +349,17 @@ class CutDebt(BaseClassifier):
             if time_label == 11:
                 label = 1
             elif time_label == 12:
-                label = 1
                 dictionary.update({'add_sentiment':1})
+                label = 1
             if debug:
-                dictionary = {'label': label, 'pred_prob': result, 'av_pred': av_pred,'other_response':response}
+                dictionary.update({'label': label, 'pred_prob': result, 
+                              'av_pred': av_pred,'other_response':response,'ml_label':ml_label})
             else:
                 if response is not None:
                     response = float(max(response['av_pred']))
                 av_pred_value = float(max(av_pred))
-                dictionary = {'label': label, 'av_pred': av_pred_value,'other_response':response}
+                dictionary.update({'label': label, 'av_pred': av_pred_value,
+                              'other_response':response,'ml_label':ml_label})
             dictionary.update({'timeExtract':time_extract})
             self.log.debug('Final Pred label is: {}'.format(label))
             dictionary.update({self.label_meaning:self.label_meaning_map.get(label,'null')})
@@ -421,7 +370,6 @@ class CutDebt(BaseClassifier):
 class Installment(BaseClassifier):
     def __init__(self,**model):
         super().__init__(**model)
-        self.re_time = TimePattern()
         self.label_meaning = 'ifAcceptInstallment'
         self.label_meaning_map = {0:'y',1:'n'}
         
@@ -448,6 +396,9 @@ class Installment(BaseClassifier):
         lower_bounder_hour = time_result['lower_bounder_hour']
         upper_bounder_hour = time_result['upper_bounder_hour']
         response = None
+        
+        ml_label,result,av_pred,response = self.preds_ml(sentence)
+        label = ml_label
             
         if time_label == 2:   
             min_time = time_extract[0]['gapH']
@@ -461,30 +412,12 @@ class Installment(BaseClassifier):
             else:
                 label = 1
                 
-            dictionary = {'label': label, 'av_pred': 1.0,'other_response':0.0,'timeExtract':time_extract} 
+            dictionary.update({'label': label, 'av_pred': 1.0,
+                          'other_response':0.0,'timeExtract':time_extract,'ml_label':ml_label})
             dictionary.update({self.label_meaning:self.label_meaning_map.get(label,'null')})
             return dictionary
         else:
-            # remove time pattern from setence
-            sentence = self.re_time.remove_time(sentence)
-            sentence = jieba.cut(sentence, cut_all = False)
-            sentence = ' '.join(sentence)
-            matrix = self.tfidf.transform([sentence])
-            self.log.debug('In transfered tfidf, the number of words in vocalbulary is: {}'.format(len(matrix.data)))
-            result = np.vstack((self.svc.predict_proba(matrix),
-                                     self.logistic.predict_proba(matrix),
-                                     self.nb.predict_proba(matrix)))
 
-            av_pred = np.mean(result, axis = 0)
-            max_pred = np.max(av_pred, axis = 0)
-            max_arg = np.argmax(av_pred)
-            label = max_arg
-
-            if label == 2:
-                response = self.other.classify(sentence)
-                label = response['label']
-
-            dictionary = {'label': label, 'pred_prob': result, 'av_pred': av_pred}
             ####### interact with Regular expression
             if time_label == 11:
                 label = 1
@@ -492,12 +425,14 @@ class Installment(BaseClassifier):
                 label = 1
                 dictionary.update({'add_sentiment':1})
             if debug:
-                dictionary = {'label': label, 'pred_prob': result, 'av_pred': av_pred,'other_response':response}
+                dictionary.update({'label': label, 'pred_prob': result, 
+                              'av_pred': av_pred,'other_response':response,'ml_label':ml_label})
             else:
                 if response is not None:
                     response = float(max(response['av_pred']))
                 av_pred_value = float(max(av_pred))
-                dictionary = {'label': label, 'av_pred': av_pred_value,'other_response':response}
+                dictionary.update({'label': label, 'av_pred': av_pred_value,
+                              'other_response':response,'ml_label':ml_label})
             dictionary.update({'timeExtract':time_extract})
             self.log.debug('Final Pred label is: {}'.format(label))
             dictionary.update({self.label_meaning:self.label_meaning_map.get(label,'null')})

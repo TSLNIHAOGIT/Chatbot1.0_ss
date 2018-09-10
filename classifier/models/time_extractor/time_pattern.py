@@ -72,11 +72,12 @@ class CHN2NUM:
 
 
 class TimePattern:
-    def __init__(self):
+    def __init__(self,logAppendName=''):
         self.CHN2NUM = CHN2NUM()
         self._init_reExpression()
         self.log = None
         self.evlEngine = None
+        self.logAppendName = logAppendName
         self._load_mapping(os.path.join(os.path.dirname(__file__), 'mapping.csv'))
         
     def _init_post(self):
@@ -84,8 +85,9 @@ class TimePattern:
         once below two are initialized, it will be locked by thread and thus cannot be pickled.
         Need to initialize later.
         """
-        self.log = Logger(self.__class__.__name__,level=ENV.MODEL_LOG_LEVEL.value).logger
-        self.evlEngine = EvlTimeExpEngine()
+        logName = self.__class__.__name__ + self.logAppendName
+        self.log = Logger(logName,level=ENV.MODEL_LOG_LEVEL.value).logger
+        self.evlEngine = EvlTimeExpEngine(logAppendName=self.logAppendName)
         
     def _load_mapping(self, pattern_path):
         df = pd.read_csv(pattern_path)
@@ -734,14 +736,16 @@ class TimePattern:
                     
     
 class EvlTimeExpEngine:
-    def __init__(self,tz=None):
-        self.log = Logger(self.__class__.__name__,level=ENV.MODEL_LOG_LEVEL.value).logger
+    def __init__(self,tz=None,logAppendName=''):
+        self.logAppendName = logAppendName
+        logName = self.__class__.__name__+logAppendName
+        self.log = Logger(logName,level=ENV.MODEL_LOG_LEVEL.value).logger
         self._set_timeZone(tz)
         
     def _set_timeZone(self,tz=None):
         if tz is None:
             tz = ENV.TIMEZONE.value
-            self.log.info('Time Zone is set from ENV: {}'.format(tz))
+            self.log.info('Time Zone is set from ENV: {}. Classifier: {}'.format(tz,self.logAppendName))
         tz = ENV.TIMEZONE.value
         self.tz = pytz.timezone(tz)
         self.delta = self.tz.utcoffset(dt.datetime.utcnow())
