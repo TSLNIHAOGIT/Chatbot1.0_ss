@@ -48,8 +48,10 @@ def clean_label(label):
 def load_others(classifier,
                 label_list,
                 other_fe = ['text','label'],
-                other_path = '../../data/others/labels/{}/mock_up_data_new.csv',
-                feedback_path='../../data/others/labels/{}/mock_up_data_feedback.csv'):
+                other_path = os.path.join(os.path.dirname(__file__),'../MLModel/data/others/labels/{}/mock_up_data_new.csv'),
+                
+                feedback_path=os.path.join(os.path.dirname(__file__),
+                                           '../MLModel/data/others/labels/{}/mock_up_data_feedback.csv')):
     """
     classifier: eg, CutDebt
     label_list: eg, [102, 103, 104, 106, 107, 108, 109, 110]
@@ -67,6 +69,9 @@ def load_others(classifier,
     return others
                 
 def load_data(load_fb=True):
+    """
+     load_fb mean loading feedback data
+    """
     if load_fb:
         main_data_fb = 'mock_up_data_feedback.csv'
     path = os.path.join(os.path.dirname(__file__),'../MLModel/data/{}/')

@@ -466,6 +466,13 @@ class TimePattern:
                     h = CHN2Hour(text[:index_hour],rela=False)
                     h = ShiftTime(h,hours)
                     mm = Minute2Exp(text[index_hour+1:])
+                    try:
+                        if int(h) >= 24:
+                            h='23'
+                            mm='59'
+                    except Exception as e:
+                        pass
+                    
                 # case 2. 几个小时
                 elif len(re.findall(reg_period,text)) > 0:
                     replace = '!H!'
@@ -858,6 +865,8 @@ class EvlTimeExpEngine:
                 reconstruct = False
             except ValueError as e:
                 self.log.error(e)
+                self.log.error('year:{},Week:{},weekday:{}'.format(y,W,w))
+                self.log.info('will change to next year')
                 W -= 1
                 shift += 24 * 60 * 7
             
@@ -947,6 +956,8 @@ class EvlTimeExpEngine:
                 reconstruct = False
             except ValueError as e:
                 self.log.error(e)
+                self.log.error('year:{},month:{},day:{}'.format(y,m,d))
+                self.log.info('will change to next month')
                 d -= 1
                 shift += 24 * 60
             
@@ -985,29 +996,3 @@ class EvlTimeExpEngine:
         M = exp[H_index+2:M_index]
         S = exp[M_index+2:S_index]
         return {'y':y, 'W':W, 'w':w, 'H':H, 'M':M, 'S':S}
-        
-        
-        
-
-        
-        
-        
-    
-    
-        
-        
-        
-        
-    
-    
-        
-        
-        
-        
-
-        
-        
-        
-    
-    
-        
