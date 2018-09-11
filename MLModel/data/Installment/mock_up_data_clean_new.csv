@@ -1839,7 +1839,7 @@ yes,Installment,0
 这个时间内，肯定换不了,Installment,1
 这个时间内，肯定有问题,Installment,1
 这个时间内，肯定有麻烦了,Installment,1
-这个时间内，肯定没有问题,Installment,1
+这个时间内，肯定没有问题,Installment,0
 这个时间内，肯定还,Installment,0
 这个时间内，肯定还完,Installment,0
 这个时间内，问题大了,Installment,1
