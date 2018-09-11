@@ -79,7 +79,8 @@ def load_data(load_fb=True):
     strategy_mat_path = os.path.join(os.path.dirname(__file__),'../MLModel/data/others/strategy_mat_v1.csv')
     features = ['label','split_text']
     ori_data_main = {}
-    for each_model in tqdm(model_list):
+#     for each_model in tqdm(model_list):
+    for each_model in model_list:
         
         ori_data_main[each_model] = pd.read_csv(path.format(each_model) + main_data_name, encoding='utf8')
         ori_data_main[each_model] = ori_data_main[each_model][features]

@@ -8,6 +8,7 @@ from sklearn.naive_bayes import MultinomialNB
 from sklearn.model_selection import StratifiedKFold
 from sklearn.metrics import confusion_matrix
 import sys,os
+import gc
 
 sys.path.append(os.path.join(os.path.dirname(__file__), '../../classifier/models/ml_models'))
 from ml import *
@@ -244,7 +245,8 @@ def load_parameter(param_path):
         return df,df_fil.iloc[0]
     
 if __name__ == '__main__':
-    model = 'IDClassifier'
+    model = sys.argv[1]
+    print('Start grid search on: {}'.format(model))
     param_path = os.path.join(os.path.dirname(__file__), 'parameter/parameter_{}.csv')
     report_path = os.path.join(os.path.dirname(__file__), 'report/report_{}.csv')
     model_list = {
