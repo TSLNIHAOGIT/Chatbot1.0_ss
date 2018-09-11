@@ -39,6 +39,7 @@ class BaseClassifier:
         self.nb = model.get('nb')
         self.tfidf = model.get('tfidf')
         self.other = model.get('other')
+        self.weights = model.get('weights')
         # load jieba
         jieba_path = model.get('jieba_path')
         if jieba_path is not None:
@@ -92,8 +93,14 @@ class BaseClassifier:
         result = np.vstack((self.svc.predict_proba(matrix),
                                  self.logistic.predict_proba(matrix),
                                  self.nb.predict_proba(matrix)))
-        
-        av_pred = np.mean(result, axis = 0)
+        if self.weights is not None:
+            if len(self.weights) == result.shape[0]:
+                av_pred = result[0] * self.weights[0]
+                for r_idx in range(1,result.shape[0]):
+                    av_pred += result[r_idx] * self.weights[r_idx]
+                av_pred = av_pred / sum(self.weights)
+        else:
+            av_pred = np.mean(result, axis = 0)
         max_pred = np.max(av_pred, axis = 0)
         max_arg = np.argmax(av_pred)
         response = None
@@ -199,7 +206,6 @@ class ConfirmLoan(BaseClassifier):
             av_pred_value = float(max(av_pred))
             dictionary = {'label': label, 'av_pred': av_pred_value,
                           'other_response':response,'ml_label':ml_label}
-        dictionary.update({'timeExtract':time_extract})
         self.log.debug('Final Pred label is: {}'.format(label))
         dictionary.update({self.label_meaning:self.label_meaning_map.get(label,'null')})
         return dictionary
@@ -456,6 +462,7 @@ class ClassifierOther:
         self.logistic = model.get('logistic')
         self.nb = model.get('nb')
         self.tfidf = model.get('tfidf')
+        self.weights = model.get('weights')
         # load jieba
         jieba_path = model.get('jieba_path')
         if jieba_path is not None:
@@ -481,7 +488,16 @@ class ClassifierOther:
         
         result = np.vstack((self.svc.predict_proba(matrix),
                                  self.logistic.predict_proba(matrix),
-                                 self.nb.predict_proba(matrix)))
+                                 self.nb.predict_proba(matrix))) 
+        
+        if self.weights is not None:
+            if len(self.weights) == result.shape[0]:
+                av_pred = result[0] * self.weights[0]
+                for r_idx in range(1,result.shape[0]):
+                    av_pred += result[r_idx] * self.weights[r_idx]
+                av_pred = av_pred / sum(self.weights)
+        else:
+            av_pred = np.mean(result, axis = 0)
         
         av_pred = np.mean(result, axis = 0)
         max_pred = np.max(av_pred, axis = 0)
