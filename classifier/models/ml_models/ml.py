@@ -182,8 +182,10 @@ class ConfirmLoan(BaseClassifier):
     
     def __init__(self,**model):
         super().__init__(**model)
-        self.label_meaning = 'ifAdmitLoan'
-        self.label_meaning_map = {0:'y',1:'n'}
+        self.label_admitLoan = 'ifAdmitLoan'
+        self.label_payoff = 'ifAlreadyPayOff'
+        self.label_admitLoan_map = {0:'y',1:'n'}
+        self.label_payoff_map = {112:'y',0:'n',1:'n'}
         
     def classify(self, 
                  sentence,
@@ -207,7 +209,8 @@ class ConfirmLoan(BaseClassifier):
             dictionary = {'label': label, 'av_pred': av_pred_value,
                           'other_response':response,'ml_label':ml_label}
         self.log.debug('Final Pred label is: {}'.format(label))
-        dictionary.update({self.label_meaning:self.label_meaning_map.get(label,'null')})
+        dictionary.update({self.label_admitLoan:self.label_admitLoan_map.get(label,'null')})
+        dictionary.update({self.label_payoff:self.label_payoff_map.get(label,'null')})
         return dictionary
     
     
@@ -217,8 +220,10 @@ class ConfirmLoan(BaseClassifier):
 class WillingToPay(BaseClassifier):
     def __init__(self,**model):
         super().__init__(**model)
-        self.label_meaning = 'ifWillingToPay'
-        self.label_meaning_map = {0:'y',1:'n',10:'confirmAgain'}
+        self.label_will2Pay = 'ifWillingToPay'
+        self.label_will2Pay_map = {0:'y',1:'n',10:'confirmAgain'}
+        self.label_payoff = 'ifAlreadyPayOff'
+        self.label_payoff_map = {112:'y',0:'n',1:'n'}
     
         
         
@@ -291,7 +296,8 @@ class WillingToPay(BaseClassifier):
                               'other_response':response,'ml_label':ml_label})
             dictionary.update({'timeExtract':time_extract})
             self.log.debug('Final Pred label is: {}'.format(label))
-            dictionary.update({self.label_meaning:self.label_meaning_map.get(label,'null')})
+            dictionary.update({self.label_will2Pay:self.label_will2Pay_map.get(label,'null')})
+            dictionary.update({self.label_payoff:self.label_payoff_map.get(label,'null')})
             return dictionary
     
     
