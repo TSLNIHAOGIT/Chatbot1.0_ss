@@ -2,11 +2,11 @@ import sys,os
 sys.path.append('../../MLModel/code/OneClickTraining/')
 sys.path.append('../../MLModel/code/TreeModelV2/')
 
-# import sys,os
-# loader_path = '../../classifier/loader/'
-# sys.path.append(loader_path)
-# from loader import load_all
-# model_dict=load_all()
+import sys,os
+loader_path = '../../classifier/loader/'
+sys.path.append(loader_path)
+from loader import load_all
+model_dict=load_all()
 
 from MLModel.code.OneClickTraining.all_model_py import  *
 from MLModel.code.TreeModelV2.chatbotv1 import *

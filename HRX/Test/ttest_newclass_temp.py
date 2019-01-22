@@ -18,6 +18,7 @@ while True:
             break
         else:
             input_answer=input('请输入答案，退出该分类起请按ENTER：\n')
-            print(model_dict[input_cls_name].classify(input_answer))
+            ans=model_dict[input_cls_name].classify(input_answer)
+            print(ans)
             flag=input_answer
 

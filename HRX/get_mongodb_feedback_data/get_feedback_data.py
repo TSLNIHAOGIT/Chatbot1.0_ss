@@ -84,11 +84,11 @@ def put_data_to_train_set(df):
 
     pass
 if __name__=='__main__':
-    # df=get_db_sever()#读取并保存数据库数据到本地
-    #classifier
+    df=get_db_sever()#读取并保存数据库数据到本地
 
-    df_cleaned=pd.read_excel('feedback_data_cleaned.xls')
-    put_data_to_train_set(df_cleaned)
+
+    # df_cleaned=pd.read_excel('feedback_data_cleaned.xls')
+    # put_data_to_train_set(df_cleaned)
 
 
 
