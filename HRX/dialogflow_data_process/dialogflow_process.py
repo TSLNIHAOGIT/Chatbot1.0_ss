@@ -208,10 +208,11 @@ def main_user_old(path,cls_name,usersays0_json_name,usersays1_json_name):
         print('data_new_dict',data_new_dict)
         data_list.append(data_new_dict)
 
-    results_str = str(data_list)
-    print('results_str',results_str)
+    # results_str = str(data_list)
+    # print('results_str',results_str)
     with open('{}/{}'.format(path,usersays0_json_name),'w',encoding='utf8') as f:#chatbot_init-IDClassifier0_usersays_zh-cn.json
-        f.write(results_str)
+        # f.write(json.dumps(data_list, indent=4))
+        json.dump(data_list, f, ensure_ascii=False,indent=4)  # 和上面的效果一样
 
     #label1处理
     # data_list = chat_bot_data_update_user(path1)
@@ -227,12 +228,12 @@ def main_user_old(path,cls_name,usersays0_json_name,usersays1_json_name):
         print('data_new_dict', data_new_dict)
         data_list.append(data_new_dict)
 
-    results_str = str(data_list)
-    print('results_str', results_str)
+    # results_str = str(data_list)
+    # print('results_str', results_str)
     with open(
             '{}/{}'.format(path,usersays1_json_name),#chatbot_init-IDClassifier1_usersays_zh-cn.json
             'w', encoding='utf8') as f:
-        f.write(results_str)
+        json.dump(data_list, f, indent=4)
 
 
 
@@ -242,12 +243,13 @@ def main_user(path,cls_name=None,dataframe=None):
     for each in dataframe:
         each_dict=chat_bot_data_update_user(text=each)
         data_list.append(each_dict)
-    results_str = str(data_list)
+    # results_str = str(data_list)
 
     with open(
             '{}/{}_usersays_zh-cn.json'.format(path, cls_name),
             'w', encoding='utf8') as f:
-        f.write(results_str)
+        # f.write(results_str)
+        json.dump(data_list, f,ensure_ascii=False, indent=4)
 
 
 
@@ -266,7 +268,8 @@ def main_agent(path,cls_name=None,init=None,input_context=None,output_context=No
         with open(
                 '{}/{}.json'.format(path, cls_name),  # chatbot_init-IDClassifier1_usersays_zh-cn.json
                 'w', encoding='utf8') as f:
-            f.write(str(each_agent_json))
+            # f.write(str(each_agent_json))
+            json.dump(each_agent_json, f,ensure_ascii=False, indent=4)
 
 
 
@@ -325,7 +328,7 @@ if __name__=='__main__':
 
     path = '/Users/ozintel/Downloads/chatbot_temp/intents'
     # # ##############usersays数据填充 新的###########
-    cls_name_list=['init','IDClassifier',]#'IfKnowDebtor','ConfirmLoan','WillingToPay']#'WillingToPay','CutDebt','Installment'
+    cls_name_list=['init','IDClassifier','IfKnowDebtor','ConfirmLoan']#,'WillingToPay']#'WillingToPay','CutDebt','Installment'
     for each_cls_name in cls_name_list:
         if each_cls_name=='init':
             init_df=['go','开始','begin']
@@ -348,7 +351,7 @@ if __name__=='__main__':
 
 
 
-    # #########agent数据填充，还未做###########
+    # #########agent数据填充###########
     all_id = generateid(counts=20)
     for each_id in all_id:
         print('each',each_id)
@@ -358,7 +361,7 @@ if __name__=='__main__':
 
 
 
-    #init
+    #######################init###########################
     print('init')
     init='init'
     id = {'current_id': all_id[init][0],'parentId':None,'rootParentId':None}
@@ -379,18 +382,19 @@ if __name__=='__main__':
        **id)
 
     print('IDClassifier')
-    #IDClassifier
+    #######################IDClassifier############################
     #IDClassifier0
-    IDClassifier='IDClassifier'
-    id = {'current_id': all_id[IDClassifier][0],'parentId':all_id[init][0],'rootParentId':all_id[init][0]}
+    cls_name='IDClassifier'
+    p_name='init'
+    id = {'current_id': all_id[cls_name][0],'parentId':all_id[p_name][0],'rootParentId':all_id[init][0]}
     main_agent(
         path,
-        cls_name='{}0'.format(IDClassifier),
+        cls_name='{}0'.format(cls_name),
         init=False,
-        input_context=["{}-followup".format(init)],
+        input_context=["{}-followup".format(p_name)],
         output_context=[
             {
-                "name": "{}0-followup".format(IDClassifier),
+                "name": "{}0-followup".format(cls_name),
                 "parameters": {},
                 "lifespan": 1
             }
@@ -400,21 +404,98 @@ if __name__=='__main__':
         **id)
 
     # IDClassifier1
-    id = {'current_id': all_id[IDClassifier][1], 'parentId': all_id[init][0], 'rootParentId': all_id[init][0]}
+    id = {'current_id': all_id[cls_name][1], 'parentId': all_id[p_name][0], 'rootParentId': all_id[init][0]}
     main_agent(
         path,
-        cls_name='{}1'.format(IDClassifier),
+        cls_name='{}1'.format(cls_name),
         init=False,
-        input_context=["{}-followup".format(init)],
+        input_context=["{}-followup".format(p_name)],
         output_context=[
             {
-                "name": "{}1-followup".format(IDClassifier),
+                "name": "{}1-followup".format(cls_name),
                 "parameters": {},
                 "lifespan": 1
             }
         ],  # 列表里面是json
 
         input_data_speech=['请问你认识张三么？'],
+        **id)
+    ########################IfKnowDebtor############################
+    #IfKnowDebtor0
+    cls_name = 'IfKnowDebtor'
+    p_name = 'IDClassifier'
+    id = {'current_id': all_id[cls_name][0], 'parentId': all_id[p_name][1], 'rootParentId': all_id[init][0]}
+    main_agent(
+        path,
+        cls_name='{}0'.format(cls_name),
+        init=False,
+        input_context=["{}-followup".format('{}1'.format(p_name))],
+        output_context=[
+            {
+                "name": "{}0-followup".format(cls_name),
+                "parameters": {},
+                "lifespan": 1
+            }
+        ],  # 列表里面是json
+
+        input_data_speech=['麻烦转告张三让他还钱'],
+        **id)
+
+    # 1
+    id = {'current_id': all_id[cls_name][1], 'parentId': all_id[p_name][1], 'rootParentId': all_id[init][0]}
+    main_agent(
+        path,
+        cls_name='{}1'.format(cls_name),
+        init=False,
+        input_context=["{}-followup".format('{}1'.format(p_name))],
+        output_context=[
+            {
+                "name": "{}1-followup".format(cls_name),
+                "parameters": {},
+                "lifespan": 1
+            }
+        ],  # 列表里面是json
+
+        input_data_speech=['打扰您了，再见'],
+        **id)
+
+    ######################### ConfirmLoan############################
+    # 0
+    cls_name = 'ConfirmLoan'
+    p_name = 'IDClassifier'                              #############
+    id = {'current_id': all_id[cls_name][0], 'parentId': all_id[p_name][0], 'rootParentId': all_id[init][0]}
+    main_agent(
+        path,
+        cls_name='{}0'.format(cls_name),
+        init=False,
+        input_context=["{}-followup".format('{}0'.format(p_name))],#############
+        output_context=[
+            {
+                "name": "{}0-followup".format(cls_name),
+                "parameters": {},
+                "lifespan": 1
+            }
+        ],  # 列表里面是json
+
+        input_data_speech=['请在三天内还钱'],#############
+        **id)
+
+    # 1                                                  #############
+    id = {'current_id': all_id[cls_name][1], 'parentId': all_id[p_name][0], 'rootParentId': all_id[init][0]}
+    main_agent(
+        path,
+        cls_name='{}1'.format(cls_name),
+        init=False,
+        input_context=["{}-followup".format('{}0'.format(p_name))],##################
+        output_context=[
+            {
+                "name": "{}1-followup".format(cls_name),
+                "parameters": {},
+                "lifespan": 1
+            }
+        ],  # 列表里面是json
+
+        input_data_speech=['赖账你是赖不掉的'],#############
         **id)
 
 
