@@ -328,7 +328,7 @@ if __name__=='__main__':
 
     path = '/Users/ozintel/Downloads/chatbot_temp/intents'
     # # ##############usersays数据填充 新的###########
-    cls_name_list=['init','IDClassifier','IfKnowDebtor','ConfirmLoan']#,'WillingToPay']#'WillingToPay','CutDebt','Installment'
+    cls_name_list=['init','IDClassifier','IfKnowDebtor','ConfirmLoan','CutDebt','Installment','WillingToPay']#'WillingToPay','CutDebt','Installment'
     for each_cls_name in cls_name_list:
         if each_cls_name=='init':
             init_df=['go','开始','begin']
@@ -339,8 +339,25 @@ if __name__=='__main__':
             yes_df = df[df['label'] == 0]['split_text']
             no_df = df[df['label'] == 1]['split_text']
 
-            main_user(path, cls_name='{}0'.format(each_cls_name), dataframe=yes_df)
-            main_user(path, cls_name='{}1'.format(each_cls_name), dataframe=no_df)
+
+            # 在0时循环
+            cycle_cls_0 = []
+            if each_cls_name in cycle_cls_0:
+                 main_user(path, cls_name='{}0_0'.format(each_cls_name), dataframe=yes_df)
+                 main_user(path, cls_name='{}0_1'.format(each_cls_name), dataframe=yes_df)
+                 main_user(path, cls_name='{}0_2'.format(each_cls_name), dataframe=yes_df)
+            else:
+                 main_user(path, cls_name='{}0'.format(each_cls_name), dataframe=yes_df)
+
+
+            #在1时循环
+            cycle_cls_1=['ConfirmLoan','WillingToPay','CutDebt','Installment']
+            if each_cls_name in cycle_cls_1:
+                main_user(path, cls_name='{}1_0'.format(each_cls_name), dataframe=no_df)
+                main_user(path, cls_name='{}1_1'.format(each_cls_name), dataframe=no_df)
+                main_user(path, cls_name='{}1_2'.format(each_cls_name), dataframe=no_df)
+            else:
+                main_user(path, cls_name='{}1'.format(each_cls_name), dataframe=no_df)
 
 
 
@@ -480,16 +497,16 @@ if __name__=='__main__':
         input_data_speech=['请在三天内还钱'],#############
         **id)
 
-    # 1                                                  #############
+    # 1  循环0次                                                #############
     id = {'current_id': all_id[cls_name][1], 'parentId': all_id[p_name][0], 'rootParentId': all_id[init][0]}
     main_agent(
         path,
-        cls_name='{}1'.format(cls_name),
+        cls_name='{}1_0'.format(cls_name),
         init=False,
         input_context=["{}-followup".format('{}0'.format(p_name))],##################
         output_context=[
             {
-                "name": "{}1-followup".format(cls_name),
+                "name": "{}1_0-followup".format(cls_name),
                 "parameters": {},
                 "lifespan": 1
             }
@@ -497,9 +514,263 @@ if __name__=='__main__':
 
         input_data_speech=['赖账你是赖不掉的'],#############
         **id)
+    # 1  循环1次         #############                      #############
+    id = {'current_id': all_id[cls_name][2], 'parentId': all_id[cls_name][1], 'rootParentId': all_id[init][0]}
+    main_agent(
+        path,
+        cls_name='{}1_1'.format(cls_name),#####
+        init=False,
+        input_context=["{}-followup".format('{}1_0'.format(cls_name))],  ##################
+        output_context=[
+            {
+                "name": "{}1_1-followup".format(cls_name),#####
+                "parameters": {},
+                "lifespan": 1
+            }
+        ],  # 列表里面是json
 
+        input_data_speech=['身份证这些信息都是你的,赖账是不可能的'],  #############
+        **id)
 
+    # 1  循环2次         #############                      #############
+    id = {'current_id': all_id[cls_name][3], 'parentId': all_id[cls_name][2], 'rootParentId': all_id[init][0]}
+    main_agent(
+        path,
+        cls_name='{}1_2'.format(cls_name),  #####
+        init=False,
+        input_context=["{}-followup".format('{}1_1'.format(cls_name))],  ##################
+        output_context=[
+            {
+                "name": "{}1_2-followup".format(cls_name),  #####
+                "parameters": {},
+                "lifespan": 1
+            }
+        ],  # 列表里面是json
 
+        input_data_speech=['既然你不承认，那只能到法院见'],  #############
+        **id)
+
+    ######################### WillingToPay############################
+    # 0
+    cls_name = 'WillingToPay'
+    p_name = 'ConfirmLoan'  #############
+    id = {'current_id': all_id[cls_name][0], 'parentId': all_id[p_name][0], 'rootParentId': all_id[init][0]}
+    main_agent(
+        path,
+        cls_name='{}0'.format(cls_name),
+        init=False,
+        input_context=["{}-followup".format('{}0'.format(p_name))],  #############
+        output_context=[
+            {
+                "name": "{}0-followup".format(cls_name),
+                "parameters": {},
+                "lifespan": 1
+            }
+        ],  # 列表里面是json
+
+        input_data_speech=['还款可以用手机app,感谢您的配合再见'],  #############
+        **id)
+
+    # 1  循环0次                                                #############
+    id = {'current_id': all_id[cls_name][1], 'parentId': all_id[p_name][0], 'rootParentId': all_id[init][0]}
+    main_agent(
+        path,
+        cls_name='{}1_0'.format(cls_name),
+        init=False,
+        input_context=["{}-followup".format('{}0'.format(p_name))],  ##################
+        output_context=[
+            {
+                "name": "{}1_0-followup".format(cls_name),
+                "parameters": {},
+                "lifespan": 1
+            }
+        ],  # 列表里面是json
+
+        input_data_speech=['你已经脱了这么久了，请赶快还钱1'],  #############
+        **id)
+    # 1  循环1次         #############                      #############
+    id = {'current_id': all_id[cls_name][2], 'parentId': all_id[cls_name][1], 'rootParentId': all_id[init][0]}
+    main_agent(
+        path,
+        cls_name='{}1_1'.format(cls_name),  #####
+        init=False,
+        input_context=["{}-followup".format('{}1_0'.format(cls_name))],  ##################
+        output_context=[
+            {
+                "name": "{}1_1-followup".format(cls_name),  #####
+                "parameters": {},
+                "lifespan": 1
+            }
+        ],  # 列表里面是json
+
+        input_data_speech=['你已经脱了这么久了，请赶快还钱2'],  #############
+        **id)
+
+    # 1  循环2次         #############                      #############
+    id = {'current_id': all_id[cls_name][3], 'parentId': all_id[cls_name][2], 'rootParentId': all_id[init][0]}
+    main_agent(
+        path,
+        cls_name='{}1_2'.format(cls_name),  #####
+        init=False,
+        input_context=["{}-followup".format('{}1_1'.format(cls_name))],  ##################
+        output_context=[
+            {
+                "name": "{}1_2-followup".format(cls_name),  #####
+                "parameters": {},
+                "lifespan": 1
+            }
+        ],  # 列表里面是json
+
+        input_data_speech=['那给你减免你看可以么'],  #############
+        **id)
+
+    ######################### CutDebt############################
+    # 0
+    cls_name = 'CutDebt'
+    p_name = 'WillingToPay'  #############
+    id = {'current_id': all_id[cls_name][0], 'parentId': all_id[p_name][3], 'rootParentId': all_id[init][0]}
+    main_agent(
+        path,
+        cls_name='{}0'.format(cls_name),
+        init=False,
+        input_context=["{}-followup".format('{}0'.format(p_name))],  #############
+        output_context=[
+            {
+                "name": "{}0-followup".format(cls_name),
+                "parameters": {},
+                "lifespan": 1
+            }
+        ],  # 列表里面是json
+
+        input_data_speech=['还款可以用手机app,感谢您的配合再见'],  #############
+        **id)
+
+    # 1  循环0次                                                #############
+    id = {'current_id': all_id[cls_name][1], 'parentId': all_id[p_name][3], 'rootParentId': all_id[init][0]}
+    main_agent(
+        path,
+        cls_name='{}1_0'.format(cls_name),
+        init=False,
+        input_context=["{}-followup".format('{}1_2'.format(p_name))],  ##################
+        output_context=[
+            {
+                "name": "{}1_0-followup".format(cls_name),
+                "parameters": {},
+                "lifespan": 1
+            }
+        ],  # 列表里面是json
+
+        input_data_speech=['已经给你减免，请赶快还钱1'],  #############
+        **id)
+    # 1  循环1次         #############                      #############
+    id = {'current_id': all_id[cls_name][2], 'parentId': all_id[cls_name][1], 'rootParentId': all_id[init][0]}
+    main_agent(
+        path,
+        cls_name='{}1_1'.format(cls_name),  #####
+        init=False,
+        input_context=["{}-followup".format('{}1_0'.format(cls_name))],  ##################
+        output_context=[
+            {
+                "name": "{}1_1-followup".format(cls_name),  #####
+                "parameters": {},
+                "lifespan": 1
+            }
+        ],  # 列表里面是json
+
+        input_data_speech=['已经给你减免，请赶快还钱2'],  #############
+        **id)
+
+    # 1  循环2次         #############                      #############
+    id = {'current_id': all_id[cls_name][3], 'parentId': all_id[cls_name][2], 'rootParentId': all_id[init][0]}
+    main_agent(
+        path,
+        cls_name='{}1_2'.format(cls_name),  #####
+        init=False,
+        input_context=["{}-followup".format('{}1_1'.format(cls_name))],  ##################
+        output_context=[
+            {
+                "name": "{}1_2-followup".format(cls_name),  #####
+                "parameters": {},
+                "lifespan": 1
+            }
+        ],  # 列表里面是json
+
+        input_data_speech=['考虑到实际情况，给你分期付款可以么'],  #############
+        **id)
+
+    #########################Installment############################
+    # 0
+    cls_name = 'Installment'
+    p_name = 'CutDebt'  #############
+    id = {'current_id': all_id[cls_name][0], 'parentId': all_id[p_name][3], 'rootParentId': all_id[init][0]}
+    main_agent(
+        path,
+        cls_name='{}0'.format(cls_name),
+        init=False,
+        input_context=["{}-followup".format('{}0'.format(p_name))],  #############
+        output_context=[
+            {
+                "name": "{}0-followup".format(cls_name),
+                "parameters": {},
+                "lifespan": 1
+            }
+        ],  # 列表里面是json
+
+        input_data_speech=['还款可以用手机app,感谢您的配合再见'],  #############
+        **id)
+
+    # 1  循环0次                                                #############
+    id = {'current_id': all_id[cls_name][1], 'parentId': all_id[p_name][3], 'rootParentId': all_id[init][0]}
+    main_agent(
+        path,
+        cls_name='{}1_0'.format(cls_name),
+        init=False,
+        input_context=["{}-followup".format('{}1_2'.format(p_name))],  ##################
+        output_context=[
+            {
+                "name": "{}1_0-followup".format(cls_name),
+                "parameters": {},
+                "lifespan": 1
+            }
+        ],  # 列表里面是json
+
+        input_data_speech=['已经给你分期付款了，请赶快还钱1'],  #############
+        **id)
+    # 1  循环1次         #############                      #############
+    id = {'current_id': all_id[cls_name][2], 'parentId': all_id[cls_name][1], 'rootParentId': all_id[init][0]}
+    main_agent(
+        path,
+        cls_name='{}1_1'.format(cls_name),  #####
+        init=False,
+        input_context=["{}-followup".format('{}1_0'.format(cls_name))],  ##################
+        output_context=[
+            {
+                "name": "{}1_1-followup".format(cls_name),  #####
+                "parameters": {},
+                "lifespan": 1
+            }
+        ],  # 列表里面是json
+
+        input_data_speech=['已经给你分期付款了，请赶快还钱2'],  #############
+        **id)
+
+    # 1  循环2次         #############                      #############
+    id = {'current_id': all_id[cls_name][3], 'parentId': all_id[cls_name][2], 'rootParentId': all_id[init][0]}
+    main_agent(
+        path,
+        cls_name='{}1_2'.format(cls_name),  #####
+        init=False,
+        input_context=["{}-followup".format('{}1_1'.format(cls_name))],  ##################
+        output_context=[
+            {
+                "name": "{}1_2-followup".format(cls_name),  #####
+                "parameters": {},
+                "lifespan": 1
+            }
+        ],  # 列表里面是json
+
+        input_data_speech=['既然这些都不行，法院见吧'],  #############
+        **id)
 
 
 
