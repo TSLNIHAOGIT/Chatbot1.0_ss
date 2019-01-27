@@ -79,7 +79,7 @@ def chat_bot_data_update_agent(
 
 
 
-def generateid(counts=20):
+def generateid(counts=20,all_others_name=None):
     # cls_name_list = ['init','IDClassifier', 'IfKnowDebtor', 'ConfirmLoan',
     #                  'WillingToPay','CutDebt','Installment']  # 'WillingToPay','CutDebt','Installment'
 
@@ -91,6 +91,7 @@ def generateid(counts=20):
                             'CutDebt0','CutDebt1_0','CutDebt1_1','CutDebt1_2','CutDebt1_3',
                             'Installment0','Installment1_0','Installment1_1','Installment1_2','Installment1_3'
                             ]
+    cls_name_extend_list.extend(all_others_name)
 
     all_cls_id={}
     for each_cls in cls_name_extend_list:
@@ -113,8 +114,8 @@ def generateid(counts=20):
         all_cls_id[each_cls]=list(id_set)
     return all_cls_id
 
-def id_dependency():
-    all_id=generateid(counts=5)
+def id_dependency(all_others_name=None):
+    all_id=generateid(counts=5,all_others_name=all_others_name)
 
 
     '''
@@ -218,6 +219,26 @@ need_category Installment
                           'output_context_name': "{}-followup".format('IDClassifier1'),
                           'parentId': all_id['init'][0], 'input_context': ["{}-followup".format('init')],
                           'rootParentId': all_id['init'][0], 'input_data_speech': ['请问你认识张三么']},
+        'IDClassifier103': {'current_id': all_id['IDClassifier103'][0],
+                            'output_context_name': "{}-followup".format('IDClassifier103'),
+                            'parentId': all_id['init'][0], 'input_context': ["{}-followup".format('init')],
+                            'rootParentId': all_id['init'][0], 'input_data_speech': ['我说你是张三么']},
+        'IDClassifier104': {'current_id': all_id['IDClassifier104'][0],
+                          'output_context_name': "{}-followup".format('IDClassifier104'),
+                          'parentId': all_id['init'][0], 'input_context': ["{}-followup".format('init')],
+                          'rootParentId': all_id['init'][0], 'input_data_speech': ['好的，我稍后联系你，再见']},
+
+        'IDClassifier107': {'current_id': all_id['IDClassifier107'][0],
+                            'output_context_name': "{}-followup".format('IDClassifier107'),
+                            'parentId': all_id['init'][0], 'input_context': ["{}-followup".format('init')],
+                            'rootParentId': all_id['init'][0], 'input_data_speech': ['我是江苏逸能的催收员，请问你是张三么']},
+        'IDClassifier109': {'current_id': all_id['IDClassifier109'][0],
+                            'output_context_name': "{}-followup".format('IDClassifier109'),
+                            'parentId': all_id['init'][0], 'input_context': ["{}-followup".format('init')],
+                            'rootParentId': all_id['init'][0], 'input_data_speech': ['不要和我扯东扯西的，你是张三么']},
+
+
+
 
         'IfKnowDebtor0': {'current_id': all_id['IfKnowDebtor0'][0],
                           'output_context_name': "{}-followup".format('IfKnowDebtor0'),
@@ -227,6 +248,30 @@ need_category Installment
              'output_context_name': "{}-followup".format('IfKnowDebtor1'),
              'parentId': all_id['IDClassifier1'][0], 'input_context': ["{}-followup".format('IDClassifier1')],
              'rootParentId': all_id['init'][0], 'input_data_speech': ['打扰您了，再见']},
+
+        'IfKnowDebtor103': {'current_id': all_id['IfKnowDebtor103'][0],
+                          'output_context_name': "{}-followup".format('IfKnowDebtor103'),
+                          'parentId': all_id['IDClassifier1'][0],
+                          'input_context': ["{}-followup".format('IDClassifier1')],
+                          'rootParentId': all_id['init'][0], 'input_data_speech': ['我说请问你认识张三么？']},
+        'IfKnowDebtor104': {'current_id': all_id['IfKnowDebtor104'][0],
+                          'output_context_name': "{}-followup".format('IfKnowDebtor104'),
+                          'parentId': all_id['IDClassifier1'][0],
+                          'input_context': ["{}-followup".format('IDClassifier1')],
+                          'rootParentId': all_id['init'][0], 'input_data_speech': ['好的，我稍后联系你']},
+        'IfKnowDebtor107': {'current_id': all_id['IfKnowDebtor107'][0],
+                          'output_context_name': "{}-followup".format('IfKnowDebtor107'),
+                          'parentId': all_id['IDClassifier1'][0],
+                          'input_context': ["{}-followup".format('IDClassifier1')],
+                          'rootParentId': all_id['init'][0], 'input_data_speech': ['我是江苏逸能的催收员，请问你认识张三么']},
+        'IfKnowDebtor109': {'current_id': all_id['IfKnowDebtor109'][0],
+                          'output_context_name': "{}-followup".format('IfKnowDebtor109'),
+                          'parentId': all_id['IDClassifier1'][0],
+                          'input_context': ["{}-followup".format('IDClassifier1')],
+                          'rootParentId': all_id['init'][0], 'input_data_speech': ['不要和我扯东扯西的，你认识张三么']},
+
+
+
 
         'ConfirmLoan0': {'current_id': all_id['ConfirmLoan0'][0],
              'output_context_name': "{}-followup".format('ConfirmLoan0'),
@@ -244,6 +289,42 @@ need_category Installment
              'output_context_name': "{}-followup".format('ConfirmLoan1_2'),
              'parentId': all_id['ConfirmLoan1_1'][0], 'input_context': ["{}-followup".format('ConfirmLoan1_1')],
              'rootParentId': all_id['init'][0], 'input_data_speech': ['既然你死不承认，只能法庭见了']},
+
+        'ConfirmLoan103': {'current_id': all_id['ConfirmLoan103'][0],
+                           'output_context_name': "{}-followup".format('ConfirmLoan103'),
+                           'parentId': all_id['IDClassifier0'][0],
+                           'input_context': ["{}-followup".format('IDClassifier0')],
+                           'rootParentId': all_id['init'][0], 'input_data_speech': ['我说当初你借钱是原因一直没有还呢']},
+        'ConfirmLoan104': {'current_id': all_id['ConfirmLoan104'][0],
+                           'output_context_name': "{}-followup".format('ConfirmLoan104'),
+                           'parentId': all_id['IDClassifier0'][0],
+                           'input_context': ["{}-followup".format('IDClassifier0')],
+                           'rootParentId': all_id['init'][0], 'input_data_speech': ['好的，稍后我在联系您']},
+        'ConfirmLoan107': {'current_id': all_id['ConfirmLoan107'][0],
+                           'output_context_name': "{}-followup".format('ConfirmLoan107'),
+                           'parentId': all_id['IDClassifier0'][0],
+                           'input_context': ["{}-followup".format('IDClassifier0')],
+                           'rootParentId': all_id['init'][0], 'input_data_speech': ['我都说了是江苏逸能的催收员，你借钱当初为什么不还呢']},
+        'ConfirmLoan108': {'current_id': all_id['ConfirmLoan108'][0],
+                           'output_context_name': "{}-followup".format('ConfirmLoan108'),
+                           'parentId': all_id['IDClassifier0'][0],
+                           'input_context': ["{}-followup".format('IDClassifier0')],
+                           'rootParentId': all_id['init'][0], 'input_data_speech': ['还款的话可以用手机app,感谢您的配合再见。']},
+        'ConfirmLoan109': {'current_id': all_id['ConfirmLoan109'][0],
+                           'output_context_name': "{}-followup".format('ConfirmLoan109'),
+                           'parentId': all_id['IDClassifier0'][0],
+                           'input_context': ["{}-followup".format('IDClassifier0')],
+                           'rootParentId': all_id['init'][0], 'input_data_speech': ['你别更我扯东扯西扯西的，我问你当时借钱为什么不还？']},
+        'ConfirmLoan112': {'current_id': all_id['ConfirmLoan112'][0],
+                           'output_context_name': "{}-followup".format('ConfirmLoan112'),
+                           'parentId': all_id['IDClassifier0'][0],
+                           'input_context': ["{}-followup".format('IDClassifier0')],
+                           'rootParentId': all_id['init'][0], 'input_data_speech': ['我们将核对您的信息，稍后和你联系，感谢您的配合再见。']},
+
+
+
+
+
 
         'WillingToPay0': {'current_id': all_id['WillingToPay0'][0],
                            'output_context_name': "{}-followup".format('WillingToPay0'),
@@ -265,6 +346,55 @@ need_category Installment
              'parentId': all_id['WillingToPay1_1'][0],
              'input_context': ["{}-followup".format('WillingToPay1_1')],
              'rootParentId': all_id['init'][0], 'input_data_speech': ['实在不行，我给你减免可以吧？']},
+        'WillingToPay102': {'current_id': all_id['WillingToPay102'][0],
+                            'output_context_name': "{}-followup".format('WillingToPay102'),
+                            'parentId': all_id['ConfirmLoan0'][0],
+                            'input_context': ["{}-followup".format('ConfirmLoan0')],
+                            'rootParentId': all_id['init'][0], 'input_data_speech': ['您的app上有详细的借款信息，现在要求您明天下午三点还钱']},
+        'WillingToPay103': {'current_id': all_id['WillingToPay103'][0],
+                            'output_context_name': "{}-followup".format('WillingToPay103'),
+                            'parentId': all_id['ConfirmLoan0'][0],
+                            'input_context': ["{}-followup".format('ConfirmLoan0')],
+                            'rootParentId': all_id['init'][0], 'input_data_speech': ['我说你借款这么久了，现在要求您明天下午三点还钱。']},
+        'WillingToPay104': {'current_id': all_id['WillingToPay104'][0],
+                            'output_context_name': "{}-followup".format('WillingToPay104'),
+                            'parentId': all_id['ConfirmLoan0'][0],
+                            'input_context': ["{}-followup".format('ConfirmLoan0')],
+                            'rootParentId': all_id['init'][0], 'input_data_speech': ['好的，稍后我在和您联系']},
+        'WillingToPay105': {'current_id': all_id['WillingToPay105'][0],
+                            'output_context_name': "{}-followup".format('WillingToPay105'),
+                            'parentId': all_id['ConfirmLoan0'][0],
+                            'input_context': ["{}-followup".format('ConfirmLoan0')],
+                            'rootParentId': all_id['init'][0], 'input_data_speech': ['我们主管稍后和你联系，感谢您的配合再见。']},
+        'WillingToPay106': {'current_id': all_id['WillingToPay106'][0],
+                            'output_context_name': "{}-followup".format('WillingToPay106'),
+                            'parentId': all_id['ConfirmLoan0'][0],
+                            'input_context': ["{}-followup".format('ConfirmLoan0')],
+                            'rootParentId': all_id['init'][0], 'input_data_speech': ['不要模模糊糊的，明天下午三点到底能不能还钱']},
+        'WillingToPay107': {'current_id': all_id['WillingToPay107'][0],
+                            'output_context_name': "{}-followup".format('WillingToPay107'),
+                            'parentId': all_id['ConfirmLoan0'][0],
+                            'input_context': ["{}-followup".format('ConfirmLoan0')],
+                            'rootParentId': all_id['init'][0], 'input_data_speech': ['我也已经说了我是江苏逸能的催收员，现在要求您明天下午三点还钱']},
+        'WillingToPay108': {'current_id': all_id['WillingToPay108'][0],
+                            'output_context_name': "{}-followup".format('WillingToPay108'),
+                            'parentId': all_id['ConfirmLoan0'][0],
+                            'input_context': ["{}-followup".format('ConfirmLoan0')],
+                            'rootParentId': all_id['init'][0], 'input_data_speech': ['还款你可以使用手机app,明天下午三点到底能不能还钱']},
+        'WillingToPay109': {'current_id': all_id['WillingToPay109'][0],
+                            'output_context_name': "{}-followup".format('WillingToPay109'),
+                            'parentId': all_id['ConfirmLoan0'][0],
+                            'input_context': ["{}-followup".format('ConfirmLoan0')],
+                            'rootParentId': all_id['init'][0], 'input_data_speech': ['不要扯东扯西的，现在要求您明天下午三点还钱']},
+        'WillingToPay112': {'current_id': all_id['WillingToPay112'][0],
+                            'output_context_name': "{}-followup".format('WillingToPay112'),
+                            'parentId': all_id['ConfirmLoan0'][0],
+                            'input_context': ["{}-followup".format('ConfirmLoan0')],
+                            'rootParentId': all_id['init'][0], 'input_data_speech': ['我们将再次核对您的信息，稍后和您联系，再见。']},
+
+
+
+
         'CutDebt0': {'current_id': all_id['CutDebt0'][0],
              'output_context_name': "{}-followup".format('CutDebt0'),
              'parentId': all_id['WillingToPay1_2'][0],
@@ -285,6 +415,50 @@ need_category Installment
              'parentId': all_id['CutDebt1_1'][0],
              'input_context': ["{}-followup".format('CutDebt1_1')],
              'rootParentId': all_id['init'][0], 'input_data_speech': ['考虑到实际情况，我们给你分期付款可以么？']},
+        'CutDebt102': {'current_id': all_id['CutDebt102'][0],
+                       'output_context_name': "{}-followup".format('CutDebt102'),
+                       'parentId': all_id['WillingToPay1_2'][0],
+                       'input_context': ["{}-followup".format('WillingToPay1_2')],
+                       'rootParentId': all_id['init'][0], 'input_data_speech': ['app上有您详细的借款信息，现在已经给你减免了，请还钱']},
+        'CutDebt103': {'current_id': all_id['CutDebt103'][0],
+                       'output_context_name': "{}-followup".format('CutDebt103'),
+                       'parentId': all_id['WillingToPay1_2'][0],
+                       'input_context': ["{}-followup".format('WillingToPay1_2')],
+                       'rootParentId': all_id['init'][0], 'input_data_speech': ['我说已经给你减免优惠，请马上还钱']},
+        'CutDebt104': {'current_id': all_id['CutDebt104'][0],
+                       'output_context_name': "{}-followup".format('CutDebt104'),
+                       'parentId': all_id['WillingToPay1_2'][0],
+                       'input_context': ["{}-followup".format('WillingToPay1_2')],
+                       'rootParentId': all_id['init'][0], 'input_data_speech': ['好的，稍后我们在联系您。']},
+        'CutDebt106': {'current_id': all_id['CutDebt106'][0],
+                       'output_context_name': "{}-followup".format('CutDebt106'),
+                       'parentId': all_id['WillingToPay1_2'][0],
+                       'input_context': ["{}-followup".format('WillingToPay1_2')],
+                       'rootParentId': all_id['init'][0], 'input_data_speech': ['不要模模糊糊的，给你减免了到底能不能还钱？']},
+        'CutDebt107': {'current_id': all_id['CutDebt107'][0],
+                       'output_context_name': "{}-followup".format('CutDebt107'),
+                       'parentId': all_id['WillingToPay1_2'][0],
+                       'input_context': ["{}-followup".format('WillingToPay1_2')],
+                       'rootParentId': all_id['init'][0], 'input_data_speech': ['我已经说了，我是江苏逸能的催收员，已经给你减免了，请还钱']},
+        'CutDebt108': {'current_id': all_id['CutDebt108'][0],
+                       'output_context_name': "{}-followup".format('CutDebt108'),
+                       'parentId': all_id['WillingToPay1_2'][0],
+                       'input_context': ["{}-followup".format('WillingToPay1_2')],
+                       'rootParentId': all_id['init'][0], 'input_data_speech': ['还款你可以使用手机app,已经给你减免了，现在请还钱']},
+        'CutDebt109': {'current_id': all_id['CutDebt109'][0],
+                       'output_context_name': "{}-followup".format('CutDebt109'),
+                       'parentId': all_id['WillingToPay1_2'][0],
+                       'input_context': ["{}-followup".format('WillingToPay1_2')],
+                       'rootParentId': all_id['init'][0], 'input_data_speech': ['不要扯动扯西的，已经给你减免了，请还钱']},
+        'CutDebt110': {'current_id': all_id['CutDebt110'][0],
+                       'output_context_name': "{}-followup".format('CutDebt110'),
+                       'parentId': all_id['WillingToPay1_2'][0],
+                       'input_context': ["{}-followup".format('WillingToPay1_2')],
+                       'rootParentId': all_id['init'][0], 'input_data_speech': ['已经给你减免了，请还钱']},
+
+
+
+
         'Installment0': {'current_id': all_id['Installment0'][0],
              'output_context_name': "{}-followup".format('Installment0'),
              'parentId': all_id['CutDebt1_2'][0],
@@ -305,6 +479,53 @@ need_category Installment
              'parentId': all_id['Installment1_1'][0],
              'input_context': ["{}-followup".format('Installment1_1')],
              'rootParentId': all_id['init'][0], 'input_data_speech': ['这也不行，那也不行，只能法院见了。']},
+
+        'Installment102': {'current_id': all_id['Installment102'][0],
+                           'output_context_name': "{}-followup".format('Installment102'),
+                           'parentId': all_id['CutDebt1_2'][0],
+                           'input_context': ["{}-followup".format('CutDebt1_2')],
+                           'rootParentId': all_id['init'][0], 'input_data_speech': ['app上有您详细的借款信息，已经给你分期了，赶快还钱']},
+        'Installment103': {'current_id': all_id['Installment103'][0],
+                           'output_context_name': "{}-followup".format('Installment103'),
+                           'parentId': all_id['CutDebt1_2'][0],
+                           'input_context': ["{}-followup".format('CutDebt1_2')],
+                           'rootParentId': all_id['init'][0], 'input_data_speech': ['我说给你分期优惠了，赶快还钱']},
+        'Installment104': {'current_id': all_id['Installment104'][0],
+                           'output_context_name': "{}-followup".format('Installment104'),
+                           'parentId': all_id['CutDebt1_2'][0],
+                           'input_context': ["{}-followup".format('CutDebt1_2')],
+                           'rootParentId': all_id['init'][0], 'input_data_speech': ['好的，稍后我在联系您']},
+        'Installment106': {'current_id': all_id['Installment106'][0],
+                           'output_context_name': "{}-followup".format('Installment106'),
+                           'parentId': all_id['CutDebt1_2'][0],
+                           'input_context': ["{}-followup".format('CutDebt1_2')],
+                           'rootParentId': all_id['init'][0], 'input_data_speech': ['不要模模糊糊的，已经给你分期了，到底能不能还钱？']},
+        'Installment107': {'current_id': all_id['Installment107'][0],
+                           'output_context_name': "{}-followup".format('Installment107'),
+                           'parentId': all_id['CutDebt1_2'][0],
+                           'input_context': ["{}-followup".format('CutDebt1_2')],
+                           'rootParentId': all_id['init'][0], 'input_data_speech': ['我说过了我是江苏逸能的催收员，已经给你分期了，赶快还钱']},
+        'Installment108': {'current_id': all_id['Installment108'][0],
+                           'output_context_name': "{}-followup".format('Installment108'),
+                           'parentId': all_id['CutDebt1_2'][0],
+                           'input_context': ["{}-followup".format('CutDebt1_2')],
+                           'rootParentId': all_id['init'][0], 'input_data_speech': ['还款你可以使用手机app,已经给你分期了，到底能不能还钱']},
+        'Installment109': {'current_id': all_id['Installment109'][0],
+                           'output_context_name': "{}-followup".format('Installment109'),
+                           'parentId': all_id['CutDebt1_2'][0],
+                           'input_context': ["{}-followup".format('CutDebt1_2')],
+                           'rootParentId': all_id['init'][0], 'input_data_speech': ['不要扯动扯西的，已经给你分期了，赶快还钱']},
+        'Installment110': {'current_id': all_id['Installment110'][0],
+                           'output_context_name': "{}-followup".format('Installment110'),
+                           'parentId': all_id['CutDebt1_2'][0],
+                           'input_context': ["{}-followup".format('CutDebt1_2')],
+                           'rootParentId': all_id['init'][0], 'input_data_speech': ['已经给你分期了，赶快还钱']},
+
+
+
+
+
+
         # '': {'current_id': all_id[''][0],
         #      'output_context_name': "{}-followup".format(''),
         #      'parentId': all_id[''][0],
@@ -478,6 +699,7 @@ if __name__=='__main__':
     path = '/Users/ozintel/Downloads/chatbot_temp/intents'
     # # ##############usersays数据填充 新的###########
     cls_name_list=['init','IDClassifier','IfKnowDebtor','ConfirmLoan','CutDebt','Installment','WillingToPay']#'WillingToPay','CutDebt','Installment'
+    all_others_cls_name=[]
     for each_cls_name in cls_name_list:
         if each_cls_name=='init':
             init_df=['go','开始','begin']
@@ -509,10 +731,14 @@ if __name__=='__main__':
                 main_user(path, cls_name='{}1'.format(each_cls_name), dataframe=no_df)
 
             # all_others_label = [102, 103, 104, 105, 106, 107, 108, 109, 110, 112]
-            # each_cls_others_label = df_others['label'].unique()
-            # for each_label in each_cls_others_label:
-            #     each_label_text=df_others.loc[df_others['label'] == each_label, 'text']
-            #     main_user(path, cls_name='{}{}'.format(each_cls_name,each_label), dataframe=no_df)
+            each_cls_others_label = df_others['label'].unique()
+            for each_label in each_cls_others_label:
+                if each_label==113:
+                    continue
+                cls_name='{}{}'.format(each_cls_name,each_label)
+                all_others_cls_name.append(cls_name)
+                each_label_text=df_others.loc[df_others['label'] == each_label, 'text']
+                main_user(path, cls_name=cls_name, dataframe=each_label_text)
 
 
 
@@ -542,10 +768,12 @@ if __name__=='__main__':
                             'CutDebt0', 'CutDebt1_0', 'CutDebt1_1', 'CutDebt1_2',  # 'CutDebt1_3',
                             'Installment0', 'Installment1_0', 'Installment1_1', 'Installment1_2',  # 'Installment1_3'
                             ]
-    denpendecy=id_dependency()
+    cls_name_extend_list.extend(all_others_cls_name)
+    denpendecy=id_dependency(all_others_name=all_others_cls_name)
 
 
     for each_cls_extend in cls_name_extend_list:
+
         print('each_cls_extend',each_cls_extend)
         id={'current_id': denpendecy[each_cls_extend]['current_id'],
             'parentId':denpendecy[each_cls_extend]['parentId'],
@@ -563,7 +791,7 @@ if __name__=='__main__':
                 {
                     "name":denpendecy[each_cls_extend]['output_context_name'] ,
                     "parameters": {},
-                    "lifespan": 4
+                    "lifespan": 8
                 }
             ],  # 列表里面是json
 
