@@ -379,6 +379,7 @@ if __name__=='__main__':
 
 
     #######################init###########################
+    ##input——context和output_context可以不填写；只把id，parentid,rootid填写正确即可
     print('init')
     init='init'
     id = {'current_id': all_id[init][0],'parentId':None,'rootParentId':None}
@@ -391,7 +392,7 @@ if __name__=='__main__':
                 {
                   "name": "{}-followup".format(init),
                   "parameters": {},
-                  "lifespan": 1
+                  "lifespan": 6
                 }
               ],  # 列表里面是json
 
@@ -413,7 +414,7 @@ if __name__=='__main__':
             {
                 "name": "{}0-followup".format(cls_name),
                 "parameters": {},
-                "lifespan": 1
+                "lifespan": 6
             }
         ],  # 列表里面是json
 
@@ -431,7 +432,7 @@ if __name__=='__main__':
             {
                 "name": "{}1-followup".format(cls_name),
                 "parameters": {},
-                "lifespan": 1
+                "lifespan": 6
             }
         ],  # 列表里面是json
 
@@ -451,7 +452,7 @@ if __name__=='__main__':
             {
                 "name": "{}0-followup".format(cls_name),
                 "parameters": {},
-                "lifespan": 1
+                "lifespan": 6
             }
         ],  # 列表里面是json
 
@@ -469,7 +470,7 @@ if __name__=='__main__':
             {
                 "name": "{}1-followup".format(cls_name),
                 "parameters": {},
-                "lifespan": 1
+                "lifespan": 6
             }
         ],  # 列表里面是json
 
@@ -490,7 +491,7 @@ if __name__=='__main__':
             {
                 "name": "{}0-followup".format(cls_name),
                 "parameters": {},
-                "lifespan": 1
+                "lifespan": 6
             }
         ],  # 列表里面是json
 
@@ -508,7 +509,7 @@ if __name__=='__main__':
             {
                 "name": "{}1_0-followup".format(cls_name),
                 "parameters": {},
-                "lifespan": 1
+                "lifespan": 6
             }
         ],  # 列表里面是json
 
@@ -525,7 +526,7 @@ if __name__=='__main__':
             {
                 "name": "{}1_1-followup".format(cls_name),#####
                 "parameters": {},
-                "lifespan": 1
+                "lifespan": 6
             }
         ],  # 列表里面是json
 
@@ -543,7 +544,7 @@ if __name__=='__main__':
             {
                 "name": "{}1_2-followup".format(cls_name),  #####
                 "parameters": {},
-                "lifespan": 1
+                "lifespan": 6
             }
         ],  # 列表里面是json
 
@@ -564,7 +565,7 @@ if __name__=='__main__':
             {
                 "name": "{}0-followup".format(cls_name),
                 "parameters": {},
-                "lifespan": 1
+                "lifespan": 6
             }
         ],  # 列表里面是json
 
@@ -582,7 +583,7 @@ if __name__=='__main__':
             {
                 "name": "{}1_0-followup".format(cls_name),
                 "parameters": {},
-                "lifespan": 1
+                "lifespan": 6
             }
         ],  # 列表里面是json
 
@@ -599,7 +600,7 @@ if __name__=='__main__':
             {
                 "name": "{}1_1-followup".format(cls_name),  #####
                 "parameters": {},
-                "lifespan": 1
+                "lifespan": 6
             }
         ],  # 列表里面是json
 
@@ -617,7 +618,7 @@ if __name__=='__main__':
             {
                 "name": "{}1_2-followup".format(cls_name),  #####
                 "parameters": {},
-                "lifespan": 1
+                "lifespan": 6
             }
         ],  # 列表里面是json
 
@@ -638,7 +639,7 @@ if __name__=='__main__':
             {
                 "name": "{}0-followup".format(cls_name),
                 "parameters": {},
-                "lifespan": 1
+                "lifespan": 6
             }
         ],  # 列表里面是json
 
@@ -656,7 +657,7 @@ if __name__=='__main__':
             {
                 "name": "{}1_0-followup".format(cls_name),
                 "parameters": {},
-                "lifespan": 1
+                "lifespan": 6
             }
         ],  # 列表里面是json
 
@@ -673,7 +674,7 @@ if __name__=='__main__':
             {
                 "name": "{}1_1-followup".format(cls_name),  #####
                 "parameters": {},
-                "lifespan": 1
+                "lifespan": 6
             }
         ],  # 列表里面是json
 
@@ -691,7 +692,7 @@ if __name__=='__main__':
             {
                 "name": "{}1_2-followup".format(cls_name),  #####
                 "parameters": {},
-                "lifespan": 1
+                "lifespan": 6
             }
         ],  # 列表里面是json
 
@@ -712,7 +713,7 @@ if __name__=='__main__':
             {
                 "name": "{}0-followup".format(cls_name),
                 "parameters": {},
-                "lifespan": 1
+                "lifespan": 6
             }
         ],  # 列表里面是json
 
@@ -730,7 +731,7 @@ if __name__=='__main__':
             {
                 "name": "{}1_0-followup".format(cls_name),
                 "parameters": {},
-                "lifespan": 1
+                "lifespan": 6
             }
         ],  # 列表里面是json
 
@@ -747,7 +748,7 @@ if __name__=='__main__':
             {
                 "name": "{}1_1-followup".format(cls_name),  #####
                 "parameters": {},
-                "lifespan": 1
+                "lifespan": 6
             }
         ],  # 列表里面是json
 
@@ -765,7 +766,7 @@ if __name__=='__main__':
             {
                 "name": "{}1_2-followup".format(cls_name),  #####
                 "parameters": {},
-                "lifespan": 1
+                "lifespan": 6
             }
         ],  # 列表里面是json
 

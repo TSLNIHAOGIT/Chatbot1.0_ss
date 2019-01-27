@@ -28,5 +28,7 @@ def generateid_list(counts=10000):
         id_set.add(id)
     print('len(id_set)',len(id_set))
     return list(id_set)
+
+
 if __name__=='__main__':
     print(generateid_list())
