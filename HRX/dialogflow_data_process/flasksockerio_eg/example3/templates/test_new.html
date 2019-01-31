@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Hello</title>
+    <style>
+        .hide{
+            display: none;
+        }
+        /*让内容是否隐藏*/
+        .menu{
+            height: 38px;
+            background-color: #eeeeee;
+            line-height: 38px;
+        }
+        .active{
+            background-color: brown;
+        }
+        .menu .menu-item{
+            float: left;
+            border-right: 1px solid red;
+            padding: 0 5px;
+            cursor: pointer;
+            /*让指针在这个位置是一个小手的形状*/
+        }
+        .content{
+            min-height: 100px;
+            border: 1px solid #eeeeee;
+        }
+    </style>
+
+    <script type="text/javascript" src="http://apps.bdimg.com/libs/jquery/2.1.1/jquery.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/1.5.1/socket.io.min.js"></script>
+</head>
+<body>
+alert('123')
+<div style="width: 700px;margin:0 auto">
+
+        <div class="menu">
+            <!--自定义属性a，与相应的内容b进行对应，以此来控制显示的内容-->
+            <!--正常这个位置可以用索引进行处理，在此仅仅用了自定义标签-->
+            <div  class="menu-item active" a="1">菜单一</div>
+            <div  class="menu-item" a="2">菜单二</div>
+            <div  class="menu-item" a="3">菜单三</div>
+        </div>
+        <div class="content">
+            <div b="1">内容一</div>
+            <div class="hide"  b="2">内容二</div>
+            <div class="hide" b="3">内容三</div>
+
+        </div>
+
+    </div>
+    <!--<script src="http://apps.bdimg.com/libs/jquery/2.1.1/jquery.min.js"></script>-->
+    <!--导入Jquery的模块-->
+    <script>
+    document.write("Hello World!");
+//        设置点击事件
+        $('.menu-item').click(function(){
+            $(this).addClass('active').siblings().removeClass('active');
+//            点击的话就让自己加上active样式,其他去掉这个样式
+            var target = $(this).attr('a');
+//            获取a属性的值,将这个值赋给b，找到b为这个值得标签去掉hide，其他加上hide进行隐藏
+            $('.content').children("[b='"+ target+"']").removeClass('hide').siblings().addClass('hide');
+        });
+    </script>
+<h2 id="t"></h2>
+<script type="text/javascript">
+alert('欢迎来到test_new.html flask-socketio');
+document.write("flask");
+    $(document).ready(function() {
+        namespace = '/test_conn';
+        var socket = io.connect(location.protocol + '//' + document.domain + ':' + location.port + namespace);
+        socket.on('server_response', function(res) {
+            var t = res.data;
+            $("#t").text(t);
+
+
+
+        });
+
+    });
+</script>
+</body>
+</html>

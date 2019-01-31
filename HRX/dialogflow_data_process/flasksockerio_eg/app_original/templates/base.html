@@ -1,0 +1,14 @@
+<html>
+  <head>
+    {% if title %}
+    <title>{{ title }} - wetucao</title>
+    {% else %}
+    <title>Welcome to mwetucao</title>
+    {% endif %}
+  </head>
+  <body>
+    <div>我们吐槽: <a href="/index">主页</a></div>
+    <hr>
+    {% block content %}{% endblock %}
+  </body>
+</html>

@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Hello</title>
+
+
+    <script type="text/javascript" src="http://apps.bdimg.com/libs/jquery/2.1.1/jquery.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/1.5.1/socket.io.min.js"></script>
+</head>
+
+<body>
+
+
+<h2 id="t"></h2>
+
+<h1 id="t1"></h1>
+<script type="text/javascript">
+
+alert('欢迎来到flask-socketio');
+
+    $(document).ready(function() {
+        namespace = '/test_conn';
+        var socket = io.connect(location.protocol + '//' + document.domain + ':' + location.port + namespace);
+        socket.on('server_response1', function(res) {
+            var t = res.data;
+            $("#t").text(t);
+            $("#t1").text(t);
+
+
+        });
+
+    });
+</script>
+
+
+</body>
+</html>

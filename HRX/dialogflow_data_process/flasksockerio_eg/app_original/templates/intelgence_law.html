@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="zh">
+  <head>
+    <title>法律咨询预测</title>
+    <meta charset="UTF-8">
+
+    <link href="http://getbootstrap.com/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <link href="http://getbootstrap.com/examples/jumbotron-narrow/jumbotron-narrow.css" rel="stylesheet">
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+    <script type=text/javascript>
+            $(function() {
+              $('button#btnSubmit').bind('click', function() {
+                $.post('/predict', {
+                  query: $('textarea[name="inputQuery"]').val(),
+                }, function(data) {
+                  $('div#result').text(data);
+                });
+                return false;
+              });
+            });
+    </script>
+    <style>
+            #inputQuery{
+                min-height:100px;
+            }
+          .box-panel{
+            background:#f9f9f9;
+            border:solid 1px #ced4da;
+            padding:10px;
+            margin:10px 0;
+            font-size:14px;
+            color:#666;
+            border-radius: .25rem;
+          }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <div class="header">
+        <h3 class="text-muted">法律咨询预测</h3>
+      </div>
+      <div class="jumbotron">
+        <h1>咨询内容</h1>
+        <form class="form-query">
+          <textarea type="text" name="inputQuery" id="inputQuery" class="form-control" placeholder="Query" required autofocus></textarea>
+          <div class="box-panel" id = result></div>
+          <button id="btnSubmit" class="btn btn-lg btn-primary btn-block" type="button">Submit</button>
+        </form>
+      </div>
+      <footer class="footer">
+        <p>&copy; HRX Company 2017</p>
+      </footer>
+
+    </div>
+  </body>
+</html>
