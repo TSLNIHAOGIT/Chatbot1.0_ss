@@ -65,7 +65,7 @@ def chat_bot_data_update_agent(
             }
         ],
         "priority": 500000,
-        "webhookUsed": False,
+        "webhookUsed": True,
         "webhookForSlotFilling": False,
         "lastUpdate": 1548052711,
         "fallbackIntent": fallbackIntent,

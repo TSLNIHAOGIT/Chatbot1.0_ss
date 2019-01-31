@@ -1,6 +1,6 @@
 import dialogflow
 import json
-json_name='cryptoassistant-be67b-38e847ce6c0c.json'
+json_name='chatbot-example-new.json'#'cryptoassistant-be67b-38e847ce6c0c.json'
 with open(json_name) as f:
     auth=json.load(f)
     print(auth)
@@ -21,8 +21,7 @@ def detect_intent_texts(project_id, session_id, texts, language_code):
     session = session_client.session_path(project_id, session_id)
     print('Session path: {}\n'.format(session))
 
-    # for text in texts:
-    text = None#'go'
+    text = 'go'
     while True:
         if text:
 
