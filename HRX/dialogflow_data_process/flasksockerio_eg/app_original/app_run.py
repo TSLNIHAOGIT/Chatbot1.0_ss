@@ -69,6 +69,7 @@ profile_new = {'fullName': '王强', 'principal': '1,000', 'loanBeginDate': "201
 #     # return render_template('test_new.html')#chatbot_original.html
 #     return render_template('chatbot_luo.html')#test.html
 
+#这个是让dialogflow请求的 #要先进行内网穿透才能让dialogflow访问， cd /usr/local/bin  然后ngrok http 5000
 @app.route('/get_response', methods=['GET', 'POST'])
 def get_response():
 
@@ -119,6 +120,7 @@ def detect_intent_texts(project_id, session_id, text, language_code):
 
 
 @app.route('/')
+
 @app.route('/index')
 def index0():
     return render_template(

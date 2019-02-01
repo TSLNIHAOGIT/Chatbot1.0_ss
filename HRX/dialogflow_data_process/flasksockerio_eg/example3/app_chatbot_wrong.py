@@ -1,22 +1,16 @@
-from gevent import monkey
-monkey.patch_all()
+# from gevent import monkey
+# monkey.patch_all()
 
+#使用eventlet是可行的，gevent 不可行
+import eventlet
+eventlet.patcher.monkey_patch(select=True, socket=True)
 
-from flask import Flask, render_template
 from flask_socketio import SocketIO,emit
-from threading import Lock
+# from threading import Lock
 import re
 
 from flask import Flask, request, jsonify, render_template
-import os
-import dialogflow
-import requests
-import json
-import pusher
-from flask import Flask
-from flask import jsonify
-from flask import request
-import requests
+
 import json
 import pandas as pd
 df_huashu=pd.read_excel('../../huashu0.xlsx')
@@ -28,6 +22,7 @@ with open(json_name) as f:
 
 import os
 os.environ["GOOGLE_APPLICATION_CREDENTIALS"]=json_name
+os.environ["GOOGLE_CLOUD_DISABLE_GRPC"]=str(1)
 
 
 
@@ -38,12 +33,12 @@ import time
 import requests
 import urllib
 import random
-async_mode = None
+# async_mode = None
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'secret!'
 socketio = SocketIO(app)
-thread = None
-thread_lock = Lock()
+# thread = None
+# thread_lock = Lock()
 
 
 
@@ -136,6 +131,7 @@ def client_msg(msg):
     print('msg',msg)#msg {'data': '%u4F60%u597D'}
     sentence = msg.get('data')
     sentence=decode(sentence)
+    print('sentence',sentence)
     sentence=detect_intent_texts(project_id=auth['project_id'], session_id='unique', text=sentence, language_code='zh-CN')
 
     if sentence=='断开':
@@ -147,4 +143,4 @@ def client_msg(msg):
 
 
 if __name__ == '__main__':
-    socketio.run(app, debug=True,port=6006)
+    socketio.run(app, debug=True,port=5000)
