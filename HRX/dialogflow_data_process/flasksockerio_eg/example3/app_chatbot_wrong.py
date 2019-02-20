@@ -6,13 +6,15 @@ import eventlet
 eventlet.patcher.monkey_patch(select=True, socket=True)
 
 from flask_socketio import SocketIO,emit
-# from threading import Lock
+from threading import Lock
 import re
 
 from flask import Flask, request, jsonify, render_template
 
 import json
 import pandas as pd
+
+import dialogflow_v2 as dialogflow
 df_huashu=pd.read_excel('../../huashu0.xlsx')
 
 json_name='../../diagflow_client/chatbot-example-new.json'#'cryptoassistant-be67b-38e847ce6c0c.json'
@@ -22,7 +24,7 @@ with open(json_name) as f:
 
 import os
 os.environ["GOOGLE_APPLICATION_CREDENTIALS"]=json_name
-os.environ["GOOGLE_CLOUD_DISABLE_GRPC"]=str(1)
+# os.environ["GOOGLE_CLOUD_DISABLE_GRPC"]=str(1)
 
 
 
@@ -33,12 +35,12 @@ import time
 import requests
 import urllib
 import random
-# async_mode = None
+async_mode = None
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'secret!'
 socketio = SocketIO(app)
-# thread = None
-# thread_lock = Lock()
+thread = None
+thread_lock = Lock()
 
 
 
@@ -91,7 +93,9 @@ def get_response():
 
 
     dic = {'fulfillmentText':success_response} #服务器端没有返回时，dialogflow才会用静态的rensponse
+    print('jsonify(dic)',jsonify(dic))
     return jsonify(dic) #返回给客户端显示的数据
+    # return json.dumps(dic)
 
 
 def detect_intent_texts(project_id, session_id, text, language_code):
@@ -112,13 +116,15 @@ def detect_intent_texts(project_id, session_id, text, language_code):
 
     response = session_client.detect_intent(
         session=session, query_input=query_input)
+    print('Query text: {}'.format(response.query_result.query_text))
+    print('response.query_result.fulfillment_text',response.query_result.fulfillment_text)
     return response.query_result.fulfillment_text
 
 
 @socketio.on('connect', namespace=name_space)
 def try_connect():
         # results='欢迎来到flask_socketio'
-        results=detect_intent_texts(project_id=auth['project_id'], session_id='unique', text='go', language_code='zh-CN')
+        results=detect_intent_texts(project_id=auth['project_id'], session_id='unique', text='开始', language_code='zh-CN')
         socketio.emit('server_response',  # 与socketio
                           {'data': results},
                           namespace=name_space)
